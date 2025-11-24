@@ -437,7 +437,7 @@ export function Hero() {
 
   const navSpacing = 28;
   const navShift = navWidth + navSpacing;
-  const closingTransformStyle: CSSProperties = { '--nav-shift': `${navShift}px` };
+  const closingTransformStyle = { '--nav-shift': `${navShift}px` } as React.CSSProperties;
 
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-background transition-colors duration-300">
