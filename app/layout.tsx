@@ -13,6 +13,12 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "David Anderson - Full Stack Developer",
   description: "Portfolio and blog of David Anderson, a full stack developer specializing in modern web technologies.",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
 };
 
 export default function RootLayout({
