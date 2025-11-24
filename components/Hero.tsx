@@ -692,15 +692,17 @@ export function Hero() {
         </div>
 
 
-        <div className="flex flex-col lg:flex-row-reverse items-center gap-16">
+        <div className="flex flex-col lg:flex-row-reverse items-center lg:items-start gap-8 lg:gap-16">
           {/* Interactive Avatar */}
-          <InteractiveImage />
+          <div className="flex-shrink-0">
+            <InteractiveImage />
+          </div>
 
           {/* Content */}
-          <div className="flex-1 text-center lg:text-left space-y-8">
-            <div>
+          <div className="flex-1 w-full space-y-8">
+            <div className="w-full">
               {/* Terminal Window */}
-              <div className="bg-white dark:bg-[#1a1a1a] rounded-lg border border-gray-300 dark:border-white/10 shadow-2xl overflow-hidden max-w-3xl transition-colors duration-300">
+              <div className="bg-white dark:bg-[#1a1a1a] rounded-lg border border-gray-300 dark:border-white/10 shadow-2xl overflow-hidden max-w-3xl transition-colors duration-300 text-left">
                 {/* Terminal Header */}
                 <div className="bg-gray-100 dark:bg-[#2a2a2a] px-4 py-2 flex items-center gap-2 border-b border-gray-300 dark:border-white/10 transition-colors duration-300">
                   <div className="flex gap-2">

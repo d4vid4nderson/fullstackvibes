@@ -147,8 +147,23 @@ html {
   }
 }
 
+@keyframes float-mobile {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 .float-animation {
-  animation: float 6s ease-in-out infinite;
+  animation: float-mobile 6s ease-in-out infinite;
+}
+
+@media (min-width: 1024px) {
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
 }
 
 /* Glass morphism effect */
