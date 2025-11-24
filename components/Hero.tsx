@@ -382,7 +382,7 @@ export function Hero() {
         break;
       default:
         if (trimmedCmd) {
-          setCommandHistory(prev => [...prev, `Command not found: ${cmd}. Type 'help' for available commands.`]);
+          setCommandHistory(prev => [...prev, `Command not found: ${trimmedCmd}. Type 'help' for available commands.`]);
         }
     }
   };
