@@ -1,11 +1,10 @@
-# Portfolio & Blog
+# Portfolio
 
 A modern, dynamic portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features automatic GitHub project integration, a blog powered by MDX, dark mode support, and a contact form.
 
 ## Features
 
 - **Dynamic GitHub Integration** - Automatically fetches and displays your GitHub repositories
-- **Blog with MDX** - Write blog posts in Markdown with React components
 - **Dark Mode** - Toggle between light and dark themes
 - **Responsive Design** - Mobile-first, fully responsive layout
 - **Contact Form** - Built-in contact form with API route
