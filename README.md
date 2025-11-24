@@ -1,6 +1,6 @@
 # Portfolio
 
-A modern, dynamic portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features automatic GitHub project integration, a blog powered by MDX, dark mode support, and a contact form.
+A modern, dynamic portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features automatic GitHub project integration, dark mode support, and a contact form.
 
 ## Features
 
