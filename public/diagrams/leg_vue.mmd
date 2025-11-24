@@ -1,0 +1,52 @@
+flowchart TB
+    subgraph Sources["Data Sources"]
+        FedReg[Federal Register<br/>Executive Orders]
+        LegiScan[LegiScan API<br/>6 State Bills]
+    end
+
+    subgraph Scraping["Data Collection"]
+        Nightly[Nightly Jobs<br/>50-60 bills/min]
+        Scraper[Python Scrapers]
+        FedReg --> Scraper
+        LegiScan --> Scraper
+        Scraper --> Nightly
+    end
+
+    subgraph Storage["Data Storage"]
+        Nightly --> DB[(PostgreSQL<br/>Azure SQL)]
+        DB --> Documents[20,000+ Documents]
+    end
+
+    subgraph AI["AI Analysis Pipeline"]
+        Documents --> Batch[Batch Processing]
+        Batch --> OpenAI[Azure OpenAI<br/>GPT-4.1]
+        OpenAI --> Summary[Executive Summary]
+        OpenAI --> Talking[Talking Points]
+        OpenAI --> Impact[Business Impact]
+        OpenAI --> Practice[Practice Area<br/>Categorization]
+    end
+
+    subgraph Frontend["User Interface"]
+        Summary --> Dashboard[User Dashboard]
+        Talking --> Dashboard
+        Impact --> Dashboard
+        Practice --> Dashboard
+
+        Dashboard --> Search[Fuzzy Search<br/>Fuse.js]
+        Dashboard --> Filter[Advanced Filters]
+        Dashboard --> Bookmark[Bookmarking]
+        Dashboard --> Analytics[Analytics & Insights]
+
+        Filter --> StateMap[Interactive<br/>State Map]
+        Analytics --> Charts[Recharts & D3<br/>Visualizations]
+    end
+
+    subgraph Auth["Authentication"]
+        Login[Azure AD SSO] --> Dashboard
+        Login --> MFA[Multi-Factor Auth]
+    end
+
+    style OpenAI fill:#14b8a6
+    style Dashboard fill:#06b6d4
+    style DB fill:#0891b2
+    style Nightly fill:#14b8a6

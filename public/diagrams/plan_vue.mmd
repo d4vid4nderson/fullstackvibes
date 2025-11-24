@@ -1,0 +1,71 @@
+graph TB
+    subgraph "Client Layer"
+        UI["Next.js React UI<br/>(Client & Admin Portals)"]
+        Auth["Next-Auth<br/>(Authentication)"]
+        Survey["Survey Interface<br/>(Traditional & RDGD)"]
+        Viz["Data Visualization<br/>(Chart.js, D3.js)"]
+    end
+
+    subgraph "Real-time Communication"
+        SignalR["SignalR Hub<br/>(Live Collaboration)"]
+    end
+
+    subgraph "API Layer"
+        API["Next.js API Routes"]
+        Upload["Image Upload API"]
+        Export["Export API<br/>(PPT, Excel, PDF)"]
+        AIService["Claude AI Service<br/>(Sentiment Analysis)"]
+    end
+
+    subgraph "Data Management"
+        TanStack["React Query<br/>(State & Cache)"]
+        Hooks["Custom Hooks<br/>(Clients, Surveys, Projects)"]
+    end
+
+    subgraph "Storage Layer"
+        AzureBlob["Azure Blob Storage<br/>(Images & Reports)"]
+        DB["Database<br/>(Survey Data & Responses)"]
+    end
+
+    subgraph "Testing & CI/CD"
+        Playwright["Playwright<br/>(E2E Testing)"]
+        Azure["Azure DevOps<br/>(Pipeline & Deployment)"]
+        Docker["Docker<br/>(Containerization)"]
+    end
+
+    UI --> Auth
+    UI --> Survey
+    UI --> Viz
+
+    Survey --> SignalR
+    SignalR --> API
+
+    UI --> TanStack
+    TanStack --> Hooks
+    Hooks --> API
+
+    API --> Upload
+    API --> Export
+    API --> AIService
+
+    Upload --> AzureBlob
+    API --> DB
+    Export --> AzureBlob
+
+    AIService --> API
+
+    Playwright --> UI
+    Azure --> Docker
+    Docker --> API
+
+    classDef frontend fill:#06b6d4,stroke:#0891b2,color:#000
+    classDef backend fill:#14b8a6,stroke:#0d9488,color:#000
+    classDef storage fill:#f59e0b,stroke:#d97706,color:#000
+    classDef devops fill:#8b5cf6,stroke:#7c3aed,color:#fff
+    classDef ai fill:#f97316,stroke:#ea580c,color:#000
+
+    class UI,Auth,Survey,Viz,SignalR frontend
+    class API,Upload,Export,TanStack,Hooks backend
+    class AzureBlob,DB storage
+    class Playwright,Azure,Docker devops
+    class AIService ai

@@ -1,0 +1,41 @@
+flowchart TB
+    Start([User Login]) --> Dashboard[Dashboard & Welcome]
+    Dashboard --> Create[Create Initiative]
+    Dashboard --> ViewAll[View All Initiatives]
+    Dashboard --> MyInit[My Initiatives]
+    Dashboard --> Schedule[View Schedule]
+
+    Create --> Dept[Select Department]
+    Dept --> Details[Enter Details]
+    Details --> Budget[Budget Tracking]
+    Budget --> Submit[Submit for Approval]
+
+    Submit --> DeptApproval{Department<br/>Approval}
+    DeptApproval -->|Approved| MgmtApproval{Management<br/>Approval}
+    DeptApproval -->|Rejected| Revise[Revise & Resubmit]
+
+    MgmtApproval -->|Approved| ExecApproval{Executive<br/>Approval}
+    MgmtApproval -->|Rejected| Revise
+
+    ExecApproval -->|Approved| Active[Active Initiative]
+    ExecApproval -->|Rejected| Revise
+
+    Active --> Monitor[Real-time Monitoring]
+    Monitor --> Health{Health Status}
+    Health -->|Green| Track[Track Progress]
+    Health -->|Yellow| Mitigate[Mitigation Plan]
+    Health -->|Red| Escalate[Executive Alert]
+
+    ViewAll --> Filter[Filter & Search]
+    Filter --> ViewDetails[View Details]
+
+    Schedule --> Gantt[Gantt Chart View]
+    Schedule --> Calendar[Calendar View]
+
+    Active --> Comments[Commenting System]
+    Active --> Updates[Status Updates]
+
+    style Dashboard fill:#14b8a6
+    style Active fill:#06b6d4
+    style ExecApproval fill:#0891b2
+    style Monitor fill:#14b8a6
