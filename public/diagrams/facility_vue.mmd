@@ -1,0 +1,67 @@
+graph TB
+    subgraph "Client Layer"
+        AdminUI["Admin Portal<br/>(Vue.js)"]
+        ClientUI["Client Portal<br/>(Vue.js)"]
+        MapView["Interactive Maps<br/>(Mapbox GL)"]
+    end
+
+    subgraph "API Layer"
+        NextAPI["Next.js API Routes"]
+        MapboxAPI["Mapbox Geocoding API"]
+        FacilityAPI["Facility Management API"]
+        AssessmentAPI["Assessment API"]
+    end
+
+    subgraph "Backend Services"
+        NodeServer["Node.js Server<br/>(Express)"]
+        GeoService["Geocoding Service"]
+        DataService["Data Management"]
+    end
+
+    subgraph "Data Storage"
+        MongoDB["MongoDB<br/>(Facility & Assessment Data)"]
+        FileStorage["File Storage<br/>(Documents & Reports)"]
+    end
+
+    subgraph "External Services"
+        MapboxService["Mapbox<br/>(Maps & Geocoding)"]
+    end
+
+    subgraph "DevOps & Deployment"
+        Azure["Azure DevOps<br/>(CI/CD Pipeline)"]
+        Docker["Docker<br/>(Containerization)"]
+    end
+
+    AdminUI --> NextAPI
+    ClientUI --> NextAPI
+    MapView --> MapboxAPI
+
+    NextAPI --> FacilityAPI
+    NextAPI --> AssessmentAPI
+    NextAPI --> NodeServer
+
+    MapboxAPI --> MapboxService
+    FacilityAPI --> GeoService
+    GeoService --> MapboxService
+
+    NodeServer --> DataService
+    DataService --> MongoDB
+
+    FacilityAPI --> MongoDB
+    AssessmentAPI --> MongoDB
+    AssessmentAPI --> FileStorage
+
+    Azure --> Docker
+    Docker --> NodeServer
+
+    classDef frontend fill:#06b6d4,stroke:#0891b2,color:#000
+    classDef backend fill:#14b8a6,stroke:#0d9488,color:#000
+    classDef storage fill:#f59e0b,stroke:#d97706,color:#000
+    classDef external fill:#8b5cf6,stroke:#7c3aed,color:#fff
+    classDef devops fill:#ec4899,stroke:#db2777,color:#fff
+
+    class AdminUI,ClientUI,MapView frontend
+    class NextAPI,MapboxAPI,FacilityAPI,AssessmentAPI,NodeServer,GeoService,DataService backend
+    class MongoDB,FileStorage storage
+    class MapboxService external
+    class Azure,Docker devops

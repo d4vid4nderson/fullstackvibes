@@ -1,26 +1,605 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #e2e8f0;
+  --foreground: #1f2937;
+}
+
+.dark {
+  --background: #0f0f0f;
+  --foreground: #e6e6fa;
+}
+
+/* Dark mode backgrounds override theme backgrounds */
+.dark[data-theme="cyan"],
+.dark[data-theme="purple"],
+.dark[data-theme="emerald"],
+.dark[data-theme="orange"],
+.dark[data-theme="blue"] {
+  --background: #0f0f0f;
+}
+
+/* Cyan Theme (Default) */
+[data-theme="cyan"] {
+  --accent-primary: #06b6d4;
+  --accent-secondary: #14b8a6;
+  --accent-tertiary: #0891b2;
+  --accent-light: #67e8f9;
+  --accent-dark: #0e7490;
+}
+
+:root:not(.dark)[data-theme="cyan"] {
+  --background: #cffafe;
+}
+
+/* Purple Theme */
+[data-theme="purple"] {
+  --accent-primary: #a855f7;
+  --accent-secondary: #8b5cf6;
+  --accent-tertiary: #7c3aed;
+  --accent-light: #c4b5fd;
+  --accent-dark: #6d28d9;
+}
+
+:root:not(.dark)[data-theme="purple"] {
+  --background: #f3e8ff;
+}
+
+/* Emerald Theme */
+[data-theme="emerald"] {
+  --accent-primary: #10b981;
+  --accent-secondary: #059669;
+  --accent-tertiary: #34d399;
+  --accent-light: #6ee7b7;
+  --accent-dark: #047857;
+}
+
+:root:not(.dark)[data-theme="emerald"] {
+  --background: #d1fae5;
+}
+
+/* Orange Theme */
+[data-theme="orange"] {
+  --accent-primary: #f97316;
+  --accent-secondary: #fb923c;
+  --accent-tertiary: #ea580c;
+  --accent-light: #fdba74;
+  --accent-dark: #c2410c;
+}
+
+:root:not(.dark)[data-theme="orange"] {
+  --background: #ffedd5;
+}
+
+/* Blue Theme */
+[data-theme="blue"] {
+  --accent-primary: #3b82f6;
+  --accent-secondary: #60a5fa;
+  --accent-tertiary: #2563eb;
+  --accent-light: #93c5fd;
+  --accent-dark: #1d4ed8;
+}
+
+:root:not(.dark)[data-theme="blue"] {
+  --background: #dbeafe;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --font-sans: var(--font-jetbrains-mono);
+  --font-mono: var(--font-jetbrains-mono);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Theme-aware accent colors */
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-accent-tertiary: var(--accent-tertiary);
+  --color-accent-light: var(--accent-light);
+  --color-accent-dark: var(--accent-dark);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-jetbrains-mono), 'Courier New', monospace;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animated gradient background */
+.gradient-bg {
+  background: linear-gradient(-45deg, #0f0f23, #1e1b4b, #312e81, #1e293b);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+/* Dark animated gradient background */
+.gradient-bg-dark {
+  background: linear-gradient(-45deg, #0a0a0a, #1a1a1a, #2a2a2a, #151515);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Glow effect */
+.glow {
+  box-shadow: 0 0 20px color-mix(in srgb, var(--accent-primary) 40%, transparent),
+              0 0 40px color-mix(in srgb, var(--accent-primary) 20%, transparent);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px color-mix(in srgb, var(--accent-primary) 30%, transparent);
+}
+
+/* Theme-aware utility classes */
+.text-accent {
+  color: var(--accent-primary);
+}
+
+.text-accent-secondary {
+  color: var(--accent-secondary);
+}
+
+.text-accent-light {
+  color: var(--accent-light);
+}
+
+.text-accent-dark {
+  color: var(--accent-dark);
+}
+
+.bg-accent {
+  background-color: var(--accent-primary);
+}
+
+.bg-accent-secondary {
+  background-color: var(--accent-secondary);
+}
+
+.bg-accent-tertiary {
+  background-color: var(--accent-tertiary);
+}
+
+.bg-accent\/10 {
+  background-color: color-mix(in srgb, var(--accent-primary) 10%, transparent);
+}
+
+.bg-accent\/20 {
+  background-color: color-mix(in srgb, var(--accent-primary) 20%, transparent);
+}
+
+.bg-accent\/30 {
+  background-color: color-mix(in srgb, var(--accent-primary) 30%, transparent);
+}
+
+.border-accent {
+  border-color: var(--accent-primary);
+}
+
+.border-accent\/30 {
+  border-color: color-mix(in srgb, var(--accent-primary) 30%, transparent);
+}
+
+.ring-accent {
+  --tw-ring-color: var(--accent-primary);
+}
+
+.caret-accent {
+  caret-color: var(--accent-primary);
+}
+
+/* Gradient backgrounds with theme colors */
+.bg-gradient-accent {
+  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+}
+
+.bg-gradient-accent-to-r {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+}
+
+/* Dark mode variants */
+.dark .dark\:text-accent {
+  color: var(--accent-light);
+}
+
+.dark .dark\:text-accent-secondary {
+  color: var(--accent-secondary);
+}
+
+.dark .dark\:caret-accent {
+  caret-color: var(--accent-light);
+}
+
+.dark .dark\:border-accent {
+  border-color: var(--accent-light);
+}
+
+/* Hover effects with theme colors */
+.hover-accent:hover {
+  color: var(--accent-light);
+}
+
+.hover-glow-accent:hover {
+  filter: drop-shadow(0 0 8px var(--accent-primary));
+}
+
+.group\/link:hover .group-hover-accent {
+  color: var(--accent-primary);
+  filter: drop-shadow(0 0 8px var(--accent-primary));
+}
+
+/* Headshot overlay gradient - theme aware */
+.headshot-overlay {
+  background: linear-gradient(
+    to top right,
+    color-mix(in srgb, var(--accent-primary) 60%, transparent) 0%,
+    color-mix(in srgb, var(--accent-primary) 40%, transparent) 20%,
+    color-mix(in srgb, var(--accent-secondary) 20%, transparent) 40%,
+    transparent 60%
+  );
+}
+
+/* Headshot lens flare animation */
+.headshot-flash {
+  position: relative;
+}
+
+.headshot-flash::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -150%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 30%,
+    color-mix(in srgb, var(--accent-primary) 0%, transparent) 40%,
+    color-mix(in srgb, var(--accent-primary) 40%, transparent) 45%,
+    color-mix(in srgb, var(--accent-light) 60%, transparent) 50%,
+    color-mix(in srgb, var(--accent-primary) 40%, transparent) 55%,
+    color-mix(in srgb, var(--accent-primary) 0%, transparent) 60%,
+    transparent 70%,
+    transparent 100%
+  );
+  transform: rotate(-45deg);
+  animation: lensFlare 0.8s ease-out;
+  pointer-events: none;
+}
+
+@keyframes lensFlare {
+  0% {
+    left: -150%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 150%;
+    opacity: 0;
+  }
+}
+
+/* Optical Lens Flare Effect */
+.optical-lens-flare {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* Main bright light source */
+.flare-source {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent-light) 90%, white) 0%,
+    color-mix(in srgb, var(--accent-primary) 60%, transparent) 30%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  animation: flareSourceFade 1s ease-out;
+}
+
+/* Hexagonal lens artifacts */
+.flare-hex {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: color-mix(in srgb, var(--accent-primary) 40%, transparent);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  filter: blur(2px);
+  animation: flareHexFade 1s ease-out;
+}
+
+.flare-hex-1 {
+  top: 25%;
+  left: 60%;
+  animation-delay: 0.1s;
+}
+
+.flare-hex-2 {
+  top: 65%;
+  left: 35%;
+  animation-delay: 0.15s;
+  width: 80px;
+  height: 80px;
+}
+
+.flare-hex-3 {
+  top: 40%;
+  left: 70%;
+  animation-delay: 0.2s;
+  width: 60px;
+  height: 60px;
+}
+
+/* Circular bokeh spots */
+.flare-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(10px);
+  animation: flareCircleFade 1s ease-out;
+}
+
+.flare-circle-1 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent-secondary) 50%, transparent) 0%,
+    transparent 70%
+  );
+  top: 30%;
+  left: 20%;
+  animation-delay: 0.05s;
+}
+
+.flare-circle-2 {
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent-light) 40%, transparent) 0%,
+    transparent 70%
+  );
+  top: 60%;
+  left: 65%;
+  animation-delay: 0.1s;
+}
+
+.flare-circle-3 {
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent-primary) 35%, transparent) 0%,
+    transparent 70%
+  );
+  top: 45%;
+  left: 80%;
+  animation-delay: 0.15s;
+}
+
+.flare-circle-4 {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent-tertiary) 30%, transparent) 0%,
+    transparent 70%
+  );
+  top: 70%;
+  left: 25%;
+  animation-delay: 0.08s;
+}
+
+/* Chromatic aberration streak */
+.flare-streak {
+  position: absolute;
+  width: 80%;
+  height: 6px;
+  top: 50%;
+  left: 10%;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    color-mix(in srgb, var(--accent-primary) 30%, transparent) 20%,
+    color-mix(in srgb, var(--accent-light) 50%, transparent) 50%,
+    color-mix(in srgb, var(--accent-secondary) 30%, transparent) 80%,
+    transparent 100%
+  );
+  filter: blur(4px);
+  animation: flareStreakFade 1s ease-out;
+}
+
+/* Anamorphic horizontal flare */
+.flare-anamorphic {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  top: 48%;
+  left: 0;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    color-mix(in srgb, var(--accent-light) 70%, white) 50%,
+    transparent 100%
+  );
+  filter: blur(2px);
+  animation: flareAnamorphicFade 1s ease-out;
+  box-shadow:
+    0 0 30px color-mix(in srgb, var(--accent-primary) 60%, transparent),
+    0 0 60px color-mix(in srgb, var(--accent-light) 40%, transparent);
+}
+
+/* Animations - Fade in place */
+@keyframes flareSourceFade {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  30% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  70% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
+
+@keyframes flareHexFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(0deg);
+  }
+  20% {
+    opacity: 0.7;
+    transform: scale(1) rotate(30deg);
+  }
+  70% {
+    opacity: 0.4;
+    transform: scale(1) rotate(60deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) rotate(90deg);
+  }
+}
+
+@keyframes flareCircleFade {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  20% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+  40% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  70% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes flareStreakFade {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.5);
+  }
+  15% {
+    opacity: 0.7;
+    transform: scaleX(1);
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(0.8);
+  }
+}
+
+@keyframes flareAnamorphicFade {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  20% {
+    opacity: 0.9;
+    transform: scaleY(1.5);
+  }
+  40% {
+    opacity: 0.8;
+    transform: scaleY(1);
+  }
+  70% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scaleY(0.5);
+  }
 }

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en" class="dark" data-theme="cyan">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Anderson - Digital Experience Architect & Product Owner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Theme System - Matches portfolio exactly */
+        :root {
+            --background: #e2e8f0;
+            --foreground: #1f2937;
+        }
+
+        .dark {
+            --background: #0f0f0f;
+            --foreground: #e6e6fa;
+        }
+
+        /* Cyan Theme (Default) */
+        [data-theme="cyan"] {
+            --accent-primary: #06b6d4;
+            --accent-secondary: #14b8a6;
+            --accent-tertiary: #0891b2;
+            --accent-light: #67e8f9;
+            --accent-dark: #0e7490;
+        }
+
+        /* Purple Theme */
+        [data-theme="purple"] {
+            --accent-primary: #a855f7;
+            --accent-secondary: #8b5cf6;
+            --accent-tertiary: #7c3aed;
+            --accent-light: #c4b5fd;
+            --accent-dark: #6d28d9;
+        }
+
+        /* Emerald Theme */
+        [data-theme="emerald"] {
+            --accent-primary: #10b981;
+            --accent-secondary: #059669;
+            --accent-tertiary: #34d399;
+            --accent-light: #6ee7b7;
+            --accent-dark: #047857;
+        }
+
+        /* Orange Theme */
+        [data-theme="orange"] {
+            --accent-primary: #f97316;
+            --accent-secondary: #fb923c;
+            --accent-tertiary: #ea580c;
+            --accent-light: #fdba74;
+            --accent-dark: #c2410c;
+        }
+
+        /* Blue Theme */
+        [data-theme="blue"] {
+            --accent-primary: #3b82f6;
+            --accent-secondary: #60a5fa;
+            --accent-tertiary: #2563eb;
+            --accent-light: #93c5fd;
+            --accent-dark: #1d4ed8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
+            color: var(--foreground);
+            background: var(--background);
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background - matches Hero component */
+        .gradient-bg {
+            background: linear-gradient(-45deg, #0f0f23, #1e1b4b, #312e81, #1e293b);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Header - clean and professional */
+        .header {
+            background: var(--background);
+            padding: 50px 40px 40px;
+            border-bottom: 3px solid var(--accent-primary);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+        }
+
+        .header-info {
+            flex: 1;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+            color: white;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            margin-bottom: 12px;
+            font-weight: 500;
+            color: var(--accent-primary);
+        }
+
+        .download-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--accent-primary);
+            color: var(--accent-primary);
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
+            align-self: flex-start;
+        }
+
+        .download-btn:hover {
+            background: var(--accent-primary);
+            color: #0f0f0f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
+        }
+
+        .contact {
+            display: flex;
+            gap: 0;
+            flex-wrap: nowrap;
+            font-size: 12px;
+            color: #9ca3af;
+            align-items: center;
+        }
+
+        .contact-item {
+            display: inline-flex;
+            white-space: nowrap;
+        }
+
+        .contact-item:not(:last-child)::after {
+            content: '|';
+            margin: 0 12px;
+            color: #4b5563;
+        }
+
+        .contact-item a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent-light);
+        }
+
+        /* Main content area */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 32px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        /* Profile section */
+        .profile {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #d1d5db;
+        }
+
+        .profile p {
+            margin-bottom: 20px;
+        }
+
+        /* Job entries - glass morphism style */
+        .job {
+            margin-bottom: 40px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .job::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 12px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .job:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.2);
+        }
+
+        .job:hover::before {
+            opacity: 1;
+        }
+
+        .job-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .job-company {
+            font-size: 16px;
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .job-date {
+            font-size: 14px;
+            color: #9ca3af;
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .job-description {
+            margin-left: 0;
+        }
+
+        .job-description li {
+            font-size: 15px;
+            color: #d1d5db;
+            margin-bottom: 12px;
+            line-height: 1.7;
+            list-style: none;
+            position: relative;
+            padding-left: 24px;
+        }
+
+        .job-description li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-secondary);
+            font-size: 18px;
+        }
+
+        /* Tech note with glass effect */
+        .tech-note {
+            font-size: 13px;
+            color: #9ca3af;
+            font-style: italic;
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: rgba(6, 182, 212, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        /* Tech sections - full width */
+        .tech-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tech-category {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            padding: 20px 24px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .tech-category:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .tech-category-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+
+        .tech-category-content {
+            font-size: 14px;
+            color: #d1d5db;
+            line-height: 1.7;
+        }
+
+        /* Gradient text effect */
+        .highlight {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        strong {
+            color: var(--accent-light);
+            font-weight: 700;
+        }
+
+        /* Footer - matches portfolio */
+        .footer {
+            padding: 48px 40px;
+            background: #0a0a0a;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+        }
+
+        .footer-link {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-light);
+            filter: drop-shadow(0 0 8px var(--accent-primary));
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            .header::before {
+                display: none;
+            }
+            .job:hover,
+            .tech-category:hover {
+                transform: none;
+                box-shadow: none;
+            }
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            body {
+                background: white !important;
+                color: #000000 !important;
+                margin: 0;
+                padding: 0;
+            }
+            .download-btn {
+                display: none;
+            }
+            .footer {
+                display: none;
+            }
+            .header {
+                background: white !important;
+                padding: 30px 30px 20px;
+                border-bottom: 2px solid #06b6d4;
+            }
+            h1 {
+                font-size: 32px;
+                margin-bottom: 4px;
+                color: #000000 !important;
+            }
+            .subtitle {
+                font-size: 14px;
+                margin-bottom: 8px;
+                color: #06b6d4 !important;
+            }
+            .contact {
+                display: inline;
+                font-size: 10px;
+                color: #4a5568 !important;
+            }
+            .contact-item {
+                display: inline;
+                color: #4a5568 !important;
+            }
+            .contact-item a {
+                color: #4a5568 !important;
+            }
+            .contact-item:not(:last-child)::after {
+                content: ' | ';
+                margin: 0;
+                color: #4a5568 !important;
+            }
+            .content {
+                padding: 30px 30px 20px;
+            }
+            .section {
+                margin-bottom: 20px;
+                page-break-inside: auto;
+            }
+            .section:last-child {
+                margin-bottom: 0;
+                page-break-after: avoid;
+            }
+            .section-title {
+                font-size: 18px;
+                margin-bottom: 12px;
+                padding-bottom: 4px;
+                border-bottom: 2px solid #06b6d4;
+                page-break-after: avoid;
+                color: #06b6d4 !important;
+            }
+            .profile {
+                font-size: 11px;
+                line-height: 1.4;
+                color: #000000 !important;
+            }
+            .profile p {
+                margin-bottom: 10px;
+            }
+            .job {
+                margin-bottom: 16px;
+                padding: 12px;
+                background: #f7f7f7 !important;
+                page-break-inside: auto;
+                border-radius: 8px;
+            }
+            .job-title {
+                font-size: 13px;
+                margin-bottom: 3px;
+                page-break-after: avoid;
+                color: #000000 !important;
+            }
+            .job-company {
+                font-size: 11px;
+                page-break-after: avoid;
+                color: #06b6d4 !important;
+            }
+            .job-date {
+                font-size: 10px;
+                margin-bottom: 8px;
+                page-break-after: avoid;
+                color: #4a5568 !important;
+            }
+            .job-description {
+                page-break-inside: auto;
+            }
+            .job-description li {
+                font-size: 10px;
+                line-height: 1.4;
+                margin-bottom: 6px;
+                padding-left: 20px;
+                color: #000000 !important;
+            }
+            .job-description li::before {
+                color: #06b6d4 !important;
+            }
+            .tech-note {
+                font-size: 9px;
+                margin-top: 8px;
+                padding: 6px 8px;
+                background: #e6f7f9 !important;
+                color: #4a5568 !important;
+                border: 1px solid #06b6d4;
+            }
+            .tech-category {
+                padding: 12px 16px;
+                margin-bottom: 12px;
+                background: #f7f7f7 !important;
+                border-radius: 8px;
+            }
+            .tech-category-title {
+                font-size: 13px;
+                margin-bottom: 6px;
+                color: #06b6d4 !important;
+            }
+            .tech-category-content {
+                font-size: 11px;
+                line-height: 1.5;
+                color: #000000 !important;
+            }
+            strong {
+                color: #000000 !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header, .content, .footer {
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            h1 {
+                font-size: 36px;
+            }
+            .subtitle {
+                font-size: 16px;
+            }
+            .contact {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+            .download-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+    <script>
+        // Apply theme immediately to prevent flash
+        (function() {
+            try {
+                const mode = localStorage.getItem('mode') || 'dark';
+                const theme = localStorage.getItem('colorTheme') || 'cyan';
+                if (mode === 'dark') {
+                    document.documentElement.classList.add('dark');
+                }
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {}
+        })();
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="header-info">
+                <h1>David Anderson</h1>
+                <div class="subtitle">Digital Experience Architect & Product Owner</div>
+                <div class="contact">
+                    <div class="contact-item">Paradise, Texas</div>
+                    <div class="contact-item"><a href="mailto:david4nderson@pm.me">david4nderson@pm.me</a></div>
+                    <div class="contact-item"><a href="https://linkedin.com/in/d4v1d4nd3rs0n" target="_blank">linkedin.com/in/d4v1d4nd3rs0n</a></div>
+                    <div class="contact-item"><a href="https://fullstackvibes.io" target="_blank">fullstackvibes.io</a></div>
+                </div>
+            </div>
+            <button class="download-btn" onclick="window.print()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download PDF
+            </button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="section">
+            <div class="section-title">Profile</div>
+            <div class="profile">
+                <p>I transform how teams work by building AI-powered tools that solve real workflow problems. Over the past 3 years, I've shipped 6 production applications that delivered $40,000+ in annual cost savings and 80% efficiency gains across our organization. My approach leverages AI not just in the products I build, but in how I build them—using LLMs as development accelerators while maintaining product ownership, system design, and quality standards throughout the full lifecycle.</p>
+
+                <p>I excel at identifying workflow friction, rapidly prototyping solutions, and driving adoption through hands-on collaboration with users. With 12+ years understanding creative team operations at MOREgroup, I've evolved from managing design processes to leading technical product development in agile sprints—handling everything from UI design and iconography to architecture decisions and daily standups. I learn fast, ship constantly, and focus relentlessly on building tools that augment human creativity rather than replace it.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Experience</div>
+
+            <div class="job">
+                <div class="job-title">Digital Experience Architect</div>
+                <div class="job-company">MOREgroup (formerly Huckabee)</div>
+                <div class="job-date">July 2022 – Present</div>
+                <ul class="job-description">
+                    <li>Leading product development of <strong>VUES</strong>, a suite of 6 production AI applications delivering measurable business impact across MOREgroup. Serving as hands-on product owner through agile sprint cycles, I handle UI/UX design, iconography, architecture decisions, feature prioritization, and daily standups while leveraging AI as a development accelerator to rapidly ship and iterate on production tools.</li>
+
+                    <li><strong>LegislationVUE</strong> (React, FastAPI, Azure OpenAI GPT-4, PostgreSQL) — Eliminated $40,000+ in annual legal consulting costs by automating analysis of 20,000+ state and federal legislative documents across 6 states. Delivers AI-generated executive summaries, key talking points, and business impact analysis, transforming regulatory tracking from 8-hour manual reviews to instant insights. Custom prompt engineering ensures accuracy and reliability for executive decision-making.</li>
+
+                    <li><strong>PlanVUE</strong> (Go, HTMX, PostgreSQL, Claude AI) — Achieved 80% efficiency gain for architectural planners by eliminating manual data entry and collection. AI-enhanced workflows automatically generate project deliverables, coordinate multi-stakeholder approval chains, and provide real-time health monitoring across initiative portfolios with Gantt visualization and budget tracking.</li>
+
+                    <li><strong>FacilityVUE</strong> (Go, HTMX, PostgreSQL) — Recently shipped facility management platform currently being prepared for commercial release to school districts nationwide. Demonstrates transition from internal tooling to market-ready software product, validating scalability and multi-tenant architecture decisions.</li>
+
+                    <li><strong>InitiativeVUE</strong> (Go, HTMX, Claude AI) — Broke down organizational silos by providing C-suite with unified visibility into cross-departmental initiatives previously tracked in isolation. Real-time executive dashboard enables data-driven strategic decision making and resource allocation across the organization.</li>
+
+                    <li><strong>sp_VUE</strong> (Go, HTMX, Playwright, Claude AI) — Automated SharePoint testing and accessibility compliance (WCAG), detecting broken links and generating multi-format reports. Reduces manual QA time while improving site reliability and accessibility standards.</li>
+                </ul>
+                <div class="tech-note">Tech stack: Azure AI Foundry, Azure OpenAI (GPT-4), Claude AI, Go, Python, React, FastAPI, HTMX, PostgreSQL, MongoDB, Docker, Playwright • Practices: Prompt engineering, RAG pipelines, full-stack development, agile product ownership</div>
+            </div>
+
+            <div class="job">
+                <div class="job-title">Resource Manager → Media Lab Manager → Digital Experience Designer</div>
+                <div class="job-company">Huckabee | A MOREgroup Brand</div>
+                <div class="job-date">July 2013 – July 2022</div>
+                <ul class="job-description">
+                    <li>Progressive 9-year career building deep fluency in creative team workflows, identifying operational gaps, and driving technology adoption. Built internal knowledge platforms saving $30,000+ annually, launched 3D reality capture services, established media lab from concept through C-suite pitch to full operation, and led development of project management systems for design team transparency.</li>
+
+                    <li>This foundation of understanding designer pain points, translating needs into solutions, and managing organizational change directly informs my current approach to building AI-powered productivity tools that teams actually adopt and depend on.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Technical Capabilities</div>
+            <div class="tech-grid">
+                <div class="tech-category">
+                    <div class="tech-category-title">AI-Augmented Development</div>
+                    <div class="tech-category-content">Leverage LLMs (Claude, GPT-4) as coding accelerators while maintaining architectural oversight, code review, and quality standards. Ship production full-stack applications using Go, Python, React, FastAPI, HTMX with PostgreSQL/MongoDB backends and Docker deployment—combining AI assistance with hands-on product ownership throughout the development lifecycle.</div>
+                </div>
+
+                <div class="tech-category">
+                    <div class="tech-category-title">AI Product Integration</div>
+                    <div class="tech-category-content">Azure AI Foundry, Azure OpenAI (GPT-4), Claude AI (Anthropic), production LLM integration, custom prompt engineering and optimization, RAG pipelines for document analysis, AI-augmented workflow design, responsible AI practices and accuracy validation</div>
+                </div>
+
+                <div class="tech-category">
+                    <div class="tech-category-title">Product & Agile Leadership</div>
+                    <div class="tech-category-content">Hands-on product ownership through sprint cycles, user research and workflow analysis, daily standups and stakeholder management, rapid prototyping and iteration, driving tool adoption and organizational change, UI/UX design and iconography, establishing technical standards and best practices</div>
+                </div>
+
+                <div class="tech-category">
+                    <div class="tech-category-title">Design Operations & Workflow</div>
+                    <div class="tech-category-content">12+ years fluency in creative team operations and pain points, translating workflow needs into technical solutions, internal productivity tooling for design teams, cross-functional collaboration across creative/technical/leadership, change management and user training</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://github.com/d4vid4nderson" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+                <a href="https://www.linkedin.com/in/d4v1d4nd3rs0n" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
+                <a href="mailto:david4nderson@pm.me" class="footer-link">Email</a>
+            </div>
+            <p>© 2025 David Anderson. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+flowchart TB
+    subgraph Auth["Authentication"]
+        Login[Azure AD + MFA] --> Session[Session Management]
+    end
+
+    Session --> Config[Site Configuration]
+    Config --> StartTest[Start Test]
+
+    subgraph Testing["Automated Testing Engine"]
+        StartTest --> Playwright[Playwright<br/>Headless Browser]
+        Playwright --> Links[Broken Link Check]
+        Playwright --> Images[Missing Image Check]
+        Playwright --> Perf[Performance Metrics]
+        Playwright --> A11y[Accessibility<br/>axe-core WCAG]
+    end
+
+    subgraph Monitoring["Real-time Monitoring"]
+        Links --> Progress[Live Progress Updates]
+        Images --> Progress
+        Perf --> Progress
+        A11y --> Progress
+        Progress --> HTMX[HTMX Auto-refresh]
+        HTMX --> UI[Responsive UI]
+    end
+
+    subgraph Storage["Data Storage"]
+        Links --> DB[(Azure SQL<br/>Database)]
+        Images --> DB
+        Perf --> DB
+        A11y --> DB
+        DB --> History[Test History]
+    end
+
+    subgraph Reporting["Report Generation"]
+        DB --> PDF[PDF Reports<br/>Landscape]
+        DB --> HTML[HTML Dashboard<br/>Interactive]
+        DB --> JSON[JSON Export<br/>Programmatic]
+    end
+
+    subgraph Management["Administration"]
+        UI --> UserMgmt[User Management<br/>RBAC]
+        UI --> SiteMgmt[Site Management]
+        UI --> Download[Download Reports]
+    end
+
+    style Playwright fill:#14b8a6
+    style UI fill:#06b6d4
+    style DB fill:#0891b2
+    style PDF fill:#14b8a6
