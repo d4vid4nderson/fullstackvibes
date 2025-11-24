@@ -714,16 +714,34 @@ export function Hero() {
                 {/* Terminal Content */}
                 <div className="relative">
                   {/* Fixed Welcome Message */}
-                  <div className="p-6 pb-0 font-mono text-sm sm:text-base leading-relaxed bg-white dark:bg-[#1a1a1a] relative z-10">
+                  <div className="p-4 sm:p-6 pb-0 font-mono text-xs sm:text-sm lg:text-base leading-relaxed bg-white dark:bg-[#1a1a1a] relative z-10">
                     <div className="mb-4">
                       <div className="flex gap-2">
-                        <span className="text-accent dark:text-accent select-none">&gt;</span>
-                        <span className="text-gray-700 dark:text-gray-300">
+                        <span className="text-accent dark:text-accent select-none flex-shrink-0">&gt;</span>
+                        <span className="text-gray-700 dark:text-gray-300 break-words">
                           Hey, I&apos;m <span className="text-accent dark:text-accent">David Anderson</span>. I build AI-powered tools that solve real workflow problems. Over the past 3 years, I&apos;ve shipped 6 production applications that delivered $40,000+ in annual cost savings and 80% efficiency gains. My approach leverages AI not just in the products I build, but in how I build them—using LLMs as development accelerators while maintaining product ownership, system design, and quality standards throughout the full lifecycle.
                         </span>
                       </div>
                       <div className="mt-2 text-gray-500 dark:text-gray-400 text-xs">
-                        Commands: <button onClick={() => handleCommand('help', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">help</button> | <button onClick={() => handleCommand('projects', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">projects</button> | <button onClick={() => handleCommand('contact', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">contact</button> | <button onClick={() => handleCommand('resume', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">resume</button> | <button onClick={() => handleCommand('github', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">github</button> | <button onClick={() => handleCommand('linkedin', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">linkedin</button> | <button onClick={() => handleCommand('theme', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">theme</button>
+                        <div className="hidden sm:block">
+                          Commands: <button onClick={() => handleCommand('help', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">help</button> | <button onClick={() => handleCommand('projects', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">projects</button> | <button onClick={() => handleCommand('contact', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">contact</button> | <button onClick={() => handleCommand('resume', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">resume</button> | <button onClick={() => handleCommand('github', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">github</button> | <button onClick={() => handleCommand('linkedin', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">linkedin</button> | <button onClick={() => handleCommand('theme', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">theme</button>
+                        </div>
+                        <div className="sm:hidden flex flex-wrap gap-x-2 gap-y-1">
+                          <span>Commands:</span>
+                          <button onClick={() => handleCommand('help', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">help</button>
+                          <span>|</span>
+                          <button onClick={() => handleCommand('projects', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">projects</button>
+                          <span>|</span>
+                          <button onClick={() => handleCommand('contact', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">contact</button>
+                          <span>|</span>
+                          <button onClick={() => handleCommand('resume', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">resume</button>
+                          <span>|</span>
+                          <button onClick={() => handleCommand('github', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">github</button>
+                          <span>|</span>
+                          <button onClick={() => handleCommand('linkedin', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">linkedin</button>
+                          <span>|</span>
+                          <button onClick={() => handleCommand('theme', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">theme</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -731,7 +749,7 @@ export function Hero() {
                   {/* Scrollable Command History and Input */}
                   <div
                     ref={terminalRef}
-                    className="p-6 pt-0 font-mono text-sm sm:text-base leading-relaxed h-48 overflow-y-auto cursor-text"
+                    className="p-4 sm:p-6 pt-0 font-mono text-xs sm:text-sm lg:text-base leading-relaxed h-48 overflow-y-auto cursor-text"
                     onClick={focusInput}
                   >
                     {/* Command History */}

@@ -9,8 +9,8 @@ export function InteractiveImage() {
         {/* Animated gradient glow - theme aware */}
         <div className="absolute -inset-1 bg-gradient-accent-to-r rounded-full blur-2xl opacity-75 group-hover:opacity-100 transition-all"></div>
 
-        {/* Gradient border - theme aware */}
-        <div className="relative rounded-full p-1 bg-gradient-accent-to-r w-[400px] h-[400px] transition-all">
+        {/* Gradient border - theme aware - responsive sizing */}
+        <div className="relative rounded-full p-1 bg-gradient-accent-to-r w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[400px] lg:h-[400px] transition-all">
           <div className="relative rounded-full overflow-hidden w-full h-full">
             <Image
               src="/david-headshot-square.png"
