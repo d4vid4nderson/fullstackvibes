@@ -407,6 +407,228 @@ export function Hero() {
           setCommand('');
         }, 500);
         break;
+
+      // 🥚 EASTER EGGS 🥚
+      case 'konami':
+      case '↑↑↓↓←→←→ba':
+        setCommandHistory(prev => [...prev,
+          '',
+          '🎮 ↑ ↑ ↓ ↓ ← → ← → B A',
+          '',
+          '  +30 lives activated!',
+          '  Just kidding... but you\'ve unlocked',
+          '  the mass respect of nerds everywhere.',
+          '',
+          '  🏆 Achievement Unlocked: Knows The Code',
+          ''
+        ]);
+        break;
+
+      case '42':
+        setCommandHistory(prev => [...prev,
+          '',
+          '🌌 The Answer to the Ultimate Question of',
+          '   Life, the Universe, and Everything.',
+          '',
+          '   But what was the question?',
+          '',
+          '   "I always thought something was fundamentally',
+          '    wrong with the universe." - Arthur Dent',
+          ''
+        ]);
+        break;
+
+      case 'sudo':
+      case 'sudo su':
+      case 'sudo rm':
+        setCommandHistory(prev => [...prev,
+          '',
+          '🔐 Nice try...',
+          '',
+          '   David is not in the sudoers file.',
+          '   This incident will be reported.',
+          '',
+          '   (Just kidding, I\'m a portfolio website)',
+          ''
+        ]);
+        break;
+
+      case 'rm -rf':
+      case 'rm -rf /':
+      case 'rm -rf /*':
+        setCommandHistory(prev => [...prev,
+          '',
+          '💀 Whoa there, cowboy!',
+          '',
+          '   I see you like to live dangerously.',
+          '   Fortunately, this terminal is read-only.',
+          '',
+          '   Your destructive tendencies have been noted.',
+          '   HR will be in touch.',
+          ''
+        ]);
+        break;
+
+      case 'hello world':
+      case 'hello, world':
+      case 'helloworld':
+        setCommandHistory(prev => [...prev,
+          '',
+          '👋 Hello, World!',
+          '',
+          '   printf("The classic first program!");',
+          '   console.log("Every journey starts here");',
+          '   print("Welcome, fellow developer!")',
+          '',
+          '   You never forget your first.',
+          ''
+        ]);
+        break;
+
+      case 'coffee':
+      case 'brew':
+        setCommandHistory(prev => [...prev,
+          '',
+          '      ☕',
+          '    ~~~~~~~~~~~~',
+          '    )  ~~~~~~  (',
+          '    )  COFFEE  (',
+          '    )__________(',
+          '    |__________|',
+          '',
+          '   A developer\'s best friend.',
+          '   Current status: Caffeinated ✓',
+          ''
+        ]);
+        break;
+
+      case 'matrix':
+        setCommandHistory(prev => [...prev,
+          '',
+          '💊 Red pill or blue pill?',
+          '',
+          '   "I\'m trying to free your mind, Neo.',
+          '    But I can only show you the door.',
+          '    You\'re the one that has to walk through it."',
+          '',
+          '   Wake up, Neo...',
+          '   The Matrix has you...',
+          ''
+        ]);
+        break;
+
+      case 'vim':
+      case ':q':
+      case ':q!':
+      case ':wq':
+        setCommandHistory(prev => [...prev,
+          '',
+          '📝 How to exit Vim:',
+          '',
+          '   Step 1: Don\'t panic',
+          '   Step 2: Press Esc (maybe a few times)',
+          '   Step 3: Type :q! and hit Enter',
+          '   Step 4: Question your life choices',
+          '',
+          '   Congratulations, you\'ve escaped!',
+          ''
+        ]);
+        break;
+
+      case 'ping':
+        setCommandHistory(prev => [...prev,
+          '',
+          '🏓 PONG!',
+          '',
+          '   64 bytes from portfolio: icmp_seq=1 ttl=64 time=0.042ms',
+          '   64 bytes from portfolio: icmp_seq=2 ttl=64 time=0.039ms',
+          '   64 bytes from portfolio: icmp_seq=3 ttl=64 time=0.041ms',
+          '',
+          '   --- portfolio ping statistics ---',
+          '   3 packets transmitted, 3 received, 0% packet loss',
+          '   Connection to Dave: Excellent',
+          ''
+        ]);
+        break;
+
+      case 'make me a sandwich':
+      case 'makemeasandwich':
+        setCommandHistory(prev => [...prev,
+          '',
+          '🥪 What? Make it yourself.',
+          ''
+        ]);
+        break;
+
+      case 'sudo make me a sandwich':
+        setCommandHistory(prev => [...prev,
+          '',
+          '🥪 Okay.',
+          '',
+          '   🍞 Bread',
+          '   🥬 Lettuce',
+          '   🍅 Tomato',
+          '   🧀 Cheese',
+          '   🥓 Bacon',
+          '   🍞 Bread',
+          '',
+          '   Your sandwich is ready, master.',
+          ''
+        ]);
+        break;
+
+      case 'exit':
+      case 'quit':
+      case 'logout':
+        setCommandHistory(prev => [...prev,
+          '',
+          '👋 Where do you think you\'re going?',
+          '',
+          '   This isn\'t a real terminal, friend.',
+          '   You\'re already free.',
+          '',
+          '   But since you\'re here... hire David?',
+          ''
+        ]);
+        break;
+
+      case 'ls':
+      case 'dir':
+        setCommandHistory(prev => [...prev,
+          '',
+          '📁 Contents of /david/portfolio:',
+          '',
+          '   drwxr-xr-x  projects/',
+          '   drwxr-xr-x  skills/',
+          '   -rw-r--r--  resume.pdf',
+          '   -rw-r--r--  cover_letter.txt',
+          '   drwxr-xr-x  coffee_addiction/',
+          '   -rw-r--r--  hire_me.please',
+          ''
+        ]);
+        break;
+
+      case 'whoami':
+        setCommandHistory(prev => [...prev,
+          '',
+          '🤔 You are a visitor exploring David\'s portfolio.',
+          '',
+          '   But the real question is...',
+          '   Who do you want to be?',
+          '',
+          '   (Deep, right?)',
+          ''
+        ]);
+        break;
+
+      case 'pwd':
+        setCommandHistory(prev => [...prev,
+          '',
+          '📍 /home/visitor/davids-awesome-portfolio',
+          ''
+        ]);
+        break;
+
       default:
         if (trimmedCmd) {
           setCommandHistory(prev => [...prev, `Command not found: ${trimmedCmd}. Type 'help' for available commands.`]);
