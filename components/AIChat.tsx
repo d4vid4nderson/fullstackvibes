@@ -11,7 +11,6 @@ interface Message {
 
 const SUGGESTED_QUESTIONS = [
   "What projects has Dave built?",
-  "Tell me about LegislationVUE",
   "What's Dave's tech stack?",
   "How does Dave use AI?",
 ];
@@ -140,36 +139,35 @@ export function AIChat() {
 
       {/* Chat Window */}
       <div
-        className={`fixed bottom-6 right-6 z-[9999] w-[400px] max-w-[calc(100vw-48px)] h-[600px] max-h-[calc(100vh-100px)] bg-[#1a1a1a] rounded-2xl shadow-2xl border border-white/10 flex flex-col transition-all duration-300 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}
+        className={`fixed bottom-6 right-6 z-[9999] w-[400px] max-w-[calc(100vw-48px)] h-[580px] max-h-[calc(100vh-100px)] bg-[#1a1a1a] rounded-2xl shadow-2xl border border-white/10 flex flex-col transition-all duration-300 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-white/10 bg-gradient-accent-to-r rounded-t-2xl">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-              <FiUser size={20} className="text-white" />
+        <div className="flex items-center justify-between px-3 py-2 border-b border-white/10 bg-gradient-accent-to-r rounded-t-2xl">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center">
+              <FiUser size={14} className="text-white" />
             </div>
             <div>
-              <h3 className="font-bold text-white">Ask about Dave</h3>
-              <p className="text-xs text-white/80">AI-powered portfolio assistant</p>
+              <h3 className="font-semibold text-white text-sm">Ask about Dave</h3>
             </div>
           </div>
           <div className="flex items-center gap-1">
             {messages.length > 0 && (
               <button
                 onClick={handleReset}
-                className="p-2 rounded-lg hover:bg-white/20 transition-colors text-white/70 hover:text-white"
+                className="p-1.5 rounded-lg hover:bg-white/20 transition-colors text-white/70 hover:text-white"
                 aria-label="Reset chat"
                 title="Reset chat"
               >
-                <FiRefreshCw size={18} />
+                <FiRefreshCw size={14} />
               </button>
             )}
             <button
               onClick={() => setIsOpen(false)}
-              className="p-2 rounded-lg hover:bg-white/20 transition-colors text-white"
+              className="p-1.5 rounded-lg hover:bg-white/20 transition-colors text-white"
               aria-label="Close chat"
             >
-              <FiX size={20} />
+              <FiX size={16} />
             </button>
           </div>
         </div>

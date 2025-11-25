@@ -31,7 +31,7 @@ export function ScrollToTop() {
   // Calculate position based on visibility and chat state
   const getPosition = () => {
     if (!isVisible) return 'bottom-6 right-6 opacity-0 pointer-events-none';
-    if (isChatOpen) return 'bottom-[640px] right-6 opacity-100'; // Above expanded chat window
+    if (isChatOpen) return 'bottom-[618px] right-6 opacity-100'; // Above chat window
     return 'bottom-[88px] right-6 opacity-100'; // Above chat button when closed
   };
 

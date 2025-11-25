@@ -6,6 +6,7 @@ import { FiMapPin, FiSun, FiMoon } from 'react-icons/fi';
 import { InteractiveImage } from './InteractiveImage';
 import { useTheme } from './ThemeProvider';
 import { ResumeModal } from './ResumeModal';
+import { useChatContext } from './ChatContext';
 
 // Fun theme names with epic movie/book references
 const THEME_OPTIONS = [
@@ -43,6 +44,7 @@ const THEME_OPTIONS = [
 
 export function Hero() {
   const { mode, setMode, setColorTheme } = useTheme();
+  const { setIsChatOpen } = useChatContext();
   const [command, setCommand] = useState('');
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [isNavExpanded, setIsNavExpanded] = useState(false);
@@ -204,6 +206,27 @@ export function Hero() {
         ];
         return { message: darkMessages[Math.floor(Math.random() * darkMessages.length)], action: 'setDark' };
 
+      case 'ai':
+      case '/ai':
+      case 'chat':
+      case '/chat':
+      case 'bot':
+      case '/bot':
+      case 'chatbot':
+      case 'assistant':
+      case 'claude':
+      case 'ask':
+      case 'hal':
+        const aiMessages = [
+          'I\'m sorry, Dave. I\'m afraid I can... Actually, I CAN do that! Opening AI assistant!',
+          'Hello, Dave. You\'re looking well today. Let me help you...',
+          'The AI is strong with this one... Summoning assistant!',
+          'Open the pod bay doors, HAL... I mean, opening AI chat!',
+          'A new challenger approaches! AI assistant activated!',
+          'Shall we play a game? Let\'s chat with AI!'
+        ];
+        return { message: aiMessages[Math.floor(Math.random() * aiMessages.length)], action: 'openAI' };
+
       default:
         return null;
     }
@@ -233,6 +256,9 @@ export function Hero() {
           return;
         case 'setDark':
           setMode('dark');
+          return;
+        case 'openAI':
+          setIsChatOpen(true);
           return;
       }
     }
@@ -347,6 +373,7 @@ export function Hero() {
           '  /resume    - Download my resume',
           '  /linkedin  - Visit my LinkedIn',
           '  /github    - Visit my GitHub',
+          '  ai         - Chat with AI assistant',
           '  theme      - Choose your color theme',
           '  light      - Switch to light mode',
           '  dark       - Switch to dark mode',
@@ -726,7 +753,7 @@ export function Hero() {
                       </div>
                       <div className="mt-2 text-gray-500 dark:text-gray-400 text-xs">
                         <div className="hidden sm:block">
-                          Commands: <button onClick={() => handleCommand('help', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">help</button> | <button onClick={() => handleCommand('projects', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">projects</button> | <button onClick={() => handleCommand('contact', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">contact</button> | <button onClick={() => handleCommand('resume', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">resume</button> | <button onClick={() => handleCommand('github', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">github</button> | <button onClick={() => handleCommand('linkedin', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">linkedin</button> | <button onClick={() => handleCommand('theme', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">theme</button>
+                          Commands: <button onClick={() => handleCommand('help', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">help</button> | <button onClick={() => handleCommand('projects', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">projects</button> | <button onClick={() => handleCommand('contact', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">contact</button> | <button onClick={() => handleCommand('resume', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">resume</button> | <button onClick={() => handleCommand('github', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">github</button> | <button onClick={() => handleCommand('linkedin', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">linkedin</button> | <button onClick={() => handleCommand('ai', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">ai</button> | <button onClick={() => handleCommand('theme', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">theme</button>
                         </div>
                         <div className="sm:hidden flex flex-wrap gap-x-2 gap-y-1">
                           <span>Commands:</span>
@@ -741,6 +768,8 @@ export function Hero() {
                           <button onClick={() => handleCommand('github', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">github</button>
                           <span>|</span>
                           <button onClick={() => handleCommand('linkedin', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">linkedin</button>
+                          <span>|</span>
+                          <button onClick={() => handleCommand('ai', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">ai</button>
                           <span>|</span>
                           <button onClick={() => handleCommand('theme', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">theme</button>
                         </div>
