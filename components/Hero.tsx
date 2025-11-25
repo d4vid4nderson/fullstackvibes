@@ -748,7 +748,7 @@ export function Hero() {
                       <div className="flex gap-2">
                         <span className="text-accent dark:text-accent select-none flex-shrink-0">&gt;</span>
                         <span className="text-gray-700 dark:text-gray-300 break-words">
-                          Hey, I&apos;m <span className="text-accent dark:text-accent">David Anderson</span>. I build AI-powered tools that solve real workflow problems. Over the past 3 years, I&apos;ve shipped 6 production applications that delivered $40,000+ in annual cost savings and 80% efficiency gains. My approach leverages AI not just in the products I build, but in how I build them—using LLMs as development accelerators while maintaining product ownership, system design, and quality standards throughout the full lifecycle.
+                          Hey, I&apos;m <span className="text-accent dark:text-accent">David Anderson</span>. I build AI-powered tools that solve real workflow problems. Over the past 3 years, I&apos;ve shipped 6 production applications that delivered $400,000+ in annual cost savings and 80% efficiency gains. My approach leverages AI not just in the products I build, but in how I build them—using LLMs as development accelerators while maintaining product ownership, system design, and quality standards throughout the full lifecycle.
                         </span>
                       </div>
                       <div className="mt-2 text-gray-500 dark:text-gray-400 text-xs">
