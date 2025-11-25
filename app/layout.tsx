@@ -4,6 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Footer } from "@/components/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { AIChat } from "@/components/AIChat";
+import { ChatProvider } from "@/components/ChatContext";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
@@ -51,11 +53,14 @@ export default function RootLayout({
         className={`${jetbrainsMono.variable} antialiased`}
       >
         <ThemeProvider>
-          <div>
-            {children}
-            <Footer />
-            <ScrollToTop />
-          </div>
+          <ChatProvider>
+            <div>
+              {children}
+              <Footer />
+              <ScrollToTop />
+              <AIChat />
+            </div>
+          </ChatProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { FiArrowUp } from 'react-icons/fi';
+import { useChatContext } from './ChatContext';
 
 export function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
+  const { isChatOpen } = useChatContext();
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -26,14 +28,17 @@ export function ScrollToTop() {
     });
   };
 
-  if (!isVisible) {
-    return null;
-  }
+  // Calculate position based on visibility and chat state
+  const getPosition = () => {
+    if (!isVisible) return 'bottom-6 right-6 opacity-0 pointer-events-none';
+    if (isChatOpen) return 'bottom-[640px] right-6 opacity-100'; // Above expanded chat window
+    return 'bottom-[88px] right-6 opacity-100'; // Above chat button when closed
+  };
 
   return (
     <button
       onClick={scrollToTop}
-      className="fixed right-8 bottom-8 z-50 p-5 bg-gradient-accent rounded-full text-white transition-all hover:scale-110 shadow-lg glow"
+      className={`fixed z-40 p-4 bg-gradient-accent rounded-full text-white shadow-lg transition-all duration-300 ease-out hover:scale-110 hover:glow ${getPosition()}`}
       aria-label="Scroll to top"
     >
       <FiArrowUp className="w-6 h-6" />

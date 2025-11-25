@@ -300,6 +300,13 @@ html {
   border-color: var(--accent-light);
 }
 
+/* Focus effects with theme colors */
+.focus-accent:focus {
+  border-color: var(--accent-primary);
+  outline: none;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-primary) 20%, transparent);
+}
+
 /* Hover effects with theme colors */
 .hover-accent:hover {
   color: var(--accent-light);
