@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { GitHubRepo } from '@/types/github';
-import { FiX, FiCheckCircle } from 'react-icons/fi';
+import { FiX, FiCheckCircle, FiExternalLink } from 'react-icons/fi';
 import { SiGo, SiJavascript, SiTailwindcss, SiDocker, SiAnthropic, SiReact, SiPython, SiFastapi, SiPostgresql, SiTypescript, SiNextdotjs, SiVuedotjs, SiNodedotjs, SiMongodb } from 'react-icons/si';
 import Image from 'next/image';
 import { MermaidDiagram } from './MermaidDiagram';
@@ -128,6 +128,7 @@ const getProjectDetails = (repoName: string) => {
     },
     'LegislationVUE': {
       diagramPath: '/diagrams/leg_vue.mmd',
+      demoUrl: 'https://legislationvue.vercel.app/',
       fullDescription: 'LegislationVUE is a comprehensive legislative tracking and AI-powered analysis platform that monitors federal executive orders and state legislation across 6 US states (CA, TX, NV, KY, SC, CO). It provides automated policy intelligence for government policy, businesses, and legislation analysts with real-time updates and AI-generated insights to empower our C-suite with the most up-to-date information and strategic recommendations for proactive decision-making on regulatory compliance, risk mitigation, and strategic planning.',
       keyFeatures: [
         'Automated tracking of executive orders and state bills from 6 US states with 20,000+ legislative documents',
@@ -465,6 +466,17 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 transition-colors duration-300">About This Project</h3>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">{projectDetails.fullDescription}</p>
+                  {projectDetails.demoUrl && (
+                    <a
+                      href={projectDetails.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-gradient-accent-to-r text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
+                    >
+                      <FiExternalLink className="w-4 h-4" />
+                      View Live Demo
+                    </a>
+                  )}
                 </div>
 
                 {/* Tech Stack */}
