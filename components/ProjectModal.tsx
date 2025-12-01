@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { GitHubRepo } from '@/types/github';
 import { FiX, FiCheckCircle, FiExternalLink } from 'react-icons/fi';
-import { SiGo, SiJavascript, SiTailwindcss, SiDocker, SiAnthropic, SiReact, SiPython, SiFastapi, SiPostgresql, SiTypescript, SiNextdotjs, SiVuedotjs, SiNodedotjs, SiMongodb } from 'react-icons/si';
+import { SiGo, SiJavascript, SiTailwindcss, SiDocker, SiAnthropic, SiReact, SiPython, SiFastapi, SiPostgresql, SiTypescript, SiNextdotjs, SiVuedotjs, SiNodedotjs, SiMongodb, SiSupabase, SiStripe } from 'react-icons/si';
 import Image from 'next/image';
 import { MermaidDiagram } from './MermaidDiagram';
 import { ScreenshotShowcase } from './ScreenshotShowcase';
@@ -49,6 +49,16 @@ const AzureIcon = ({ className }: { className?: string }) => (
   <Image
     src="/azure-color.svg"
     alt="Azure DevOps"
+    width={24}
+    height={24}
+    className={className}
+  />
+);
+
+const SignWellIcon = ({ className }: { className?: string }) => (
+  <Image
+    src="/signwell.svg"
+    alt="SignWell"
     width={24}
     height={24}
     className={className}
@@ -352,6 +362,96 @@ const getProjectDetails = (repoName: string) => {
           caption: 'PowerBI dashboard iframe export configuration modal allowing administrators to share analytics with stakeholders. Generate embeddable code for Power BI dashboards and deficiency galleries with customizable dimensions.'
         },
       ],
+    },
+    'Tenant Wise': {
+      diagramPath: '/diagrams/tenant_wise.mmd',
+      demoUrl: 'https://tenant-wise.vercel.app',
+      demoCredentials: {
+        username: 'demo@tenantwisedemo.com',
+        password: 'demodemo'
+      },
+      fullDescription: 'TenantWise is a SaaS application designed for small Texas landlords (1-10 units) that leverages Claude AI to generate state-compliant legal documents, notices, and communications. The platform solves the pain point of expensive property management software ($50-200/month) by providing AI-powered document generation at an affordable price point ($19-39/month), ensuring compliance with Texas Property Code requirements.',
+      keyFeatures: [
+        'AI-powered document generation using Claude API for Texas-compliant legal notices and communications',
+        'Late Rent Notice generation following Texas Property Code § 24.005 (3-day notice to pay or vacate)',
+        'Security Deposit Return letters with itemized deductions per Texas Property Code § 92.103 (30-day rule)',
+        'Lease Renewal Letters with professional terms and conditions for tenant retention',
+        'Maintenance Response templates for repair acknowledgment and expectation setting',
+        'Move-In/Move-Out Checklists for property condition documentation',
+        'Legal AI Assistant chat feature trained on Texas landlord-tenant law (paid plans)',
+        'Property and tenant profile management for quick document generation',
+      ],
+      capabilities: [
+        { title: 'AI Document Generation', description: 'Generate Texas-compliant legal documents instantly using Claude AI, transforming complex legal requirements into properly formatted notices and communications' },
+        { title: 'Texas Legal Compliance', description: 'Documents automatically include proper citations to Texas Property Code sections (§ 24.005, § 92.103) with legally required language and timelines' },
+        { title: 'Property Management', description: 'Save property profiles with addresses, unit details, and lease terms for streamlined document generation across multiple rental units' },
+        { title: 'Tenant Profiles', description: 'Store tenant contact information, lease dates, rent amounts, and security deposits for quick reference and document pre-population' },
+        { title: 'Subscription Tiers', description: 'Flexible pricing with Free (3 docs/month), Basic ($19/month unlimited), and Pro ($39/month with multi-property support) tiers via Stripe integration' },
+      ],
+      techIcons: [
+        { Icon: SiTypescript, name: 'TypeScript', color: 'text-blue-400' },
+        { Icon: SiNextdotjs, name: 'Next.js', color: 'text-white' },
+        { Icon: SiReact, name: 'React', color: 'text-cyan-400' },
+        { Icon: SiTailwindcss, name: 'Tailwind CSS', color: 'text-cyan-400' },
+        { Icon: SiSupabase, name: 'Supabase', color: 'text-green-400' },
+        { Icon: SiAnthropic, name: 'Claude AI', color: 'text-orange-400' },
+        { Icon: SiStripe, name: 'Stripe', color: 'text-purple-400' },
+        { Icon: SiPostgresql, name: 'PostgreSQL', color: 'text-blue-400' },
+        { Icon: SignWellIcon, name: 'SignWell', color: '' },
+      ],
+      alsoIncludes: 'Supabase Auth, Row Level Security, Vercel, React 19, App Router, E-Signatures',
+      screenshots: [
+        {
+          src: '/screenshots/Tenant_Wise-Landing.png',
+          alt: 'TenantWise Landing Page',
+          caption: 'Marketing landing page showcasing Texas-compliant document generation, pricing tiers (Free, Basic $19/mo, Pro $39/mo), and key features including Late Rent Notices, Lease Renewals, Security Deposit Returns, and Legal Review Add-On.'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-Dashboard.png',
+          alt: 'TenantWise Dashboard',
+          caption: 'Main landlord dashboard displaying rental portfolio overview with monthly rent collection tracking ($9,728 collected), property summaries, tenant counts, Pro Plan status, and quick actions for adding properties, tenants, or creating documents.'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-dashboard-New Document.png',
+          alt: 'Create New Document',
+          caption: 'Document type selection interface offering six AI-powered templates: Late Rent Notice (§ 24.005), Lease Renewal, Security Deposit Return (§ 92.103), Maintenance Response, Move-In/Out Checklist, and Lease Agreement with Texas Property Code compliance disclaimer.'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-Documents.png',
+          alt: 'Documents Management',
+          caption: 'Document management dashboard with search and filtering capabilities, showing generated documents with type badges, status tracking (Sent/Draft), creation dates, and quick view/delete actions for Late Rent Notices across multiple tenants.'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-Document Preview.png',
+          alt: 'Document Preview - Late Rent Notice',
+          caption: 'Full Texas-compliant Three-Day Notice to Pay Rent or Vacate with itemized breakdown, payment instructions, consequences of non-compliance, landlord signature section, certificate of service, and e-signature integration with awaiting signatures status.'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-Property Dashboard.png',
+          alt: 'Properties Dashboard',
+          caption: 'Property management interface with List/Cards/Map view toggle, property type filtering (Single Family, Condo, Apartment, Duplex), tenant counts, and monthly rent tracking across multiple Austin, TX rental properties.'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-Prop Detail.png',
+          alt: 'Property Detail View',
+          caption: 'Comprehensive property detail page showing 2606 Wilson St condo with cover image, property description, photo gallery, rent analysis chart comparing your rent ($2,900) vs market rent ($2,847), tenant information, and quick document generation actions.'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-Tenant Detail.png',
+          alt: 'Tenant Detail View',
+          caption: 'Tenant profile page with contact information, employment & income details, previous rental history, pet information, lease details (period, duration, move-in date), financial summary (monthly rent, security deposit), and issued documents history.'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-Legal.png',
+          alt: 'Legal Assistant AI Chat',
+          caption: 'AI-powered Legal Assistant chatbot trained on Texas landlord-tenant law, offering instant answers about Texas Property Code, security deposit requirements, eviction procedures, late fees, and landlord repair responsibilities with suggested questions.'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-Settings.png',
+          alt: 'Settings & Account Management',
+          caption: 'Landlord settings page with profile information for document population, email/password management, Pro Plan subscription with Stripe billing integration, notification preferences for document reminders and Texas law updates, and account deletion option.'
+        }
+      ],
     }
   };
 
@@ -467,15 +567,25 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 transition-colors duration-300">About This Project</h3>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">{projectDetails.fullDescription}</p>
                   {projectDetails.demoUrl && (
-                    <a
-                      href={projectDetails.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-gradient-accent-to-r text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
-                    >
-                      <FiExternalLink className="w-4 h-4" />
-                      View Live Demo
-                    </a>
+                    <div className="mt-4 flex flex-wrap items-center gap-4">
+                      <a
+                        href={projectDetails.demoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-accent-to-r text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
+                      >
+                        <FiExternalLink className="w-4 h-4" />
+                        View Live Demo
+                      </a>
+                      {projectDetails.demoCredentials && (
+                        <div className="flex items-center gap-3 px-4 py-2 bg-gray-100 dark:bg-white/5 rounded-lg border border-gray-300 dark:border-white/10">
+                          <span className="text-sm text-gray-500 dark:text-gray-400">Demo Login:</span>
+                          <code className="text-sm text-gray-700 dark:text-gray-300 font-mono">{projectDetails.demoCredentials.username}</code>
+                          <span className="text-gray-400">/</span>
+                          <code className="text-sm text-gray-700 dark:text-gray-300 font-mono">{projectDetails.demoCredentials.password}</code>
+                        </div>
+                      )}
+                    </div>
                   )}
                 </div>
 

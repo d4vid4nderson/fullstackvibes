@@ -87,6 +87,23 @@ const developerProjects: GitHubRepo[] = [
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
     pushed_at: new Date().toISOString(),
+  },
+  {
+    id: 6,
+    name: 'Tenant Wise',
+    full_name: 'd4vid4nderson/Tenant-Wise',
+    description: 'SaaS platform for small Texas landlords that uses Claude AI to generate state-compliant legal documents. Automates late rent notices, lease renewals, and security deposit returns following Texas Property Code requirements.',
+    html_url: '#',
+    homepage: null,
+    stargazers_count: 0,
+    forks_count: 0,
+    fork: false,
+    language: 'TypeScript',
+    topics: ['typescript', 'nextjs', 'react', 'tailwindcss', 'supabase', 'claude', 'signwell'],
+    techStackCount: 9,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+    pushed_at: new Date().toISOString(),
   }
 ];
 

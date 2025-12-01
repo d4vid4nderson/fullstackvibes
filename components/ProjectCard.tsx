@@ -79,6 +79,18 @@ const MongoDBIcon = ({ className }: { className?: string }) => (
   <img src="/mongodb-color.svg" alt="MongoDB" width={24} height={24} className={className} />
 );
 
+const SupabaseIcon = ({ className }: { className?: string }) => (
+  <img src="/supabase-logo-icon.svg" alt="Supabase" width={24} height={24} className={className} />
+);
+
+const StripeIcon = ({ className }: { className?: string }) => (
+  <img src="/stripe.svg" alt="Stripe" width={24} height={24} className={className} />
+);
+
+const SignWellIcon = ({ className }: { className?: string }) => (
+  <img src="/signwell.svg" alt="SignWell" width={24} height={24} className={className} />
+);
+
 // Map topic names to their corresponding colored icons
 const getIconForTopic = (topic: string) => {
   const iconMap: { [key: string]: React.ComponentType<{ className?: string }> } = {
@@ -112,6 +124,9 @@ const getIconForTopic = (topic: string) => {
     'azure-ai': AzureAIIcon,
     'azureai': AzureAIIcon,
     'azure': AzureIcon,
+    'supabase': SupabaseIcon,
+    'stripe': StripeIcon,
+    'signwell': SignWellIcon,
   };
 
   return iconMap[topic.toLowerCase()];

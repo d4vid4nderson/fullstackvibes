@@ -1,0 +1,67 @@
+flowchart TB
+    subgraph Client["User Interface"]
+        Landing[Landing Page]
+        Auth[Login / Signup]
+        Dashboard[Dashboard]
+        DocForm[Document Forms]
+        Preview[Document Preview]
+    end
+
+    subgraph Authentication["Authentication Layer"]
+        Auth --> Supabase[Supabase Auth]
+        Supabase --> Session[Session Management]
+        Session --> RLS[Row Level Security]
+    end
+
+    subgraph Documents["Document Generation"]
+        DocForm --> API["/api/generate"]
+        API --> Claude[Claude API<br/>Anthropic]
+        Claude --> Prompts[Texas-Compliant<br/>Prompt Templates]
+
+        subgraph DocTypes["Document Types"]
+            LateRent[Late Rent Notice<br/>§ 24.005]
+            LeaseRenewal[Lease Renewal<br/>Letter]
+            Deposit[Security Deposit<br/>§ 92.103]
+            Maintenance[Maintenance<br/>Response]
+            MoveIO[Move-In/Out<br/>Checklist]
+        end
+
+        Prompts --> DocTypes
+        Claude --> Preview
+    end
+
+    subgraph Storage["Data Storage"]
+        RLS --> DB[(Supabase<br/>PostgreSQL)]
+
+        DB --> Profiles[User Profiles]
+        DB --> Properties[Properties]
+        DB --> Tenants[Tenants]
+        DB --> SavedDocs[Saved Documents]
+
+        Properties --> DocForm
+        Tenants --> DocForm
+    end
+
+    subgraph Payments["Subscription System"]
+        Dashboard --> Stripe[Stripe<br/>Checkout]
+        Stripe --> Webhook["/api/stripe/webhook"]
+        Webhook --> Tiers{Subscription Tier}
+        Tiers --> Free[Free<br/>3 docs/month]
+        Tiers --> Basic[Basic $19/mo<br/>Unlimited]
+        Tiers --> Pro[Pro $39/mo<br/>Multi-property]
+    end
+
+    subgraph Deploy["Deployment"]
+        Vercel[Vercel<br/>Edge Functions]
+    end
+
+    Landing --> Auth
+    Session --> Dashboard
+    Dashboard --> DocForm
+    Preview --> SavedDocs
+
+    style Claude fill:#14b8a6
+    style Dashboard fill:#06b6d4
+    style DB fill:#0891b2
+    style Stripe fill:#a855f7
+    style Supabase fill:#10b981
