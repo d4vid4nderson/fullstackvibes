@@ -13,8 +13,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "David Anderson - Full Stack Developer",
-  description: "Portfolio and blog of David Anderson, a full stack developer specializing in modern web technologies.",
+  title: "FullStackVibes - A Portfolio Site For David Anderson",
+  description: "FullStackVibes - A Portfolio Site For David Anderson",
   viewport: {
     width: "device-width",
     initialScale: 1,
