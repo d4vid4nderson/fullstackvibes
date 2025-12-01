@@ -46,7 +46,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#0f0f0f" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="FSV" />
+        <meta name="apple-mobile-web-app-title" content="FullStackVibes" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
