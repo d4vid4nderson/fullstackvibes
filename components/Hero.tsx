@@ -779,7 +779,7 @@ export function Hero() {
   const closingTransformStyle = { '--nav-shift': `${navShift}px` } as React.CSSProperties;
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 bg-background transition-colors duration-300">
+    <section className="relative px-4 sm:px-6 lg:px-8 pt-24 pb-16 bg-background transition-colors duration-300">
       {/* Animated background orbs */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
@@ -788,8 +788,8 @@ export function Hero() {
       </div>
 
       <div className="relative max-w-7xl mx-auto w-full z-10">
-        {/* Full Stack Vibes with hidden navigation easter egg */}
-        <div className="absolute -top-12 left-0 group/nav cursor-pointer">
+        {/* Full Stack Vibes with hidden navigation easter egg - desktop only */}
+        <div className="absolute -top-12 left-0 group/nav cursor-pointer hidden md:block">
           <div className="flex items-center text-accent dark:text-accent font-mono text-lg">
             <div className="flex items-center relative gap-0">
               {/* Opening bracket stays in place */}
@@ -917,117 +917,37 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Mobile navigation - always visible on small screens */}
-        <div className="absolute -top-12 right-0 md:hidden">
-          <div className="flex items-center gap-4">
-            <a href="/" className="font-medium text-gray-700 dark:text-gray-300 hover-accent hover-glow-accent transition-all text-sm">
-              Home
-            </a>
-            <a href="#projects" className="font-medium text-gray-700 dark:text-gray-300 hover-accent hover-glow-accent transition-all text-sm">
-              Projects
-            </a>
-            <button onClick={() => setShowResumeModal(true)} className="font-medium text-gray-700 dark:text-gray-300 hover-accent hover-glow-accent transition-all text-sm">
-              Resume
-            </button>
-            <a href="#contact" className="font-medium text-gray-700 dark:text-gray-300 hover-accent hover-glow-accent transition-all text-sm">
-              Contact
-            </a>
-            <div className="relative">
-              <button onClick={() => setShowThemeMenu(!showThemeMenu)} className="font-medium text-gray-700 dark:text-gray-300 hover-accent hover-glow-accent transition-all text-sm">
-                Themes
-              </button>
-              {/* Mobile Theme Dropdown */}
-              {showThemeMenu && (
-                <div className="absolute right-0 top-8 z-50">
-                  <div className="bg-white dark:bg-[#1a1a1a] rounded-lg shadow-xl border border-gray-300 dark:border-white/10 p-4 min-w-[280px]">
-                    <div className="flex items-center justify-between mb-3">
-                      <h3 className="text-sm font-bold text-gray-900 dark:text-white">Select Theme</h3>
-                      <div className="flex gap-2">
-                        <button
-                          onClick={() => setMode('light')}
-                          className={`p-2 rounded-lg transition-colors ${
-                            mode === 'light'
-                              ? 'bg-accent text-white'
-                              : 'bg-gray-100 dark:bg-[#2a2a2a] text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-[#333]'
-                          }`}
-                          aria-label="Light mode"
-                        >
-                          <FiSun className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => setMode('dark')}
-                          className={`p-2 rounded-lg transition-colors ${
-                            mode === 'dark'
-                              ? 'bg-accent text-white'
-                              : 'bg-gray-100 dark:bg-[#2a2a2a] text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-[#333]'
-                          }`}
-                          aria-label="Dark mode"
-                        >
-                          <FiMoon className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      {THEME_OPTIONS.map((theme) => (
-                        <button
-                          key={theme.key}
-                          onClick={() => {
-                            handleThemeSelection(theme.key);
-                            setShowThemeMenu(false);
-                          }}
-                          className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-[#2a2a2a] transition-colors text-left"
-                        >
-                          <div className="flex gap-1">
-                            {theme.key === 'cyan' && (
-                              <>
-                                <div className="w-5 h-5 rounded-full bg-[#06b6d4] border border-gray-300 dark:border-white/20"></div>
-                                <div className="w-5 h-5 rounded-full bg-[#14b8a6] border border-gray-300 dark:border-white/20"></div>
-                                <div className="w-5 h-5 rounded-full bg-[#0891b2] border border-gray-300 dark:border-white/20"></div>
-                              </>
-                            )}
-                            {theme.key === 'purple' && (
-                              <>
-                                <div className="w-5 h-5 rounded-full bg-[#a855f7] border border-gray-300 dark:border-white/20"></div>
-                                <div className="w-5 h-5 rounded-full bg-[#8b5cf6] border border-gray-300 dark:border-white/20"></div>
-                                <div className="w-5 h-5 rounded-full bg-[#7c3aed] border border-gray-300 dark:border-white/20"></div>
-                              </>
-                            )}
-                            {theme.key === 'emerald' && (
-                              <>
-                                <div className="w-5 h-5 rounded-full bg-[#10b981] border border-gray-300 dark:border-white/20"></div>
-                                <div className="w-5 h-5 rounded-full bg-[#059669] border border-gray-300 dark:border-white/20"></div>
-                                <div className="w-5 h-5 rounded-full bg-[#34d399] border border-gray-300 dark:border-white/20"></div>
-                              </>
-                            )}
-                            {theme.key === 'orange' && (
-                              <>
-                                <div className="w-5 h-5 rounded-full bg-[#f97316] border border-gray-300 dark:border-white/20"></div>
-                                <div className="w-5 h-5 rounded-full bg-[#fb923c] border border-gray-300 dark:border-white/20"></div>
-                                <div className="w-5 h-5 rounded-full bg-[#ea580c] border border-gray-300 dark:border-white/20"></div>
-                              </>
-                            )}
-                            {theme.key === 'blue' && (
-                              <>
-                                <div className="w-5 h-5 rounded-full bg-[#3b82f6] border border-gray-300 dark:border-white/20"></div>
-                                <div className="w-5 h-5 rounded-full bg-[#60a5fa] border border-gray-300 dark:border-white/20"></div>
-                                <div className="w-5 h-5 rounded-full bg-[#2563eb] border border-gray-300 dark:border-white/20"></div>
-                              </>
-                            )}
-                          </div>
-                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                            {theme.name}
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
+        {/* Mobile site title with tap-to-reveal nav */}
+        <div className="absolute -top-12 left-0 md:hidden">
+          <button
+            onClick={() => setIsNavExpanded(!isNavExpanded)}
+            className="text-accent dark:text-accent font-mono text-base flex items-center"
+          >
+            <span>&lt;</span>
+            {/* Nav links - expand from left */}
+            <div
+              className={`flex items-center gap-1.5 overflow-hidden transition-all duration-500 ease-out ${
+                isNavExpanded ? 'w-[210px] opacity-100 px-2' : 'w-0 opacity-0 px-0'
+              }`}
+            >
+              <a href="#projects" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap">
+                Projects
+              </a>
+              <span className="text-gray-500 text-xs">|</span>
+              <span onClick={(e) => { e.stopPropagation(); setShowResumeModal(true); setIsNavExpanded(false); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap cursor-pointer">
+                Resume
+              </span>
+              <span className="text-gray-500 text-xs">|</span>
+              <a href="#contact" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap">
+                Contact
+              </a>
             </div>
-            <a href="#contact" className="font-medium text-gray-700 dark:text-gray-300 hover-accent hover-glow-accent transition-all text-sm">
-              Contact
-            </a>
-          </div>
+            <span>&gt;</span>
+            {/* Title - contracts to FSV when nav open */}
+            <span className="overflow-hidden transition-all duration-500 ease-out whitespace-nowrap">
+              {isNavExpanded ? 'FSV' : 'FullStackVibes'}
+            </span>
+          </button>
         </div>
 
 
@@ -1049,9 +969,9 @@ export function Hero() {
 
                 {/* Terminal Content */}
                 <div className="p-5 sm:p-8 font-mono text-sm sm:text-base leading-relaxed relative">
-                  {/* Photo - upper right */}
-                  <div className="absolute top-5 right-5 sm:top-8 sm:right-8">
-                    <div className="relative rounded-full p-[3px] bg-gradient-accent-to-r w-[120px] h-[120px] sm:w-[160px] sm:h-[160px]">
+                  {/* Photo - upper right, hidden on mobile and tablet */}
+                  <div className="absolute top-8 right-8 hidden lg:block">
+                    <div className="relative rounded-full p-[3px] bg-gradient-accent-to-r w-[160px] h-[160px]">
                       <div className="relative rounded-full overflow-hidden w-full h-full bg-white dark:bg-[#1a1a1a]">
                         <Image
                           src="/david-headshot-square.png"
@@ -1066,7 +986,7 @@ export function Hero() {
                   </div>
 
                   {/* whoami */}
-                  <div className="pr-20 sm:pr-24">
+                  <div className="lg:pr-44">
                     <div className="flex gap-2 mb-1">
                       <span className="text-accent dark:text-accent select-none">$</span>
                       <span className="text-gray-700 dark:text-gray-300">whoami</span>
@@ -1078,23 +998,23 @@ export function Hero() {
                   {/* Commands: bio, stack, ai - compact display */}
                   <div className="mt-4 space-y-2 text-xs sm:text-sm">
                     {/* Bio */}
-                    <div className="flex gap-2">
-                      <span className="text-accent dark:text-accent select-none">$</span>
-                      <span className="text-gray-500 dark:text-gray-500">--bio</span>
+                    <div>
+                      <span className="text-accent dark:text-accent select-none">$ </span>
+                      <span className="text-gray-500 dark:text-gray-500">--bio </span>
                       <span className="text-gray-600 dark:text-gray-400">→ I build AI-powered tools that solve real workflow problems</span>
                     </div>
 
                     {/* Stack */}
-                    <div className="flex gap-2">
-                      <span className="text-accent dark:text-accent select-none">$</span>
-                      <span className="text-gray-500 dark:text-gray-500">--stack</span>
+                    <div>
+                      <span className="text-accent dark:text-accent select-none">$ </span>
+                      <span className="text-gray-500 dark:text-gray-500">--stack </span>
                       <span className="text-gray-600 dark:text-gray-400">→ go, python, typescript, react, next.js, fastapi, postgresql</span>
                     </div>
 
                     {/* AI/ML */}
-                    <div className="flex gap-2">
-                      <span className="text-accent dark:text-accent select-none">$</span>
-                      <span className="text-gray-500 dark:text-gray-500">--ai</span>
+                    <div>
+                      <span className="text-accent dark:text-accent select-none">$ </span>
+                      <span className="text-gray-500 dark:text-gray-500">--ai </span>
                       <span className="text-gray-600 dark:text-gray-400">→ claude, gpt-4, azure-openai, prompt-engineering, rag-pipelines</span>
                     </div>
                   </div>

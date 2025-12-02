@@ -639,3 +639,19 @@ html {
     transform: scaleY(0.5);
   }
 }
+
+/* Fade in animation for mobile nav */
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
