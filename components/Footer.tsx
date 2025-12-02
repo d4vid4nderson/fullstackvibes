@@ -1,73 +1,76 @@
 import { FiGithub, FiMail, FiHeart, FiLinkedin } from 'react-icons/fi';
-import Image from 'next/image';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative py-12 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] border-t border-white/10">
+    <footer className="relative py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] border-t border-white/10">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
+        <div className="flex flex-col items-center text-center gap-6 sm:flex-row sm:items-end sm:justify-between sm:text-left">
           {/* Left side: Logo and Built with */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 items-center sm:items-start">
             {/* Full Stack Vibes Logo */}
             <div className="font-bold text-accent leading-tight text-lg font-mono">
               Full Stack Vibes
             </div>
 
-            {/* Built with section */}
-            <div className="flex items-center gap-2 text-gray-400">
-              <span>Built with</span>
-              <FiHeart className="w-4 h-4 text-accent animate-pulse" />
-              <span>using</span>
-              <span className="font-semibold gradient-text">Next.js</span>
-              <span>&</span>
-              <span className="font-semibold gradient-text">Tailwind CSS</span>
-              <span>&</span>
-              <span className="inline-block" style={{
-                background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary))',
-                WebkitMask: 'url(/claude_code.svg) no-repeat center',
-                mask: 'url(/claude_code.svg) no-repeat center',
-                WebkitMaskSize: 'contain',
-                maskSize: 'contain',
-                width: '24px',
-                height: '24px'
-              }} />
+            {/* Built with section - stacked on mobile */}
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-2 gap-y-1 text-gray-400 text-sm">
+              <span className="flex items-center gap-2">
+                Built with
+                <FiHeart className="w-4 h-4 text-accent animate-pulse" />
+                using
+              </span>
+              <span className="flex items-center gap-2">
+                <span className="font-semibold gradient-text">Next.js</span>
+                <span>&</span>
+                <span className="font-semibold gradient-text">Tailwind</span>
+                <span>&</span>
+                <span className="inline-block" style={{
+                  background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary))',
+                  WebkitMask: 'url(/claude_code.svg) no-repeat center',
+                  mask: 'url(/claude_code.svg) no-repeat center',
+                  WebkitMaskSize: 'contain',
+                  maskSize: 'contain',
+                  width: '20px',
+                  height: '20px'
+                }} />
+              </span>
             </div>
           </div>
 
           {/* Center: Social links */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 order-first sm:order-none">
             <a
               href="https://github.com/d4vid4nderson"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 transition-colors group/link"
+              className="text-gray-400 hover:text-accent transition-colors p-2"
               aria-label="GitHub"
             >
-              <FiGithub className="w-5 h-5 group-hover-accent transition-colors" />
+              <FiGithub className="w-6 h-6 sm:w-5 sm:h-5" />
             </a>
             <a
               href="https://www.linkedin.com/in/d4v1d4nd3rs0n"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 transition-colors group/link"
+              className="text-gray-400 hover:text-accent transition-colors p-2"
               aria-label="LinkedIn"
             >
-              <FiLinkedin className="w-5 h-5 group-hover-accent transition-colors" />
+              <FiLinkedin className="w-6 h-6 sm:w-5 sm:h-5" />
             </a>
             <a
               href="#contact"
-              className="text-gray-400 transition-colors group/link"
+              className="text-gray-400 hover:text-accent transition-colors p-2"
               aria-label="Contact"
             >
-              <FiMail className="w-5 h-5 group-hover-accent transition-colors" />
+              <FiMail className="w-6 h-6 sm:w-5 sm:h-5" />
             </a>
           </div>
 
           {/* Right: Copyright */}
-          <p className="text-gray-400 text-sm">
-            © {currentYear} David Anderson. All rights reserved.
+          <p className="text-gray-500 text-xs sm:text-sm">
+            © {currentYear} David Anderson
           </p>
         </div>
       </div>

@@ -131,15 +131,18 @@ export function AIChat() {
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 z-[9998] p-4 rounded-full bg-gradient-accent-to-r text-white shadow-lg transition-all duration-300 hover:scale-110 hover:glow ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[9998] p-3 sm:p-4 rounded-full bg-gradient-accent-to-r text-white shadow-lg transition-all duration-300 hover:scale-110 hover:glow ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
         aria-label="Open chat"
       >
-        <FiMessageSquare size={24} />
+        <FiMessageSquare className="w-5 h-5 sm:w-6 sm:h-6" />
       </button>
 
       {/* Chat Window */}
       <div
-        className={`fixed bottom-6 right-6 z-[9999] w-[400px] max-w-[calc(100vw-48px)] h-[580px] max-h-[calc(100vh-100px)] bg-[#1a1a1a] rounded-2xl shadow-2xl border border-white/10 flex flex-col transition-all duration-300 ${isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'}`}
+        className={`fixed z-[9999] bg-[#1a1a1a] shadow-2xl border border-white/10 flex flex-col transition-all duration-300
+          bottom-0 right-0 left-0 h-[85vh] rounded-t-2xl
+          sm:bottom-6 sm:right-6 sm:left-auto sm:w-[400px] sm:max-w-[calc(100vw-48px)] sm:h-[580px] sm:max-h-[calc(100vh-100px)] sm:rounded-2xl
+          ${isOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4 pointer-events-none'}`}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-3 py-2 border-b border-white/10 bg-gradient-accent-to-r rounded-t-2xl">

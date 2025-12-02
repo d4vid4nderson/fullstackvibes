@@ -2,8 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react';
 import type { CSSProperties } from 'react';
+import Image from 'next/image';
 import { FiMapPin, FiSun, FiMoon } from 'react-icons/fi';
-import { InteractiveImage } from './InteractiveImage';
 import { useTheme } from './ThemeProvider';
 import { ResumeModal } from './ResumeModal';
 import { useChatContext } from './ChatContext';
@@ -51,9 +51,40 @@ export function Hero() {
   const [showThemeMenu, setShowThemeMenu] = useState(false);
   const [showResumeModal, setShowResumeModal] = useState(false);
   const [navWidth, setNavWidth] = useState(0);
+  const [isHistoryFading, setIsHistoryFading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
   const navMenuRef = useRef<HTMLDivElement>(null);
+  const resetTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Auto-reset terminal output after 20 seconds of inactivity with fade effect
+  useEffect(() => {
+    if (commandHistory.length > 0 && !isHistoryFading) {
+      // Clear any existing timer
+      if (resetTimerRef.current) {
+        clearTimeout(resetTimerRef.current);
+      }
+
+      // Set new timer to fade and clear history after 20 seconds
+      resetTimerRef.current = setTimeout(() => {
+        // Start fade out
+        setIsHistoryFading(true);
+
+        // Clear history after fade animation completes
+        setTimeout(() => {
+          setCommandHistory([]);
+          setShowThemeMenu(false);
+          setIsHistoryFading(false);
+        }, 500);
+      }, 20000);
+    }
+
+    return () => {
+      if (resetTimerRef.current) {
+        clearTimeout(resetTimerRef.current);
+      }
+    };
+  }, [commandHistory, isHistoryFading]);
 
   const handleThemeSelection = (themeKey: string) => {
     const theme = THEME_OPTIONS.find(t => t.key === themeKey);
@@ -218,8 +249,8 @@ export function Hero() {
       case 'ask':
       case 'hal':
         const aiMessages = [
-          'I\'m sorry, Dave. I\'m afraid I can... Actually, I CAN do that! Opening AI assistant!',
-          'Hello, Dave. You\'re looking well today. Let me help you...',
+          'I\'m sorry, I\'m afraid I can... Actually, I CAN do that! Opening AI assistant!',
+          'Hello there! You\'re looking well today. Let me help you...',
           'The AI is strong with this one... Summoning assistant!',
           'Open the pod bay doors, HAL... I mean, opening AI chat!',
           'A new challenger approaches! AI assistant activated!',
@@ -368,17 +399,22 @@ export function Hero() {
         ];
         setCommandHistory(prev => [...prev,
           helpIntros[Math.floor(Math.random() * helpIntros.length)],
+          '',
+          '  --bio      - About me',
+          '  --stats    - My impact stats',
+          '  --stack    - Tech stack',
+          '  --ai       - AI & ML tools',
+          '',
           '  /projects  - View my projects',
           '  /contact   - Get in touch',
           '  /resume    - Download my resume',
           '  /linkedin  - Visit my LinkedIn',
           '  /github    - Visit my GitHub',
+          '',
           '  ai         - Chat with AI assistant',
           '  theme      - Choose your color theme',
-          '  light      - Switch to light mode',
-          '  dark       - Switch to dark mode',
+          '  light/dark - Switch display mode',
           '  clear      - Clear terminal',
-          '  reset      - Reset terminal to original state',
           '  help       - Show this message'
         ]);
         break;
@@ -546,7 +582,7 @@ export function Hero() {
           '',
           '   --- portfolio ping statistics ---',
           '   3 packets transmitted, 3 received, 0% packet loss',
-          '   Connection to Dave: Excellent',
+          '   Connection to David\'s portfolio: Excellent',
           ''
         ]);
         break;
@@ -629,6 +665,60 @@ export function Hero() {
         ]);
         break;
 
+      case '--bio':
+      case 'bio':
+      case '--about':
+      case 'about':
+        setCommandHistory(prev => [...prev,
+          '',
+          '💡 About David:',
+          '',
+          '   David builds AI-powered tools that solve real workflow problems.',
+          '   From concept to deployment, he bridges the gap between',
+          '   business needs and technical solutions.',
+          ''
+        ]);
+        break;
+
+      case '--stats':
+      case 'stats':
+        setCommandHistory(prev => [...prev,
+          '',
+          '📊 Impact Stats:',
+          '',
+          '   → 6 production AI applications shipped',
+          '   → $400K+ annual cost savings delivered',
+          '   → 80% efficiency gains measured',
+          ''
+        ]);
+        break;
+
+      case '--stack':
+      case 'stack':
+        setCommandHistory(prev => [...prev,
+          '',
+          '🛠️ Tech Stack:',
+          '',
+          '   Languages:  Go, Python, TypeScript',
+          '   Frontend:   React, Next.js, Tailwind CSS',
+          '   Backend:    FastAPI, HTMX, PostgreSQL',
+          '   DevOps:     Docker, Playwright, CI/CD',
+          ''
+        ]);
+        break;
+
+      case '--ai':
+        setCommandHistory(prev => [...prev,
+          '',
+          '🤖 AI & ML Tools:',
+          '',
+          '   Models:     Claude, GPT-4, Azure OpenAI',
+          '   Skills:     Prompt Engineering, RAG Pipelines',
+          '   Focus:      Enterprise AI Integration',
+          ''
+        ]);
+        break;
+
       default:
         if (trimmedCmd) {
           setCommandHistory(prev => [...prev, `Command not found: ${trimmedCmd}. Type 'help' for available commands.`]);
@@ -689,7 +779,7 @@ export function Hero() {
   const closingTransformStyle = { '--nav-shift': `${navShift}px` } as React.CSSProperties;
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-background transition-colors duration-300">
+    <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 bg-background transition-colors duration-300">
       {/* Animated background orbs */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
@@ -699,7 +789,7 @@ export function Hero() {
 
       <div className="relative max-w-7xl mx-auto w-full z-10">
         {/* Full Stack Vibes with hidden navigation easter egg */}
-        <div className="absolute -top-16 left-0 group/nav cursor-pointer">
+        <div className="absolute -top-12 left-0 group/nav cursor-pointer">
           <div className="flex items-center text-accent dark:text-accent font-mono text-lg">
             <div className="flex items-center relative gap-0">
               {/* Opening bracket stays in place */}
@@ -828,7 +918,7 @@ export function Hero() {
         </div>
 
         {/* Mobile navigation - always visible on small screens */}
-        <div className="absolute -top-16 right-0 md:hidden">
+        <div className="absolute -top-12 right-0 md:hidden">
           <div className="flex items-center gap-4">
             <a href="/" className="font-medium text-gray-700 dark:text-gray-300 hover-accent hover-glow-accent transition-all text-sm">
               Home
@@ -941,17 +1031,12 @@ export function Hero() {
         </div>
 
 
-        <div className="flex flex-col lg:flex-row-reverse items-center lg:items-start gap-8 lg:gap-16">
-          {/* Interactive Avatar */}
-          <div className="flex-shrink-0">
-            <InteractiveImage />
-          </div>
-
+        <div className="flex flex-col items-center gap-8">
           {/* Content */}
-          <div className="flex-1 w-full space-y-8">
+          <div className="w-full">
             <div className="w-full">
               {/* Terminal Window */}
-              <div className="bg-white dark:bg-[#1a1a1a] rounded-lg border border-gray-300 dark:border-white/10 shadow-2xl overflow-hidden max-w-3xl transition-colors duration-300 text-left">
+              <div className="bg-white dark:bg-[#1a1a1a] rounded-lg border border-gray-300 dark:border-white/10 shadow-2xl overflow-hidden max-w-7xl mx-auto transition-colors duration-300 text-left">
                 {/* Terminal Header */}
                 <div className="bg-gray-100 dark:bg-[#2a2a2a] px-4 py-2 flex items-center gap-2 border-b border-gray-300 dark:border-white/10 transition-colors duration-300">
                   <div className="flex gap-2">
@@ -963,70 +1048,121 @@ export function Hero() {
                 </div>
 
                 {/* Terminal Content */}
-                <div className="relative">
-                  {/* Fixed Welcome Message */}
-                  <div className="p-4 sm:p-6 pb-0 font-mono text-xs sm:text-sm lg:text-base leading-relaxed bg-white dark:bg-[#1a1a1a] relative z-10">
-                    <div className="mb-4">
-                      <div className="flex gap-2">
-                        <span className="text-accent dark:text-accent select-none flex-shrink-0">&gt;</span>
-                        <span className="text-gray-700 dark:text-gray-300 break-words">
-                          Hey, I&apos;m <span className="text-accent dark:text-accent">David Anderson</span>. I build AI-powered tools that solve real workflow problems. Over the past 3 years, I&apos;ve shipped 6 production applications that delivered $400,000+ in annual cost savings and 80% efficiency gains. My approach leverages AI not just in the products I build, but in how I build them—using LLMs as development accelerators while maintaining product ownership, system design, and quality standards throughout the full lifecycle.
-                        </span>
-                      </div>
-                      <div className="mt-2 text-gray-500 dark:text-gray-400 text-xs">
-                        <div className="hidden sm:block">
-                          Commands: <button onClick={() => handleCommand('help', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">help</button> | <button onClick={() => handleCommand('projects', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">projects</button> | <button onClick={() => handleCommand('contact', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">contact</button> | <button onClick={() => handleCommand('resume', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">resume</button> | <button onClick={() => handleCommand('github', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">github</button> | <button onClick={() => handleCommand('linkedin', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">linkedin</button> | <button onClick={() => handleCommand('ai', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">ai</button> | <button onClick={() => handleCommand('theme', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">theme</button>
-                        </div>
-                        <div className="sm:hidden flex flex-wrap gap-x-2 gap-y-1">
-                          <span>Commands:</span>
-                          <button onClick={() => handleCommand('help', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">help</button>
-                          <span>|</span>
-                          <button onClick={() => handleCommand('projects', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">projects</button>
-                          <span>|</span>
-                          <button onClick={() => handleCommand('contact', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">contact</button>
-                          <span>|</span>
-                          <button onClick={() => handleCommand('resume', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">resume</button>
-                          <span>|</span>
-                          <button onClick={() => handleCommand('github', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">github</button>
-                          <span>|</span>
-                          <button onClick={() => handleCommand('linkedin', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">linkedin</button>
-                          <span>|</span>
-                          <button onClick={() => handleCommand('ai', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">ai</button>
-                          <span>|</span>
-                          <button onClick={() => handleCommand('theme', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">theme</button>
-                        </div>
+                <div className="p-5 sm:p-8 font-mono text-sm sm:text-base leading-relaxed relative">
+                  {/* Photo - upper right */}
+                  <div className="absolute top-5 right-5 sm:top-8 sm:right-8">
+                    <div className="relative rounded-full p-[3px] bg-gradient-accent-to-r w-[120px] h-[120px] sm:w-[160px] sm:h-[160px]">
+                      <div className="relative rounded-full overflow-hidden w-full h-full bg-white dark:bg-[#1a1a1a]">
+                        <Image
+                          src="/david-headshot-square.png"
+                          alt="David Anderson"
+                          width={160}
+                          height={160}
+                          className="rounded-full object-cover w-full h-full"
+                          priority
+                        />
                       </div>
                     </div>
                   </div>
 
-                  {/* Scrollable Command History and Input */}
+                  {/* whoami */}
+                  <div className="pr-20 sm:pr-24">
+                    <div className="flex gap-2 mb-1">
+                      <span className="text-accent dark:text-accent select-none">$</span>
+                      <span className="text-gray-700 dark:text-gray-300">whoami</span>
+                    </div>
+                    <div className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">David Anderson</div>
+                    <div className="text-accent dark:text-accent font-medium text-sm sm:text-base">Digital Experience Architect / Product Owner</div>
+                  </div>
+
+                  {/* Commands: bio, stack, ai - compact display */}
+                  <div className="mt-4 space-y-2 text-xs sm:text-sm">
+                    {/* Bio */}
+                    <div className="flex gap-2">
+                      <span className="text-accent dark:text-accent select-none">$</span>
+                      <span className="text-gray-500 dark:text-gray-500">--bio</span>
+                      <span className="text-gray-600 dark:text-gray-400">→ I build AI-powered tools that solve real workflow problems</span>
+                    </div>
+
+                    {/* Stack */}
+                    <div className="flex gap-2">
+                      <span className="text-accent dark:text-accent select-none">$</span>
+                      <span className="text-gray-500 dark:text-gray-500">--stack</span>
+                      <span className="text-gray-600 dark:text-gray-400">→ go, python, typescript, react, next.js, fastapi, postgresql</span>
+                    </div>
+
+                    {/* AI/ML */}
+                    <div className="flex gap-2">
+                      <span className="text-accent dark:text-accent select-none">$</span>
+                      <span className="text-gray-500 dark:text-gray-500">--ai</span>
+                      <span className="text-gray-600 dark:text-gray-400">→ claude, gpt-4, azure-openai, prompt-engineering, rag-pipelines</span>
+                    </div>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="border-t border-gray-200 dark:border-white/10 my-5"></div>
+
+                  {/* Command History - scrollable if needed */}
                   <div
                     ref={terminalRef}
-                    className="p-4 sm:p-6 pt-0 font-mono text-xs sm:text-sm lg:text-base leading-relaxed h-48 overflow-y-auto cursor-text"
+                    className={`overflow-hidden cursor-text transition-all duration-500 ease-out ${
+                      isHistoryFading
+                        ? 'opacity-0 max-h-0 mb-0'
+                        : commandHistory.length > 0
+                          ? 'opacity-100 max-h-32 mb-3'
+                          : 'max-h-0 mb-0'
+                    }`}
                     onClick={focusInput}
                   >
-                    {/* Command History */}
                     {commandHistory.map((line, index) => (
-                      <div key={index} className="text-gray-600 dark:text-gray-400 mb-1">
+                      <div key={index} className="text-gray-600 dark:text-gray-400 text-sm mb-1">
                         {line}
                       </div>
                     ))}
+                  </div>
 
-                    {/* Command Input */}
-                    <div className="flex gap-2 items-center mt-2">
-                      <span className="text-accent dark:text-accent select-none">&gt;</span>
-                      <input
-                        ref={inputRef}
-                        type="text"
-                        value={command}
-                        onChange={(e) => setCommand(e.target.value)}
-                        onKeyPress={handleKeyPress}
-                        className="flex-1 bg-transparent outline-none text-gray-700 dark:text-gray-300 caret-accent dark:caret-accent placeholder:text-gray-500 dark:placeholder:text-gray-500"
-                        placeholder="type your command to begin."
-                        autoFocus
-                        spellCheck={false}
-                        autoComplete="off"
-                      />
+                  {/* Command Input */}
+                  <div className="flex gap-2 items-center mt-3">
+                    <span className="text-accent dark:text-accent select-none">&gt;</span>
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      value={command}
+                      onChange={(e) => setCommand(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      className="flex-1 bg-transparent outline-none text-gray-700 dark:text-gray-300 caret-accent dark:caret-accent placeholder:text-gray-500 dark:placeholder:text-gray-500"
+                      placeholder="type your command to begin."
+                      autoFocus
+                      spellCheck={false}
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  {/* Divider */}
+                  <div className="border-t border-gray-200 dark:border-white/10 my-5"></div>
+
+                  {/* Commands */}
+                  <div className="text-gray-500 dark:text-gray-400 text-xs">
+                    <div className="hidden sm:block">
+                      Commands: <button onClick={() => handleCommand('help', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">help</button> | <button onClick={() => handleCommand('projects', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">projects</button> | <button onClick={() => handleCommand('contact', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">contact</button> | <button onClick={() => handleCommand('resume', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">resume</button> | <button onClick={() => handleCommand('github', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">github</button> | <button onClick={() => handleCommand('linkedin', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">linkedin</button> | <button onClick={() => handleCommand('ai', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">ai</button> | <button onClick={() => handleCommand('theme', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">theme</button>
+                    </div>
+                    <div className="sm:hidden flex flex-wrap gap-x-2 gap-y-1">
+                      <span>Commands:</span>
+                      <button onClick={() => handleCommand('help', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">help</button>
+                      <span>|</span>
+                      <button onClick={() => handleCommand('projects', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">projects</button>
+                      <span>|</span>
+                      <button onClick={() => handleCommand('contact', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">contact</button>
+                      <span>|</span>
+                      <button onClick={() => handleCommand('resume', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">resume</button>
+                      <span>|</span>
+                      <button onClick={() => handleCommand('github', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">github</button>
+                      <span>|</span>
+                      <button onClick={() => handleCommand('linkedin', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">linkedin</button>
+                      <span>|</span>
+                      <button onClick={() => handleCommand('ai', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">ai</button>
+                      <span>|</span>
+                      <button onClick={() => handleCommand('theme', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">theme</button>
                     </div>
                   </div>
                 </div>

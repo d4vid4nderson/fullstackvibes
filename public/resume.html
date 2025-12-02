@@ -26,6 +26,8 @@
             --accent-tertiary: #0891b2;
             --accent-light: #67e8f9;
             --accent-dark: #0e7490;
+            --bg-terminal: #1a1a1a;
+            --bg-terminal-header: #2a2a2a;
         }
 
         /* Purple Theme */
@@ -35,6 +37,8 @@
             --accent-tertiary: #7c3aed;
             --accent-light: #c4b5fd;
             --accent-dark: #6d28d9;
+            --bg-terminal: #1a1a1a;
+            --bg-terminal-header: #2a2a2a;
         }
 
         /* Emerald Theme */
@@ -44,6 +48,8 @@
             --accent-tertiary: #34d399;
             --accent-light: #6ee7b7;
             --accent-dark: #047857;
+            --bg-terminal: #1a1a1a;
+            --bg-terminal-header: #2a2a2a;
         }
 
         /* Orange Theme */
@@ -53,6 +59,8 @@
             --accent-tertiary: #ea580c;
             --accent-light: #fdba74;
             --accent-dark: #c2410c;
+            --bg-terminal: #1a1a1a;
+            --bg-terminal-header: #2a2a2a;
         }
 
         /* Blue Theme */
@@ -62,6 +70,14 @@
             --accent-tertiary: #2563eb;
             --accent-light: #93c5fd;
             --accent-dark: #1d4ed8;
+            --bg-terminal: #1a1a1a;
+            --bg-terminal-header: #2a2a2a;
+        }
+
+        /* Light mode overrides */
+        :root:not(.dark) {
+            --bg-terminal: #f5f5f5;
+            --bg-terminal-header: #e5e5e5;
         }
 
         * {
@@ -77,110 +93,169 @@
             background: var(--background);
             padding: 0;
             overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
-        /* Animated gradient background - matches Hero component */
-        .gradient-bg {
-            background: linear-gradient(-45deg, #0f0f23, #1e1b4b, #312e81, #1e293b);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
+        .dark body {
+            color: #e5e5e5;
         }
 
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Header - clean and professional */
-        .header {
-            background: var(--background);
-            padding: 50px 40px 40px;
-            border-bottom: 3px solid var(--accent-primary);
-        }
-
-        .header-content {
+        /* Terminal Wrapper */
+        .terminal-wrapper {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 40px 40px 0;
+        }
+
+        /* Terminal Window */
+        .terminal {
+            background: var(--bg-terminal);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            transition: background 0.3s ease;
+        }
+
+        :root:not(.dark) .terminal {
+            border: 1px solid #e0e0e0;
+        }
+
+        .terminal-header {
+            background: var(--bg-terminal-header);
+            padding: 12px 16px;
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: flex-start;
-            gap: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background 0.3s ease;
         }
 
-        .header-info {
-            flex: 1;
+        :root:not(.dark) .terminal-header {
+            border-bottom: 1px solid #d0d0d0;
         }
 
-        h1 {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            letter-spacing: -0.5px;
-            color: white;
+        .terminal-header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .subtitle {
-            font-size: 16px;
-            margin-bottom: 12px;
-            font-weight: 500;
+        .terminal-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background: #ff5f56; }
+        .terminal-dot.yellow { background: #ffbd2e; }
+        .terminal-dot.green { background: #27ca3f; }
+
+        .terminal-title {
+            font-size: 11px;
+            color: #666;
+            margin-left: 8px;
+        }
+
+        .terminal-content {
+            padding: 24px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .terminal-section {
+            margin-bottom: 16px;
+        }
+
+        .terminal-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .terminal-line {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 2px;
+        }
+
+        .terminal-prompt {
             color: var(--accent-primary);
+            flex-shrink: 0;
+        }
+
+        .terminal-command {
+            color: var(--foreground);
+        }
+
+        .dark .terminal-command {
+            color: #d1d5db;
+        }
+
+        .terminal-output {
+            color: #a1a1aa;
+            padding-left: 20px;
+            margin-bottom: 2px;
+        }
+
+        .terminal-output-name {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            padding-left: 20px;
+            margin-bottom: 4px;
+        }
+
+        :root:not(.dark) .terminal-output-name {
+            color: #000;
+        }
+
+        .terminal-output-title {
+            color: var(--accent-primary);
+            font-size: 14px;
+            font-weight: 500;
+            padding-left: 20px;
+        }
+
+        .terminal-output a {
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+
+        .terminal-output a:hover {
+            text-decoration: underline;
+        }
+
+        .terminal-highlight {
+            color: var(--accent-primary);
+        }
+
+        .terminal-separator {
+            color: #525252;
+            margin: 0 8px;
         }
 
         .download-btn {
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid var(--accent-primary);
-            color: var(--accent-primary);
-            font-size: 13px;
-            font-weight: 600;
-            border-radius: 8px;
+            padding: 6px 12px;
+            background: transparent;
+            border: 1px solid #525252;
+            color: #a1a1aa;
+            font-size: 11px;
+            font-weight: 500;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             font-family: 'JetBrains Mono', monospace;
-            white-space: nowrap;
-            align-self: flex-start;
         }
 
         .download-btn:hover {
-            background: var(--accent-primary);
-            color: #0f0f0f;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.3);
-        }
-
-        .contact {
-            display: flex;
-            gap: 0;
-            flex-wrap: nowrap;
-            font-size: 12px;
-            color: #9ca3af;
-            align-items: center;
-        }
-
-        .contact-item {
-            display: inline-flex;
-            white-space: nowrap;
-        }
-
-        .contact-item:not(:last-child)::after {
-            content: '|';
-            margin: 0 12px;
-            color: #4b5563;
-        }
-
-        .contact-item a {
-            color: #9ca3af;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-item a:hover {
-            color: var(--accent-light);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
         }
 
         /* Main content area */
@@ -197,13 +272,15 @@
         .section-title {
             font-size: 24px;
             font-weight: 700;
-            color: var(--accent-primary);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 32px;
             padding-bottom: 12px;
             border-bottom: 3px solid var(--accent-primary);
             text-transform: uppercase;
             letter-spacing: 2px;
-            position: relative;
         }
 
         /* Profile section */
@@ -213,11 +290,15 @@
             color: #d1d5db;
         }
 
+        :root:not(.dark) .profile {
+            color: #374151;
+        }
+
         .profile p {
             margin-bottom: 20px;
         }
 
-        /* Job entries - glass morphism style */
+        /* Job entries */
         .job {
             margin-bottom: 40px;
             padding: 24px;
@@ -227,6 +308,11 @@
             border-radius: 12px;
             transition: all 0.3s ease;
             position: relative;
+        }
+
+        :root:not(.dark) .job {
+            background: #f7f7f7;
+            border: 1px solid #e0e0e0;
         }
 
         .job::before {
@@ -260,6 +346,10 @@
             margin-bottom: 8px;
         }
 
+        :root:not(.dark) .job-title {
+            color: #000;
+        }
+
         .job-company {
             font-size: 16px;
             color: var(--accent-primary);
@@ -269,7 +359,7 @@
 
         .job-date {
             font-size: 14px;
-            color: #9ca3af;
+            color: #a1a1aa;
             margin-bottom: 16px;
             font-style: italic;
         }
@@ -288,6 +378,10 @@
             padding-left: 24px;
         }
 
+        :root:not(.dark) .job-description li {
+            color: #374151;
+        }
+
         .job-description li::before {
             content: '▸';
             position: absolute;
@@ -296,10 +390,10 @@
             font-size: 18px;
         }
 
-        /* Tech note with glass effect */
+        /* Tech note */
         .tech-note {
             font-size: 13px;
-            color: #9ca3af;
+            color: #a1a1aa;
             font-style: italic;
             margin-top: 16px;
             padding: 12px 16px;
@@ -308,7 +402,7 @@
             border: 1px solid rgba(6, 182, 212, 0.2);
         }
 
-        /* Tech sections - full width */
+        /* Tech sections */
         .tech-grid {
             display: flex;
             flex-direction: column;
@@ -321,10 +415,36 @@
             padding: 20px 24px;
             border-radius: 8px;
             transition: all 0.3s ease;
+            position: relative;
+        }
+
+        :root:not(.dark) .tech-category {
+            background: #f7f7f7;
+            border: 1px solid #e0e0e0;
+        }
+
+        .tech-category::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 8px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .tech-category:hover {
+            transform: translateY(-4px);
             background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.2);
+        }
+
+        .tech-category:hover::before {
+            opacity: 1;
         }
 
         .tech-category-title {
@@ -337,8 +457,12 @@
 
         .tech-category-content {
             font-size: 14px;
-            color: #d1d5db;
+            color: #d4d4d8;
             line-height: 1.7;
+        }
+
+        :root:not(.dark) .tech-category-content {
+            color: #525252;
         }
 
         /* Gradient text effect */
@@ -355,19 +479,32 @@
             font-weight: 700;
         }
 
-        /* Footer - matches portfolio */
+        :root:not(.dark) strong {
+            color: var(--accent-dark);
+        }
+
+        /* Footer */
         .footer {
             padding: 48px 40px;
             background: #0a0a0a;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        :root:not(.dark) .footer {
+            background: #f5f5f5;
+            border-top: 1px solid #e5e5e5;
+        }
+
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
             text-align: center;
-            color: #9ca3af;
+            color: #a1a1aa;
             font-size: 14px;
+        }
+
+        :root:not(.dark) .footer-content {
+            color: #525252;
         }
 
         .footer-links {
@@ -378,29 +515,12 @@
         }
 
         .footer-link {
-            color: #9ca3af;
+            color: var(--accent-primary);
             text-decoration: none;
-            transition: all 0.3s ease;
         }
 
         .footer-link:hover {
-            color: var(--accent-light);
-            filter: drop-shadow(0 0 8px var(--accent-primary));
-        }
-
-        @media print {
-            body {
-                background: white;
-                color: black;
-            }
-            .header::before {
-                display: none;
-            }
-            .job:hover,
-            .tech-category:hover {
-                transform: none;
-                box-shadow: none;
-            }
+            text-decoration: underline;
         }
 
         @media print {
@@ -420,97 +540,106 @@
             .footer {
                 display: none;
             }
-            .header {
-                background: white !important;
-                padding: 30px 30px 20px;
-                border-bottom: 2px solid #06b6d4;
+            .terminal-wrapper {
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 20px 30px 0 !important;
             }
-            h1 {
-                font-size: 32px;
-                margin-bottom: 4px;
-                color: #000000 !important;
-            }
-            .subtitle {
-                font-size: 14px;
-                margin-bottom: 8px;
-                color: #06b6d4 !important;
-            }
-            .contact {
-                display: inline;
-                font-size: 10px;
-                color: #4a5568 !important;
-            }
-            .contact-item {
-                display: inline;
-                color: #4a5568 !important;
-            }
-            .contact-item a {
-                color: #4a5568 !important;
-            }
-            .contact-item:not(:last-child)::after {
-                content: ' | ';
-                margin: 0;
-                color: #4a5568 !important;
+            .terminal {
+                background: #f5f5f5 !important;
+                border: 1px solid #ddd;
             }
             .content {
-                padding: 30px 30px 20px;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 20px 30px 0 !important;
             }
-            .section {
-                margin-bottom: 20px;
-                page-break-inside: auto;
+            .terminal-header {
+                background: #e5e5e5 !important;
+                padding: 6px 12px;
             }
-            .section:last-child {
-                margin-bottom: 0;
-                page-break-after: avoid;
+            .terminal-content {
+                background: #f5f5f5 !important;
+                padding: 12px 16px;
+                font-size: 9px;
+                line-height: 1.4;
             }
-            .section-title {
+            .terminal-section {
+                margin-bottom: 8px;
+            }
+            .terminal-command {
+                color: #000 !important;
+            }
+            .terminal-output {
+                color: #525252 !important;
+                font-size: 9px;
+                padding-left: 16px;
+            }
+            .terminal-output-name {
+                color: #000 !important;
                 font-size: 18px;
-                margin-bottom: 12px;
-                padding-bottom: 4px;
-                border-bottom: 2px solid #06b6d4;
-                page-break-after: avoid;
+                padding-left: 16px;
+                margin-bottom: 2px;
+            }
+            .terminal-output-title {
+                color: #06b6d4 !important;
+                font-size: 11px;
+                padding-left: 16px;
+            }
+            .terminal-output a {
+                color: #525252 !important;
+            }
+            .terminal-prompt {
                 color: #06b6d4 !important;
             }
+            .terminal-highlight {
+                color: #06b6d4 !important;
+            }
+            .section {
+                margin-bottom: 16px;
+                page-break-inside: auto;
+            }
+            .section-title {
+                font-size: 14px;
+                margin-bottom: 8px;
+                padding-bottom: 3px;
+                border-bottom: 2px solid #06b6d4;
+                color: #06b6d4 !important;
+                -webkit-text-fill-color: #06b6d4 !important;
+            }
             .profile {
-                font-size: 11px;
+                font-size: 10px;
                 line-height: 1.4;
                 color: #000000 !important;
             }
             .profile p {
-                margin-bottom: 10px;
+                margin-bottom: 6px;
             }
             .job {
-                margin-bottom: 16px;
-                padding: 12px;
+                margin-bottom: 12px;
+                padding: 10px;
                 background: #f7f7f7 !important;
-                page-break-inside: auto;
                 border-radius: 8px;
             }
             .job-title {
-                font-size: 13px;
-                margin-bottom: 3px;
-                page-break-after: avoid;
+                font-size: 12px;
+                margin-bottom: 2px;
                 color: #000000 !important;
             }
             .job-company {
                 font-size: 11px;
-                page-break-after: avoid;
                 color: #06b6d4 !important;
             }
             .job-date {
-                font-size: 10px;
-                margin-bottom: 8px;
-                page-break-after: avoid;
+                font-size: 9px;
+                margin-bottom: 6px;
                 color: #4a5568 !important;
             }
-            .job-description {
-                page-break-inside: auto;
-            }
             .job-description li {
-                font-size: 10px;
-                line-height: 1.4;
-                margin-bottom: 6px;
-                padding-left: 20px;
+                font-size: 9px;
+                line-height: 1.35;
+                margin-bottom: 4px;
+                padding-left: 16px;
                 color: #000000 !important;
             }
             .job-description li::before {
@@ -518,26 +647,25 @@
             }
             .tech-note {
                 font-size: 9px;
-                margin-top: 8px;
-                padding: 6px 8px;
-                background: #e6f7f9 !important;
+                margin-top: 6px;
+                padding: 4px 8px;
+                background: #eef2ff !important;
                 color: #4a5568 !important;
                 border: 1px solid #06b6d4;
             }
             .tech-category {
-                padding: 12px 16px;
-                margin-bottom: 12px;
+                padding: 8px 12px;
+                margin-bottom: 8px;
                 background: #f7f7f7 !important;
-                border-radius: 8px;
             }
             .tech-category-title {
-                font-size: 13px;
-                margin-bottom: 6px;
+                font-size: 12px;
+                margin-bottom: 4px;
                 color: #06b6d4 !important;
             }
             .tech-category-content {
-                font-size: 11px;
-                line-height: 1.5;
+                font-size: 10px;
+                line-height: 1.4;
                 color: #000000 !important;
             }
             strong {
@@ -546,26 +674,14 @@
         }
 
         @media (max-width: 768px) {
-            .header, .content, .footer {
+            .terminal-wrapper, .content, .footer {
                 padding-left: 24px;
                 padding-right: 24px;
             }
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-            h1 {
-                font-size: 36px;
-            }
-            .subtitle {
-                font-size: 16px;
-            }
-            .contact {
+            .terminal-header {
                 flex-direction: column;
                 gap: 12px;
-            }
-            .tech-grid {
-                grid-template-columns: 1fr;
+                align-items: flex-start;
             }
             .download-btn {
                 width: 100%;
@@ -581,6 +697,8 @@
                 const theme = localStorage.getItem('colorTheme') || 'cyan';
                 if (mode === 'dark') {
                     document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
                 }
                 document.documentElement.setAttribute('data-theme', theme);
             } catch (e) {}
@@ -588,36 +706,70 @@
     </script>
 </head>
 <body>
-    <div class="header">
-        <div class="header-content">
-            <div class="header-info">
-                <h1>David Anderson</h1>
-                <div class="subtitle">Digital Experience Architect & Product Owner</div>
-                <div class="contact">
-                    <div class="contact-item">Paradise, Texas</div>
-                    <div class="contact-item"><a href="mailto:david4nderson@pm.me">david4nderson@pm.me</a></div>
-                    <div class="contact-item"><a href="https://linkedin.com/in/d4v1d4nd3rs0n" target="_blank">linkedin.com/in/d4v1d4nd3rs0n</a></div>
-                    <div class="contact-item"><a href="https://fullstackvibes.io" target="_blank">fullstackvibes.io</a></div>
+    <!-- Terminal Header -->
+    <div class="terminal-wrapper">
+    <div class="terminal">
+        <div class="terminal-header">
+            <div class="terminal-header-left">
+                <div class="terminal-dots">
+                    <div class="terminal-dot red"></div>
+                    <div class="terminal-dot yellow"></div>
+                    <div class="terminal-dot green"></div>
                 </div>
+                <span class="terminal-title">david@fullstackvibes:~/resume</span>
             </div>
             <button class="download-btn" onclick="window.print()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                     <polyline points="7 10 12 15 17 10"></polyline>
                     <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
-                Download PDF
+                PDF
             </button>
         </div>
+        <div class="terminal-content">
+            <div class="terminal-section">
+                <div class="terminal-line">
+                    <span class="terminal-prompt">$</span>
+                    <span class="terminal-command">whoami</span>
+                </div>
+                <div class="terminal-output-name">David Anderson</div>
+                <div class="terminal-output-title">Digital Experience Architect / Product Owner</div>
+            </div>
+
+            <div class="terminal-section">
+                <div class="terminal-line">
+                    <span class="terminal-prompt">$</span>
+                    <span class="terminal-command">--contact</span>
+                </div>
+                <div class="terminal-output">→ <a href="mailto:david4nderson@pm.me">david4nderson@pm.me</a><span class="terminal-separator">|</span><a href="https://linkedin.com/in/d4v1d4nd3rs0n" target="_blank">linkedin.com/in/d4v1d4nd3rs0n</a></div>
+                <div class="terminal-output">→ <a href="https://fullstackvibes.io" target="_blank" class="terminal-highlight">fullstackvibes.io</a></div>
+            </div>
+
+            <div class="terminal-section">
+                <div class="terminal-line">
+                    <span class="terminal-prompt">$</span>
+                    <span class="terminal-command">--stack</span>
+                </div>
+                <div class="terminal-output">→ go, python, typescript, react, next.js, fastapi, postgresql</div>
+            </div>
+
+            <div class="terminal-section">
+                <div class="terminal-line">
+                    <span class="terminal-prompt">$</span>
+                    <span class="terminal-command">--ai</span>
+                </div>
+                <div class="terminal-output">→ claude, gpt-4, azure-openai, prompt-engineering, rag-pipelines</div>
+            </div>
+        </div>
+    </div>
     </div>
 
     <div class="content">
         <div class="section">
             <div class="section-title">Profile</div>
             <div class="profile">
-                <p>I transform how teams work by building AI-powered tools that solve real workflow problems. Over the past 3 years, I've shipped 6 production applications that delivered $40,000+ in annual cost savings and 80% efficiency gains across our organization. My approach leverages AI not just in the products I build, but in how I build them—using LLMs as development accelerators while maintaining product ownership, system design, and quality standards throughout the full lifecycle.</p>
-
-                <p>I excel at identifying workflow friction, rapidly prototyping solutions, and driving adoption through hands-on collaboration with users. With 12+ years understanding creative team operations at MOREgroup, I've evolved from managing design processes to leading technical product development in agile sprints—handling everything from UI design and iconography to architecture decisions and daily standups. I learn fast, ship constantly, and focus relentlessly on building tools that augment human creativity rather than replace it.</p>
+                <p>I build AI powered products that ship. I've taken ideas from zero to production, creating tools that teams actually depend on. They process real data, automate manual work, and deliver real results. No demos. No proofs of concept. Just solutions that work.</p>
             </div>
         </div>
 
@@ -625,23 +777,23 @@
             <div class="section-title">Experience</div>
 
             <div class="job">
-                <div class="job-title">Digital Experience Architect</div>
+                <div class="job-title">Digital Experience Architect / Product Owner</div>
                 <div class="job-company">MOREgroup (formerly Huckabee)</div>
                 <div class="job-date">July 2022 – Present</div>
                 <ul class="job-description">
-                    <li>Leading product development of <strong>VUES</strong>, a suite of 6 production AI applications delivering measurable business impact across MOREgroup. Serving as hands-on product owner through agile sprint cycles, I handle UI/UX design, iconography, architecture decisions, feature prioritization, and daily standups while leveraging AI as a development accelerator to rapidly ship and iterate on production tools.</li>
+                    <li>Leading product development of <strong>VUES</strong>, a suite of 6 production AI applications delivering measurable business impact across MOREgroup. Serving as hands on product owner through agile sprint cycles, I handle UI/UX design, iconography, architecture decisions, feature prioritization, and daily standups while leveraging AI as a development accelerator to rapidly ship and iterate on production tools.</li>
 
-                    <li><strong>LegislationVUE</strong> (React, FastAPI, Azure OpenAI GPT-4, PostgreSQL) — Eliminated $40,000+ in annual legal consulting costs by automating analysis of 20,000+ state and federal legislative documents across 6 states. Delivers AI-generated executive summaries, key talking points, and business impact analysis, transforming regulatory tracking from 8-hour manual reviews to instant insights. Custom prompt engineering ensures accuracy and reliability for executive decision-making.</li>
+                    <li><strong>LegislationVUE</strong> (React, FastAPI, Azure OpenAI GPT 4, PostgreSQL) — Eliminated $40,000+ in annual legal consulting costs by automating analysis of 20,000+ state and federal legislative documents across 6 states. Delivers AI generated executive summaries, key talking points, and business impact analysis, transforming regulatory tracking from 8 hour manual reviews to instant insights.</li>
 
-                    <li><strong>PlanVUE</strong> (Go, HTMX, PostgreSQL, Claude AI) — Achieved 80% efficiency gain for architectural planners by eliminating manual data entry and collection. AI-enhanced workflows automatically generate project deliverables, coordinate multi-stakeholder approval chains, and provide real-time health monitoring across initiative portfolios with Gantt visualization and budget tracking.</li>
+                    <li><strong>PlanVUE</strong> (Go, HTMX, PostgreSQL, Claude AI) — Achieved 80% efficiency gain for architectural planners by eliminating manual data entry and collection. AI enhanced workflows automatically generate project deliverables, coordinate multi stakeholder approval chains, and provide real time health monitoring across initiative portfolios.</li>
 
-                    <li><strong>FacilityVUE</strong> (Go, HTMX, PostgreSQL) — Recently shipped facility management platform currently being prepared for commercial release to school districts nationwide. Demonstrates transition from internal tooling to market-ready software product, validating scalability and multi-tenant architecture decisions.</li>
+                    <li><strong>FacilityVUE</strong> (Go, HTMX, PostgreSQL) — Recently shipped facility management platform currently being prepared for commercial release to school districts nationwide. Demonstrates transition from internal tooling to market ready software product.</li>
 
-                    <li><strong>InitiativeVUE</strong> (Go, HTMX, Claude AI) — Broke down organizational silos by providing C-suite with unified visibility into cross-departmental initiatives previously tracked in isolation. Real-time executive dashboard enables data-driven strategic decision making and resource allocation across the organization.</li>
+                    <li><strong>InitiativeVUE</strong> (Go, HTMX, Claude AI) — Broke down organizational silos by providing C suite with unified visibility into cross departmental initiatives previously tracked in isolation. Real time executive dashboard enables data driven strategic decision making.</li>
 
-                    <li><strong>sp_VUE</strong> (Go, HTMX, Playwright, Claude AI) — Automated SharePoint testing and accessibility compliance (WCAG), detecting broken links and generating multi-format reports. Reduces manual QA time while improving site reliability and accessibility standards.</li>
+                    <li><strong>SharePointVUE</strong> (Go, Playwright, Claude AI) — Automated SharePoint testing and accessibility compliance (WCAG), detecting broken links and generating multi format reports.</li>
                 </ul>
-                <div class="tech-note">Tech stack: Azure AI Foundry, Azure OpenAI (GPT-4), Claude AI, Go, Python, React, FastAPI, HTMX, PostgreSQL, MongoDB, Docker, Playwright • Practices: Prompt engineering, RAG pipelines, full-stack development, agile product ownership</div>
+                <div class="tech-note">Tech stack: TypeScript, React, Next.js, Go, Python, FastAPI, PostgreSQL, MongoDB, Docker, Playwright • AI: Claude, Azure OpenAI (GPT 4), prompt engineering, RAG pipelines</div>
             </div>
 
             <div class="job">
@@ -649,9 +801,7 @@
                 <div class="job-company">Huckabee | A MOREgroup Brand</div>
                 <div class="job-date">July 2013 – July 2022</div>
                 <ul class="job-description">
-                    <li>Progressive 9-year career building deep fluency in creative team workflows, identifying operational gaps, and driving technology adoption. Built internal knowledge platforms saving $30,000+ annually, launched 3D reality capture services, established media lab from concept through C-suite pitch to full operation, and led development of project management systems for design team transparency.</li>
-
-                    <li>This foundation of understanding designer pain points, translating needs into solutions, and managing organizational change directly informs my current approach to building AI-powered productivity tools that teams actually adopt and depend on.</li>
+                    <li>9 years building internal tools, knowledge platforms ($30K+ annual savings), and media production systems. Foundation for understanding workflow pain points, translating user needs into technical solutions, and driving technology adoption across teams.</li>
                 </ul>
             </div>
         </div>
@@ -660,23 +810,23 @@
             <div class="section-title">Technical Capabilities</div>
             <div class="tech-grid">
                 <div class="tech-category">
-                    <div class="tech-category-title">AI-Augmented Development</div>
-                    <div class="tech-category-content">Leverage LLMs (Claude, GPT-4) as coding accelerators while maintaining architectural oversight, code review, and quality standards. Ship production full-stack applications using Go, Python, React, FastAPI, HTMX with PostgreSQL/MongoDB backends and Docker deployment—combining AI assistance with hands-on product ownership throughout the development lifecycle.</div>
+                    <div class="tech-category-title">Frontend & React Ecosystem</div>
+                    <div class="tech-category-content">TypeScript, React, Next.js (App Router, Turbopack), Tailwind CSS, component architecture, state management, responsive design. Ship production applications with modern tooling.</div>
                 </div>
 
                 <div class="tech-category">
-                    <div class="tech-category-title">AI Product Integration</div>
-                    <div class="tech-category-content">Azure AI Foundry, Azure OpenAI (GPT-4), Claude AI (Anthropic), production LLM integration, custom prompt engineering and optimization, RAG pipelines for document analysis, AI-augmented workflow design, responsible AI practices and accuracy validation</div>
+                    <div class="tech-category-title">AI Integration & LLMs</div>
+                    <div class="tech-category-content">Claude AI, Azure OpenAI (GPT 4), production LLM integration, prompt engineering, RAG pipelines for document analysis, AI augmented workflows, accuracy validation. Experience building AI powered tools that ship to real users.</div>
                 </div>
 
                 <div class="tech-category">
-                    <div class="tech-category-title">Product & Agile Leadership</div>
-                    <div class="tech-category-content">Hands-on product ownership through sprint cycles, user research and workflow analysis, daily standups and stakeholder management, rapid prototyping and iteration, driving tool adoption and organizational change, UI/UX design and iconography, establishing technical standards and best practices</div>
+                    <div class="tech-category-title">Backend & APIs</div>
+                    <div class="tech-category-content">Go, Python, FastAPI, Node.js, PostgreSQL, MongoDB, Docker. Build scalable APIs and services that handle AI workloads. Focus on performance, reliability, and clean architecture.</div>
                 </div>
 
                 <div class="tech-category">
-                    <div class="tech-category-title">Design Operations & Workflow</div>
-                    <div class="tech-category-content">12+ years fluency in creative team operations and pain points, translating workflow needs into technical solutions, internal productivity tooling for design teams, cross-functional collaboration across creative/technical/leadership, change management and user training</div>
+                    <div class="tech-category-title">Developer Experience</div>
+                    <div class="tech-category-content">Playwright testing, CI/CD pipelines, documentation, developer tooling. Obsess over the details that make tools intuitive and reliable.</div>
                 </div>
             </div>
         </div>

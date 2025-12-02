@@ -543,22 +543,24 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
           }`}
         >
           {/* Header */}
-          <div className="sticky top-0 bg-white dark:bg-[#1a1a1a] border-b border-gray-300 dark:border-white/10 p-6 flex items-start justify-between z-10 transition-colors duration-300">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{repo.name}</h2>
-              <p className="text-gray-600 dark:text-gray-400">{repo.description}</p>
+          <div className="sticky top-0 bg-white dark:bg-[#1a1a1a] border-b border-gray-300 dark:border-white/10 p-4 sm:p-6 z-10 transition-colors duration-300">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex-1 min-w-0">
+                <h2 className="text-xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-1 sm:mb-2 truncate">{repo.name}</h2>
+                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 line-clamp-2">{repo.description}</p>
+              </div>
+              <button
+                onClick={onClose}
+                className="flex-shrink-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors p-2 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg"
+                aria-label="Close modal"
+              >
+                <FiX className="w-6 h-6" />
+              </button>
             </div>
-            <button
-              onClick={onClose}
-              className="text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors p-2 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg"
-              aria-label="Close modal"
-            >
-              <FiX className="w-6 h-6" />
-            </button>
           </div>
 
           {/* Content */}
-          <div className="overflow-y-auto max-h-[calc(90vh-120px)] p-6 pb-12 space-y-8">
+          <div className="overflow-y-auto max-h-[calc(90vh-120px)] p-4 sm:p-6 pb-12 space-y-6 sm:space-y-8">
 
             {projectDetails && (
               <>
@@ -567,7 +569,7 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 transition-colors duration-300">About This Project</h3>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">{projectDetails.fullDescription}</p>
                   {projectDetails.demoUrl && (
-                    <div className="mt-4 flex flex-wrap items-center gap-4">
+                    <div className="mt-4 flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3 sm:gap-4">
                       <a
                         href={projectDetails.demoUrl}
                         target="_blank"
@@ -578,11 +580,11 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
                         View Live Demo
                       </a>
                       {projectDetails.demoCredentials && (
-                        <div className="flex items-center gap-3 px-4 py-2 bg-gray-100 dark:bg-white/5 rounded-lg border border-gray-300 dark:border-white/10">
-                          <span className="text-sm text-gray-500 dark:text-gray-400">Demo Login:</span>
-                          <code className="text-sm text-gray-700 dark:text-gray-300 font-mono">{projectDetails.demoCredentials.username}</code>
+                        <div className="flex flex-wrap items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 bg-gray-100 dark:bg-white/5 rounded-lg border border-gray-300 dark:border-white/10 text-xs sm:text-sm">
+                          <span className="text-gray-500 dark:text-gray-400">Demo:</span>
+                          <code className="text-gray-700 dark:text-gray-300 font-mono break-all">{projectDetails.demoCredentials.username}</code>
                           <span className="text-gray-400">/</span>
-                          <code className="text-sm text-gray-700 dark:text-gray-300 font-mono">{projectDetails.demoCredentials.password}</code>
+                          <code className="text-gray-700 dark:text-gray-300 font-mono">{projectDetails.demoCredentials.password}</code>
                         </div>
                       )}
                     </div>

@@ -34,7 +34,13 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
   if (!isOpen && !isAnimating) return null;
 
   const handleDownload = () => {
-    window.print();
+    // Open resume in new window and trigger print
+    const printWindow = window.open('/resume.html', '_blank');
+    if (printWindow) {
+      printWindow.onload = () => {
+        printWindow.print();
+      };
+    }
   };
 
   return (
@@ -57,9 +63,9 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
           }`}
         >
           {/* Header */}
-          <div className="sticky top-0 z-10 flex items-center justify-between p-4 border-b border-gray-300 dark:border-white/10 bg-white dark:bg-[#1a1a1a]">
-            <h2 className="text-xl font-bold text-gray-900 dark:text-white">Resume</h2>
-            <div className="flex items-center gap-2">
+          <div className="sticky top-0 z-10 flex items-center justify-between p-3 sm:p-4 border-b border-gray-300 dark:border-white/10 bg-white dark:bg-[#1a1a1a]">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">Resume</h2>
+            <div className="flex items-center gap-1 sm:gap-2">
               <button
                 onClick={handleDownload}
                 className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-[#2a2a2a] transition-colors"

@@ -7,7 +7,7 @@ export async function Projects() {
   const productOwnerProjects = await getProductOwnerProjects();
 
   return (
-    <section id="projects" className="relative pt-16 pb-32 px-4 sm:px-6 lg:px-8 bg-background transition-colors duration-300 overflow-visible">
+    <section id="projects" className="relative pt-16 pb-16 px-4 sm:px-6 lg:px-8 bg-background transition-colors duration-300 overflow-visible">
       {/* Background decoration - extends beyond section boundaries */}
       <div className="absolute left-0 right-0 -top-[500px] -bottom-[500px] pointer-events-none opacity-30 z-0">
         <div className="absolute top-[500px] right-0 w-[600px] h-[600px] bg-accent rounded-full filter blur-3xl opacity-20"></div>

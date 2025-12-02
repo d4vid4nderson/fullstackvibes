@@ -48,7 +48,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-32 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+    <section id="contact" className="relative pt-16 pb-32 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none opacity-30">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-secondary rounded-full filter blur-3xl opacity-20"></div>
