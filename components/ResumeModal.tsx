@@ -34,7 +34,6 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
   if (!isOpen && !isAnimating) return null;
 
   const handleDownload = () => {
-    // Open resume in new window and trigger print
     const printWindow = window.open('/resume.html', '_blank');
     if (printWindow) {
       printWindow.onload = () => {

@@ -237,27 +237,6 @@
             margin: 0 8px;
         }
 
-        .download-btn {
-            padding: 6px 12px;
-            background: transparent;
-            border: 1px solid #525252;
-            color: #a1a1aa;
-            font-size: 11px;
-            font-weight: 500;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .download-btn:hover {
-            border-color: var(--accent-primary);
-            color: var(--accent-primary);
-        }
-
         /* Main content area */
         .content {
             max-width: 1200px;
@@ -534,9 +513,6 @@
                 margin: 0;
                 padding: 0;
             }
-            .download-btn {
-                display: none;
-            }
             .footer {
                 display: none;
             }
@@ -683,10 +659,6 @@
                 gap: 12px;
                 align-items: flex-start;
             }
-            .download-btn {
-                width: 100%;
-                justify-content: center;
-            }
         }
     </style>
     <script>
@@ -718,14 +690,6 @@
                 </div>
                 <span class="terminal-title">david@fullstackvibes:~/resume</span>
             </div>
-            <button class="download-btn" onclick="window.print()">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                    <polyline points="7 10 12 15 17 10"></polyline>
-                    <line x1="12" y1="15" x2="12" y2="3"></line>
-                </svg>
-                PDF
-            </button>
         </div>
         <div class="terminal-content">
             <div class="terminal-section">

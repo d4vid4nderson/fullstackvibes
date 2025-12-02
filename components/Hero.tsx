@@ -1025,11 +1025,11 @@ export function Hero() {
                   {/* Command History - scrollable if needed */}
                   <div
                     ref={terminalRef}
-                    className={`overflow-hidden cursor-text transition-all duration-500 ease-out ${
+                    className={`cursor-text transition-all duration-500 ease-out overflow-y-auto overscroll-contain touch-pan-y ${
                       isHistoryFading
                         ? 'opacity-0 max-h-0 mb-0'
                         : commandHistory.length > 0
-                          ? 'opacity-100 max-h-32 mb-3'
+                          ? 'opacity-100 max-h-48 sm:max-h-32 mb-3'
                           : 'max-h-0 mb-0'
                     }`}
                     onClick={focusInput}
