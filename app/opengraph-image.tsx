@@ -25,18 +25,27 @@ export default async function Image() {
           padding: '40px',
         }}
       >
-        {/* Terminal Window */}
+        {/* Terminal Window with gradient border */}
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
-            width: '1000px',
-            backgroundColor: '#1a1a1a',
-            borderRadius: '12px',
-            border: '1px solid rgba(255,255,255,0.1)',
-            overflow: 'hidden',
+            width: '1004px',
+            padding: '2px',
+            borderRadius: '14px',
+            background: 'linear-gradient(135deg, #06b6d4, #3b82f6, #a855f7)',
           }}
         >
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              width: '100%',
+              backgroundColor: '#1a1a1a',
+              borderRadius: '12px',
+              overflow: 'hidden',
+            }}
+          >
           {/* Terminal Header */}
           <div
             style={{
@@ -134,6 +143,7 @@ export default async function Image() {
                 marginLeft: '4px',
               }} />
             </div>
+          </div>
           </div>
         </div>
       </div>
