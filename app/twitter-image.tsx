@@ -21,110 +21,120 @@ export default async function Image() {
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: '#0f0f0f',
-          backgroundImage: 'radial-gradient(circle at 25% 25%, rgba(6, 182, 212, 0.15) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(20, 184, 166, 0.15) 0%, transparent 50%)',
+          backgroundImage: 'radial-gradient(circle at 25% 25%, rgba(6, 182, 212, 0.12) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(20, 184, 166, 0.12) 0%, transparent 50%)',
+          padding: '40px',
         }}
       >
-        {/* Main content container */}
+        {/* Terminal Window */}
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '40px',
+            width: '1000px',
+            backgroundColor: '#1a1a1a',
+            borderRadius: '12px',
+            border: '1px solid rgba(255,255,255,0.1)',
+            overflow: 'hidden',
           }}
         >
-          {/* Logo/Brand - matching favicon_text.svg style */}
+          {/* Terminal Header */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              padding: '12px 16px',
+              backgroundColor: '#2a2a2a',
+              borderBottom: '1px solid rgba(255,255,255,0.1)',
+              gap: '8px',
+            }}
+          >
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#ef4444' }} />
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#eab308' }} />
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#22c55e' }} />
+            <span style={{ marginLeft: '12px', fontSize: '14px', color: '#9ca3af', fontFamily: 'monospace' }}>
+              david@fullstackvibes:~
+            </span>
+          </div>
+
+          {/* Terminal Content */}
           <div
             style={{
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'center',
-              marginBottom: '30px',
-              padding: '16px 24px',
-              borderRadius: '12px',
-              background: 'linear-gradient(135deg, #06b6d4, #3b82f6, #a855f7)',
+              padding: '24px 32px',
+              gap: '8px',
             }}
           >
-            <span
-              style={{
-                fontSize: '28px',
-                fontWeight: 800,
-                color: 'white',
-                fontFamily: 'monospace',
-                letterSpacing: '2px',
-                lineHeight: 1.2,
-              }}
-            >
-              FULL STACK VIBES
-            </span>
+            {/* whoami command */}
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+              <span style={{ color: '#06b6d4', fontSize: '20px', fontFamily: 'monospace' }}>$</span>
+              <span style={{ color: '#d1d5db', fontSize: '20px', fontFamily: 'monospace' }}>whoami</span>
+            </div>
+
+            {/* Name */}
+            <div style={{ display: 'flex', marginTop: '4px', marginBottom: '4px' }}>
+              <span style={{ fontSize: '48px', fontWeight: 'bold', color: 'white', fontFamily: 'monospace' }}>
+                David Anderson
+              </span>
+            </div>
+
+            {/* Title */}
+            <div style={{ display: 'flex' }}>
+              <span style={{ fontSize: '24px', color: '#06b6d4', fontFamily: 'monospace' }}>
+                Full Stack Developer & AI Engineer
+              </span>
+            </div>
+
+            {/* Divider */}
+            <div style={{ width: '100%', height: '1px', backgroundColor: 'rgba(255,255,255,0.1)', margin: '16px 0' }} />
+
+            {/* Bio command */}
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+              <span style={{ color: '#06b6d4', fontSize: '18px', fontFamily: 'monospace' }}>$</span>
+              <span style={{ color: '#6b7280', fontSize: '18px', fontFamily: 'monospace' }}>--bio</span>
+              <span style={{ color: '#9ca3af', fontSize: '18px', fontFamily: 'monospace' }}>→</span>
+              <span style={{ color: '#d1d5db', fontSize: '18px', fontFamily: 'monospace' }}>
+                I build AI-powered tools that solve real workflow problems
+              </span>
+            </div>
+
+            {/* Stack command */}
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+              <span style={{ color: '#06b6d4', fontSize: '18px', fontFamily: 'monospace' }}>$</span>
+              <span style={{ color: '#6b7280', fontSize: '18px', fontFamily: 'monospace' }}>--stack</span>
+              <span style={{ color: '#9ca3af', fontSize: '18px', fontFamily: 'monospace' }}>→</span>
+              <span style={{ color: '#d1d5db', fontSize: '18px', fontFamily: 'monospace' }}>
+                go, python, typescript, react, next.js, fastapi
+              </span>
+            </div>
+
+            {/* AI command */}
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+              <span style={{ color: '#06b6d4', fontSize: '18px', fontFamily: 'monospace' }}>$</span>
+              <span style={{ color: '#6b7280', fontSize: '18px', fontFamily: 'monospace' }}>--ai</span>
+              <span style={{ color: '#9ca3af', fontSize: '18px', fontFamily: 'monospace' }}>→</span>
+              <span style={{ color: '#d1d5db', fontSize: '18px', fontFamily: 'monospace' }}>
+                claude, gpt-4, azure-openai, prompt-engineering
+              </span>
+            </div>
+
+            {/* Divider */}
+            <div style={{ width: '100%', height: '1px', backgroundColor: 'rgba(255,255,255,0.1)', margin: '16px 0' }} />
+
+            {/* Command prompt */}
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+              <span style={{ color: '#06b6d4', fontSize: '20px', fontFamily: 'monospace' }}>&gt;</span>
+              <span style={{ color: '#6b7280', fontSize: '18px', fontFamily: 'monospace' }}>
+                fullstackvibes.io
+              </span>
+              <span style={{
+                width: '12px',
+                height: '24px',
+                backgroundColor: '#06b6d4',
+                marginLeft: '4px',
+              }} />
+            </div>
           </div>
-
-          {/* Name */}
-          <h1
-            style={{
-              fontSize: '72px',
-              fontWeight: 'bold',
-              color: 'white',
-              margin: '0 0 20px 0',
-              textAlign: 'center',
-            }}
-          >
-            David Anderson
-          </h1>
-
-          {/* Title */}
-          <p
-            style={{
-              fontSize: '36px',
-              background: 'linear-gradient(135deg, #06b6d4, #14b8a6, #0891b2)',
-              backgroundClip: 'text',
-              color: 'transparent',
-              margin: '0 0 30px 0',
-              textAlign: 'center',
-            }}
-          >
-            Full Stack Developer & AI Engineer
-          </p>
-
-          {/* Tech stack */}
-          <div
-            style={{
-              display: 'flex',
-              gap: '16px',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              maxWidth: '800px',
-            }}
-          >
-            {['Go', 'Python', 'TypeScript', 'React', 'Next.js', 'AI/ML'].map((tech) => (
-              <div
-                key={tech}
-                style={{
-                  padding: '8px 20px',
-                  borderRadius: '20px',
-                  border: '2px solid #06b6d4',
-                  color: '#06b6d4',
-                  fontSize: '20px',
-                  fontFamily: 'monospace',
-                }}
-              >
-                {tech}
-              </div>
-            ))}
-          </div>
-
-          {/* URL */}
-          <p
-            style={{
-              fontSize: '24px',
-              color: '#9ca3af',
-              marginTop: '40px',
-              fontFamily: 'monospace',
-            }}
-          >
-            fullstackvibes.io
-          </p>
         </div>
       </div>
     ),
