@@ -8,6 +8,7 @@ import { AIChat } from "@/components/AIChat";
 import { ChatProvider } from "@/components/ChatContext";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+import { StructuredData } from "@/components/StructuredData";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
@@ -15,15 +16,71 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FullStackVibes - A Portfolio Site For David Anderson",
-  description: "FullStackVibes - A Portfolio Site For David Anderson",
+  metadataBase: new URL('https://fullstackvibes.io'),
+  title: {
+    default: "David Anderson | Full Stack Developer & AI Engineer",
+    template: "%s | David Anderson"
+  },
+  description: "Full stack developer specializing in AI-powered enterprise applications. Expert in Go, Python, TypeScript, React, and Next.js. Building tools that deliver measurable business impact.",
+  keywords: [
+    "David Anderson",
+    "Full Stack Developer",
+    "AI Engineer",
+    "Go Developer",
+    "Python Developer",
+    "TypeScript",
+    "React Developer",
+    "Next.js",
+    "Enterprise Applications",
+    "AI-Powered Tools",
+    "Software Engineer",
+    "Product Owner",
+    "FastAPI",
+    "PostgreSQL"
+  ],
+  authors: [{ name: "David Anderson", url: "https://fullstackvibes.io" }],
+  creator: "David Anderson",
+  publisher: "David Anderson",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://fullstackvibes.io',
+    siteName: 'FullStackVibes',
+    title: 'David Anderson | Full Stack Developer & AI Engineer',
+    description: 'Full stack developer specializing in AI-powered enterprise applications. Expert in Go, Python, TypeScript, React, and Next.js.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'David Anderson | Full Stack Developer & AI Engineer',
+    description: 'Full stack developer specializing in AI-powered enterprise applications. Expert in Go, Python, TypeScript, React, and Next.js.',
+    creator: '@d4vid4nderson',
+  },
+  alternates: {
+    canonical: 'https://fullstackvibes.io',
+  },
+  category: 'technology',
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#06b6d4' },
+    { media: '(prefers-color-scheme: dark)', color: '#0f0f0f' },
+  ],
 };
 
 export default function RootLayout({
@@ -45,11 +102,28 @@ export default function RootLayout({
         {/* Web App Manifest for Android */}
         <link rel="manifest" href="/manifest.json" />
 
-        {/* Theme color for mobile browsers */}
-        <meta name="theme-color" content="#0f0f0f" />
+        {/* Mobile app metadata */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="FullStackVibes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="application-name" content="FullStackVibes" />
+        <meta name="format-detection" content="telephone=no" />
+
+        {/* Microsoft/Windows metadata */}
+        <meta name="msapplication-TileColor" content="#06b6d4" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+
+        {/* Additional SEO metadata */}
+        <meta name="geo.region" content="US" />
+        <meta name="geo.placename" content="United States" />
+        <link rel="author" href="https://fullstackvibes.io" />
+        <link rel="me" href="https://github.com/d4vid4nderson" />
+        <link rel="me" href="https://linkedin.com/in/d4v1d4nd3rs0n" />
+
+        {/* Structured Data for SEO */}
+        <StructuredData />
+
         <script
           dangerouslySetInnerHTML={{
             __html: `

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 128 128">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        fill: #fff;
+        font-family: JetBrainsMono-ExtraBold, 'JetBrains Mono';
+        font-size: 28px;
+        font-weight: 700;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="2.93" y1="2.93" x2="125.07" y2="125.07" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#06b6d4"/>
+      <stop offset=".5" stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <rect y="0" width="128" height="128" rx="10" ry="10"/>
+      <path class="cls-1" d="M118,7c1.65,0,3,1.35,3,3v108c0,1.65-1.35,3-3,3H10c-1.65,0-3-1.35-3-3V10c0-1.65,1.35-3,3-3h108M118,0H10C4.48,0,0,4.48,0,10v108c0,5.52,4.48,10,10,10h108c5.52,0,10-4.48,10-10V10c0-5.52-4.48-10-10-10h0Z"/>
+    </g>
+    <text class="cls-2" transform="translate(15.39 40.62)"><tspan x="0" y="0">FULL</tspan><tspan x="0" y="33.6">STACK</tspan><tspan x="0" y="67.2">VIBES</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,24 @@
+# robots.txt for fullstackvibes.io
+# https://fullstackvibes.io
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://fullstackvibes.io/sitemap.xml
+
+# Crawl-delay (optional, for polite crawling)
+Crawl-delay: 1
+
+# Block unnecessary paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+
+# Allow important resources
+Allow: /og-image.png
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.svg
