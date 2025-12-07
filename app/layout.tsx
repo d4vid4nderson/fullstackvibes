@@ -59,12 +59,21 @@ export const metadata: Metadata = {
     siteName: 'FullStackVibes',
     title: 'David Anderson | Full Stack Developer & AI Engineer',
     description: 'Full stack developer specializing in AI-powered enterprise applications. Expert in Go, Python, TypeScript, React, and Next.js.',
+    images: [
+      {
+        url: 'https://fullstackvibes.io/opengraph-image?v=20251207',
+        width: 1200,
+        height: 630,
+        alt: 'David Anderson - Full Stack Developer & AI Engineer',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'David Anderson | Full Stack Developer & AI Engineer',
     description: 'Full stack developer specializing in AI-powered enterprise applications. Expert in Go, Python, TypeScript, React, and Next.js.',
     creator: '@d4vid4nderson',
+    images: ['https://fullstackvibes.io/twitter-image?v=20251207'],
   },
   alternates: {
     canonical: 'https://fullstackvibes.io',
