@@ -21,31 +21,22 @@ export default async function Image() {
           alignItems: 'center',
           justifyContent: 'center',
           backgroundColor: '#0f0f0f',
-          backgroundImage: 'radial-gradient(circle at 25% 25%, rgba(6, 182, 212, 0.12) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(20, 184, 166, 0.12) 0%, transparent 50%)',
+          backgroundImage: 'radial-gradient(circle at 20% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 40%), radial-gradient(circle at 80% 30%, rgba(59, 130, 246, 0.12) 0%, transparent 40%), radial-gradient(circle at 70% 80%, rgba(168, 85, 247, 0.12) 0%, transparent 40%)',
           padding: '40px',
         }}
       >
-        {/* Terminal Window with gradient border */}
+        {/* Terminal Window */}
         <div
           style={{
             display: 'flex',
             flexDirection: 'column',
-            width: '1004px',
-            padding: '2px',
-            borderRadius: '14px',
-            background: 'linear-gradient(135deg, #06b6d4, #3b82f6, #a855f7)',
+            width: '1000px',
+            backgroundColor: '#1a1a1a',
+            borderRadius: '12px',
+            border: '1px solid rgba(255,255,255,0.1)',
+            overflow: 'hidden',
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              width: '100%',
-              backgroundColor: '#1a1a1a',
-              borderRadius: '12px',
-              overflow: 'hidden',
-            }}
-          >
           {/* Terminal Header */}
           <div
             style={{
@@ -143,7 +134,6 @@ export default async function Image() {
                 marginLeft: '4px',
               }} />
             </div>
-          </div>
           </div>
         </div>
       </div>
