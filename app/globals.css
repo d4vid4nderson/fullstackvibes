@@ -48,30 +48,30 @@ body {
   --background: #cffafe;
 }
 
-/* Purple Theme */
+/* Purple Theme - One Ring: Gold to Purple */
 [data-theme="purple"] {
-  --accent-primary: #a855f7;
-  --accent-secondary: #8b5cf6;
+  --accent-primary: #eab308;
+  --accent-secondary: #a855f7;
   --accent-tertiary: #7c3aed;
-  --accent-light: #c4b5fd;
+  --accent-light: #fde047;
   --accent-dark: #6d28d9;
 }
 
 :root:not(.dark)[data-theme="purple"] {
-  --background: #f3e8ff;
+  --background: #fef9c3;
 }
 
-/* Emerald Theme */
+/* Emerald Theme - The Shire: Light to Dark Green */
 [data-theme="emerald"] {
-  --accent-primary: #10b981;
-  --accent-secondary: #059669;
-  --accent-tertiary: #34d399;
-  --accent-light: #6ee7b7;
-  --accent-dark: #047857;
+  --accent-primary: #4ade80;
+  --accent-secondary: #22c55e;
+  --accent-tertiary: #15803d;
+  --accent-light: #86efac;
+  --accent-dark: #166534;
 }
 
 :root:not(.dark)[data-theme="emerald"] {
-  --background: #d1fae5;
+  --background: #dcfce7;
 }
 
 /* Orange Theme */
