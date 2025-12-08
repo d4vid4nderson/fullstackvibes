@@ -760,6 +760,136 @@ export function Hero() {
         ]);
         break;
 
+      // Easter Eggs - Fun Commands
+      case 'sudo hire-me':
+      case 'sudo hire me':
+      case 'hire-me':
+      case 'hire me':
+      case 'hire':
+        setCommandHistory(prev => [...prev,
+          '',
+          '🚀 INITIATING HIRING SEQUENCE...',
+          '',
+          '   [■■■■■■■■■■] 100% - Scanning resume',
+          '   [■■■■■■■■■■] 100% - Verifying AI skills',
+          '   [■■■■■■■■■■] 100% - Checking project portfolio',
+          '   [■■■■■■■■■■] 100% - Confirming $400K+ impact',
+          '',
+          '   ✅ CANDIDATE VERIFIED: David Anderson',
+          '   📧 Contact: david@fullstackvibes.io',
+          '   🔗 LinkedIn: linkedin.com/in/d4vid4nderson',
+          '',
+          '   Ready when you are! 🤝',
+          ''
+        ]);
+        break;
+
+      case 'status':
+      case 'availability':
+      case 'available':
+      case 'open to work':
+        setCommandHistory(prev => [...prev,
+          '',
+          '🟢 STATUS: OPEN TO OPPORTUNITIES',
+          '',
+          '   Currently exploring:',
+          '   • Product Owner / Technical PM roles',
+          '   • Full-Stack Developer positions',
+          '   • AI/ML Engineering opportunities',
+          '',
+          '   Location: Texas (Remote-friendly)',
+          '   Notice: Can start within 2 weeks',
+          '',
+          '   Type "contact" to reach out!',
+          ''
+        ]);
+        break;
+
+      case 'cat skills.txt':
+      case 'cat skills':
+      case 'skills':
+        setCommandHistory(prev => [...prev,
+          '',
+          '📄 skills.txt',
+          '',
+          '   LANGUAGES',
+          '   ├── Go ████████████ Expert',
+          '   ├── Python ████████████ Expert',
+          '   ├── TypeScript ██████████░░ Advanced',
+          '   └── JavaScript ██████████░░ Advanced',
+          '',
+          '   FRAMEWORKS',
+          '   ├── React/Next.js ██████████░░ Advanced',
+          '   ├── FastAPI ████████████ Expert',
+          '   └── HTMX ████████████ Expert',
+          '',
+          '   AI/ML',
+          '   ├── Claude/Anthropic ████████████ Expert',
+          '   ├── OpenAI/GPT-4 ████████████ Expert',
+          '   └── RAG Pipelines ██████████░░ Advanced',
+          ''
+        ]);
+        break;
+
+      case 'cat hire_me.please':
+      case 'cat hire_me':
+        setCommandHistory(prev => [...prev,
+          '',
+          '📄 hire_me.please',
+          '',
+          '   Dear Future Employer,',
+          '',
+          '   I build things that make people\'s lives easier.',
+          '   I\'ve saved companies $400K+ with AI tools.',
+          '   I ship 6 production apps that teams use daily.',
+          '   I bridge the gap between tech and business.',
+          '',
+          '   Let\'s build something amazing together.',
+          '',
+          '   - David',
+          '',
+          '   P.S. I also make great coffee. ☕',
+          ''
+        ]);
+        break;
+
+      case 'fortune':
+      case 'cowsay':
+        const fortunes = [
+          '"Any sufficiently advanced bug is indistinguishable from a feature." - Unknown',
+          '"It works on my machine." - Every developer ever',
+          '"99 little bugs in the code, 99 little bugs... Take one down, patch it around... 127 little bugs in the code."',
+          '"A good programmer is someone who looks both ways before crossing a one-way street." - Doug Linder',
+          '"The best error message is the one that never shows up." - Thomas Fuchs',
+        ];
+        const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+        setCommandHistory(prev => [...prev,
+          '',
+          '🔮 Fortune:',
+          '',
+          `   ${randomFortune}`,
+          ''
+        ]);
+        break;
+
+      case 'neofetch':
+      case 'screenfetch':
+        setCommandHistory(prev => [...prev,
+          '',
+          '        ████████████████        david@fullstackvibes',
+          '      ██              ██        ──────────────────────',
+          '    ██   ██████████   ██        OS: macOS Sequoia',
+          '    ██   ██      ██   ██        Host: David Anderson',
+          '    ██   ██████████   ██        Shell: zsh 5.9',
+          '    ██                ██        Terminal: iTerm2',
+          '    ██   ██████████   ██        Editor: VS Code + Cursor',
+          '    ██                ██        Languages: Go, Python, TS',
+          '      ██              ██        Coffee: ████████████ 100%',
+          '        ████████████████        Status: Open to Work 🟢',
+          ''
+        ]);
+        break;
+
       default:
         if (trimmedCmd) {
           setCommandHistory(prev => [...prev, `Command not found: ${trimmedCmd}. Type 'help' for available commands.`]);
@@ -1020,17 +1150,26 @@ export function Hero() {
                 {/* Terminal Content */}
                 <div className="p-5 sm:p-8 font-mono text-sm sm:text-base leading-relaxed relative">
                   {/* Photo - responsive: inline on mobile, absolute on desktop */}
-                  <div className="lg:absolute lg:top-8 lg:right-8 flex justify-center lg:justify-end mb-4 lg:mb-0">
-                    <div className="relative rounded-full p-[3px] bg-gradient-accent-to-r w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] lg:w-[160px] lg:h-[160px]">
-                      <div className="relative rounded-full overflow-hidden w-full h-full bg-white dark:bg-[#1a1a1a]">
-                        <Image
-                          src="/david-headshot-square.png"
-                          alt="David Anderson"
-                          width={160}
-                          height={160}
-                          className="rounded-full object-cover w-full h-full"
-                          priority
-                        />
+                  <div className="lg:absolute lg:top-8 lg:right-8 flex flex-col items-center lg:items-end mb-4 lg:mb-0 gap-2">
+                    <div className="relative">
+                      <div className="relative rounded-full p-[3px] bg-gradient-accent-to-r w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] lg:w-[160px] lg:h-[160px]">
+                        <div className="relative rounded-full overflow-hidden w-full h-full bg-white dark:bg-[#1a1a1a]">
+                          <Image
+                            src="/david-headshot-square.jpg"
+                            alt="David Anderson"
+                            width={160}
+                            height={160}
+                            className="rounded-full object-cover w-full h-full"
+                            priority
+                          />
+                        </div>
+                      </div>
+                      {/* Open to Work badge */}
+                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-500/20 border border-green-500/30 text-green-600 dark:text-green-400 text-[10px] sm:text-xs font-medium">
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                          Open to Work
+                        </span>
                       </div>
                     </div>
                   </div>
