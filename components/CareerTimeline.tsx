@@ -102,46 +102,45 @@ const getTechIcon = (tech: string) => {
   return iconMap[tech.toLowerCase()];
 };
 
-function TimelineCard({ entry, isFirst }: { entry: CareerEntry; isFirst: boolean }) {
-  const [isExpanded, setIsExpanded] = useState(isFirst);
+interface TimelineCardProps {
+  entry: CareerEntry;
+  isExpanded: boolean;
+  onToggle: () => void;
+}
 
+function TimelineCard({ entry, isExpanded, onToggle }: TimelineCardProps) {
   return (
     <div className="relative pl-8 sm:pl-12 pb-8 last:pb-0 group">
       {/* Vertical line */}
       <div className="absolute left-[11px] sm:left-[19px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-accent-primary via-accent-secondary to-transparent opacity-30 group-last:bg-gradient-to-b group-last:from-accent-primary group-last:to-transparent" />
 
-      {/* Git commit node */}
+      {/* Git commit node - highlights when expanded */}
       <div className="absolute left-0 sm:left-2 top-0 flex items-center justify-center">
-        <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-          entry.type === 'current'
+        <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
+          isExpanded
             ? 'bg-accent text-white shadow-lg shadow-accent-primary/50'
             : 'bg-white dark:bg-[#1a1a1a] border-2 border-accent-primary/50'
         }`}>
-          <FiGitCommit className={`w-3 h-3 ${entry.type === 'current' ? 'text-white' : 'text-accent'}`} />
+          <FiGitCommit className={`w-3 h-3 ${isExpanded ? 'text-white' : 'text-accent'}`} />
         </div>
       </div>
 
       {/* Card */}
       <div
         className={`relative overflow-hidden rounded-xl border transition-all duration-300 cursor-pointer ${
-          entry.type === 'current'
+          isExpanded
             ? 'bg-white/90 dark:bg-[#1a1a1a] border-accent-primary/30 shadow-lg shadow-accent-primary/10'
             : 'bg-white/80 dark:bg-[#1a1a1a]/80 border-gray-300 dark:border-white/10 hover:border-accent-primary/30'
         }`}
-        onClick={() => setIsExpanded(!isExpanded)}
+        onClick={onToggle}
       >
-        {/* Gradient accent bar for current role */}
-        {entry.type === 'current' && (
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-accent-to-r" />
-        )}
-
         <div className="p-4 sm:p-6">
           {/* Header */}
           <div className="flex items-start justify-between gap-4">
             <div className="flex-1 min-w-0">
               {/* Git-style commit reference */}
               <div className="flex items-center gap-2 mb-2 text-xs font-mono">
-                <span className="text-accent font-semibold">
+                <span className={`font-semibold transition-colors duration-300 ${isExpanded ? 'text-accent' : 'text-gray-500 dark:text-gray-500'}`}>
                   commit {entry.endYear === 'HEAD' ? 'HEAD' : entry.endYear}
                 </span>
                 {entry.type === 'current' && (
@@ -153,7 +152,7 @@ function TimelineCard({ entry, isFirst }: { entry: CareerEntry; isFirst: boolean
 
               {/* Title & Company */}
               <h3 className={`font-bold text-gray-900 dark:text-white text-base sm:text-lg ${
-                entry.type === 'current' ? 'gradient-text' : ''
+                isExpanded ? 'gradient-text' : ''
               }`}>
                 {entry.title}
               </h3>
@@ -250,6 +249,15 @@ function TimelineCard({ entry, isFirst }: { entry: CareerEntry; isFirst: boolean
 }
 
 export function CareerTimeline() {
+  // Track which entry is expanded - default to first (current role)
+  const [expandedId, setExpandedId] = useState<string>(careerData[0].id);
+
+  const handleToggle = (id: string) => {
+    // If clicking the already expanded one, keep it expanded (or toggle if you prefer)
+    // For accordion behavior where one is always open:
+    setExpandedId(id);
+  };
+
   return (
     <section id="career" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background decoration */}
@@ -286,8 +294,13 @@ export function CareerTimeline() {
 
             {/* Timeline */}
             <div className="relative">
-              {careerData.map((entry, index) => (
-                <TimelineCard key={entry.id} entry={entry} isFirst={index === 0} />
+              {careerData.map((entry) => (
+                <TimelineCard
+                  key={entry.id}
+                  entry={entry}
+                  isExpanded={expandedId === entry.id}
+                  onToggle={() => handleToggle(entry.id)}
+                />
               ))}
             </div>
 
