@@ -874,27 +874,31 @@ export function Hero() {
                             className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-[#2a2a2a] transition-colors text-left"
                           >
                             <div className="flex gap-1">
+                              {/* Water of Life: Cyan → Sky Blue → Blue */}
                               {theme.key === 'cyan' && (
                                 <>
                                   <div className="w-5 h-5 rounded-full bg-[#06b6d4] border border-gray-300 dark:border-white/20"></div>
-                                  <div className="w-5 h-5 rounded-full bg-[#14b8a6] border border-gray-300 dark:border-white/20"></div>
-                                  <div className="w-5 h-5 rounded-full bg-[#0891b2] border border-gray-300 dark:border-white/20"></div>
+                                  <div className="w-5 h-5 rounded-full bg-[#0ea5e9] border border-gray-300 dark:border-white/20"></div>
+                                  <div className="w-5 h-5 rounded-full bg-[#3b82f6] border border-gray-300 dark:border-white/20"></div>
                                 </>
                               )}
+                              {/* One Ring: Gold → Amber → Orange */}
                               {theme.key === 'purple' && (
                                 <>
-                                  <div className="w-5 h-5 rounded-full bg-[#a855f7] border border-gray-300 dark:border-white/20"></div>
-                                  <div className="w-5 h-5 rounded-full bg-[#8b5cf6] border border-gray-300 dark:border-white/20"></div>
-                                  <div className="w-5 h-5 rounded-full bg-[#7c3aed] border border-gray-300 dark:border-white/20"></div>
+                                  <div className="w-5 h-5 rounded-full bg-[#eab308] border border-gray-300 dark:border-white/20"></div>
+                                  <div className="w-5 h-5 rounded-full bg-[#f59e0b] border border-gray-300 dark:border-white/20"></div>
+                                  <div className="w-5 h-5 rounded-full bg-[#ea580c] border border-gray-300 dark:border-white/20"></div>
                                 </>
                               )}
+                              {/* The Shire: Light Green → Green → Dark Green */}
                               {theme.key === 'emerald' && (
                                 <>
-                                  <div className="w-5 h-5 rounded-full bg-[#10b981] border border-gray-300 dark:border-white/20"></div>
-                                  <div className="w-5 h-5 rounded-full bg-[#059669] border border-gray-300 dark:border-white/20"></div>
-                                  <div className="w-5 h-5 rounded-full bg-[#34d399] border border-gray-300 dark:border-white/20"></div>
+                                  <div className="w-5 h-5 rounded-full bg-[#4ade80] border border-gray-300 dark:border-white/20"></div>
+                                  <div className="w-5 h-5 rounded-full bg-[#22c55e] border border-gray-300 dark:border-white/20"></div>
+                                  <div className="w-5 h-5 rounded-full bg-[#15803d] border border-gray-300 dark:border-white/20"></div>
                                 </>
                               )}
+                              {/* Arrakis: Orange tones */}
                               {theme.key === 'orange' && (
                                 <>
                                   <div className="w-5 h-5 rounded-full bg-[#f97316] border border-gray-300 dark:border-white/20"></div>
@@ -902,11 +906,12 @@ export function Hero() {
                                   <div className="w-5 h-5 rounded-full bg-[#ea580c] border border-gray-300 dark:border-white/20"></div>
                                 </>
                               )}
+                              {/* Saber Battle: Blue → Fuchsia → Red */}
                               {theme.key === 'blue' && (
                                 <>
                                   <div className="w-5 h-5 rounded-full bg-[#3b82f6] border border-gray-300 dark:border-white/20"></div>
-                                  <div className="w-5 h-5 rounded-full bg-[#60a5fa] border border-gray-300 dark:border-white/20"></div>
-                                  <div className="w-5 h-5 rounded-full bg-[#2563eb] border border-gray-300 dark:border-white/20"></div>
+                                  <div className="w-5 h-5 rounded-full bg-[#c026d3] border border-gray-300 dark:border-white/20"></div>
+                                  <div className="w-5 h-5 rounded-full bg-[#ef4444] border border-gray-300 dark:border-white/20"></div>
                                 </>
                               )}
                             </div>

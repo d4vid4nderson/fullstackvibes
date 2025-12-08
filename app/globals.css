@@ -48,17 +48,17 @@ body {
   --background: #cffafe;
 }
 
-/* Purple Theme - One Ring: Gold to Purple */
+/* Purple Theme - One Ring: Gold to Orange */
 [data-theme="purple"] {
   --accent-primary: #eab308;
-  --accent-secondary: #a855f7;
-  --accent-tertiary: #7c3aed;
+  --accent-secondary: #f59e0b;
+  --accent-tertiary: #ea580c;
   --accent-light: #fde047;
-  --accent-dark: #6d28d9;
+  --accent-dark: #c2410c;
 }
 
 :root:not(.dark)[data-theme="purple"] {
-  --background: #fef9c3;
+  --background: #fef3c7;
 }
 
 /* Emerald Theme - The Shire: Light to Dark Green */
