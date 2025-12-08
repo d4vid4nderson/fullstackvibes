@@ -1,79 +1,113 @@
 import { getDeveloperProjects, getProductOwnerProjects } from '@/lib/github';
 import { ProjectCard } from './ProjectCard';
-import { FiArrowRight, FiPackage, FiCode, FiUsers } from 'react-icons/fi';
+import { FiCode, FiUsers } from 'react-icons/fi';
 
 export async function Projects() {
   const developerProjects = await getDeveloperProjects();
   const productOwnerProjects = await getProductOwnerProjects();
 
   return (
-    <section id="projects" className="relative pt-16 pb-16 px-4 sm:px-6 lg:px-8 bg-background transition-colors duration-300 overflow-visible">
-      {/* Background decoration - extends beyond section boundaries */}
-      <div className="absolute left-0 right-0 -top-[500px] -bottom-[500px] pointer-events-none opacity-30 z-0">
-        <div className="absolute top-[500px] right-0 w-[600px] h-[600px] bg-accent rounded-full filter blur-3xl opacity-20"></div>
-        <div className="absolute bottom-[500px] left-0 w-[600px] h-[600px] bg-accent-secondary rounded-full filter blur-3xl opacity-20"></div>
+    <section id="projects" className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-background transition-colors duration-300 overflow-visible">
+      {/* Background decoration */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-accent rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-10 animate-pulse" />
+        <div className="absolute bottom-1/3 left-0 w-80 h-80 bg-accent-secondary rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-10 animate-pulse" style={{ animationDelay: '1s' }} />
       </div>
 
       <div className="relative max-w-7xl mx-auto z-10">
-        {/* Section header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/30 rounded-full mb-6">
-            <FiPackage className="w-5 h-5 text-accent dark:text-accent" />
-            <span className="text-accent-dark dark:text-accent font-mono text-sm">My Work</span>
+        {/* Terminal Window */}
+        <div className="bg-white dark:bg-[#1a1a1a] rounded-lg border border-gray-300 dark:border-white/10 shadow-2xl overflow-hidden transition-colors duration-300">
+          {/* Terminal Header */}
+          <div className="bg-gray-100 dark:bg-[#2a2a2a] px-4 py-2 flex items-center gap-2 border-b border-gray-300 dark:border-white/10 transition-colors duration-300">
+            <div className="flex gap-2">
+              <div className="w-3 h-3 rounded-full bg-red-500"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+            <span className="text-xs text-gray-500 dark:text-gray-400 ml-2 font-mono">david@fullstackvibes:~/projects</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-            <span className="gradient-text">Featured Projects</span>
-          </h2>
-          <p className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            A collection of my latest work spanning development and product ownership.
-          </p>
+
+          {/* Terminal Content */}
+          <div className="p-5 sm:p-8 font-mono">
+            {/* Command header */}
+            <div className="mb-8">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
+                <span className="text-accent">$</span> ls -la{' '}
+                <span className="gradient-text">./projects</span>
+              </h2>
+              <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                A collection of my latest work spanning development and product ownership.
+              </p>
+            </div>
+
+            {/* Developer Projects Section */}
+            {developerProjects.length > 0 && (
+              <div className="mb-12">
+                {/* Developer Section Header */}
+                <div className="mb-6">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-accent">$</span>
+                    <span className="text-gray-500 dark:text-gray-500">--role</span>
+                    <span className="text-gray-600 dark:text-gray-400">developer</span>
+                  </div>
+                  <div className="flex items-center gap-2 pl-4">
+                    <FiCode className="w-4 h-4 text-accent" />
+                    <span className="text-accent font-bold">Developer</span>
+                    <span className="text-gray-500 dark:text-gray-500">|</span>
+                    <span className="text-gray-600 dark:text-gray-400 text-sm">{developerProjects.length} projects</span>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-400 mt-2 pl-4 text-sm leading-relaxed font-sans">
+                    Projects I architected and built from the ground up—custom enterprise applications designed to streamline workflows and deliver measurable value.
+                  </p>
+                </div>
+
+                {/* Developer Projects Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {developerProjects.map((repo) => (
+                    <ProjectCard key={repo.id} repo={repo} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Product Owner Projects Section */}
+            {productOwnerProjects.length > 0 && (
+              <div>
+                {/* Product Owner Section Header */}
+                <div className="mb-6 pt-8 border-t border-gray-200 dark:border-white/10">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-accent">$</span>
+                    <span className="text-gray-500 dark:text-gray-500">--role</span>
+                    <span className="text-gray-600 dark:text-gray-400">product-owner</span>
+                  </div>
+                  <div className="flex items-center gap-2 pl-4">
+                    <FiUsers className="w-4 h-4 text-accent" />
+                    <span className="text-accent font-bold">Product Owner</span>
+                    <span className="text-gray-500 dark:text-gray-500">|</span>
+                    <span className="text-gray-600 dark:text-gray-400 text-sm">{productOwnerProjects.length} projects</span>
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-400 mt-2 pl-4 text-sm leading-relaxed font-sans">
+                    Projects I managed through the product lifecycle—leading Agile ceremonies, stakeholder presentations, and feature delivery.
+                  </p>
+                </div>
+
+                {/* Product Owner Projects Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {productOwnerProjects.map((repo) => (
+                    <ProjectCard key={repo.id} repo={repo} />
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Footer note */}
+            <div className="mt-8 pt-6 border-t border-gray-200 dark:border-white/10">
+              <p className="text-xs text-gray-500 dark:text-gray-500 text-center">
+                <span className="text-accent">tip:</span> click on a project card to view details
+              </p>
+            </div>
+          </div>
         </div>
-
-        {/* Developer Projects Section */}
-        {developerProjects.length > 0 && (
-          <div className="mb-20">
-            {/* Developer Section Header */}
-            <div className="mb-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/30 rounded-lg">
-                <FiCode className="w-5 h-5 text-accent" />
-                <span className="text-accent font-bold text-lg">Developer</span>
-              </div>
-              <p className="text-gray-700 dark:text-gray-400 mt-3 ml-1">
-                Projects I architected and built from the ground up. I met with business owners and C-suite executives to identify critical gaps in the existing technology stack, conducted needs assessments to understand operational pain points, and developed custom, tailored solutions that addressed specific business challenges. These one-off enterprise applications were designed to streamline workflows, improve efficiency, and deliver measurable value aligned with strategic organizational objectives.
-              </p>
-            </div>
-
-            {/* Developer Projects Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {developerProjects.map((repo) => (
-                <ProjectCard key={repo.id} repo={repo} />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Product Owner Projects Section */}
-        {productOwnerProjects.length > 0 && (
-          <div className="mb-16">
-            {/* Product Owner Section Header */}
-            <div className="mb-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-accent/10 border border-accent/30 rounded-lg">
-                <FiUsers className="w-5 h-5 text-accent" />
-                <span className="text-accent font-bold text-lg">Product Owner</span>
-              </div>
-              <p className="text-gray-700 dark:text-gray-400 mt-3 ml-1">
-                Projects I managed and guided through the product lifecycle. As Product Owner, I led weekly Agile working meetings with consultant development teams, facilitated sprint planning and retrospectives, and conducted in-person planning sessions and presentations with leadership and stakeholders to gather requirement and to demonstrate features to ensure platforms aligned with organizational and business needs.
-              </p>
-            </div>
-
-            {/* Product Owner Projects Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {productOwnerProjects.map((repo) => (
-                <ProjectCard key={repo.id} repo={repo} />
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </section>
   );
