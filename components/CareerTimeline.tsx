@@ -259,37 +259,45 @@ export function CareerTimeline() {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
-        {/* Section header - Terminal style */}
-        <div className="mb-8 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#1a1a1a] dark:bg-[#0a0a0a] border border-white/10 mb-4">
-            <div className="flex gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
-              <span className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
-              <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
+        {/* Terminal Window */}
+        <div className="bg-white dark:bg-[#1a1a1a] rounded-lg border border-gray-300 dark:border-white/10 shadow-2xl overflow-hidden transition-colors duration-300">
+          {/* Terminal Header */}
+          <div className="bg-gray-100 dark:bg-[#2a2a2a] px-4 py-2 flex items-center gap-2 border-b border-gray-300 dark:border-white/10 transition-colors duration-300">
+            <div className="flex gap-2">
+              <div className="w-3 h-3 rounded-full bg-red-500"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500"></div>
             </div>
-            <span className="text-xs font-mono text-gray-400">~/career</span>
+            <span className="text-xs text-gray-500 dark:text-gray-400 ml-2 font-mono">david@fullstackvibes:~/career</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">
-            <span className="text-accent font-mono">$</span> git log{' '}
-            <span className="gradient-text">--career</span>
-          </h2>
-          <p className="mt-2 text-gray-600 dark:text-gray-400 font-mono text-sm">
-            <span className="text-accent">12+ years</span> of evolution from design ops to AI-powered product development
-          </p>
-        </div>
 
-        {/* Timeline */}
-        <div className="relative">
-          {careerData.map((entry, index) => (
-            <TimelineCard key={entry.id} entry={entry} isFirst={index === 0} />
-          ))}
-        </div>
+          {/* Terminal Content */}
+          <div className="p-5 sm:p-8 font-mono">
+            {/* Command header */}
+            <div className="mb-6 sm:mb-8">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
+                <span className="text-accent">$</span> git log{' '}
+                <span className="gradient-text">--career</span>
+              </h2>
+              <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
+                <span className="text-accent">12+ years</span> of evolution from design ops to AI-powered product development
+              </p>
+            </div>
 
-        {/* Footer note */}
-        <div className="mt-8 pt-6 border-t border-gray-200 dark:border-white/10">
-          <p className="text-xs font-mono text-gray-500 dark:text-gray-500 text-center">
-            <span className="text-accent">tip:</span> type <code className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-white/5 text-accent">career</code> in the terminal above for quick access
-          </p>
+            {/* Timeline */}
+            <div className="relative">
+              {careerData.map((entry, index) => (
+                <TimelineCard key={entry.id} entry={entry} isFirst={index === 0} />
+              ))}
+            </div>
+
+            {/* Footer note */}
+            <div className="mt-8 pt-6 border-t border-gray-200 dark:border-white/10">
+              <p className="text-xs text-gray-500 dark:text-gray-500 text-center">
+                <span className="text-accent">tip:</span> type <code className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-white/5 text-accent">career</code> in the terminal above for quick access
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
