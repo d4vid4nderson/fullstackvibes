@@ -281,10 +281,10 @@ export function CareerTimeline() {
 
   if (careerState === 'closed') {
     if (!showClosedMessage) {
-      return <section id="career" className="py-4" />;
+      return <section id="career" className="py-2" />;
     }
     return (
-      <section id="career" className="relative py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+      <section id="career" className="relative py-4 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
         <div className="relative max-w-7xl mx-auto z-10">
           <div className={`bg-gray-100 dark:bg-[#2a2a2a] rounded-lg border border-gray-300 dark:border-white/10 px-4 py-3 font-mono text-sm text-gray-500 dark:text-gray-400 text-center transition-all duration-500 ${
             isMessageVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
@@ -298,7 +298,7 @@ export function CareerTimeline() {
 
   return (
     <section id="career" className={`px-4 sm:px-6 lg:px-8 relative overflow-hidden transition-all duration-300 ${
-      careerState === 'minimized' ? 'py-8' : 'py-16 sm:py-24'
+      careerState === 'minimized' ? 'py-4' : 'py-8 sm:py-12'
     }`}>
       {/* Background decoration - always visible */}
       <div className="absolute inset-0 pointer-events-none">

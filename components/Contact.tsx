@@ -136,10 +136,10 @@ export function Contact() {
 
   if (contactState === 'closed') {
     if (!showClosedMessage) {
-      return <section id="contact" className="py-4" />;
+      return <section id="contact" className="py-2" />;
     }
     return (
-      <section id="contact" className="relative py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+      <section id="contact" className="relative py-4 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
         <div className="relative max-w-7xl mx-auto z-10">
           <div className={`bg-gray-100 dark:bg-[#2a2a2a] rounded-lg border border-gray-300 dark:border-white/10 px-4 py-3 font-mono text-sm text-gray-500 dark:text-gray-400 text-center transition-all duration-500 ${
             isMessageVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
@@ -153,7 +153,7 @@ export function Contact() {
 
   return (
     <section id="contact" className={`relative px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
-      contactState === 'minimized' ? 'py-8' : 'py-16 sm:py-24'
+      contactState === 'minimized' ? 'py-4' : 'py-8 sm:py-12'
     }`}>
       {/* Background decoration - always visible */}
       <div className="absolute inset-0 pointer-events-none">

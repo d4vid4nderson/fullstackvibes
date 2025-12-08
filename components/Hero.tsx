@@ -820,7 +820,7 @@ export function Hero() {
   const closingTransformStyle = { '--nav-shift': `${navShift}px` } as React.CSSProperties;
 
   return (
-    <section className="relative px-4 sm:px-6 lg:px-8 pt-24 pb-16 transition-colors duration-300 overflow-visible">
+    <section className="relative px-4 sm:px-6 lg:px-8 pt-24 pb-8 transition-colors duration-300 overflow-visible">
       {/* Animated background orbs */}
       <div className="absolute inset-0 pointer-events-none overflow-visible">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-20 animate-pulse"></div>
