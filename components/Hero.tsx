@@ -948,13 +948,13 @@ export function Hero() {
                 isNavExpanded ? 'w-[210px] opacity-100 px-2' : 'w-0 opacity-0 px-0'
               }`}
             >
+              <a href="#career" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap">
+                Career
+              </a>
+              <span className="text-gray-500 text-xs">|</span>
               <a href="#projects" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap">
                 Projects
               </a>
-              <span className="text-gray-500 text-xs">|</span>
-              <span onClick={(e) => { e.stopPropagation(); setShowResumeModal(true); setIsNavExpanded(false); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap cursor-pointer">
-                Resume
-              </span>
               <span className="text-gray-500 text-xs">|</span>
               <a href="#contact" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap">
                 Contact
