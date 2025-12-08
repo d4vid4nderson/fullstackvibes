@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, useState, useEffect } from 'react';
 import { useTerminal } from './TerminalContext';
 
 interface ProjectsTerminalProps {
@@ -9,12 +9,36 @@ interface ProjectsTerminalProps {
 
 export function ProjectsTerminal({ children }: ProjectsTerminalProps) {
   const { projectsState, setProjectsState } = useTerminal();
+  const [showClosedMessage, setShowClosedMessage] = useState(false);
+  const [isMessageVisible, setIsMessageVisible] = useState(false);
+
+  // Show closed message for 10 seconds then animate out
+  useEffect(() => {
+    if (projectsState === 'closed') {
+      setShowClosedMessage(true);
+      setIsMessageVisible(true);
+      const timer = setTimeout(() => {
+        setIsMessageVisible(false);
+        // Remove from DOM after animation
+        setTimeout(() => setShowClosedMessage(false), 500);
+      }, 10000);
+      return () => clearTimeout(timer);
+    } else {
+      setShowClosedMessage(false);
+      setIsMessageVisible(false);
+    }
+  }, [projectsState]);
 
   if (projectsState === 'closed') {
+    if (!showClosedMessage) {
+      return <section id="projects" className="py-4" />;
+    }
     return (
       <section id="projects" className="relative py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
         <div className="relative max-w-7xl mx-auto z-10">
-          <div className="bg-gray-100 dark:bg-[#2a2a2a] rounded-lg border border-gray-300 dark:border-white/10 px-4 py-3 font-mono text-sm text-gray-500 dark:text-gray-400 text-center transition-colors duration-300">
+          <div className={`bg-gray-100 dark:bg-[#2a2a2a] rounded-lg border border-gray-300 dark:border-white/10 px-4 py-3 font-mono text-sm text-gray-500 dark:text-gray-400 text-center transition-all duration-500 ${
+            isMessageVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+          }`}>
             <span className="text-accent">~/projects</span> terminal closed. Type <code className="px-1.5 py-0.5 rounded bg-white dark:bg-white/10 text-accent">projects</code> in the main terminal to restore.
           </div>
         </div>

@@ -846,13 +846,16 @@ export function Hero() {
                 <a href="/" className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all">
                   Home
                 </a>
-                <a href="#projects" className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all">
+                <a href="#career" onClick={() => { if (careerState === 'closed') restoreTerminal('career'); }} className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all">
+                  Career
+                </a>
+                <a href="#projects" onClick={() => { if (projectsState === 'closed') restoreTerminal('projects'); }} className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all">
                   Projects
                 </a>
                 <button onClick={() => setShowResumeModal(true)} className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all">
                   Resume
                 </button>
-                <a href="#contact" className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all">
+                <a href="#contact" onClick={() => { if (contactState === 'closed') restoreTerminal('contact'); }} className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all">
                   Contact
                 </a>
                 <div className="relative group/themes px-3">
@@ -976,15 +979,15 @@ export function Hero() {
                 isNavExpanded ? 'w-[210px] opacity-100 px-2' : 'w-0 opacity-0 px-0'
               }`}
             >
-              <a href="#career" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap">
+              <a href="#career" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); if (careerState === 'closed') restoreTerminal('career'); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap">
                 Career
               </a>
               <span className="text-gray-500 text-xs">|</span>
-              <a href="#projects" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap">
+              <a href="#projects" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); if (projectsState === 'closed') restoreTerminal('projects'); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap">
                 Projects
               </a>
               <span className="text-gray-500 text-xs">|</span>
-              <a href="#contact" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap">
+              <a href="#contact" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); if (contactState === 'closed') restoreTerminal('contact'); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap">
                 Contact
               </a>
             </div>

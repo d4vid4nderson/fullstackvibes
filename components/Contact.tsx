@@ -16,10 +16,29 @@ export function Contact() {
   const emailRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const { contactState, setContactState } = useTerminal();
+  const [showClosedMessage, setShowClosedMessage] = useState(false);
+  const [isMessageVisible, setIsMessageVisible] = useState(false);
 
   useEffect(() => {
     setIsMac(navigator.platform.toUpperCase().indexOf('MAC') >= 0);
   }, []);
+
+  // Show closed message for 10 seconds then animate out
+  useEffect(() => {
+    if (contactState === 'closed') {
+      setShowClosedMessage(true);
+      setIsMessageVisible(true);
+      const timer = setTimeout(() => {
+        setIsMessageVisible(false);
+        // Remove from DOM after animation
+        setTimeout(() => setShowClosedMessage(false), 500);
+      }, 10000);
+      return () => clearTimeout(timer);
+    } else {
+      setShowClosedMessage(false);
+      setIsMessageVisible(false);
+    }
+  }, [contactState]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -116,10 +135,15 @@ export function Contact() {
   };
 
   if (contactState === 'closed') {
+    if (!showClosedMessage) {
+      return <section id="contact" className="py-4" />;
+    }
     return (
       <section id="contact" className="relative py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
         <div className="relative max-w-7xl mx-auto z-10">
-          <div className="bg-gray-100 dark:bg-[#2a2a2a] rounded-lg border border-gray-300 dark:border-white/10 px-4 py-3 font-mono text-sm text-gray-500 dark:text-gray-400 text-center transition-colors duration-300">
+          <div className={`bg-gray-100 dark:bg-[#2a2a2a] rounded-lg border border-gray-300 dark:border-white/10 px-4 py-3 font-mono text-sm text-gray-500 dark:text-gray-400 text-center transition-all duration-500 ${
+            isMessageVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
+          }`}>
             <span className="text-accent">~/contact</span> terminal closed. Type <code className="px-1.5 py-0.5 rounded bg-white dark:bg-white/10 text-accent">contact</code> in the main terminal to restore.
           </div>
         </div>
