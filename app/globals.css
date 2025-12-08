@@ -35,13 +35,13 @@ body {
   --background: #0f0f0f;
 }
 
-/* Cyan Theme (Default) */
+/* Cyan Theme (Default) - Water of Life: Cyan to Blue */
 [data-theme="cyan"] {
   --accent-primary: #06b6d4;
-  --accent-secondary: #14b8a6;
-  --accent-tertiary: #0891b2;
+  --accent-secondary: #0ea5e9;
+  --accent-tertiary: #3b82f6;
   --accent-light: #67e8f9;
-  --accent-dark: #0e7490;
+  --accent-dark: #0369a1;
 }
 
 :root:not(.dark)[data-theme="cyan"] {
