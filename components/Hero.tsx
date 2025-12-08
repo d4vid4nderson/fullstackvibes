@@ -1166,8 +1166,8 @@ export function Hero() {
                       </div>
                       {/* Open to Work badge */}
                       <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap">
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-500/20 border border-green-500/30 text-green-600 dark:text-green-400 text-[10px] sm:text-xs font-medium">
-                          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-green-600 dark:bg-green-600 border border-green-500 text-white text-[10px] sm:text-xs font-semibold shadow-lg">
+                          <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
                           Open to Work
                         </span>
                       </div>
