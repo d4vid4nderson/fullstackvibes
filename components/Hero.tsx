@@ -1150,26 +1150,17 @@ export function Hero() {
                 {/* Terminal Content */}
                 <div className="p-5 sm:p-8 font-mono text-sm sm:text-base leading-relaxed relative">
                   {/* Photo - responsive: inline on mobile, absolute on desktop */}
-                  <div className="lg:absolute lg:top-8 lg:right-8 flex flex-col items-center lg:items-end mb-4 lg:mb-0 gap-2">
-                    <div className="relative">
-                      <div className="relative rounded-full p-[3px] bg-gradient-accent-to-r w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] lg:w-[160px] lg:h-[160px]">
-                        <div className="relative rounded-full overflow-hidden w-full h-full bg-white dark:bg-[#1a1a1a]">
-                          <Image
-                            src="/david-headshot-square.jpg"
-                            alt="David Anderson"
-                            width={160}
-                            height={160}
-                            className="rounded-full object-cover w-full h-full"
-                            priority
-                          />
-                        </div>
-                      </div>
-                      {/* Open to Work badge */}
-                      <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-green-600 dark:bg-green-600 border border-green-500 text-white text-[10px] sm:text-xs font-semibold shadow-lg">
-                          <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                          Open to Work
-                        </span>
+                  <div className="lg:absolute lg:top-8 lg:right-8 flex justify-center lg:justify-end mb-4 lg:mb-0">
+                    <div className="relative rounded-full p-[3px] bg-gradient-accent-to-r w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] lg:w-[160px] lg:h-[160px]">
+                      <div className="relative rounded-full overflow-hidden w-full h-full bg-white dark:bg-[#1a1a1a]">
+                        <Image
+                          src="/david-headshot-square.jpg"
+                          alt="David Anderson"
+                          width={160}
+                          height={160}
+                          className="rounded-full object-cover w-full h-full"
+                          priority
+                        />
                       </div>
                     </div>
                   </div>
