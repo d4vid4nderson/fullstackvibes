@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark" data-theme="cyan">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,68 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Theme System */
-        :root {
-            --background: #f8fafc;
-            --foreground: #1f2937;
-            --card-bg: #ffffff;
-            --card-border: #e5e7eb;
-            --muted: #6b7280;
-        }
-
-        .dark {
-            --background: #0f0f0f;
-            --foreground: #f5f5f5;
-            --card-bg: #1a1a1a;
-            --card-border: rgba(255, 255, 255, 0.1);
-            --muted: #a1a1aa;
-        }
-
-        /* Cyan Theme (Default) */
-        [data-theme="cyan"] {
-            --accent-primary: #06b6d4;
-            --accent-secondary: #14b8a6;
-            --accent-tertiary: #0891b2;
-            --accent-light: #67e8f9;
-            --accent-dark: #0e7490;
-        }
-
-        /* Purple Theme */
-        [data-theme="purple"] {
-            --accent-primary: #a855f7;
-            --accent-secondary: #8b5cf6;
-            --accent-tertiary: #7c3aed;
-            --accent-light: #c4b5fd;
-            --accent-dark: #6d28d9;
-        }
-
-        /* Emerald Theme */
-        [data-theme="emerald"] {
-            --accent-primary: #10b981;
-            --accent-secondary: #059669;
-            --accent-tertiary: #34d399;
-            --accent-light: #6ee7b7;
-            --accent-dark: #047857;
-        }
-
-        /* Orange Theme */
-        [data-theme="orange"] {
-            --accent-primary: #f97316;
-            --accent-secondary: #fb923c;
-            --accent-tertiary: #ea580c;
-            --accent-light: #fdba74;
-            --accent-dark: #c2410c;
-        }
-
-        /* Blue Theme */
-        [data-theme="blue"] {
-            --accent-primary: #3b82f6;
-            --accent-secondary: #60a5fa;
-            --accent-tertiary: #2563eb;
-            --accent-light: #93c5fd;
-            --accent-dark: #1d4ed8;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -78,65 +16,100 @@
 
         body {
             font-family: 'JetBrains Mono', monospace;
-            line-height: 1.6;
-            color: var(--foreground);
-            background: var(--background);
-            min-height: 100vh;
+            line-height: 1.5;
+            color: #1f2937;
+            background: #f1f5f9;
+            padding: 24px;
         }
 
-        /* Container */
-        .container {
+        /* Terminal Window */
+        .terminal {
             max-width: 900px;
             margin: 0 auto;
-            padding: 40px 32px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+
+        /* Terminal Header */
+        .terminal-header {
+            background: #f3f4f6;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #eab308; }
+        .dot-green { background: #22c55e; }
+
+        .terminal-title {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        /* Terminal Content */
+        .terminal-content {
+            padding: 24px;
         }
 
         /* Header Section */
         .header {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 24px;
-            margin-bottom: 32px;
-            padding-bottom: 24px;
-            border-bottom: 2px solid var(--accent-primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #06b6d4;
         }
 
         .header-main h1 {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 700;
-            color: var(--foreground);
+            color: #111827;
             margin-bottom: 4px;
         }
 
         .header-title {
-            font-size: 16px;
-            color: var(--accent-primary);
+            font-size: 14px;
+            color: #06b6d4;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .header-contact {
             display: flex;
             flex-wrap: wrap;
-            gap: 16px;
-            font-size: 13px;
-            color: var(--muted);
+            gap: 12px;
+            font-size: 11px;
+            color: #6b7280;
         }
 
         .header-contact a {
-            color: var(--accent-primary);
+            color: #06b6d4;
             text-decoration: none;
         }
 
-        .header-contact a:hover {
-            text-decoration: underline;
-        }
-
-        /* Stats Grid */
+        /* Stats */
         .stats-grid {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 4px;
             text-align: right;
         }
 
@@ -144,87 +117,84 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            gap: 8px;
-            font-size: 13px;
+            gap: 6px;
+            font-size: 11px;
         }
 
         .stat-value {
             font-weight: 700;
-            color: var(--accent-primary);
-            font-size: 15px;
+            color: #06b6d4;
+            font-size: 13px;
         }
 
         .stat-label {
-            color: var(--muted);
+            color: #6b7280;
         }
 
         /* Section */
         .section {
-            margin-bottom: 28px;
+            margin-bottom: 16px;
         }
 
         .section-title {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
-            color: var(--accent-primary);
+            color: #06b6d4;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 16px;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .section-title::before {
             content: '$';
-            color: var(--accent-secondary);
+            color: #14b8a6;
         }
 
         /* Summary */
         .summary {
-            font-size: 14px;
-            color: var(--foreground);
-            line-height: 1.7;
-            padding: 16px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            border-left: 3px solid var(--accent-primary);
+            font-size: 12px;
+            color: #374151;
+            line-height: 1.6;
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 6px;
+            border-left: 3px solid #06b6d4;
         }
 
-        /* Experience */
+        /* Job */
         .job {
-            margin-bottom: 24px;
-            padding: 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
+            margin-bottom: 14px;
+            padding: 14px;
+            background: #f9fafb;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
         }
 
         .job-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-            gap: 8px;
+            margin-bottom: 8px;
         }
 
         .job-title {
-            font-size: 16px;
+            font-size: 13px;
             font-weight: 700;
-            color: var(--foreground);
+            color: #111827;
         }
 
         .job-company {
-            font-size: 14px;
-            color: var(--accent-primary);
+            font-size: 12px;
+            color: #06b6d4;
             font-weight: 600;
         }
 
         .job-date {
-            font-size: 12px;
-            color: var(--muted);
+            font-size: 10px;
+            color: #6b7280;
             white-space: nowrap;
         }
 
@@ -233,11 +203,11 @@
         }
 
         .job-description li {
-            font-size: 13px;
-            color: var(--foreground);
-            margin-bottom: 10px;
-            line-height: 1.6;
-            padding-left: 16px;
+            font-size: 11px;
+            color: #374151;
+            margin-bottom: 6px;
+            line-height: 1.5;
+            padding-left: 14px;
             position: relative;
         }
 
@@ -245,244 +215,218 @@
             content: '▸';
             position: absolute;
             left: 0;
-            color: var(--accent-secondary);
+            color: #14b8a6;
         }
 
-        .job-description li:last-child {
-            margin-bottom: 0;
-        }
-
-        /* Project highlight */
         .project-name {
-            color: var(--accent-light);
+            color: #0891b2;
             font-weight: 600;
         }
 
-        .dark .project-name {
-            color: var(--accent-light);
-        }
-
-        :root:not(.dark) .project-name {
-            color: var(--accent-dark);
-        }
-
-        /* Metrics inline */
         .metric {
-            color: var(--accent-primary);
+            color: #06b6d4;
             font-weight: 600;
         }
 
-        /* Tech stack badge */
+        /* Tech Stack */
         .tech-stack {
-            margin-top: 12px;
-            padding: 10px 12px;
-            background: rgba(6, 182, 212, 0.08);
-            border-radius: 6px;
-            font-size: 11px;
-            color: var(--muted);
-        }
-
-        .dark .tech-stack {
-            background: rgba(6, 182, 212, 0.1);
+            margin-top: 8px;
+            padding: 8px 10px;
+            background: #ecfeff;
+            border-radius: 4px;
+            font-size: 10px;
+            color: #6b7280;
         }
 
         .tech-stack-label {
-            color: var(--accent-primary);
+            color: #06b6d4;
             font-weight: 600;
         }
 
-        /* Side Projects */
+        /* Side Project */
         .side-project {
-            padding: 16px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            margin-bottom: 16px;
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
         }
 
         .side-project-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .side-project-title {
-            font-size: 15px;
+            font-size: 12px;
             font-weight: 700;
-            color: var(--foreground);
+            color: #111827;
         }
 
         .side-project-link {
-            font-size: 11px;
-            color: var(--accent-primary);
+            font-size: 10px;
+            color: #06b6d4;
             text-decoration: none;
         }
 
-        .side-project-link:hover {
-            text-decoration: underline;
-        }
-
         .side-project-desc {
-            font-size: 13px;
-            color: var(--foreground);
-            line-height: 1.6;
-            margin-bottom: 8px;
+            font-size: 11px;
+            color: #374151;
+            line-height: 1.5;
+            margin-bottom: 6px;
         }
 
         .side-project-tech {
-            font-size: 11px;
-            color: var(--muted);
+            font-size: 10px;
+            color: #6b7280;
         }
 
         /* Skills Grid */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 10px;
         }
 
         .skill-category {
-            padding: 14px;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
+            padding: 10px;
+            background: #f9fafb;
+            border-radius: 6px;
+            border: 1px solid #e5e7eb;
         }
 
         .skill-category-title {
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 700;
-            color: var(--accent-primary);
-            margin-bottom: 6px;
+            color: #06b6d4;
+            margin-bottom: 4px;
         }
 
         .skill-category-content {
-            font-size: 12px;
-            color: var(--foreground);
-            line-height: 1.5;
-        }
-
-        /* Footer */
-        .footer {
-            margin-top: 32px;
-            padding-top: 16px;
-            border-top: 1px solid var(--card-border);
-            text-align: center;
-            font-size: 11px;
-            color: var(--muted);
-        }
-
-        .footer a {
-            color: var(--accent-primary);
-            text-decoration: none;
+            font-size: 10px;
+            color: #374151;
+            line-height: 1.4;
         }
 
         /* Print Styles */
         @media print {
-            * {
+            @page {
+                margin: 0.4in;
+                size: letter;
+            }
+
+            body {
+                background: white !important;
+                padding: 0 !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
 
-            html, body {
-                background: white !important;
-                color: #000 !important;
-                font-size: 11px;
+            .terminal {
+                box-shadow: none !important;
+                border: none !important;
+                max-width: 100% !important;
             }
 
-            .container {
-                max-width: 100% !important;
-                padding: 0 !important;
-                margin: 0 !important;
+            .terminal-header {
+                background: #f3f4f6 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .dot-red { background: #ef4444 !important; }
+            .dot-yellow { background: #eab308 !important; }
+            .dot-green { background: #22c55e !important; }
+
+            .terminal-content {
+                padding: 16px !important;
             }
 
             .header {
-                margin-bottom: 16px;
-                padding-bottom: 12px;
+                margin-bottom: 14px !important;
+                padding-bottom: 12px !important;
             }
 
             .header-main h1 {
-                font-size: 22px;
+                font-size: 24px !important;
                 color: #000 !important;
             }
 
             .header-title {
-                font-size: 12px;
+                font-size: 12px !important;
                 color: #06b6d4 !important;
             }
 
             .header-contact {
-                font-size: 10px;
-                gap: 12px;
+                font-size: 10px !important;
             }
 
             .header-contact a {
                 color: #06b6d4 !important;
             }
 
-            .stats-grid {
-                gap: 4px;
-            }
-
-            .stat {
-                font-size: 10px;
-            }
-
             .stat-value {
-                font-size: 12px;
                 color: #06b6d4 !important;
+            }
+
+            .stat-label {
+                color: #4b5563 !important;
             }
 
             .section {
-                margin-bottom: 14px;
+                margin-bottom: 12px !important;
             }
 
             .section-title {
-                font-size: 11px;
-                margin-bottom: 8px;
                 color: #06b6d4 !important;
+                font-size: 11px !important;
+                margin-bottom: 8px !important;
+            }
+
+            .section-title::before {
+                color: #14b8a6 !important;
             }
 
             .summary {
-                font-size: 11px;
-                padding: 10px;
-                background: #f7f7f7 !important;
-                border: 1px solid #ddd !important;
+                background: #f9fafb !important;
                 border-left: 3px solid #06b6d4 !important;
+                color: #1f2937 !important;
+                font-size: 11px !important;
+                padding: 10px !important;
             }
 
             .job {
-                margin-bottom: 12px;
-                padding: 12px;
-                background: #f9f9f9 !important;
-                border: 1px solid #ddd !important;
+                background: #f9fafb !important;
+                border: 1px solid #e5e7eb !important;
+                margin-bottom: 10px !important;
+                padding: 10px !important;
                 page-break-inside: avoid;
             }
 
             .job-title {
-                font-size: 12px;
                 color: #000 !important;
+                font-size: 12px !important;
             }
 
             .job-company {
-                font-size: 11px;
                 color: #06b6d4 !important;
+                font-size: 11px !important;
             }
 
             .job-date {
-                font-size: 10px;
-                color: #666 !important;
+                color: #4b5563 !important;
+                font-size: 10px !important;
             }
 
             .job-description li {
-                font-size: 10px;
-                margin-bottom: 6px;
-                padding-left: 12px;
-                color: #000 !important;
+                color: #1f2937 !important;
+                font-size: 10px !important;
+                margin-bottom: 4px !important;
             }
 
             .job-description li::before {
-                color: #06b6d4 !important;
+                color: #14b8a6 !important;
             }
 
             .project-name {
@@ -494,11 +438,10 @@
             }
 
             .tech-stack {
-                margin-top: 8px;
-                padding: 6px 8px;
-                font-size: 9px;
-                background: #f0f9ff !important;
-                border: 1px solid #06b6d4 !important;
+                background: #ecfeff !important;
+                color: #4b5563 !important;
+                font-size: 9px !important;
+                padding: 6px 8px !important;
             }
 
             .tech-stack-label {
@@ -506,226 +449,179 @@
             }
 
             .side-project {
-                padding: 10px;
-                margin-bottom: 10px;
-                background: #f9f9f9 !important;
-                border: 1px solid #ddd !important;
+                background: #f9fafb !important;
+                border: 1px solid #e5e7eb !important;
+                padding: 10px !important;
                 page-break-inside: avoid;
             }
 
             .side-project-title {
-                font-size: 11px;
                 color: #000 !important;
+                font-size: 11px !important;
             }
 
             .side-project-link {
-                font-size: 9px;
                 color: #06b6d4 !important;
             }
 
             .side-project-desc {
-                font-size: 10px;
-                color: #000 !important;
+                color: #1f2937 !important;
+                font-size: 10px !important;
             }
 
             .side-project-tech {
-                font-size: 9px;
-            }
-
-            .skills-grid {
-                gap: 8px;
+                color: #4b5563 !important;
+                font-size: 9px !important;
             }
 
             .skill-category {
-                padding: 10px;
-                background: #f9f9f9 !important;
-                border: 1px solid #ddd !important;
+                background: #f9fafb !important;
+                border: 1px solid #e5e7eb !important;
+                padding: 8px !important;
             }
 
             .skill-category-title {
-                font-size: 10px;
                 color: #06b6d4 !important;
+                font-size: 9px !important;
             }
 
             .skill-category-content {
-                font-size: 9px;
-                color: #000 !important;
-            }
-
-            .footer {
-                display: none;
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 24px 20px;
-            }
-
-            .header {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                flex-direction: row;
-                flex-wrap: wrap;
-                justify-content: flex-start;
-                text-align: left;
-            }
-
-            .stat {
-                justify-content: flex-start;
-            }
-
-            .skills-grid {
-                grid-template-columns: 1fr;
+                color: #1f2937 !important;
+                font-size: 9px !important;
             }
         }
     </style>
-    <script>
-        (function() {
-            try {
-                const mode = localStorage.getItem('mode') || 'dark';
-                const theme = localStorage.getItem('colorTheme') || 'cyan';
-                if (mode === 'dark') {
-                    document.documentElement.classList.add('dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                }
-                document.documentElement.setAttribute('data-theme', theme);
-            } catch (e) {}
-        })();
-    </script>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-main">
-                <h1>David Anderson</h1>
-                <div class="header-title">Full Stack Developer & AI Product Builder</div>
-                <div class="header-contact">
-                    <span><a href="mailto:david@fullstackvibes.io">david@fullstackvibes.io</a></span>
-                    <span><a href="https://fullstackvibes.io" target="_blank">fullstackvibes.io</a></span>
-                    <span><a href="https://linkedin.com/in/d4vid4nderson" target="_blank">LinkedIn</a></span>
-                    <span><a href="https://github.com/d4vid4nderson" target="_blank">GitHub</a></span>
-                </div>
+    <div class="terminal">
+        <!-- Terminal Header -->
+        <div class="terminal-header">
+            <div class="terminal-dots">
+                <div class="dot dot-red"></div>
+                <div class="dot dot-yellow"></div>
+                <div class="dot dot-green"></div>
             </div>
-            <div class="stats-grid">
-                <div class="stat">
-                    <span class="stat-value">$400K+</span>
-                    <span class="stat-label">savings delivered</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-value">6</span>
-                    <span class="stat-label">AI apps shipped</span>
-                </div>
-                <div class="stat">
-                    <span class="stat-value">12+</span>
-                    <span class="stat-label">years experience</span>
-                </div>
-            </div>
-        </header>
+            <span class="terminal-title">david@fullstackvibes:~/resume</span>
+        </div>
 
-        <!-- Summary -->
-        <section class="section">
-            <div class="section-title">Summary</div>
-            <div class="summary">
-                Full stack developer who ships AI-powered products. Built 6 production applications processing 20,000+ documents, serving 50+ concurrent users, and delivering $400K+ in measurable business impact. I take ideas from zero to production—real tools that teams depend on daily.
-            </div>
-        </section>
-
-        <!-- Experience -->
-        <section class="section">
-            <div class="section-title">Experience</div>
-
-            <div class="job">
-                <div class="job-header">
-                    <div>
-                        <div class="job-title">Full Stack Developer & Product Owner</div>
-                        <div class="job-company">MOREgroup (formerly Huckabee)</div>
+        <!-- Terminal Content -->
+        <div class="terminal-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-main">
+                    <h1>David Anderson</h1>
+                    <div class="header-title">Full Stack Developer & AI Product Builder</div>
+                    <div class="header-contact">
+                        <span><a href="mailto:david@fullstackvibes.io">david@fullstackvibes.io</a></span>
+                        <span><a href="https://fullstackvibes.io">fullstackvibes.io</a></span>
+                        <span><a href="https://linkedin.com/in/d4vid4nderson">LinkedIn</a></span>
+                        <span><a href="https://github.com/d4vid4nderson">GitHub</a></span>
                     </div>
-                    <div class="job-date">Jul 2022 – Present</div>
                 </div>
-                <ul class="job-description">
-                    <li>Architected and shipped <span class="project-name">VUES</span>, a suite of <span class="metric">6 production AI applications</span> with <span class="metric">130+ API endpoints</span>, <span class="metric">55+ database tables</span>, serving cross-functional teams across the organization.</li>
-
-                    <li><span class="project-name">LegislationVUE</span> — Python/FastAPI backend processing <span class="metric">20,000+ legislative documents</span> via Azure OpenAI GPT-4. React frontend with real-time search across <span class="metric">6 state databases</span>. Eliminated <span class="metric">$40K+/year</span> in legal consulting costs.</li>
-
-                    <li><span class="project-name">PlanVUE</span> — Go/HTMX application managing <span class="metric">200+ active projects</span> with <span class="metric">25+ PostgreSQL tables</span>. Claude AI for scope analysis, role-based access, automated PDF generation. Achieved <span class="metric">80% efficiency gain</span> (5 days → 1 day).</li>
-
-                    <li><span class="project-name">InitiativeVUE</span> — Full-stack Go application serving <span class="metric">50+ concurrent users</span>. Real-time WebSocket updates, multi-level approval workflows, <span class="metric">30+ RESTful endpoints</span>, <span class="metric">15+ DB tables</span>. Claude AI for automated status reporting.</li>
-
-                    <li><span class="project-name">FacilityVUE</span> — Multi-tenant Go platform supporting <span class="metric">100+ school districts</span> with isolated PostgreSQL schemas. <span class="metric">40+ API endpoints</span>, real-time notifications, comprehensive audit logging. Preparing for commercial release.</li>
-
-                    <li><span class="project-name">SharePointVUE</span> — Automated testing framework scanning <span class="metric">500+ pages/run</span>. Playwright-based validation, WCAG 2.1 AA compliance checking, broken link detection. Claude AI analyzes accessibility issues, generates PDF/JSON/CSV reports.</li>
-                </ul>
-                <div class="tech-stack">
-                    <span class="tech-stack-label">Stack:</span> Go, Python, TypeScript, React, Next.js, FastAPI, HTMX, PostgreSQL, Azure SQL, Docker, Playwright | <span class="tech-stack-label">AI:</span> Claude, Azure OpenAI GPT-4, RAG pipelines
-                </div>
-            </div>
-
-            <div class="job">
-                <div class="job-header">
-                    <div>
-                        <div class="job-title">Resource Manager → Media Lab Manager → Digital Experience Designer</div>
-                        <div class="job-company">Huckabee | A MOREgroup Brand</div>
+                <div class="stats-grid">
+                    <div class="stat">
+                        <span class="stat-value">$400K+</span>
+                        <span class="stat-label">savings delivered</span>
                     </div>
-                    <div class="job-date">Jul 2013 – Jul 2022</div>
+                    <div class="stat">
+                        <span class="stat-value">6</span>
+                        <span class="stat-label">AI apps shipped</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">12+</span>
+                        <span class="stat-label">years experience</span>
+                    </div>
                 </div>
-                <ul class="job-description">
-                    <li>9 years of progressive growth building internal tools, knowledge management platforms (<span class="metric">$30K+ annual savings</span>), and media production systems. Foundation for understanding workflow pain points and translating user needs into technical solutions.</li>
-                    <li>Drove technology adoption across teams, establishing processes for digital asset management and collaborative workflows that scaled with organizational growth.</li>
-                </ul>
-            </div>
-        </section>
+            </header>
 
-        <!-- Side Projects -->
-        <section class="section">
-            <div class="section-title">Side Projects</div>
+            <!-- Summary -->
+            <section class="section">
+                <div class="section-title">Summary</div>
+                <div class="summary">
+                    Full stack developer who ships AI-powered products. Built 6 production applications processing 20,000+ documents, serving 50+ concurrent users, and delivering $400K+ in measurable business impact. I take ideas from zero to production—real tools that teams depend on daily.
+                </div>
+            </section>
 
-            <div class="side-project">
-                <div class="side-project-header">
-                    <div class="side-project-title">Tenant Wise</div>
-                    <a href="https://github.com/d4vid4nderson/Tenant-Wise" target="_blank" class="side-project-link">github.com/d4vid4nderson/Tenant-Wise</a>
-                </div>
-                <div class="side-project-desc">
-                    Next.js 14 SaaS for Texas landlords. Supabase backend with Row-Level Security for multi-tenancy. Claude AI generates Texas Property Code-compliant legal documents. Stripe subscriptions, SignWell e-signatures, automated email workflows.
-                </div>
-                <div class="side-project-tech">
-                    <span class="tech-stack-label">Stack:</span> TypeScript, Next.js, React, Tailwind CSS, Supabase, Claude AI, Stripe, SignWell API
-                </div>
-            </div>
-        </section>
+            <!-- Experience -->
+            <section class="section">
+                <div class="section-title">Experience</div>
 
-        <!-- Skills -->
-        <section class="section">
-            <div class="section-title">Technical Skills</div>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <div class="skill-category-title">Languages & Frameworks</div>
-                    <div class="skill-category-content">Go, Python, TypeScript, React, Next.js, FastAPI, HTMX, Tailwind CSS</div>
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Full Stack Developer & Product Owner</div>
+                            <div class="job-company">MOREgroup (formerly Huckabee)</div>
+                        </div>
+                        <div class="job-date">Jul 2022 – Present</div>
+                    </div>
+                    <ul class="job-description">
+                        <li>Architected <span class="project-name">VUES</span>, a suite of <span class="metric">6 production AI apps</span> with <span class="metric">130+ API endpoints</span> and <span class="metric">55+ database tables</span>.</li>
+                        <li><span class="project-name">LegislationVUE</span> — Python/FastAPI processing <span class="metric">20,000+ documents</span> via Azure OpenAI. React frontend, <span class="metric">6 state databases</span>. Saved <span class="metric">$40K+/year</span>.</li>
+                        <li><span class="project-name">PlanVUE</span> — Go/HTMX managing <span class="metric">200+ projects</span>, <span class="metric">25+ tables</span>. Claude AI for analysis. <span class="metric">80% efficiency gain</span>.</li>
+                        <li><span class="project-name">InitiativeVUE</span> — Go app serving <span class="metric">50+ users</span>. WebSocket updates, <span class="metric">30+ endpoints</span>, <span class="metric">15+ tables</span>.</li>
+                        <li><span class="project-name">FacilityVUE</span> — Multi-tenant platform for <span class="metric">100+ school districts</span>. <span class="metric">40+ endpoints</span>, audit logging.</li>
+                        <li><span class="project-name">SharePointVUE</span> — Testing framework scanning <span class="metric">500+ pages/run</span>. WCAG 2.1 AA compliance.</li>
+                    </ul>
+                    <div class="tech-stack">
+                        <span class="tech-stack-label">Stack:</span> Go, Python, TypeScript, React, Next.js, FastAPI, HTMX, PostgreSQL, Docker, Playwright | <span class="tech-stack-label">AI:</span> Claude, Azure OpenAI GPT-4, RAG
+                    </div>
                 </div>
-                <div class="skill-category">
-                    <div class="skill-category-title">AI & LLMs</div>
-                    <div class="skill-category-content">Claude AI, Azure OpenAI GPT-4, prompt engineering, RAG pipelines, document analysis</div>
-                </div>
-                <div class="skill-category">
-                    <div class="skill-category-title">Data & Infrastructure</div>
-                    <div class="skill-category-content">PostgreSQL, Azure SQL, Supabase, Redis, Docker, REST APIs, WebSockets</div>
-                </div>
-                <div class="skill-category">
-                    <div class="skill-category-title">Testing & DevOps</div>
-                    <div class="skill-category-content">Playwright, CI/CD pipelines, automated testing, accessibility compliance (WCAG)</div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <a href="https://fullstackvibes.io" target="_blank">fullstackvibes.io</a> · Built with Next.js & Tailwind CSS
-        </footer>
+                <div class="job">
+                    <div class="job-header">
+                        <div>
+                            <div class="job-title">Resource Manager → Media Lab Manager → Digital Experience Designer</div>
+                            <div class="job-company">Huckabee | A MOREgroup Brand</div>
+                        </div>
+                        <div class="job-date">Jul 2013 – Jul 2022</div>
+                    </div>
+                    <ul class="job-description">
+                        <li>9 years building internal tools and knowledge platforms (<span class="metric">$30K+ annual savings</span>). Foundation for translating user needs into technical solutions.</li>
+                        <li>Drove technology adoption, establishing digital asset management and collaborative workflows at scale.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Side Projects -->
+            <section class="section">
+                <div class="section-title">Side Projects</div>
+                <div class="side-project">
+                    <div class="side-project-header">
+                        <div class="side-project-title">Tenant Wise</div>
+                        <a href="https://github.com/d4vid4nderson/Tenant-Wise" class="side-project-link">github.com/d4vid4nderson/Tenant-Wise</a>
+                    </div>
+                    <div class="side-project-desc">
+                        Next.js 14 SaaS for Texas landlords. Supabase with Row-Level Security. Claude AI generates legal documents. Stripe subscriptions, SignWell e-signatures.
+                    </div>
+                    <div class="side-project-tech">
+                        <span class="tech-stack-label">Stack:</span> TypeScript, Next.js, React, Tailwind, Supabase, Claude AI, Stripe
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills -->
+            <section class="section">
+                <div class="section-title">Technical Skills</div>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <div class="skill-category-title">Languages & Frameworks</div>
+                        <div class="skill-category-content">Go, Python, TypeScript, React, Next.js, FastAPI, HTMX, Tailwind</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-category-title">AI & LLMs</div>
+                        <div class="skill-category-content">Claude AI, Azure OpenAI GPT-4, prompt engineering, RAG pipelines</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-category-title">Data & Infrastructure</div>
+                        <div class="skill-category-content">PostgreSQL, Azure SQL, Supabase, Redis, Docker, REST APIs</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-category-title">Testing & DevOps</div>
+                        <div class="skill-category-content">Playwright, CI/CD, automated testing, WCAG accessibility</div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
 </body>
 </html>
