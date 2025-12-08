@@ -61,19 +61,19 @@ export function ProjectsTerminal({ children }: ProjectsTerminalProps) {
             <div className="flex gap-2">
               <button
                 onClick={() => setProjectsState('closed')}
-                className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors cursor-pointer"
+                className="w-6 h-6 sm:w-3 sm:h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-1"
                 aria-label="Close terminal"
                 title="Close terminal"
               />
               <button
                 onClick={() => setProjectsState('minimized')}
-                className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors cursor-pointer"
+                className="w-6 h-6 sm:w-3 sm:h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1"
                 aria-label="Minimize terminal"
                 title="Minimize terminal"
               />
               <button
                 onClick={() => setProjectsState('open')}
-                className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors cursor-pointer"
+                className="w-6 h-6 sm:w-3 sm:h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-1"
                 aria-label="Maximize terminal"
                 title="Maximize terminal"
               />

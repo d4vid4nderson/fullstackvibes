@@ -824,7 +824,7 @@ export function Hero() {
 
       <div className="relative max-w-7xl mx-auto w-full z-10">
         {/* Full Stack Vibes with hidden navigation easter egg - desktop only */}
-        <div className="absolute -top-12 left-0 group/nav cursor-pointer hidden md:block">
+        <nav className="absolute -top-12 left-0 group/nav cursor-pointer hidden md:block" aria-label="Main navigation">
           <div className="flex items-center text-accent dark:text-accent font-mono text-lg">
             <div className="flex items-center relative gap-0">
               {/* Opening bracket stays in place */}
@@ -837,19 +837,19 @@ export function Hero() {
                   isNavExpanded ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
                 } group-hover/nav:opacity-100 group-hover/nav:pointer-events-auto`}
               >
-                <a href="/" className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all">
+                <a href="/" className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all focus:outline-none focus:text-accent">
                   Home
                 </a>
-                <a href="#career" onClick={() => { if (careerState === 'closed') restoreTerminal('career'); }} className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all">
+                <a href="#career" onClick={() => { if (careerState === 'closed') restoreTerminal('career'); }} className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all focus:outline-none focus:text-accent">
                   Career
                 </a>
-                <a href="#projects" onClick={() => { if (projectsState === 'closed') restoreTerminal('projects'); }} className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all">
+                <a href="#projects" onClick={() => { if (projectsState === 'closed') restoreTerminal('projects'); }} className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all focus:outline-none focus:text-accent">
                   Projects
                 </a>
-                <button onClick={() => setShowResumeModal(true)} className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all">
+                <button onClick={() => setShowResumeModal(true)} className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all focus:outline-none focus:text-accent">
                   Resume
                 </button>
-                <a href="#contact" onClick={() => { if (contactState === 'closed') restoreTerminal('contact'); }} className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all">
+                <a href="#contact" onClick={() => { if (contactState === 'closed') restoreTerminal('contact'); }} className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all focus:outline-none focus:text-accent">
                   Contact
                 </a>
                 <div className="relative group/themes px-3">
@@ -958,30 +958,37 @@ export function Hero() {
               </div>
             </div>
           </div>
-        </div>
+        </nav>
 
         {/* Mobile site title with tap-to-reveal nav */}
-        <div className="absolute -top-12 left-0 md:hidden">
+        <nav className="absolute -top-12 left-0 md:hidden" aria-label="Mobile navigation">
           <button
             onClick={() => setIsNavExpanded(!isNavExpanded)}
             className="text-accent dark:text-accent font-mono text-base flex items-center"
+            aria-expanded={isNavExpanded}
+            aria-controls="mobile-nav-links"
           >
             <span>&lt;</span>
             {/* Nav links - expand from left */}
             <div
+              id="mobile-nav-links"
               className={`flex items-center gap-1.5 overflow-hidden transition-all duration-500 ease-out ${
-                isNavExpanded ? 'w-[210px] opacity-100 px-2' : 'w-0 opacity-0 px-0'
+                isNavExpanded ? 'w-[280px] opacity-100 px-2' : 'w-0 opacity-0 px-0'
               }`}
             >
-              <a href="#career" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); if (careerState === 'closed') restoreTerminal('career'); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap">
+              <a href="#career" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); if (careerState === 'closed') restoreTerminal('career'); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap focus:outline-none focus:text-accent">
                 Career
               </a>
               <span className="text-gray-500 text-xs">|</span>
-              <a href="#projects" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); if (projectsState === 'closed') restoreTerminal('projects'); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap">
+              <a href="#projects" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); if (projectsState === 'closed') restoreTerminal('projects'); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap focus:outline-none focus:text-accent">
                 Projects
               </a>
               <span className="text-gray-500 text-xs">|</span>
-              <a href="#contact" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); if (contactState === 'closed') restoreTerminal('contact'); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap">
+              <button onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); setShowResumeModal(true); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap focus:outline-none focus:text-accent">
+                Resume
+              </button>
+              <span className="text-gray-500 text-xs">|</span>
+              <a href="#contact" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); if (contactState === 'closed') restoreTerminal('contact'); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap focus:outline-none focus:text-accent">
                 Contact
               </a>
             </div>
@@ -991,7 +998,7 @@ export function Hero() {
               {isNavExpanded ? 'FSV' : 'FullStackVibes'}
             </span>
           </button>
-        </div>
+        </nav>
 
 
         <div className="flex flex-col items-center gap-8">
@@ -1012,9 +1019,9 @@ export function Hero() {
 
                 {/* Terminal Content */}
                 <div className="p-5 sm:p-8 font-mono text-sm sm:text-base leading-relaxed relative">
-                  {/* Photo - upper right, hidden on mobile and tablet */}
-                  <div className="absolute top-8 right-8 hidden lg:block">
-                    <div className="relative rounded-full p-[3px] bg-gradient-accent-to-r w-[160px] h-[160px]">
+                  {/* Photo - responsive: inline on mobile, absolute on desktop */}
+                  <div className="lg:absolute lg:top-8 lg:right-8 flex justify-center lg:justify-end mb-4 lg:mb-0">
+                    <div className="relative rounded-full p-[3px] bg-gradient-accent-to-r w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] lg:w-[160px] lg:h-[160px]">
                       <div className="relative rounded-full overflow-hidden w-full h-full bg-white dark:bg-[#1a1a1a]">
                         <Image
                           src="/david-headshot-square.png"
@@ -1029,7 +1036,7 @@ export function Hero() {
                   </div>
 
                   {/* whoami - command small, name large white, role colored */}
-                  <div className="lg:pr-44 mb-2">
+                  <div className="lg:pr-44 mb-4 text-center lg:text-left">
                     <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
                       <span className="text-accent">$</span> whoami{' '}
                       <span className="text-accent">--profile</span>
@@ -1040,6 +1047,50 @@ export function Hero() {
                     <p className="text-base sm:text-lg font-medium gradient-text">
                       Digital Experience Architect / Product Owner
                     </p>
+                  </div>
+
+                  {/* Key Metrics - recruitment hook */}
+                  <div className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 mb-4 text-xs sm:text-sm">
+                    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20">
+                      <span className="text-accent font-bold">$400K+</span>
+                      <span className="text-gray-600 dark:text-gray-400">saved</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20">
+                      <span className="text-accent font-bold">6</span>
+                      <span className="text-gray-600 dark:text-gray-400">AI apps shipped</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20">
+                      <span className="text-accent font-bold">12+</span>
+                      <span className="text-gray-600 dark:text-gray-400">years exp</span>
+                    </div>
+                  </div>
+
+                  {/* CTA Buttons - above the fold */}
+                  <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-5">
+                    <a
+                      href="#projects"
+                      onClick={() => { if (projectsState === 'closed') restoreTerminal('projects'); }}
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-accent hover:bg-accent/90 text-white font-medium rounded-lg transition-all hover:shadow-lg hover:shadow-accent/25"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
+                      View Projects
+                    </a>
+                    <button
+                      onClick={() => setShowResumeModal(true)}
+                      className="inline-flex items-center gap-2 px-4 py-2 border border-accent text-accent hover:bg-accent/10 font-medium rounded-lg transition-all"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                      View Resume
+                    </button>
+                    <a
+                      href="https://linkedin.com/in/d4vid4nderson"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-white/20 text-gray-700 dark:text-gray-300 hover:border-accent hover:text-accent font-medium rounded-lg transition-all"
+                    >
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                      LinkedIn
+                    </a>
                   </div>
 
                   {/* Commands: bio, stack, ai - compact display */}
@@ -1076,7 +1127,7 @@ export function Hero() {
                       isHistoryFading
                         ? 'opacity-0 max-h-0 mb-0'
                         : commandHistory.length > 0
-                          ? 'opacity-100 max-h-48 sm:max-h-32 mb-3'
+                          ? 'opacity-100 max-h-32 sm:max-h-48 mb-3'
                           : 'max-h-0 mb-0'
                     }`}
                     onClick={focusInput}
