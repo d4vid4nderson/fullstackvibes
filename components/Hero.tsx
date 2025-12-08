@@ -180,6 +180,20 @@ export function Hero() {
         ];
         return { message: contactMessages[Math.floor(Math.random() * contactMessages.length)], action: 'scrollContact' };
 
+      case '/career':
+      case 'career':
+      case 'experience':
+      case 'history':
+      case 'timeline':
+        const careerMessages = [
+          'git log --career | The full commit history of my professional journey!',
+          'The story of how I got here... Spoiler: It involves a lot of code!',
+          'From design ops to AI applications... Let me show you the path!',
+          '12+ years of evolution, documented in one timeline!',
+          'The archives are comprehensive and totally secure... Let me show you!'
+        ];
+        return { message: careerMessages[Math.floor(Math.random() * careerMessages.length)], action: 'scrollCareer' };
+
       case '/resume':
       case '/cv':
       case 'resume':
@@ -272,6 +286,9 @@ export function Hero() {
           return;
         case 'scrollContact':
           document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+          return;
+        case 'scrollCareer':
+          document.getElementById('career')?.scrollIntoView({ behavior: 'smooth' });
           return;
         case 'openResume':
           setShowResumeModal(true);
@@ -406,6 +423,7 @@ export function Hero() {
           '  --ai       - AI & ML tools',
           '',
           '  /projects  - View my projects',
+          '  /career    - View my career timeline',
           '  /contact   - Get in touch',
           '  /resume    - Download my resume',
           '  /linkedin  - Visit my LinkedIn',
@@ -1064,13 +1082,15 @@ export function Hero() {
                   {/* Commands */}
                   <div className="text-gray-500 dark:text-gray-400 text-xs">
                     <div className="hidden sm:block">
-                      Commands: <button onClick={() => handleCommand('help', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">help</button> | <button onClick={() => handleCommand('projects', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">projects</button> | <button onClick={() => handleCommand('contact', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">contact</button> | <button onClick={() => handleCommand('resume', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">resume</button> | <button onClick={() => handleCommand('github', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">github</button> | <button onClick={() => handleCommand('linkedin', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">linkedin</button> | <button onClick={() => handleCommand('ai', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">ai</button> | <button onClick={() => handleCommand('theme', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">theme</button>
+                      Commands: <button onClick={() => handleCommand('help', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">help</button> | <button onClick={() => handleCommand('projects', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">projects</button> | <button onClick={() => handleCommand('career', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">career</button> | <button onClick={() => handleCommand('contact', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">contact</button> | <button onClick={() => handleCommand('resume', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">resume</button> | <button onClick={() => handleCommand('github', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">github</button> | <button onClick={() => handleCommand('linkedin', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">linkedin</button> | <button onClick={() => handleCommand('ai', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">ai</button> | <button onClick={() => handleCommand('theme', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">theme</button>
                     </div>
                     <div className="sm:hidden flex flex-wrap gap-x-2 gap-y-1">
                       <span>Commands:</span>
                       <button onClick={() => handleCommand('help', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">help</button>
                       <span>|</span>
                       <button onClick={() => handleCommand('projects', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">projects</button>
+                      <span>|</span>
+                      <button onClick={() => handleCommand('career', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">career</button>
                       <span>|</span>
                       <button onClick={() => handleCommand('contact', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">contact</button>
                       <span>|</span>
