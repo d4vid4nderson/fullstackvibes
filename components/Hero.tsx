@@ -1223,58 +1223,21 @@ export function Hero() {
                     </a>
                   </div>
 
-                  {/* Tech Stack - Visual Icons */}
-                  <div className="mt-4 space-y-3">
-                    {/* Languages & Frameworks */}
+                  {/* Tech Stack - Text */}
+                  <div className="mt-4 space-y-2 text-sm">
                     <div>
-                      <div className="text-xs text-gray-500 dark:text-gray-500 mb-2 flex items-center gap-2">
-                        <span className="text-accent">$</span> --stack
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {[
-                          { name: 'Go', icon: '/go.svg' },
-                          { name: 'Python', icon: '/python-color.svg' },
-                          { name: 'TypeScript', icon: '/typescript-logo.svg' },
-                          { name: 'React', icon: '/react-color.svg' },
-                          { name: 'Next.js', icon: '/nextjs.svg' },
-                          { name: 'PostgreSQL', icon: '/postgresql.svg' },
-                          { name: 'Docker', icon: '/docker-color.svg' },
-                        ].map((tech) => (
-                          <div
-                            key={tech.name}
-                            className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-xs"
-                          >
-                            <img src={tech.icon} alt={tech.name} className="w-4 h-4" />
-                            <span className="text-gray-600 dark:text-gray-400">{tech.name}</span>
-                          </div>
-                        ))}
-                      </div>
+                      <span className="text-accent">$</span>
+                      <span className="text-gray-500 dark:text-gray-500"> --stack</span>
                     </div>
-
-                    {/* AI/ML */}
-                    <div>
-                      <div className="text-xs text-gray-500 dark:text-gray-500 mb-2 flex items-center gap-2">
-                        <span className="text-accent">$</span> --ai
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {[
-                          { name: 'Claude', icon: '/Anthropic.svg' },
-                          { name: 'GPT-4', icon: '/openai.svg' },
-                          { name: 'Azure AI', icon: '/azure-color.svg' },
-                        ].map((tech) => (
-                          <div
-                            key={tech.name}
-                            className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-xs"
-                          >
-                            <img src={tech.icon} alt={tech.name} className="w-4 h-4" />
-                            <span className="text-gray-600 dark:text-gray-400">{tech.name}</span>
-                          </div>
-                        ))}
-                        <div className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-xs">
-                          <span className="text-accent">⚡</span>
-                          <span className="text-gray-600 dark:text-gray-400">RAG Pipelines</span>
-                        </div>
-                      </div>
+                    <div className="text-gray-700 dark:text-gray-300 pl-4">
+                      → go, python, typescript, react, next.js, fastapi, postgresql
+                    </div>
+                    <div className="mt-3">
+                      <span className="text-accent">$</span>
+                      <span className="text-gray-500 dark:text-gray-500"> --ai</span>
+                    </div>
+                    <div className="text-gray-700 dark:text-gray-300 pl-4">
+                      → claude, gpt-4, azure-openai, rag-pipelines
                     </div>
                   </div>
 
