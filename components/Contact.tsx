@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -10,18 +10,40 @@ export function Contact() {
   });
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [isMac, setIsMac] = useState(true);
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
 
+  useEffect(() => {
+    setIsMac(navigator.platform.toUpperCase().indexOf('MAC') >= 0);
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('loading');
-    setCommandHistory(prev => [...prev, `$ send-message --to david`]);
-    setCommandHistory(prev => [...prev, `  --from "${formData.name}" <${formData.email}>`]);
-    setCommandHistory(prev => [...prev, `  --body "${formData.message.substring(0, 50)}${formData.message.length > 50 ? '...' : ''}"`]);
-    setCommandHistory(prev => [...prev, '']);
-    setCommandHistory(prev => [...prev, 'Sending message...']);
+    setCommandHistory([]);
+
+    // Simulate terminal command sequence
+    const addLine = (line: string, delay: number) => {
+      return new Promise<void>(resolve => {
+        setTimeout(() => {
+          setCommandHistory(prev => [...prev, line]);
+          resolve();
+        }, delay);
+      });
+    };
+
+    // Build command sequence
+    await addLine(`$ send-message \\`, 100);
+    await addLine(`    --to "david@fullstackvibes.io" \\`, 150);
+    await addLine(`    --from "${formData.name}" \\`, 150);
+    await addLine(`    --email "${formData.email}" \\`, 150);
+    await addLine(`    --body "${formData.message.substring(0, 40)}${formData.message.length > 40 ? '...' : ''}"`, 150);
+    await addLine('', 200);
+    await addLine('Connecting to mail server...', 300);
+    await addLine('Authenticating...', 400);
+    await addLine('Composing message...', 300);
 
     try {
       const response = await fetch('/api/contact', {
@@ -33,18 +55,25 @@ export function Contact() {
       });
 
       if (response.ok) {
+        await addLine('Sending...', 200);
+        await addLine('', 300);
         setStatus('success');
-        setCommandHistory(prev => [...prev, '✓ Message sent successfully!']);
-        setCommandHistory(prev => [...prev, '  Response: "Thanks! I\'ll get back to you soon."']);
+        setCommandHistory(prev => [...prev, '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━']);
+        setCommandHistory(prev => [...prev, '✓ Message delivered successfully!']);
+        setCommandHistory(prev => [...prev, '']);
+        setCommandHistory(prev => [...prev, '  Thanks for reaching out! I\'ll review your']);
+        setCommandHistory(prev => [...prev, '  message and get back to you soon.']);
+        setCommandHistory(prev => [...prev, '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━']);
         setFormData({ name: '', email: '', message: '' });
         setTimeout(() => {
           setStatus('idle');
           setCommandHistory([]);
-        }, 5000);
+        }, 8000);
       } else {
         setStatus('error');
-        setCommandHistory(prev => [...prev, '✗ Error: Failed to send message']);
-        setCommandHistory(prev => [...prev, '  Please try again later.']);
+        setCommandHistory(prev => [...prev, '']);
+        setCommandHistory(prev => [...prev, '✗ Error: Failed to deliver message']);
+        setCommandHistory(prev => [...prev, '  Server returned an error. Please try again.']);
         setTimeout(() => {
           setStatus('idle');
           setCommandHistory([]);
@@ -52,8 +81,9 @@ export function Contact() {
       }
     } catch {
       setStatus('error');
-      setCommandHistory(prev => [...prev, '✗ Error: Network error']);
-      setCommandHistory(prev => [...prev, '  Please check your connection.']);
+      setCommandHistory(prev => [...prev, '']);
+      setCommandHistory(prev => [...prev, '✗ Error: Connection failed']);
+      setCommandHistory(prev => [...prev, '  Please check your network and try again.']);
       setTimeout(() => {
         setStatus('idle');
         setCommandHistory([]);
@@ -68,6 +98,19 @@ export function Contact() {
       ...prev,
       [e.target.name]: e.target.value,
     }));
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    // Submit on Cmd+Enter (Mac) or Ctrl+Enter (Windows/Linux)
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      if (status !== 'loading' && status !== 'success') {
+        const form = e.currentTarget.closest('form');
+        if (form) {
+          form.requestSubmit();
+        }
+      }
+    }
   };
 
   return (
@@ -163,6 +206,7 @@ export function Contact() {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
+                    onKeyDown={handleKeyDown}
                     required
                     disabled={status === 'loading' || status === 'success'}
                     rows={4}
@@ -174,12 +218,16 @@ export function Contact() {
 
               {/* Command history / Status output */}
               {commandHistory.length > 0 && (
-                <div className="mt-4 p-4 bg-gray-50 dark:bg-black/30 rounded-lg border border-gray-200 dark:border-white/10">
+                <div className="mt-4 p-4 bg-gray-50 dark:bg-black/30 rounded-lg border border-gray-200 dark:border-white/10 font-mono text-sm">
                   {commandHistory.map((line, index) => (
-                    <div key={index} className={`text-sm ${
-                      line.startsWith('✓') ? 'text-green-600 dark:text-green-400' :
-                      line.startsWith('✗') ? 'text-red-600 dark:text-red-400' :
-                      line.startsWith('Sending') ? 'text-accent animate-pulse' :
+                    <div key={index} className={`${
+                      line.startsWith('✓') ? 'text-green-600 dark:text-green-400 font-semibold' :
+                      line.startsWith('✗') ? 'text-red-600 dark:text-red-400 font-semibold' :
+                      line.startsWith('━') ? 'text-accent/50' :
+                      line.startsWith('$') ? 'text-accent' :
+                      line.startsWith('Connecting') || line.startsWith('Authenticating') || line.startsWith('Composing') || line.startsWith('Sending') ? 'text-yellow-600 dark:text-yellow-400' :
+                      line.startsWith('  Thanks') || line.startsWith('  message') ? 'text-gray-600 dark:text-gray-300' :
+                      line.startsWith('    --') ? 'text-gray-500 dark:text-gray-500' :
                       'text-gray-600 dark:text-gray-400'
                     }`}>
                       {line || '\u00A0'}
@@ -191,25 +239,23 @@ export function Contact() {
               {/* Divider */}
               <div className="border-t border-gray-200 dark:border-white/10 my-6"></div>
 
-              {/* Submit button styled as command */}
+              {/* Submit instruction styled as terminal prompt */}
               <div className="flex items-center gap-2">
                 <span className="text-accent select-none">&gt;</span>
-                <button
-                  type="submit"
-                  disabled={status === 'loading' || status === 'success'}
-                  className="flex items-center gap-2 px-6 py-3 bg-accent hover:bg-accent-dark text-white font-mono text-sm rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 disabled:hover:scale-100"
-                >
-                  {status === 'loading' ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      <span>sending...</span>
-                    </>
-                  ) : status === 'success' ? (
-                    <span>message sent!</span>
-                  ) : (
-                    <span>send-message --execute</span>
-                  )}
-                </button>
+                {status === 'loading' ? (
+                  <span className="flex items-center gap-2 text-accent animate-pulse">
+                    <span className="w-2 h-2 bg-accent rounded-full animate-ping"></span>
+                    sending message...
+                  </span>
+                ) : status === 'success' ? (
+                  <span className="text-green-600 dark:text-green-400">
+                    ✓ message sent successfully
+                  </span>
+                ) : (
+                  <span className="text-gray-500 dark:text-gray-400 text-sm">
+                    press <kbd className="px-1.5 py-0.5 mx-1 rounded bg-gray-200 dark:bg-white/10 text-accent font-semibold">{isMac ? '⌘' : 'Ctrl'}</kbd> + <kbd className="px-1.5 py-0.5 mx-1 rounded bg-gray-200 dark:bg-white/10 text-accent font-semibold">Enter</kbd> to send
+                  </span>
+                )}
               </div>
             </form>
 
