@@ -36,9 +36,9 @@ const THEME_OPTIONS = [
   },
   {
     key: 'blue',
-    name: 'Hyperdrive',
-    description: 'The Force awakens - Jedi blue clash',
-    tagline: 'May the Force be with you!'
+    name: 'Saber Battle',
+    description: 'Blue vs Red - the eternal clash',
+    tagline: 'Choose your side!'
   },
 ];
 
