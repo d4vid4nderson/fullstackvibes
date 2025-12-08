@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { useTerminal } from './TerminalContext';
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -14,6 +15,7 @@ export function Contact() {
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
+  const { contactState, setContactState } = useTerminal();
 
   useEffect(() => {
     setIsMac(navigator.platform.toUpperCase().indexOf('MAC') >= 0);
@@ -113,6 +115,18 @@ export function Contact() {
     }
   };
 
+  if (contactState === 'closed') {
+    return (
+      <section id="contact" className="relative py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+        <div className="relative max-w-7xl mx-auto z-10">
+          <div className="bg-gray-100 dark:bg-[#2a2a2a] rounded-lg border border-gray-300 dark:border-white/10 px-4 py-3 font-mono text-sm text-gray-500 dark:text-gray-400 text-center transition-colors duration-300">
+            <span className="text-accent">~/contact</span> terminal closed. Type <code className="px-1.5 py-0.5 rounded bg-white dark:bg-white/10 text-accent">contact</code> in the main terminal to restore.
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section id="contact" className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       {/* Background decoration */}
@@ -127,14 +141,32 @@ export function Contact() {
           {/* Terminal Header */}
           <div className="bg-gray-100 dark:bg-[#2a2a2a] px-4 py-2 flex items-center gap-2 border-b border-gray-300 dark:border-white/10 transition-colors duration-300">
             <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-500"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              <button
+                onClick={() => setContactState('closed')}
+                className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors cursor-pointer"
+                aria-label="Close terminal"
+                title="Close terminal"
+              />
+              <button
+                onClick={() => setContactState('minimized')}
+                className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors cursor-pointer"
+                aria-label="Minimize terminal"
+                title="Minimize terminal"
+              />
+              <button
+                onClick={() => setContactState('open')}
+                className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors cursor-pointer"
+                aria-label="Maximize terminal"
+                title="Maximize terminal"
+              />
             </div>
             <span className="text-xs text-gray-500 dark:text-gray-400 ml-2 font-mono">david@fullstackvibes:~/contact</span>
           </div>
 
-          {/* Terminal Content */}
+          {/* Terminal Content - Hidden when minimized */}
+          <div className={`transition-all duration-300 overflow-hidden ${
+            contactState === 'minimized' ? 'max-h-0' : 'max-h-[5000px]'
+          }`}>
           <div className="p-5 sm:p-8 font-mono">
             {/* Command header */}
             <div className="mb-6">
@@ -265,6 +297,7 @@ export function Contact() {
                 <span className="text-accent">tip:</span> fill out the form and press <kbd className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-white/5 text-accent font-semibold">{isMac ? '⌘' : 'Ctrl'}</kbd> + <kbd className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-white/5 text-accent font-semibold">Enter</kbd> to send
               </p>
             </div>
+          </div>
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ import { FiMapPin, FiSun, FiMoon } from 'react-icons/fi';
 import { useTheme } from './ThemeProvider';
 import { ResumeModal } from './ResumeModal';
 import { useChatContext } from './ChatContext';
+import { useTerminal } from './TerminalContext';
 
 // Fun theme names with epic movie/book references
 const THEME_OPTIONS = [
@@ -45,6 +46,7 @@ const THEME_OPTIONS = [
 export function Hero() {
   const { mode, setMode, setColorTheme } = useTheme();
   const { setIsChatOpen } = useChatContext();
+  const { careerState, projectsState, contactState, restoreTerminal } = useTerminal();
   const [command, setCommand] = useState('');
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [isNavExpanded, setIsNavExpanded] = useState(false);
@@ -282,13 +284,34 @@ export function Hero() {
     if (action) {
       switch (action) {
         case 'scrollProjects':
-          document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+          // Restore terminal if closed, then scroll
+          if (projectsState === 'closed') {
+            restoreTerminal('projects');
+            setCommandHistory(prev => [...prev, '✓ ~/projects terminal restored']);
+          }
+          setTimeout(() => {
+            document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
           return;
         case 'scrollCareer':
-          document.getElementById('career')?.scrollIntoView({ behavior: 'smooth' });
+          // Restore terminal if closed, then scroll
+          if (careerState === 'closed') {
+            restoreTerminal('career');
+            setCommandHistory(prev => [...prev, '✓ ~/career terminal restored']);
+          }
+          setTimeout(() => {
+            document.getElementById('career')?.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
           return;
         case 'scrollContact':
-          document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+          // Restore terminal if closed, then scroll
+          if (contactState === 'closed') {
+            restoreTerminal('contact');
+            setCommandHistory(prev => [...prev, '✓ ~/contact terminal restored']);
+          }
+          setTimeout(() => {
+            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
           return;
         case 'openResume':
           setShowResumeModal(true);

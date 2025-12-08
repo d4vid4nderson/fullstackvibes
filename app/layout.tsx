@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
 import { AIChat } from "@/components/AIChat";
 import { ChatProvider } from "@/components/ChatContext";
+import { TerminalProvider } from "@/components/TerminalContext";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { StructuredData } from "@/components/StructuredData";
@@ -155,12 +156,14 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <ChatProvider>
-            <div>
-              {children}
-              <Footer />
-              <ScrollToTop />
-              <AIChat />
-            </div>
+            <TerminalProvider>
+              <div>
+                {children}
+                <Footer />
+                <ScrollToTop />
+                <AIChat />
+              </div>
+            </TerminalProvider>
           </ChatProvider>
         </ThemeProvider>
         <SpeedInsights />

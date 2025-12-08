@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { FiChevronDown, FiChevronUp, FiGitCommit, FiMapPin, FiBriefcase } from 'react-icons/fi';
+import { useTerminal } from './TerminalContext';
 
 interface CareerEntry {
   id: string;
@@ -251,12 +252,25 @@ function TimelineCard({ entry, isExpanded, onToggle }: TimelineCardProps) {
 export function CareerTimeline() {
   // Track which entry is expanded - default to first (current role)
   const [expandedId, setExpandedId] = useState<string>(careerData[0].id);
+  const { careerState, setCareerState } = useTerminal();
 
   const handleToggle = (id: string) => {
     // If clicking the already expanded one, keep it expanded (or toggle if you prefer)
     // For accordion behavior where one is always open:
     setExpandedId(id);
   };
+
+  if (careerState === 'closed') {
+    return (
+      <section id="career" className="relative py-8 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+        <div className="relative max-w-7xl mx-auto z-10">
+          <div className="bg-gray-100 dark:bg-[#2a2a2a] rounded-lg border border-gray-300 dark:border-white/10 px-4 py-3 font-mono text-sm text-gray-500 dark:text-gray-400 text-center transition-colors duration-300">
+            <span className="text-accent">~/career</span> terminal closed. Type <code className="px-1.5 py-0.5 rounded bg-white dark:bg-white/10 text-accent">career</code> in the main terminal to restore.
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="career" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -272,14 +286,32 @@ export function CareerTimeline() {
           {/* Terminal Header */}
           <div className="bg-gray-100 dark:bg-[#2a2a2a] px-4 py-2 flex items-center gap-2 border-b border-gray-300 dark:border-white/10 transition-colors duration-300">
             <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-500"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              <button
+                onClick={() => setCareerState('closed')}
+                className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors cursor-pointer"
+                aria-label="Close terminal"
+                title="Close terminal"
+              />
+              <button
+                onClick={() => setCareerState('minimized')}
+                className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors cursor-pointer"
+                aria-label="Minimize terminal"
+                title="Minimize terminal"
+              />
+              <button
+                onClick={() => setCareerState('open')}
+                className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors cursor-pointer"
+                aria-label="Maximize terminal"
+                title="Maximize terminal"
+              />
             </div>
             <span className="text-xs text-gray-500 dark:text-gray-400 ml-2 font-mono">david@fullstackvibes:~/career</span>
           </div>
 
-          {/* Terminal Content */}
+          {/* Terminal Content - Hidden when minimized */}
+          <div className={`transition-all duration-300 overflow-hidden ${
+            careerState === 'minimized' ? 'max-h-0' : 'max-h-[5000px]'
+          }`}>
           <div className="p-5 sm:p-8 font-mono">
             {/* Command header */}
             <div className="mb-6 sm:mb-8">
@@ -310,6 +342,7 @@ export function CareerTimeline() {
                 <span className="text-accent">tip:</span> click on a role to expand and view achievements &amp; tech stack
               </p>
             </div>
+          </div>
           </div>
         </div>
       </div>
