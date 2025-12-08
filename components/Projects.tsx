@@ -1,5 +1,5 @@
 import { getDeveloperProjects, getProductOwnerProjects } from '@/lib/github';
-import { ProjectCard } from './ProjectCard';
+import { ProjectTimeline } from './ProjectTimeline';
 import { FiCode, FiUsers } from 'react-icons/fi';
 
 export async function Projects() {
@@ -32,8 +32,8 @@ export async function Projects() {
             {/* Command header */}
             <div className="mb-8">
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
-                <span className="text-accent">$</span> ls -la{' '}
-                <span className="gradient-text">./projects</span>
+                <span className="text-accent">$</span> git log{' '}
+                <span className="gradient-text">--projects</span>
               </h2>
               <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
                 A collection of my latest work spanning development and product ownership.
@@ -42,7 +42,7 @@ export async function Projects() {
 
             {/* Developer Projects Section */}
             {developerProjects.length > 0 && (
-              <div className="mb-12">
+              <div className="mb-10">
                 {/* Developer Section Header */}
                 <div className="mb-6">
                   <div className="flex items-center gap-2 mb-2">
@@ -61,12 +61,8 @@ export async function Projects() {
                   </p>
                 </div>
 
-                {/* Developer Projects Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {developerProjects.map((repo) => (
-                    <ProjectCard key={repo.id} repo={repo} />
-                  ))}
-                </div>
+                {/* Developer Projects Timeline */}
+                <ProjectTimeline projects={developerProjects} />
               </div>
             )}
 
@@ -91,19 +87,15 @@ export async function Projects() {
                   </p>
                 </div>
 
-                {/* Product Owner Projects Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {productOwnerProjects.map((repo) => (
-                    <ProjectCard key={repo.id} repo={repo} />
-                  ))}
-                </div>
+                {/* Product Owner Projects Timeline */}
+                <ProjectTimeline projects={productOwnerProjects} />
               </div>
             )}
 
             {/* Footer note */}
             <div className="mt-8 pt-6 border-t border-gray-200 dark:border-white/10">
               <p className="text-xs text-gray-500 dark:text-gray-500 text-center">
-                <span className="text-accent">tip:</span> click on a project card to view details
+                <span className="text-accent">tip:</span> click on a project to expand, then view details
               </p>
             </div>
           </div>
