@@ -3,20 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David Anderson - Digital Experience Architect & Product Owner</title>
+    <title>David Anderson - Full Stack Developer & AI Product Builder</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Theme System - Matches portfolio exactly */
+        /* Theme System */
         :root {
-            --background: #e2e8f0;
+            --background: #f8fafc;
             --foreground: #1f2937;
+            --card-bg: #ffffff;
+            --card-border: #e5e7eb;
+            --muted: #6b7280;
         }
 
         .dark {
             --background: #0f0f0f;
-            --foreground: #e6e6fa;
+            --foreground: #f5f5f5;
+            --card-bg: #1a1a1a;
+            --card-border: rgba(255, 255, 255, 0.1);
+            --muted: #a1a1aa;
         }
 
         /* Cyan Theme (Default) */
@@ -26,8 +32,6 @@
             --accent-tertiary: #0891b2;
             --accent-light: #67e8f9;
             --accent-dark: #0e7490;
-            --bg-terminal: #1a1a1a;
-            --bg-terminal-header: #2a2a2a;
         }
 
         /* Purple Theme */
@@ -37,8 +41,6 @@
             --accent-tertiary: #7c3aed;
             --accent-light: #c4b5fd;
             --accent-dark: #6d28d9;
-            --bg-terminal: #1a1a1a;
-            --bg-terminal-header: #2a2a2a;
         }
 
         /* Emerald Theme */
@@ -48,8 +50,6 @@
             --accent-tertiary: #34d399;
             --accent-light: #6ee7b7;
             --accent-dark: #047857;
-            --bg-terminal: #1a1a1a;
-            --bg-terminal-header: #2a2a2a;
         }
 
         /* Orange Theme */
@@ -59,8 +59,6 @@
             --accent-tertiary: #ea580c;
             --accent-light: #fdba74;
             --accent-dark: #c2410c;
-            --bg-terminal: #1a1a1a;
-            --bg-terminal-header: #2a2a2a;
         }
 
         /* Blue Theme */
@@ -70,14 +68,6 @@
             --accent-tertiary: #2563eb;
             --accent-light: #93c5fd;
             --accent-dark: #1d4ed8;
-            --bg-terminal: #1a1a1a;
-            --bg-terminal-header: #2a2a2a;
-        }
-
-        /* Light mode overrides */
-        :root:not(.dark) {
-            --bg-terminal: #f5f5f5;
-            --bg-terminal-header: #e5e5e5;
         }
 
         * {
@@ -91,274 +81,164 @@
             line-height: 1.6;
             color: var(--foreground);
             background: var(--background);
-            padding: 0;
-            overflow-x: hidden;
-            transition: background 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
         }
 
-        .dark body {
-            color: #e5e5e5;
-        }
-
-        /* Terminal Wrapper */
-        .terminal-wrapper {
-            max-width: 1200px;
+        /* Container */
+        .container {
+            max-width: 900px;
             margin: 0 auto;
-            padding: 40px 40px 0;
+            padding: 40px 32px;
         }
 
-        /* Terminal Window */
-        .terminal {
-            background: var(--bg-terminal);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-            transition: background 0.3s ease;
+        /* Header Section */
+        .header {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid var(--accent-primary);
         }
 
-        :root:not(.dark) .terminal {
-            border: 1px solid #e0e0e0;
-        }
-
-        .terminal-header {
-            background: var(--bg-terminal-header);
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: background 0.3s ease;
-        }
-
-        :root:not(.dark) .terminal-header {
-            border-bottom: 1px solid #d0d0d0;
-        }
-
-        .terminal-header-left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .terminal-dots {
-            display: flex;
-            gap: 6px;
-        }
-
-        .terminal-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .terminal-dot.red { background: #ff5f56; }
-        .terminal-dot.yellow { background: #ffbd2e; }
-        .terminal-dot.green { background: #27ca3f; }
-
-        .terminal-title {
-            font-size: 11px;
-            color: #666;
-            margin-left: 8px;
-        }
-
-        .terminal-content {
-            padding: 24px;
-            font-size: 13px;
-            line-height: 1.7;
-        }
-
-        .terminal-section {
-            margin-bottom: 16px;
-        }
-
-        .terminal-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .terminal-line {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 2px;
-        }
-
-        .terminal-prompt {
-            color: var(--accent-primary);
-            flex-shrink: 0;
-        }
-
-        .terminal-command {
-            color: var(--foreground);
-        }
-
-        .dark .terminal-command {
-            color: #d1d5db;
-        }
-
-        .terminal-output {
-            color: #a1a1aa;
-            padding-left: 20px;
-            margin-bottom: 2px;
-        }
-
-        .terminal-output-name {
-            color: white;
-            font-size: 24px;
+        .header-main h1 {
+            font-size: 32px;
             font-weight: 700;
-            padding-left: 20px;
+            color: var(--foreground);
             margin-bottom: 4px;
         }
 
-        :root:not(.dark) .terminal-output-name {
-            color: #000;
-        }
-
-        .terminal-output-title {
+        .header-title {
+            font-size: 16px;
             color: var(--accent-primary);
-            font-size: 14px;
-            font-weight: 500;
-            padding-left: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
         }
 
-        .terminal-output a {
+        .header-contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .header-contact a {
             color: var(--accent-primary);
             text-decoration: none;
         }
 
-        .terminal-output a:hover {
+        .header-contact a:hover {
             text-decoration: underline;
         }
 
-        .terminal-highlight {
+        /* Stats Grid */
+        .stats-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: right;
+        }
+
+        .stat {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .stat-value {
+            font-weight: 700;
             color: var(--accent-primary);
+            font-size: 15px;
         }
 
-        .terminal-separator {
-            color: #525252;
-            margin: 0 8px;
+        .stat-label {
+            color: var(--muted);
         }
 
-        /* Main content area */
-        .content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 40px;
-        }
-
+        /* Section */
         .section {
-            margin-bottom: 60px;
+            margin-bottom: 28px;
         }
 
         .section-title {
-            font-size: 24px;
+            font-size: 14px;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 32px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid var(--accent-primary);
+            color: var(--accent-primary);
             text-transform: uppercase;
             letter-spacing: 2px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        /* Profile section */
-        .profile {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #d1d5db;
+        .section-title::before {
+            content: '$';
+            color: var(--accent-secondary);
         }
 
-        :root:not(.dark) .profile {
-            color: #374151;
+        /* Summary */
+        .summary {
+            font-size: 14px;
+            color: var(--foreground);
+            line-height: 1.7;
+            padding: 16px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-primary);
         }
 
-        .profile p {
-            margin-bottom: 20px;
-        }
-
-        /* Job entries */
+        /* Experience */
         .job {
-            margin-bottom: 40px;
-            padding: 24px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            position: relative;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
         }
 
-        :root:not(.dark) .job {
-            background: #f7f7f7;
-            border: 1px solid #e0e0e0;
-        }
-
-        .job::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 12px;
-            padding: 2px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .job:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.2);
-        }
-
-        .job:hover::before {
-            opacity: 1;
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
         .job-title {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 700;
-            color: white;
-            margin-bottom: 8px;
-        }
-
-        :root:not(.dark) .job-title {
-            color: #000;
+            color: var(--foreground);
         }
 
         .job-company {
-            font-size: 16px;
+            font-size: 14px;
             color: var(--accent-primary);
             font-weight: 600;
-            margin-bottom: 6px;
         }
 
         .job-date {
-            font-size: 14px;
-            color: #a1a1aa;
-            margin-bottom: 16px;
-            font-style: italic;
+            font-size: 12px;
+            color: var(--muted);
+            white-space: nowrap;
         }
 
         .job-description {
-            margin-left: 0;
+            list-style: none;
         }
 
         .job-description li {
-            font-size: 15px;
-            color: #d1d5db;
-            margin-bottom: 12px;
-            line-height: 1.7;
-            list-style: none;
+            font-size: 13px;
+            color: var(--foreground);
+            margin-bottom: 10px;
+            line-height: 1.6;
+            padding-left: 16px;
             position: relative;
-            padding-left: 24px;
-        }
-
-        :root:not(.dark) .job-description li {
-            color: #374151;
         }
 
         .job-description li::before {
@@ -366,303 +246,344 @@
             position: absolute;
             left: 0;
             color: var(--accent-secondary);
-            font-size: 18px;
         }
 
-        /* Tech note */
-        .tech-note {
-            font-size: 13px;
-            color: #a1a1aa;
-            font-style: italic;
-            margin-top: 16px;
-            padding: 12px 16px;
-            background: rgba(6, 182, 212, 0.1);
-            border-radius: 8px;
-            border: 1px solid rgba(6, 182, 212, 0.2);
+        .job-description li:last-child {
+            margin-bottom: 0;
         }
 
-        /* Tech sections */
-        .tech-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .tech-category {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            padding: 20px 24px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        :root:not(.dark) .tech-category {
-            background: #f7f7f7;
-            border: 1px solid #e0e0e0;
-        }
-
-        .tech-category::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 8px;
-            padding: 2px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .tech-category:hover {
-            transform: translateY(-4px);
-            background: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.2);
-        }
-
-        .tech-category:hover::before {
-            opacity: 1;
-        }
-
-        .tech-category-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--accent-primary);
-            margin-bottom: 8px;
-            display: inline-block;
-        }
-
-        .tech-category-content {
-            font-size: 14px;
-            color: #d4d4d8;
-            line-height: 1.7;
-        }
-
-        :root:not(.dark) .tech-category-content {
-            color: #525252;
-        }
-
-        /* Gradient text effect */
-        .highlight {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        /* Project highlight */
+        .project-name {
+            color: var(--accent-light);
             font-weight: 600;
         }
 
-        strong {
+        .dark .project-name {
             color: var(--accent-light);
-            font-weight: 700;
         }
 
-        :root:not(.dark) strong {
+        :root:not(.dark) .project-name {
             color: var(--accent-dark);
         }
 
-        /* Footer */
-        .footer {
-            padding: 48px 40px;
-            background: #0a0a0a;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        /* Metrics inline */
+        .metric {
+            color: var(--accent-primary);
+            font-weight: 600;
         }
 
-        :root:not(.dark) .footer {
-            background: #f5f5f5;
-            border-top: 1px solid #e5e5e5;
+        /* Tech stack badge */
+        .tech-stack {
+            margin-top: 12px;
+            padding: 10px 12px;
+            background: rgba(6, 182, 212, 0.08);
+            border-radius: 6px;
+            font-size: 11px;
+            color: var(--muted);
         }
 
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-            color: #a1a1aa;
-            font-size: 14px;
+        .dark .tech-stack {
+            background: rgba(6, 182, 212, 0.1);
         }
 
-        :root:not(.dark) .footer-content {
-            color: #525252;
+        .tech-stack-label {
+            color: var(--accent-primary);
+            font-weight: 600;
         }
 
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
+        /* Side Projects */
+        .side-project {
+            padding: 16px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
             margin-bottom: 16px;
         }
 
-        .footer-link {
+        .side-project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .side-project-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--foreground);
+        }
+
+        .side-project-link {
+            font-size: 11px;
             color: var(--accent-primary);
             text-decoration: none;
         }
 
-        .footer-link:hover {
+        .side-project-link:hover {
             text-decoration: underline;
         }
 
+        .side-project-desc {
+            font-size: 13px;
+            color: var(--foreground);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .side-project-tech {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .skill-category {
+            padding: 14px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+        }
+
+        .skill-category-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent-primary);
+            margin-bottom: 6px;
+        }
+
+        .skill-category-content {
+            font-size: 12px;
+            color: var(--foreground);
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid var(--card-border);
+            text-align: center;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .footer a {
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+
+        /* Print Styles */
         @media print {
             * {
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
-            body {
+
+            html, body {
                 background: white !important;
-                color: #000000 !important;
-                margin: 0;
-                padding: 0;
-            }
-            .footer {
-                display: none;
-            }
-            .terminal-wrapper {
-                max-width: none !important;
-                margin: 0 !important;
-                padding: 20px 30px 0 !important;
-            }
-            .terminal {
-                background: #f5f5f5 !important;
-                border: 1px solid #ddd;
-            }
-            .content {
-                max-width: none !important;
-                margin: 0 !important;
-                padding: 20px 30px 0 !important;
-            }
-            .terminal-header {
-                background: #e5e5e5 !important;
-                padding: 6px 12px;
-            }
-            .terminal-content {
-                background: #f5f5f5 !important;
-                padding: 12px 16px;
-                font-size: 9px;
-                line-height: 1.4;
-            }
-            .terminal-section {
-                margin-bottom: 8px;
-            }
-            .terminal-command {
                 color: #000 !important;
-            }
-            .terminal-output {
-                color: #525252 !important;
-                font-size: 9px;
-                padding-left: 16px;
-            }
-            .terminal-output-name {
-                color: #000 !important;
-                font-size: 18px;
-                padding-left: 16px;
-                margin-bottom: 2px;
-            }
-            .terminal-output-title {
-                color: #06b6d4 !important;
                 font-size: 11px;
-                padding-left: 16px;
             }
-            .terminal-output a {
-                color: #525252 !important;
+
+            .container {
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
             }
-            .terminal-prompt {
-                color: #06b6d4 !important;
-            }
-            .terminal-highlight {
-                color: #06b6d4 !important;
-            }
-            .section {
+
+            .header {
                 margin-bottom: 16px;
-                page-break-inside: auto;
+                padding-bottom: 12px;
             }
-            .section-title {
-                font-size: 14px;
-                margin-bottom: 8px;
-                padding-bottom: 3px;
-                border-bottom: 2px solid #06b6d4;
+
+            .header-main h1 {
+                font-size: 22px;
+                color: #000 !important;
+            }
+
+            .header-title {
+                font-size: 12px;
                 color: #06b6d4 !important;
-                -webkit-text-fill-color: #06b6d4 !important;
             }
-            .profile {
+
+            .header-contact {
                 font-size: 10px;
-                line-height: 1.4;
-                color: #000000 !important;
+                gap: 12px;
             }
-            .profile p {
-                margin-bottom: 6px;
+
+            .header-contact a {
+                color: #06b6d4 !important;
             }
-            .job {
-                margin-bottom: 12px;
+
+            .stats-grid {
+                gap: 4px;
+            }
+
+            .stat {
+                font-size: 10px;
+            }
+
+            .stat-value {
+                font-size: 12px;
+                color: #06b6d4 !important;
+            }
+
+            .section {
+                margin-bottom: 14px;
+            }
+
+            .section-title {
+                font-size: 11px;
+                margin-bottom: 8px;
+                color: #06b6d4 !important;
+            }
+
+            .summary {
+                font-size: 11px;
                 padding: 10px;
                 background: #f7f7f7 !important;
-                border-radius: 8px;
+                border: 1px solid #ddd !important;
+                border-left: 3px solid #06b6d4 !important;
             }
+
+            .job {
+                margin-bottom: 12px;
+                padding: 12px;
+                background: #f9f9f9 !important;
+                border: 1px solid #ddd !important;
+                page-break-inside: avoid;
+            }
+
             .job-title {
                 font-size: 12px;
-                margin-bottom: 2px;
-                color: #000000 !important;
+                color: #000 !important;
             }
+
             .job-company {
                 font-size: 11px;
                 color: #06b6d4 !important;
             }
+
             .job-date {
-                font-size: 9px;
-                margin-bottom: 6px;
-                color: #4a5568 !important;
+                font-size: 10px;
+                color: #666 !important;
             }
+
             .job-description li {
-                font-size: 9px;
-                line-height: 1.35;
-                margin-bottom: 4px;
-                padding-left: 16px;
-                color: #000000 !important;
+                font-size: 10px;
+                margin-bottom: 6px;
+                padding-left: 12px;
+                color: #000 !important;
             }
+
             .job-description li::before {
                 color: #06b6d4 !important;
             }
-            .tech-note {
-                font-size: 9px;
-                margin-top: 6px;
-                padding: 4px 8px;
-                background: #eef2ff !important;
-                color: #4a5568 !important;
-                border: 1px solid #06b6d4;
+
+            .project-name {
+                color: #0891b2 !important;
             }
-            .tech-category {
-                padding: 8px 12px;
-                margin-bottom: 8px;
-                background: #f7f7f7 !important;
-            }
-            .tech-category-title {
-                font-size: 12px;
-                margin-bottom: 4px;
+
+            .metric {
                 color: #06b6d4 !important;
             }
-            .tech-category-content {
-                font-size: 10px;
-                line-height: 1.4;
-                color: #000000 !important;
+
+            .tech-stack {
+                margin-top: 8px;
+                padding: 6px 8px;
+                font-size: 9px;
+                background: #f0f9ff !important;
+                border: 1px solid #06b6d4 !important;
             }
-            strong {
-                color: #000000 !important;
+
+            .tech-stack-label {
+                color: #06b6d4 !important;
+            }
+
+            .side-project {
+                padding: 10px;
+                margin-bottom: 10px;
+                background: #f9f9f9 !important;
+                border: 1px solid #ddd !important;
+                page-break-inside: avoid;
+            }
+
+            .side-project-title {
+                font-size: 11px;
+                color: #000 !important;
+            }
+
+            .side-project-link {
+                font-size: 9px;
+                color: #06b6d4 !important;
+            }
+
+            .side-project-desc {
+                font-size: 10px;
+                color: #000 !important;
+            }
+
+            .side-project-tech {
+                font-size: 9px;
+            }
+
+            .skills-grid {
+                gap: 8px;
+            }
+
+            .skill-category {
+                padding: 10px;
+                background: #f9f9f9 !important;
+                border: 1px solid #ddd !important;
+            }
+
+            .skill-category-title {
+                font-size: 10px;
+                color: #06b6d4 !important;
+            }
+
+            .skill-category-content {
+                font-size: 9px;
+                color: #000 !important;
+            }
+
+            .footer {
+                display: none;
             }
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
-            .terminal-wrapper, .content, .footer {
-                padding-left: 24px;
-                padding-right: 24px;
+            .container {
+                padding: 24px 20px;
             }
-            .terminal-header {
-                flex-direction: column;
-                gap: 12px;
-                align-items: flex-start;
+
+            .header {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                text-align: left;
+            }
+
+            .stat {
+                justify-content: flex-start;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
     <script>
-        // Apply theme immediately to prevent flash
         (function() {
             try {
                 const mode = localStorage.getItem('mode') || 'dark';
@@ -678,133 +599,133 @@
     </script>
 </head>
 <body>
-    <!-- Terminal Header -->
-    <div class="terminal-wrapper">
-    <div class="terminal">
-        <div class="terminal-header">
-            <div class="terminal-header-left">
-                <div class="terminal-dots">
-                    <div class="terminal-dot red"></div>
-                    <div class="terminal-dot yellow"></div>
-                    <div class="terminal-dot green"></div>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-main">
+                <h1>David Anderson</h1>
+                <div class="header-title">Full Stack Developer & AI Product Builder</div>
+                <div class="header-contact">
+                    <span><a href="mailto:david@fullstackvibes.io">david@fullstackvibes.io</a></span>
+                    <span><a href="https://fullstackvibes.io" target="_blank">fullstackvibes.io</a></span>
+                    <span><a href="https://linkedin.com/in/d4vid4nderson" target="_blank">LinkedIn</a></span>
+                    <span><a href="https://github.com/d4vid4nderson" target="_blank">GitHub</a></span>
                 </div>
-                <span class="terminal-title">david@fullstackvibes:~/resume</span>
             </div>
-        </div>
-        <div class="terminal-content">
-            <div class="terminal-section">
-                <div class="terminal-line">
-                    <span class="terminal-prompt">$</span>
-                    <span class="terminal-command">whoami</span>
+            <div class="stats-grid">
+                <div class="stat">
+                    <span class="stat-value">$400K+</span>
+                    <span class="stat-label">savings delivered</span>
                 </div>
-                <div class="terminal-output-name">David Anderson</div>
-                <div class="terminal-output-title">Digital Experience Architect / Product Owner</div>
-            </div>
-
-            <div class="terminal-section">
-                <div class="terminal-line">
-                    <span class="terminal-prompt">$</span>
-                    <span class="terminal-command">--contact</span>
+                <div class="stat">
+                    <span class="stat-value">6</span>
+                    <span class="stat-label">AI apps shipped</span>
                 </div>
-                <div class="terminal-output">→ <a href="mailto:david4nderson@pm.me">david4nderson@pm.me</a><span class="terminal-separator">|</span><a href="https://linkedin.com/in/d4v1d4nd3rs0n" target="_blank">linkedin.com/in/d4v1d4nd3rs0n</a></div>
-                <div class="terminal-output">→ <a href="https://fullstackvibes.io" target="_blank" class="terminal-highlight">fullstackvibes.io</a></div>
-            </div>
-
-            <div class="terminal-section">
-                <div class="terminal-line">
-                    <span class="terminal-prompt">$</span>
-                    <span class="terminal-command">--stack</span>
+                <div class="stat">
+                    <span class="stat-value">12+</span>
+                    <span class="stat-label">years experience</span>
                 </div>
-                <div class="terminal-output">→ go, python, typescript, react, next.js, fastapi, postgresql</div>
             </div>
+        </header>
 
-            <div class="terminal-section">
-                <div class="terminal-line">
-                    <span class="terminal-prompt">$</span>
-                    <span class="terminal-command">--ai</span>
-                </div>
-                <div class="terminal-output">→ claude, gpt-4, azure-openai, prompt-engineering, rag-pipelines</div>
+        <!-- Summary -->
+        <section class="section">
+            <div class="section-title">Summary</div>
+            <div class="summary">
+                Full stack developer who ships AI-powered products. Built 6 production applications processing 20,000+ documents, serving 50+ concurrent users, and delivering $400K+ in measurable business impact. I take ideas from zero to production—real tools that teams depend on daily.
             </div>
-        </div>
-    </div>
-    </div>
+        </section>
 
-    <div class="content">
-        <div class="section">
-            <div class="section-title">Profile</div>
-            <div class="profile">
-                <p>I build AI powered products that ship. I've taken ideas from zero to production, creating tools that teams actually depend on. They process real data, automate manual work, and deliver real results. No demos. No proofs of concept. Just solutions that work.</p>
-            </div>
-        </div>
-
-        <div class="section">
+        <!-- Experience -->
+        <section class="section">
             <div class="section-title">Experience</div>
 
             <div class="job">
-                <div class="job-title">Digital Experience Architect / Product Owner</div>
-                <div class="job-company">MOREgroup (formerly Huckabee)</div>
-                <div class="job-date">July 2022 – Present</div>
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Full Stack Developer & Product Owner</div>
+                        <div class="job-company">MOREgroup (formerly Huckabee)</div>
+                    </div>
+                    <div class="job-date">Jul 2022 – Present</div>
+                </div>
                 <ul class="job-description">
-                    <li>Leading product development of <strong>VUES</strong>, a suite of 6 production AI applications delivering measurable business impact across MOREgroup. Serving as hands on product owner through agile sprint cycles, I handle UI/UX design, iconography, architecture decisions, feature prioritization, and daily standups while leveraging AI as a development accelerator to rapidly ship and iterate on production tools.</li>
+                    <li>Architected and shipped <span class="project-name">VUES</span>, a suite of <span class="metric">6 production AI applications</span> with <span class="metric">130+ API endpoints</span>, <span class="metric">55+ database tables</span>, serving cross-functional teams across the organization.</li>
 
-                    <li><strong>LegislationVUE</strong> (React, FastAPI, Azure OpenAI GPT 4, PostgreSQL) — Eliminated $40,000+ in annual legal consulting costs by automating analysis of 20,000+ state and federal legislative documents across 6 states. Delivers AI generated executive summaries, key talking points, and business impact analysis, transforming regulatory tracking from 8 hour manual reviews to instant insights.</li>
+                    <li><span class="project-name">LegislationVUE</span> — Python/FastAPI backend processing <span class="metric">20,000+ legislative documents</span> via Azure OpenAI GPT-4. React frontend with real-time search across <span class="metric">6 state databases</span>. Eliminated <span class="metric">$40K+/year</span> in legal consulting costs.</li>
 
-                    <li><strong>PlanVUE</strong> (Go, HTMX, PostgreSQL, Claude AI) — Achieved 80% efficiency gain for architectural planners by eliminating manual data entry and collection. AI enhanced workflows automatically generate project deliverables, coordinate multi stakeholder approval chains, and provide real time health monitoring across initiative portfolios.</li>
+                    <li><span class="project-name">PlanVUE</span> — Go/HTMX application managing <span class="metric">200+ active projects</span> with <span class="metric">25+ PostgreSQL tables</span>. Claude AI for scope analysis, role-based access, automated PDF generation. Achieved <span class="metric">80% efficiency gain</span> (5 days → 1 day).</li>
 
-                    <li><strong>FacilityVUE</strong> (Go, HTMX, PostgreSQL) — Recently shipped facility management platform currently being prepared for commercial release to school districts nationwide. Demonstrates transition from internal tooling to market ready software product.</li>
+                    <li><span class="project-name">InitiativeVUE</span> — Full-stack Go application serving <span class="metric">50+ concurrent users</span>. Real-time WebSocket updates, multi-level approval workflows, <span class="metric">30+ RESTful endpoints</span>, <span class="metric">15+ DB tables</span>. Claude AI for automated status reporting.</li>
 
-                    <li><strong>InitiativeVUE</strong> (Go, HTMX, Claude AI) — Broke down organizational silos by providing C suite with unified visibility into cross departmental initiatives previously tracked in isolation. Real time executive dashboard enables data driven strategic decision making.</li>
+                    <li><span class="project-name">FacilityVUE</span> — Multi-tenant Go platform supporting <span class="metric">100+ school districts</span> with isolated PostgreSQL schemas. <span class="metric">40+ API endpoints</span>, real-time notifications, comprehensive audit logging. Preparing for commercial release.</li>
 
-                    <li><strong>SharePointVUE</strong> (Go, Playwright, Claude AI) — Automated SharePoint testing and accessibility compliance (WCAG), detecting broken links and generating multi format reports.</li>
+                    <li><span class="project-name">SharePointVUE</span> — Automated testing framework scanning <span class="metric">500+ pages/run</span>. Playwright-based validation, WCAG 2.1 AA compliance checking, broken link detection. Claude AI analyzes accessibility issues, generates PDF/JSON/CSV reports.</li>
                 </ul>
-                <div class="tech-note">Tech stack: TypeScript, React, Next.js, Go, Python, FastAPI, PostgreSQL, Azure SQL, Docker, Playwright • AI: Claude, Azure OpenAI (GPT 4), prompt engineering, RAG pipelines</div>
+                <div class="tech-stack">
+                    <span class="tech-stack-label">Stack:</span> Go, Python, TypeScript, React, Next.js, FastAPI, HTMX, PostgreSQL, Azure SQL, Docker, Playwright | <span class="tech-stack-label">AI:</span> Claude, Azure OpenAI GPT-4, RAG pipelines
+                </div>
             </div>
 
             <div class="job">
-                <div class="job-title">Resource Manager → Media Lab Manager → Digital Experience Designer</div>
-                <div class="job-company">Huckabee | A MOREgroup Brand</div>
-                <div class="job-date">July 2013 – July 2022</div>
+                <div class="job-header">
+                    <div>
+                        <div class="job-title">Resource Manager → Media Lab Manager → Digital Experience Designer</div>
+                        <div class="job-company">Huckabee | A MOREgroup Brand</div>
+                    </div>
+                    <div class="job-date">Jul 2013 – Jul 2022</div>
+                </div>
                 <ul class="job-description">
-                    <li>9 years building internal tools, knowledge platforms ($30K+ annual savings), and media production systems. Foundation for understanding workflow pain points, translating user needs into technical solutions, and driving technology adoption across teams.</li>
+                    <li>9 years of progressive growth building internal tools, knowledge management platforms (<span class="metric">$30K+ annual savings</span>), and media production systems. Foundation for understanding workflow pain points and translating user needs into technical solutions.</li>
+                    <li>Drove technology adoption across teams, establishing processes for digital asset management and collaborative workflows that scaled with organizational growth.</li>
                 </ul>
             </div>
-        </div>
+        </section>
 
-        <div class="section">
-            <div class="section-title">Technical Capabilities</div>
-            <div class="tech-grid">
-                <div class="tech-category">
-                    <div class="tech-category-title">Frontend & React Ecosystem</div>
-                    <div class="tech-category-content">TypeScript, React, Next.js (App Router, Turbopack), Tailwind CSS, component architecture, state management, responsive design. Ship production applications with modern tooling.</div>
+        <!-- Side Projects -->
+        <section class="section">
+            <div class="section-title">Side Projects</div>
+
+            <div class="side-project">
+                <div class="side-project-header">
+                    <div class="side-project-title">Tenant Wise</div>
+                    <a href="https://github.com/d4vid4nderson/Tenant-Wise" target="_blank" class="side-project-link">github.com/d4vid4nderson/Tenant-Wise</a>
                 </div>
-
-                <div class="tech-category">
-                    <div class="tech-category-title">AI Integration & LLMs</div>
-                    <div class="tech-category-content">Claude AI, Azure OpenAI (GPT 4), production LLM integration, prompt engineering, RAG pipelines for document analysis, AI augmented workflows, accuracy validation. Experience building AI powered tools that ship to real users.</div>
+                <div class="side-project-desc">
+                    Next.js 14 SaaS for Texas landlords. Supabase backend with Row-Level Security for multi-tenancy. Claude AI generates Texas Property Code-compliant legal documents. Stripe subscriptions, SignWell e-signatures, automated email workflows.
                 </div>
-
-                <div class="tech-category">
-                    <div class="tech-category-title">Backend & APIs</div>
-                    <div class="tech-category-content">Go, Python, FastAPI, Node.js, PostgreSQL, Azure SQL, Docker. Build scalable APIs and services that handle AI workloads. Focus on performance, reliability, and clean architecture.</div>
-                </div>
-
-                <div class="tech-category">
-                    <div class="tech-category-title">Developer Experience</div>
-                    <div class="tech-category-content">Playwright testing, CI/CD pipelines, documentation, developer tooling. Obsess over the details that make tools intuitive and reliable.</div>
+                <div class="side-project-tech">
+                    <span class="tech-stack-label">Stack:</span> TypeScript, Next.js, React, Tailwind CSS, Supabase, Claude AI, Stripe, SignWell API
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <div class="footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="https://github.com/d4vid4nderson" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
-                <a href="https://www.linkedin.com/in/d4v1d4nd3rs0n" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a>
-                <a href="mailto:david4nderson@pm.me" class="footer-link">Email</a>
+        <!-- Skills -->
+        <section class="section">
+            <div class="section-title">Technical Skills</div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-category-title">Languages & Frameworks</div>
+                    <div class="skill-category-content">Go, Python, TypeScript, React, Next.js, FastAPI, HTMX, Tailwind CSS</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">AI & LLMs</div>
+                    <div class="skill-category-content">Claude AI, Azure OpenAI GPT-4, prompt engineering, RAG pipelines, document analysis</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Data & Infrastructure</div>
+                    <div class="skill-category-content">PostgreSQL, Azure SQL, Supabase, Redis, Docker, REST APIs, WebSockets</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Testing & DevOps</div>
+                    <div class="skill-category-content">Playwright, CI/CD pipelines, automated testing, accessibility compliance (WCAG)</div>
+                </div>
             </div>
-            <p>© 2025 David Anderson. All rights reserved.</p>
-        </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <a href="https://fullstackvibes.io" target="_blank">fullstackvibes.io</a> · Built with Next.js & Tailwind CSS
+        </footer>
     </div>
 </body>
 </html>
