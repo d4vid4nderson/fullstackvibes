@@ -1028,16 +1028,16 @@ export function Hero() {
                     </div>
                   </div>
 
-                  {/* whoami - command small, output large */}
+                  {/* whoami - command small, name large white, role colored */}
                   <div className="lg:pr-44 mb-2">
                     <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
                       <span className="text-accent">$</span> whoami{' '}
                       <span className="text-accent">--profile</span>
                     </div>
-                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
-                      <span className="gradient-text">David Anderson</span>
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">
+                      David Anderson
                     </h2>
-                    <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300">
+                    <p className="text-base sm:text-lg font-medium gradient-text">
                       Digital Experience Architect / Product Owner
                     </p>
                   </div>

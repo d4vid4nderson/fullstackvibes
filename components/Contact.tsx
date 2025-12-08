@@ -189,15 +189,16 @@ export function Contact() {
             contactState === 'minimized' ? 'max-h-0' : 'max-h-[5000px]'
           }`}>
           <div className="p-5 sm:p-8 font-mono">
-            {/* Command header - command small, output large */}
+            {/* Command header */}
             <div className="mb-6">
-              <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
-                <span className="text-accent">$</span> compose{' '}
+              <div className="flex items-baseline gap-2 mb-1">
+                <span className="text-accent">$</span>
+                <span className="text-gray-600 dark:text-gray-300">compose</span>
                 <span className="text-accent">--message</span>
               </div>
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 Have a project in mind or want to collaborate? Let&apos;s connect.
-              </h2>
+              </p>
             </div>
 
             {/* Form */}

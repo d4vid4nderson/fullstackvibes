@@ -11,15 +11,16 @@ export async function Projects() {
     <ProjectsTerminal>
       {/* Terminal Content */}
       <div className="p-5 sm:p-8 font-mono">
-        {/* Command header - command small, output large */}
+        {/* Command header */}
         <div className="mb-8">
-          <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
-            <span className="text-accent">$</span> git log{' '}
+          <div className="flex items-baseline gap-2 mb-1">
+            <span className="text-accent">$</span>
+            <span className="text-gray-600 dark:text-gray-300">git log</span>
             <span className="text-accent">--projects</span>
           </div>
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
             A collection of my latest work spanning development and product ownership.
-          </h2>
+          </p>
         </div>
 
         {/* Developer Projects Section */}
