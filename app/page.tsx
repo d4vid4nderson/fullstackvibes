@@ -5,7 +5,7 @@ import { Contact } from '@/components/Contact';
 
 export default function Home() {
   return (
-    <main>
+    <main className="min-h-screen">
       <Hero />
       <CareerTimeline />
       <Projects />

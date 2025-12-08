@@ -23,8 +23,10 @@ export function ProjectsTerminal({ children }: ProjectsTerminalProps) {
   }
 
   return (
-    <section id="projects" className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-background transition-colors duration-300 overflow-visible">
-      {/* Background decoration */}
+    <section id="projects" className={`relative px-4 sm:px-6 lg:px-8 transition-all duration-300 overflow-visible ${
+      projectsState === 'minimized' ? 'py-8' : 'py-16 sm:py-24'
+    }`}>
+      {/* Background decoration - always visible */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-accent rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-10 animate-pulse" />
         <div className="absolute bottom-1/3 left-0 w-80 h-80 bg-accent-secondary rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-10 animate-pulse" style={{ animationDelay: '1s' }} />
