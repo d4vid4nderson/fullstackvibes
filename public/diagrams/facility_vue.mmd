@@ -19,7 +19,7 @@ graph TB
     end
 
     subgraph "Data Storage"
-        MongoDB["MongoDB<br/>(Facility & Assessment Data)"]
+        AzureSQL["Azure SQL<br/>(Facility & Assessment Data)"]
         FileStorage["File Storage<br/>(Documents & Reports)"]
     end
 
@@ -45,10 +45,10 @@ graph TB
     GeoService --> MapboxService
 
     NodeServer --> DataService
-    DataService --> MongoDB
+    DataService --> AzureSQL
 
-    FacilityAPI --> MongoDB
-    AssessmentAPI --> MongoDB
+    FacilityAPI --> AzureSQL
+    AssessmentAPI --> AzureSQL
     AssessmentAPI --> FileStorage
 
     Azure --> Docker
@@ -62,6 +62,6 @@ graph TB
 
     class AdminUI,ClientUI,MapView frontend
     class NextAPI,MapboxAPI,FacilityAPI,AssessmentAPI,NodeServer,GeoService,DataService backend
-    class MongoDB,FileStorage storage
+    class AzureSQL,FileStorage storage
     class MapboxService external
     class Azure,Docker devops

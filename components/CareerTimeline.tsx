@@ -50,7 +50,7 @@ const careerData: CareerEntry[] = [
       'Designed and developed project management systems',
       'Created UI/UX design systems and iconography standards',
     ],
-    techStack: ['javascript', 'react', 'nodejs', 'mongodb'],
+    techStack: ['javascript', 'react', 'nodejs', 'azuresql'],
   },
   {
     id: 'media-lab-manager',
@@ -95,7 +95,7 @@ const getTechIcon = (tech: string) => {
     react: '/react-color.svg',
     nodejs: '/nodejs-color.svg',
     postgresql: '/postgresql.svg',
-    mongodb: '/mongodb-color.svg',
+    azuresql: '/azure-color.svg',
     docker: '/docker-color.svg',
     claude: '/Anthropic.svg',
   };

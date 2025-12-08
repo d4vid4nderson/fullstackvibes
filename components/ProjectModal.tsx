@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { GitHubRepo } from '@/types/github';
 import { FiX, FiCheckCircle, FiExternalLink } from 'react-icons/fi';
-import { SiGo, SiJavascript, SiTailwindcss, SiDocker, SiAnthropic, SiReact, SiPython, SiFastapi, SiPostgresql, SiTypescript, SiNextdotjs, SiVuedotjs, SiNodedotjs, SiMongodb, SiSupabase, SiStripe } from 'react-icons/si';
+import { SiGo, SiJavascript, SiTailwindcss, SiDocker, SiAnthropic, SiReact, SiPython, SiFastapi, SiPostgresql, SiTypescript, SiNextdotjs, SiVuedotjs, SiNodedotjs, SiSupabase, SiStripe } from 'react-icons/si';
 import Image from 'next/image';
 import { MermaidDiagram } from './MermaidDiagram';
 import { ScreenshotShowcase } from './ScreenshotShowcase';
@@ -325,14 +325,14 @@ const getProjectDetails = (repoName: string) => {
         { title: 'Multi-District Administration', description: 'Centralized platform supporting Willis ISD, Conroe ISD, and Magnolia ISD with district-specific configurations, branding, and facility hierarchies' },
         { title: 'Assessment & Maintenance Tracking', description: 'Comprehensive facility condition assessments, maintenance scheduling, compliance monitoring, and automated reporting for proactive facility management' },
         { title: 'Resource Allocation', description: 'Space planning tools, room booking systems, asset tracking across locations, and resource optimization for efficient facility utilization' },
-        { title: 'Data Management & Reporting', description: 'MongoDB-backed facility database with CSV import/export, automated coordinate conversion, and customizable reporting for stakeholder communication' },
+        { title: 'Data Management & Reporting', description: 'Azure SQL-backed facility database with CSV import/export, automated coordinate conversion, and customizable reporting for stakeholder communication' },
       ],
       techIcons: [
         { Icon: SiJavascript, name: 'JavaScript', color: 'text-yellow-400' },
         { Icon: AzureIcon, name: 'Azure DevOps', color: '' },
         { Icon: SiVuedotjs, name: 'Vue.js', color: 'text-green-400' },
         { Icon: SiNodedotjs, name: 'Node.js', color: 'text-green-600' },
-        { Icon: SiMongodb, name: 'MongoDB', color: 'text-green-500' },
+        { Icon: AzureIcon, name: 'Azure SQL', color: '' },
         { Icon: SiDocker, name: 'Docker', color: 'text-blue-400' },
       ],
       alsoIncludes: 'Mapbox GL, Next.js, Tailwind CSS, TypeScript, Axios, Heroicons, Express, CSV Parser, Geocoding API',

@@ -71,8 +71,8 @@ const NodeJSIcon = ({ className }: { className?: string }) => (
   <img src="/nodejs-color.svg" alt="Node.js" width={16} height={16} className={className} />
 );
 
-const MongoDBIcon = ({ className }: { className?: string }) => (
-  <img src="/mongodb-color.svg" alt="MongoDB" width={16} height={16} className={className} />
+const AzureSqlIcon = ({ className }: { className?: string }) => (
+  <img src="/azure-color.svg" alt="Azure SQL" width={16} height={16} className={className} />
 );
 
 const SupabaseIcon = ({ className }: { className?: string }) => (
@@ -103,8 +103,8 @@ const getIconForTopic = (topic: string) => {
     'docker': DockerIcon,
     'postgresql': PostgreSQLIcon,
     'postgres': PostgreSQLIcon,
-    'mongodb': MongoDBIcon,
-    'mongo': MongoDBIcon,
+    'azuresql': AzureSqlIcon,
+    'azure-sql': AzureSqlIcon,
     'vue': VueIcon,
     'vuejs': VueIcon,
     'claude': ClaudeIcon,

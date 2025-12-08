@@ -33,7 +33,7 @@ He excels at identifying workflow friction, rapidly prototyping solutions, and d
 ## KEY STRENGTHS
 
 1. **AI-Augmented Development**: Uses LLMs (Claude, GPT-4) as coding accelerators while maintaining architectural oversight
-2. **Full-Stack Capabilities**: Go, Python, React, FastAPI, HTMX, PostgreSQL, MongoDB, Docker
+2. **Full-Stack Capabilities**: Go, Python, React, FastAPI, HTMX, PostgreSQL, Azure SQL, Docker
 3. **Product Ownership**: Hands-on through sprint cycles, UI/UX design, stakeholder management
 4. **12+ Years Design Operations**: Deep understanding of creative team workflows and pain points
 5. **Rapid Shipping**: Focuses relentlessly on building tools that augment human creativity
@@ -80,7 +80,7 @@ He excels at identifying workflow friction, rapidly prototyping solutions, and d
 - **Languages:** Go, Python, TypeScript/JavaScript
 - **Frontend:** React, HTMX, Tailwind CSS
 - **Backend:** FastAPI, Go standard library
-- **Databases:** PostgreSQL, MongoDB
+- **Databases:** PostgreSQL, Azure SQL
 - **Infrastructure:** Docker, Azure
 - **Testing:** Playwright
 
