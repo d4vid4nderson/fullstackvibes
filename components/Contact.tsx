@@ -78,7 +78,7 @@ export function Contact() {
         <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-accent-secondary rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-10 animate-pulse" style={{ animationDelay: '1s' }} />
       </div>
 
-      <div className="relative max-w-3xl mx-auto z-10">
+      <div className="relative max-w-7xl mx-auto z-10">
         {/* Terminal Window */}
         <div className="bg-white dark:bg-[#1a1a1a] rounded-lg border border-gray-300 dark:border-white/10 shadow-2xl overflow-hidden transition-colors duration-300">
           {/* Terminal Header */}

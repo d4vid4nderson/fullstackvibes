@@ -251,14 +251,14 @@ function TimelineCard({ entry, isFirst }: { entry: CareerEntry; isFirst: boolean
 
 export function CareerTimeline() {
   return (
-    <section id="career" className="py-16 sm:py-24 relative overflow-hidden">
+    <section id="career" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 right-0 w-96 h-96 bg-accent rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-10 animate-pulse" />
         <div className="absolute bottom-1/4 left-0 w-80 h-80 bg-accent-secondary rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-10 animate-pulse" style={{ animationDelay: '1s' }} />
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Terminal Window */}
         <div className="bg-white dark:bg-[#1a1a1a] rounded-lg border border-gray-300 dark:border-white/10 shadow-2xl overflow-hidden transition-colors duration-300">
           {/* Terminal Header */}
