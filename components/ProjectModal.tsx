@@ -525,49 +525,70 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-[10000] overflow-y-auto"
+      className="fixed inset-0 overflow-y-auto"
+      style={{ zIndex: 99999 }}
       onWheel={(e) => e.stopPropagation()}
       onTouchMove={(e) => e.stopPropagation()}
     >
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
+        style={{ zIndex: 99999 }}
         onClick={onClose}
       />
 
       {/* Modal */}
-      <div className="relative min-h-screen flex items-center justify-center p-4 z-[10001]">
+      <div className="relative min-h-screen flex items-center justify-center p-4" style={{ zIndex: 100000 }}>
         <div
-          className={`relative bg-white dark:bg-[#1a1a1a] border border-gray-300 dark:border-white/10 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl transition-all z-[10001] ${
+          className={`relative bg-white dark:bg-[#1a1a1a] border border-gray-300 dark:border-white/10 rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl transition-all ${
             isAnimating ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
           }`}
         >
-          {/* Header */}
-          <div className="sticky top-0 bg-white dark:bg-[#1a1a1a] border-b border-gray-300 dark:border-white/10 p-4 sm:p-6 z-10 transition-colors duration-300">
-            <div className="flex items-start justify-between gap-4">
-              <div className="flex-1 min-w-0">
-                <h2 className="text-xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-1 sm:mb-2 truncate">{repo.name}</h2>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 line-clamp-2">{repo.description}</p>
-              </div>
+          {/* Terminal Header */}
+          <div className="sticky top-0 bg-gray-100 dark:bg-[#2a2a2a] px-4 py-2 flex items-center gap-2 border-b border-gray-300 dark:border-white/10 z-10 transition-colors duration-300">
+            <div className="flex gap-2">
               <button
                 onClick={onClose}
-                className="flex-shrink-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors p-2 hover:bg-gray-100 dark:hover:bg-white/5 rounded-lg"
+                className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors"
                 aria-label="Close modal"
-              >
-                <FiX className="w-6 h-6" />
-              </button>
+              />
+              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+            <span className="text-xs text-gray-500 dark:text-gray-400 ml-2 font-mono truncate">
+              david@fullstackvibes:~/projects/{repo.name.toLowerCase().replace(/\s+/g, '-')}
+            </span>
+            <button
+              onClick={onClose}
+              className="ml-auto flex-shrink-0 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors p-1 hover:bg-gray-200 dark:hover:bg-white/10 rounded"
+              aria-label="Close modal"
+            >
+              <FiX className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Command Header */}
+          <div className="bg-white dark:bg-[#1a1a1a] border-b border-gray-300 dark:border-white/10 p-4 sm:p-6 transition-colors duration-300">
+            <div className="font-mono">
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
+                <span className="text-accent">$</span> cat{' '}
+                <span className="gradient-text">./README.md</span>
+              </h2>
+              <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">{repo.description}</p>
             </div>
           </div>
 
           {/* Content */}
-          <div className="overflow-y-auto max-h-[calc(90vh-120px)] p-4 sm:p-6 pb-12 space-y-6 sm:space-y-8">
+          <div className="overflow-y-auto max-h-[calc(90vh-160px)] p-4 sm:p-6 pb-12 space-y-6 sm:space-y-8 font-mono">
 
             {projectDetails && (
               <>
                 {/* Full Description */}
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 transition-colors duration-300">About This Project</h3>
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300">{projectDetails.fullDescription}</p>
+                  <h3 className="text-sm font-bold text-accent uppercase tracking-wide mb-3 transition-colors duration-300">
+                    # About
+                  </h3>
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed transition-colors duration-300 font-sans">{projectDetails.fullDescription}</p>
                   {projectDetails.demoUrl && (
                     <div className="mt-4 flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3 sm:gap-4">
                       <a
@@ -593,7 +614,7 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
 
                 {/* Tech Stack */}
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">Tech Stack</h3>
+                  <h3 className="text-sm font-bold text-accent uppercase tracking-wide mb-4 transition-colors duration-300"># Tech Stack</h3>
                   <div className="flex flex-wrap gap-4">
                     {projectDetails.techIcons.map(({ Icon, name, color }: any) => (
                       <div key={name} className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-white/5 rounded-lg border border-gray-300 dark:border-white/10 transition-colors duration-300">
@@ -611,12 +632,12 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
 
                 {/* Key Features */}
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">Key Features</h3>
-                  <div className="space-y-3">
+                  <h3 className="text-sm font-bold text-accent uppercase tracking-wide mb-4 transition-colors duration-300"># Key Features</h3>
+                  <div className="space-y-2">
                     {projectDetails.keyFeatures.map((feature: string, index: number) => (
-                      <div key={index} className="flex items-start gap-3">
-                        <FiCheckCircle className="w-5 h-5 text-cyan-600 dark:text-cyan-400 flex-shrink-0 mt-0.5" />
-                        <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300">{feature}</p>
+                      <div key={index} className="flex items-start gap-2">
+                        <span className="text-accent mt-0.5">+</span>
+                        <p className="text-gray-700 dark:text-gray-300 transition-colors duration-300 font-sans text-sm">{feature}</p>
                       </div>
                     ))}
                   </div>
@@ -624,12 +645,12 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
 
                 {/* Capabilities */}
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">Core Capabilities</h3>
+                  <h3 className="text-sm font-bold text-accent uppercase tracking-wide mb-4 transition-colors duration-300"># Core Capabilities</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {projectDetails.capabilities.map((capability: any, index: number) => (
                       <div key={index} className="p-4 bg-gray-100 dark:bg-white/5 rounded-lg border border-gray-300 dark:border-white/10 transition-colors duration-300">
-                        <h4 className="font-bold text-cyan-700 dark:text-cyan-400 mb-2 transition-colors duration-300">{capability.title}</h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">{capability.description}</p>
+                        <h4 className="font-bold text-accent mb-2 transition-colors duration-300">{capability.title}</h4>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300 font-sans">{capability.description}</p>
                       </div>
                     ))}
                   </div>
@@ -638,7 +659,7 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
                 {/* Architecture Diagram */}
                 {diagramContent && (
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">System Architecture</h3>
+                    <h3 className="text-sm font-bold text-accent uppercase tracking-wide mb-4 transition-colors duration-300"># System Architecture</h3>
                     <MermaidDiagram chart={diagramContent} />
                   </div>
                 )}
@@ -646,7 +667,7 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
                 {/* Team Collaboration - Side by Side */}
                 {projectDetails.teamCollaboration && projectDetails.teamCollaboration.length > 0 && (
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">Project Team Collaboration</h3>
+                    <h3 className="text-sm font-bold text-accent uppercase tracking-wide mb-4 transition-colors duration-300"># Team Collaboration</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {projectDetails.teamCollaboration.map((image: any, index: number) => (
                         <div key={index} className="space-y-2">
@@ -658,7 +679,7 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
                               className="object-cover"
                             />
                           </div>
-                          <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">{image.caption}</p>
+                          <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300 font-sans">{image.caption}</p>
                         </div>
                       ))}
                     </div>
@@ -668,7 +689,7 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
                 {/* Screenshots Showcase */}
                 {projectDetails.screenshots && projectDetails.screenshots.length > 0 && (
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">Application Screenshots</h3>
+                    <h3 className="text-sm font-bold text-accent uppercase tracking-wide mb-4 transition-colors duration-300"># Screenshots</h3>
                     <ScreenshotShowcase screenshots={projectDetails.screenshots} />
                   </div>
                 )}
