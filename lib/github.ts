@@ -132,7 +132,7 @@ const productOwnerProjects: GitHubRepo[] = [
     full_name: 'd4vid4nderson/FacilityVUE',
     description: 'Recently shipped facility management platform currently being prepared for commercial release to school districts nationwide. Demonstrates transition from internal tooling to market-ready software product with scalable multi-tenant architecture.',
     html_url: '#',
-    homepage: null,
+    homepage: 'https://facilityvue.com/',
     stargazers_count: 0,
     forks_count: 0,
     fork: false,
