@@ -334,15 +334,15 @@ export function CareerTimeline() {
             careerState === 'minimized' ? 'max-h-0' : 'max-h-[5000px]'
           }`}>
           <div className="p-5 sm:p-8 font-mono">
-            {/* Command header */}
+            {/* Command header - command small, output large */}
             <div className="mb-6 sm:mb-8">
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
+              <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
                 <span className="text-accent">$</span> git log{' '}
-                <span className="gradient-text">--career</span>
+                <span className="text-accent">--career</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
+                <span className="gradient-text">12+ years</span> of evolution from design ops to AI-powered product development
               </h2>
-              <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                <span className="text-accent">12+ years</span> of evolution from design ops to AI-powered product development
-              </p>
             </div>
 
             {/* Timeline */}

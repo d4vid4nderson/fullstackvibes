@@ -1028,14 +1028,17 @@ export function Hero() {
                     </div>
                   </div>
 
-                  {/* whoami - matches git log --career style */}
+                  {/* whoami - command small, output large */}
                   <div className="lg:pr-44 mb-2">
-                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
+                    <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
                       <span className="text-accent">$</span> whoami{' '}
-                      <span className="gradient-text">--profile</span>
+                      <span className="text-accent">--profile</span>
+                    </div>
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
+                      <span className="gradient-text">David Anderson</span>
                     </h2>
-                    <p className="mt-2 text-gray-600 dark:text-gray-400 text-sm">
-                      <span className="text-accent font-semibold">David Anderson</span> · Digital Experience Architect / Product Owner
+                    <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300">
+                      Digital Experience Architect / Product Owner
                     </p>
                   </div>
 
