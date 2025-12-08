@@ -7,6 +7,7 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import { AIChat } from "@/components/AIChat";
 import { ChatProvider } from "@/components/ChatContext";
 import { TerminalProvider } from "@/components/TerminalContext";
+import { BackgroundOrbs } from "@/components/BackgroundOrbs";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { StructuredData } from "@/components/StructuredData";
@@ -152,17 +153,18 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${jetbrainsMono.variable} antialiased`}
+        className={`${jetbrainsMono.variable} antialiased min-h-screen flex flex-col`}
       >
         <ThemeProvider>
           <ChatProvider>
             <TerminalProvider>
-              <div>
+              <BackgroundOrbs />
+              <div className="flex-1 relative z-10">
                 {children}
-                <Footer />
-                <ScrollToTop />
-                <AIChat />
               </div>
+              <Footer />
+              <ScrollToTop />
+              <AIChat />
             </TerminalProvider>
           </ChatProvider>
         </ThemeProvider>

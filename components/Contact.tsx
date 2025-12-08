@@ -155,11 +155,6 @@ export function Contact() {
     <section id="contact" className={`relative px-4 sm:px-6 lg:px-8 transition-all duration-300 ${
       contactState === 'minimized' ? 'py-4' : 'py-8 sm:py-12'
     }`}>
-      {/* Background decoration - always visible */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/3 left-0 w-96 h-96 bg-accent rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-10 animate-pulse" />
-        <div className="absolute bottom-1/4 right-0 w-80 h-80 bg-accent-secondary rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-10 animate-pulse" style={{ animationDelay: '1s' }} />
-      </div>
 
       <div className="relative max-w-7xl mx-auto z-10">
         {/* Terminal Window */}

@@ -820,13 +820,7 @@ export function Hero() {
   const closingTransformStyle = { '--nav-shift': `${navShift}px` } as React.CSSProperties;
 
   return (
-    <section className="relative px-4 sm:px-6 lg:px-8 pt-24 pb-8 transition-colors duration-300 overflow-visible">
-      {/* Animated background orbs */}
-      <div className="absolute inset-0 pointer-events-none overflow-visible">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-20 animate-pulse"></div>
-        <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-accent-secondary rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-20 animate-pulse delay-75"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-accent-tertiary rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-20 animate-pulse delay-150"></div>
-      </div>
+    <section className="relative px-4 sm:px-6 lg:px-8 pt-24 pb-8 transition-colors duration-300">
 
       <div className="relative max-w-7xl mx-auto w-full z-10">
         {/* Full Stack Vibes with hidden navigation easter egg - desktop only */}
