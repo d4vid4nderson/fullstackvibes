@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { GitHubRepo } from '@/types/github';
 import { FiX, FiCheckCircle, FiExternalLink } from 'react-icons/fi';
 import { SiGo, SiJavascript, SiTailwindcss, SiDocker, SiAnthropic, SiReact, SiPython, SiFastapi, SiPostgresql, SiTypescript, SiNextdotjs, SiVuedotjs, SiNodedotjs, SiMongodb, SiSupabase, SiStripe } from 'react-icons/si';
@@ -461,6 +462,12 @@ const getProjectDetails = (repoName: string) => {
 export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [diagramContent, setDiagramContent] = useState<string>('');
+  const [mounted, setMounted] = useState(false);
+
+  // Ensure we're mounted before using portal
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -519,11 +526,11 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
     }
   }, [isOpen]);
 
-  if (!isOpen || !repo) return null;
+  if (!isOpen || !repo || !mounted) return null;
 
   const projectDetails = getProjectDetails(repo.name);
 
-  return (
+  return createPortal(
     <div
       className="fixed inset-0 overflow-y-auto"
       style={{ zIndex: 99999 }}
@@ -698,6 +705,7 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
