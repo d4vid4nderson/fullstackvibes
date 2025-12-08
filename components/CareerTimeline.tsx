@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { FiChevronDown, FiChevronUp, FiGitCommit, FiMapPin, FiBriefcase } from 'react-icons/fi';
 import { useTerminal } from './TerminalContext';
+import { TerminalHeader } from './TerminalHeader';
 
 interface CareerEntry {
   id: string;
@@ -304,30 +305,12 @@ export function CareerTimeline() {
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Terminal Window */}
         <div className="bg-white dark:bg-[#1a1a1a] rounded-lg border border-gray-300 dark:border-white/10 shadow-2xl overflow-hidden transition-colors duration-300">
-          {/* Terminal Header */}
-          <div className="bg-gray-100 dark:bg-[#2a2a2a] px-4 py-2 flex items-center gap-2 border-b border-gray-300 dark:border-white/10 transition-colors duration-300">
-            <div className="flex gap-2">
-              <button
-                onClick={() => setCareerState('closed')}
-                className="w-6 h-6 sm:w-3 sm:h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-1"
-                aria-label="Close terminal"
-                title="Close terminal"
-              />
-              <button
-                onClick={() => setCareerState('minimized')}
-                className="w-6 h-6 sm:w-3 sm:h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-1"
-                aria-label="Minimize terminal"
-                title="Minimize terminal"
-              />
-              <button
-                onClick={() => setCareerState('open')}
-                className="w-6 h-6 sm:w-3 sm:h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-1"
-                aria-label="Maximize terminal"
-                title="Maximize terminal"
-              />
-            </div>
-            <span className="text-xs text-gray-500 dark:text-gray-400 ml-2 font-mono">david@fullstackvibes:~/career</span>
-          </div>
+          <TerminalHeader
+            path="~/career"
+            onClose={() => setCareerState('closed')}
+            onMinimize={() => setCareerState('minimized')}
+            onMaximize={() => setCareerState('open')}
+          />
 
           {/* Terminal Content - Hidden when minimized */}
           <div className={`transition-all duration-300 overflow-hidden ${
