@@ -262,7 +262,7 @@ export function Contact() {
             {/* Footer note */}
             <div className="mt-8 pt-6 border-t border-gray-200 dark:border-white/10">
               <p className="text-xs text-gray-500 dark:text-gray-500 text-center">
-                <span className="text-accent">tip:</span> type <code className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-white/5 text-accent">contact</code> in the terminal above for quick access
+                <span className="text-accent">tip:</span> fill out the form and press <kbd className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-white/5 text-accent font-semibold">{isMac ? '⌘' : 'Ctrl'}</kbd> + <kbd className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-white/5 text-accent font-semibold">Enter</kbd> to send
               </p>
             </div>
           </div>
