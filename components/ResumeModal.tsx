@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { FiX, FiDownload } from 'react-icons/fi';
+import { useState, useEffect, useRef } from 'react';
+import { FiX, FiDownload, FiSun, FiMoon } from 'react-icons/fi';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -10,6 +10,8 @@ interface ResumeModalProps {
 
 export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
   const [isAnimating, setIsAnimating] = useState(false);
+  const [resumeTheme, setResumeTheme] = useState<'dark' | 'light'>('dark');
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -19,6 +21,21 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
       return () => clearTimeout(timer);
     }
   }, [isOpen]);
+
+  const toggleResumeTheme = () => {
+    const newTheme = resumeTheme === 'dark' ? 'light' : 'dark';
+    setResumeTheme(newTheme);
+
+    // Toggle theme in iframe
+    if (iframeRef.current?.contentDocument) {
+      const iframeBody = iframeRef.current.contentDocument.body;
+      if (newTheme === 'light') {
+        iframeBody.classList.add('light-mode');
+      } else {
+        iframeBody.classList.remove('light-mode');
+      }
+    }
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -56,6 +73,14 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
           <div className="sticky top-0 z-10 flex items-center justify-between p-3 sm:p-4 border-b border-gray-300 dark:border-white/10 bg-white dark:bg-[#1a1a1a]">
             <h2 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">Resume</h2>
             <div className="flex items-center gap-2 sm:gap-3">
+              <button
+                onClick={toggleResumeTheme}
+                className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-[#2a2a2a] hover:text-accent transition-colors"
+                aria-label="Toggle resume theme"
+                title={resumeTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {resumeTheme === 'dark' ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
+              </button>
               <a
                 href="/david-anderson-resume.pdf"
                 download="David-Anderson-Resume.pdf"
@@ -78,6 +103,7 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
           {/* Resume Content */}
           <div className="overflow-y-auto max-h-[calc(90vh-80px)]">
             <iframe
+              ref={iframeRef}
               src="/resume.html"
               className="w-full h-[calc(90vh-80px)] border-0"
               title="Resume"

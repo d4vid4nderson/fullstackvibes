@@ -51,7 +51,7 @@
             transition: background 0.3s ease, color 0.3s ease;
         }
 
-        /* Theme Toggle */
+        /* Theme Toggle - hidden when in iframe */
         .theme-toggle {
             position: fixed;
             top: 16px;
@@ -68,6 +68,11 @@
             align-items: center;
             justify-content: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hide theme toggle when in iframe */
+        .in-iframe .theme-toggle {
+            display: none;
         }
 
         .theme-toggle:hover {
@@ -761,6 +766,11 @@
 
         // Check for saved theme or sync with portfolio
         (function() {
+            // Detect if in iframe and hide theme toggle
+            if (window.self !== window.top) {
+                document.body.classList.add('in-iframe');
+            }
+
             const savedTheme = localStorage.getItem('resume-theme');
             const portfolioMode = localStorage.getItem('mode');
 
