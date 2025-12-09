@@ -1114,9 +1114,9 @@ export function Hero() {
                 Projects
               </a>
               <span className="text-gray-500 text-xs">|</span>
-              <button onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); setShowResumeModal(true); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap focus:outline-none focus:text-accent">
+              <span role="button" tabIndex={0} onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); setShowResumeModal(true); }} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.stopPropagation(); setIsNavExpanded(false); setShowResumeModal(true); }}} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap focus:outline-none focus:text-accent cursor-pointer">
                 Resume
-              </button>
+              </span>
               <span className="text-gray-500 text-xs">|</span>
               <a href="#contact" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); if (contactState === 'closed') restoreTerminal('contact'); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap focus:outline-none focus:text-accent">
                 Contact
