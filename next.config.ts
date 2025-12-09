@@ -11,9 +11,21 @@ const getGitHash = () => {
   }
 };
 
+// Get version from package.json and append git hash
+const getVersion = () => {
+  try {
+    const pkg = require('./package.json');
+    const hash = getGitHash();
+    return `${pkg.version}.${hash}`;
+  } catch {
+    return `0.1.0.${getGitHash()}`;
+  }
+};
+
 const nextConfig: NextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   env: {
+    NEXT_PUBLIC_VERSION: getVersion(),
     NEXT_PUBLIC_GIT_HASH: getGitHash(),
     NEXT_PUBLIC_BUILD_TIME: new Date().toISOString(),
   },

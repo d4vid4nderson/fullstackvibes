@@ -68,13 +68,13 @@ export function Footer() {
             </a>
           </div>
 
-          {/* Right: Copyright and Version - with padding to avoid floating buttons */}
-          <div className="text-center sm:text-right sm:pr-20">
+          {/* Right: Copyright and Version */}
+          <div className="text-center sm:text-right">
             <p className="text-gray-500 text-xs sm:text-sm">
               © {currentYear} David Anderson
             </p>
             <p className="text-gray-600 text-xs font-mono mt-1">
-              v{process.env.NEXT_PUBLIC_GIT_HASH || 'dev'}
+              v{process.env.NEXT_PUBLIC_VERSION || 'dev'}
             </p>
           </div>
         </div>
