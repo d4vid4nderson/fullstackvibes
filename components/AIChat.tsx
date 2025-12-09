@@ -1,9 +1,8 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { FiMessageSquare, FiX, FiSend, FiUser, FiRefreshCw } from 'react-icons/fi';
+import { FiX, FiSend, FiUser, FiRefreshCw } from 'react-icons/fi';
 import { useChatContext } from './ChatContext';
-import { useFooterVisibility } from '../hooks/useFooterVisibility';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -24,11 +23,6 @@ export function AIChat() {
   const [showJobMatcher, setShowJobMatcher] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
-  const { isFooterVisible, footerHeight } = useFooterVisibility();
-
-  // Calculate bottom position for chat button when footer is visible
-  // Base is 24px (sm:bottom-6), add footer height to maintain consistent spacing
-  const chatButtonBottom = isFooterVisible ? 24 + footerHeight : undefined;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -134,16 +128,6 @@ export function AIChat() {
 
   return (
     <>
-      {/* Chat Button */}
-      <button
-        onClick={() => setIsOpen(true)}
-        style={chatButtonBottom ? { bottom: `${chatButtonBottom}px`, transition: 'bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1)' } : undefined}
-        className={`fixed right-4 sm:right-6 z-[9998] p-3 sm:p-4 rounded-full bg-gradient-accent-to-r text-white shadow-lg transition-all duration-300 ease-out hover:scale-110 hover:glow ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'} ${!chatButtonBottom ? 'bottom-4 sm:bottom-6' : ''}`}
-        aria-label="Open chat"
-      >
-        <FiMessageSquare className="w-5 h-5 sm:w-6 sm:h-6" />
-      </button>
-
       {/* Chat Window */}
       <div
         className={`fixed z-[9999] bg-[#1a1a1a] shadow-2xl border border-white/10 flex flex-col transition-all duration-300

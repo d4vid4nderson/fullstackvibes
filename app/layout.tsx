@@ -3,7 +3,7 @@ import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Footer } from "@/components/Footer";
-import { ScrollToTop } from "@/components/ScrollToTop";
+import { FloatingButtons } from "@/components/FloatingButtons";
 import { AIChat } from "@/components/AIChat";
 import { ChatProvider } from "@/components/ChatContext";
 import { TerminalProvider } from "@/components/TerminalContext";
@@ -163,7 +163,7 @@ export default function RootLayout({
                 {children}
               </div>
               <Footer />
-              <ScrollToTop />
+              <FloatingButtons />
               <AIChat />
             </TerminalProvider>
           </ChatProvider>
