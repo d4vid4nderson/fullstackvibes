@@ -68,10 +68,15 @@ export function Footer() {
             </a>
           </div>
 
-          {/* Right: Copyright */}
-          <p className="text-gray-500 text-xs sm:text-sm">
-            © {currentYear} David Anderson
-          </p>
+          {/* Right: Copyright and Version */}
+          <div className="text-right">
+            <p className="text-gray-500 text-xs sm:text-sm">
+              © {currentYear} David Anderson
+            </p>
+            <p className="text-gray-600 text-xs font-mono mt-1">
+              v{process.env.NEXT_PUBLIC_GIT_HASH || 'dev'}
+            </p>
+          </div>
         </div>
       </div>
     </footer>
