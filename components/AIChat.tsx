@@ -137,8 +137,8 @@ export function AIChat() {
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(true)}
-        style={chatButtonBottom ? { bottom: `${chatButtonBottom}px` } : undefined}
-        className={`fixed right-4 sm:right-6 z-[9998] p-3 sm:p-4 rounded-full bg-gradient-accent-to-r text-white shadow-lg transition-all duration-300 hover:scale-110 hover:glow ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'} ${!chatButtonBottom ? 'bottom-4 sm:bottom-6' : ''}`}
+        style={chatButtonBottom ? { bottom: `${chatButtonBottom}px`, transition: 'bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1)' } : undefined}
+        className={`fixed right-4 sm:right-6 z-[9998] p-3 sm:p-4 rounded-full bg-gradient-accent-to-r text-white shadow-lg transition-all duration-300 ease-out hover:scale-110 hover:glow ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'} ${!chatButtonBottom ? 'bottom-4 sm:bottom-6' : ''}`}
         aria-label="Open chat"
       >
         <FiMessageSquare className="w-5 h-5 sm:w-6 sm:h-6" />

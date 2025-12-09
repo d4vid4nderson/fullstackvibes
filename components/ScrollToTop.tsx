@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, CSSProperties } from 'react';
 import { FiArrowUp } from 'react-icons/fi';
 import { useChatContext } from './ChatContext';
 import { useFooterVisibility } from '../hooks/useFooterVisibility';
@@ -40,20 +40,23 @@ export function ScrollToTop() {
     return 'opacity-100';
   };
 
-  // Calculate bottom position dynamically
-  const getBottomStyle = () => {
-    if (!isVisible) return { bottom: '24px', right: '24px' };
+  // Calculate bottom position dynamically with smooth transition
+  const getBottomStyle = (): CSSProperties => {
+    const transition = 'bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+    if (!isVisible) return { bottom: '24px', right: '24px', transition };
     if (isChatOpen) {
       return {
         bottom: `${Math.max(16, 16 + footerOffset)}px`,
-        right: '24px'
+        right: '24px',
+        transition
       };
     }
     // Above chat button (72px on mobile, 88px on desktop) + footer offset
     const baseBottom = window.innerWidth >= 640 ? 88 : 72;
     return {
       bottom: `${baseBottom + footerOffset}px`,
-      right: '24px'
+      right: '24px',
+      transition
     };
   };
 
