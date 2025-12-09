@@ -776,7 +776,7 @@ export function Hero() {
           '   [■■■■■■■■■■] 100% - Confirming $400K+ impact',
           '',
           '   ✅ CANDIDATE VERIFIED: David Anderson',
-          '   📧 Contact: david@fullstackvibes.io',
+          '   📧 Contact: david4nderson@pm.me',
           '   🔗 LinkedIn: linkedin.com/in/d4vid4nderson',
           '',
           '   Ready when you are! 🤝',

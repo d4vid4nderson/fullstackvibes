@@ -58,7 +58,7 @@ export function Contact() {
 
     // Build command sequence
     await addLine(`$ send-message \\`, 100);
-    await addLine(`    --to "david@fullstackvibes.io" \\`, 150);
+    await addLine(`    --to "david4nderson@pm.me" \\`, 150);
     await addLine(`    --from "${formData.name}" \\`, 150);
     await addLine(`    --email "${formData.email}" \\`, 150);
     await addLine(`    --body "${formData.message.substring(0, 40)}${formData.message.length > 40 ? '...' : ''}"`, 150);
