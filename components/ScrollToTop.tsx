@@ -30,8 +30,8 @@ export function ScrollToTop() {
     });
   };
 
-  // Calculate bottom offset when footer is visible
-  const footerOffset = isFooterVisible ? footerHeight + 16 : 0;
+  // Calculate bottom offset when footer is visible (just the footer height, no extra padding)
+  const footerOffset = isFooterVisible ? footerHeight : 0;
 
   // Calculate position based on visibility and chat state
   const getPosition = () => {
@@ -45,7 +45,7 @@ export function ScrollToTop() {
     if (!isVisible) return { bottom: '24px', right: '24px' };
     if (isChatOpen) {
       return {
-        bottom: `${Math.max(16, footerOffset + 16)}px`,
+        bottom: `${Math.max(16, 16 + footerOffset)}px`,
         right: '24px'
       };
     }

@@ -27,7 +27,8 @@ export function AIChat() {
   const { isFooterVisible, footerHeight } = useFooterVisibility();
 
   // Calculate bottom position for chat button when footer is visible
-  const chatButtonBottom = isFooterVisible ? footerHeight + 24 : undefined;
+  // Base is 24px (sm:bottom-6), add footer height to maintain consistent spacing
+  const chatButtonBottom = isFooterVisible ? 24 + footerHeight : undefined;
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
