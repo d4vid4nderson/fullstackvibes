@@ -563,7 +563,7 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
               <div className="w-3 h-3 rounded-full bg-green-500"></div>
             </div>
             <span className="text-xs text-gray-500 dark:text-gray-400 ml-2 font-mono truncate">
-              david@fullstackvibes:~/projects/{repo.name.toLowerCase().replace(/\s+/g, '-')}
+              david@fullstackvibes:~/projects/{repo.name.toLowerCase().replace(/\s+/g, '-')}/README.md
             </span>
             <button
               onClick={onClose}
@@ -574,12 +574,14 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
             </button>
           </div>
 
-          {/* Command Header */}
+          {/* Project Title Header */}
           <div className="bg-white dark:bg-[#1a1a1a] border-b border-gray-300 dark:border-white/10 p-4 sm:p-6 transition-colors duration-300">
             <div className="font-mono">
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white">
-                <span className="text-accent">$</span> cat{' '}
-                <span className="gradient-text">./README.md</span>
+              <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                <span className="text-accent">$</span> cat <span className="text-accent">./README.md</span>
+              </div>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold gradient-text">
+                {repo.name}
               </h2>
               <p className="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-400">{repo.description}</p>
             </div>

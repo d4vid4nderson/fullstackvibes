@@ -1151,13 +1151,13 @@ export function Hero() {
                 <div className="p-5 sm:p-8 font-mono text-sm sm:text-base leading-relaxed relative">
                   {/* Photo - responsive: inline on mobile, absolute on desktop */}
                   <div className="lg:absolute lg:top-8 lg:right-8 flex justify-center lg:justify-end mb-4 lg:mb-0">
-                    <div className="relative rounded-full p-[3px] bg-gradient-accent-to-r w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] lg:w-[160px] lg:h-[160px]">
+                    <div className="relative rounded-full p-[3px] bg-gradient-accent-to-r w-[150px] h-[150px] sm:w-[175px] sm:h-[175px] lg:w-[200px] lg:h-[200px]">
                       <div className="relative rounded-full overflow-hidden w-full h-full bg-white dark:bg-[#1a1a1a]">
                         <Image
                           src="/david-headshot-square.jpg"
                           alt="David Anderson"
-                          width={160}
-                          height={160}
+                          width={200}
+                          height={200}
                           className="rounded-full object-cover w-full h-full"
                           priority
                         />
@@ -1166,7 +1166,7 @@ export function Hero() {
                   </div>
 
                   {/* whoami - command small, name large white, role colored */}
-                  <div className="lg:pr-44 mb-4 text-center lg:text-left">
+                  <div className="lg:pr-44 mb-4 text-left">
                     <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
                       <span className="text-accent">$</span> whoami{' '}
                       <span className="text-accent">--profile</span>
@@ -1180,7 +1180,7 @@ export function Hero() {
                   </div>
 
                   {/* Key Metrics - recruitment hook */}
-                  <div className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 mb-4 text-xs sm:text-sm">
+                  <div className="flex flex-wrap justify-start gap-3 sm:gap-4 mb-4 text-xs sm:text-sm">
                     <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20">
                       <span className="text-accent font-bold">$400K+</span>
                       <span className="text-gray-600 dark:text-gray-400">saved</span>
