@@ -102,8 +102,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Favicon - multiple formats for browser compatibility */}
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        {/* Favicon - PNG for better gradient support and compatibility */}
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
