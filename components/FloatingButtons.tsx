@@ -7,27 +7,56 @@ import { useFooterVisibility } from '../hooks/useFooterVisibility';
 
 export function FloatingButtons() {
   const [isScrollVisible, setIsScrollVisible] = useState(false);
+  const [wasScrollVisible, setWasScrollVisible] = useState(false);
   const { isChatOpen, setIsChatOpen } = useChatContext();
   const { isFooterVisible, footerHeight } = useFooterVisibility();
-  const prevFooterVisible = useRef(isFooterVisible);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [isGooeyActive, setIsGooeyActive] = useState(false);
+  const gooeyTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const toggleVisibility = () => {
-      setIsScrollVisible(window.scrollY > 300);
+      const shouldBeVisible = window.scrollY > 300;
+
+      if (shouldBeVisible !== isScrollVisible) {
+        // Trigger gooey effect when visibility changes
+        setIsGooeyActive(true);
+
+        // Clear any existing timeout
+        if (gooeyTimeoutRef.current) {
+          clearTimeout(gooeyTimeoutRef.current);
+        }
+
+        // Keep gooey active during animation
+        gooeyTimeoutRef.current = setTimeout(() => {
+          setIsGooeyActive(false);
+        }, 800);
+
+        setWasScrollVisible(isScrollVisible);
+        setIsScrollVisible(shouldBeVisible);
+      }
     };
 
     window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', toggleVisibility);
+      if (gooeyTimeoutRef.current) {
+        clearTimeout(gooeyTimeoutRef.current);
+      }
+    };
+  }, [isScrollVisible]);
 
-  // Detect footer visibility changes to trigger bounce animation
+  // Also trigger gooey on footer visibility change
+  const prevFooterVisible = useRef(isFooterVisible);
   useEffect(() => {
     if (prevFooterVisible.current !== isFooterVisible) {
-      setIsAnimating(true);
-      const timer = setTimeout(() => setIsAnimating(false), 600);
+      setIsGooeyActive(true);
+      if (gooeyTimeoutRef.current) {
+        clearTimeout(gooeyTimeoutRef.current);
+      }
+      gooeyTimeoutRef.current = setTimeout(() => {
+        setIsGooeyActive(false);
+      }, 800);
       prevFooterVisible.current = isFooterVisible;
-      return () => clearTimeout(timer);
     }
   }, [isFooterVisible]);
 
@@ -38,28 +67,25 @@ export function FloatingButtons() {
   // Calculate footer offset
   const footerOffset = isFooterVisible ? footerHeight : 0;
 
-  // Base positions - add overshoot during animation (more for scroll button)
-  const scrollOvershoot = isAnimating ? 28 : 0;
-  const chatOvershoot = isAnimating ? 8 : 0;
-  const chatButtonBottom = 24 + footerOffset + chatOvershoot;
-  const scrollButtonBottom = 88 + footerOffset + scrollOvershoot;
+  // Chat button position
+  const chatButtonBottom = 24 + footerOffset;
 
-  // Bounce easing for gooey effect - overshoots then settles
-  const transition = isAnimating
-    ? 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)' // Bounce/overshoot easing
-    : 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'; // Smooth settle
+  // Scroll button: starts at chat position, animates to final position
+  // When not visible, position at chat button location (merged)
+  const scrollButtonFinalBottom = 88 + footerOffset;
+  const scrollButtonBottom = isScrollVisible ? scrollButtonFinalBottom : chatButtonBottom;
 
   return (
     <>
-      {/* SVG Filter for Gooey Effect - only used during animation */}
+      {/* SVG Filter for Gooey Effect */}
       <svg className="absolute" style={{ width: 0, height: 0 }}>
         <defs>
           <filter id="gooey">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
             <feColorMatrix
               in="blur"
               mode="matrix"
-              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 25 -12"
+              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
               result="gooey"
             />
             <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
@@ -67,22 +93,20 @@ export function FloatingButtons() {
         </defs>
       </svg>
 
-      {/* Container - gooey filter only during animation */}
+      {/* Container with gooey filter */}
       <div
         className="fixed bottom-0 right-0 z-[9998] pointer-events-none"
         style={{
-          filter: isAnimating ? 'url(#gooey)' : 'none',
-          transition: 'filter 0.2s ease-out'
+          filter: isGooeyActive ? 'url(#gooey)' : 'none',
         }}
       >
-        {/* Scroll to Top Button */}
+        {/* Scroll to Top Button - emerges from chat button */}
         <button
           onClick={scrollToTop}
           style={{
             bottom: `${scrollButtonBottom}px`,
             right: '24px',
-            transition,
-            transform: isScrollVisible ? 'scale(1)' : 'scale(0)',
+            transition: 'bottom 0.6s cubic-bezier(0.34, 1.2, 0.64, 1), opacity 0.3s ease',
           } as CSSProperties}
           className={`fixed z-40 p-3 sm:p-4 bg-gradient-accent rounded-full text-white shadow-lg pointer-events-auto hover:scale-110 ${
             isScrollVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
@@ -98,7 +122,7 @@ export function FloatingButtons() {
           style={{
             bottom: `${chatButtonBottom}px`,
             right: '24px',
-            transition,
+            transition: 'bottom 0.5s cubic-bezier(0.34, 1.2, 0.64, 1)',
           } as CSSProperties}
           className={`fixed z-[9998] p-3 sm:p-4 rounded-full bg-gradient-accent-to-r text-white shadow-lg pointer-events-auto hover:scale-110 hover:glow ${
             isChatOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'
