@@ -777,7 +777,7 @@ export function Hero() {
           '',
           '   ✅ CANDIDATE VERIFIED: David Anderson',
           '   📧 Contact: david4nderson@pm.me',
-          '   🔗 LinkedIn: linkedin.com/in/d4vid4nderson',
+          '   🔗 LinkedIn: linkedin.com/in/d4v1d4nd3rs0n',
           '',
           '   Ready when you are! 🤝',
           ''
@@ -1213,7 +1213,7 @@ export function Hero() {
                       View Resume
                     </button>
                     <a
-                      href="https://linkedin.com/in/d4vid4nderson"
+                      href="https://www.linkedin.com/in/d4v1d4nd3rs0n/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-white/20 text-gray-700 dark:text-gray-300 hover:border-accent hover:text-accent font-medium rounded-lg transition-all"
