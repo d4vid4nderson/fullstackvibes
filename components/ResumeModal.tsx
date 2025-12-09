@@ -1,7 +1,16 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { FiX, FiDownload, FiSun, FiMoon } from 'react-icons/fi';
+import { useTheme } from './ThemeProvider';
+
+const themeColors: Record<string, { primary: string; secondary: string; tertiary: string; light: string; dark: string }> = {
+  'cyan': { primary: '#06b6d4', secondary: '#14b8a6', tertiary: '#0891b2', light: '#67e8f9', dark: '#0e7490' },
+  'purple': { primary: '#a855f7', secondary: '#8b5cf6', tertiary: '#7c3aed', light: '#c084fc', dark: '#7c3aed' },
+  'emerald': { primary: '#10b981', secondary: '#059669', tertiary: '#34d399', light: '#6ee7b7', dark: '#047857' },
+  'orange': { primary: '#f97316', secondary: '#fb923c', tertiary: '#ea580c', light: '#fdba74', dark: '#c2410c' },
+  'blue': { primary: '#3b82f6', secondary: '#60a5fa', tertiary: '#2563eb', light: '#93c5fd', dark: '#1d4ed8' }
+};
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -11,7 +20,46 @@ interface ResumeModalProps {
 export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [resumeTheme, setResumeTheme] = useState<'dark' | 'light'>('dark');
+  const [iframeReady, setIframeReady] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const { colorTheme } = useTheme();
+
+  // Send theme to iframe
+  const sendThemeToIframe = useCallback(() => {
+    if (iframeRef.current?.contentWindow) {
+      const colors = themeColors[colorTheme] || themeColors['cyan'];
+      iframeRef.current.contentWindow.postMessage({
+        type: 'setTheme',
+        mode: resumeTheme,
+        colors
+      }, '*');
+    }
+  }, [colorTheme, resumeTheme]);
+
+  // Listen for iframe ready message
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data && event.data.type === 'iframeReady') {
+        setIframeReady(true);
+      }
+    };
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
+  // Send theme when iframe is ready or theme changes
+  useEffect(() => {
+    if (iframeReady && isOpen) {
+      sendThemeToIframe();
+    }
+  }, [iframeReady, isOpen, sendThemeToIframe]);
+
+  // Also send on colorTheme change
+  useEffect(() => {
+    if (isOpen && iframeReady) {
+      sendThemeToIframe();
+    }
+  }, [colorTheme, isOpen, iframeReady, sendThemeToIframe]);
 
   useEffect(() => {
     if (isOpen) {
@@ -26,14 +74,14 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
     const newTheme = resumeTheme === 'dark' ? 'light' : 'dark';
     setResumeTheme(newTheme);
 
-    // Toggle theme in iframe
-    if (iframeRef.current?.contentDocument) {
-      const iframeBody = iframeRef.current.contentDocument.body;
-      if (newTheme === 'light') {
-        iframeBody.classList.add('light-mode');
-      } else {
-        iframeBody.classList.remove('light-mode');
-      }
+    // Send theme update to iframe via postMessage
+    if (iframeRef.current?.contentWindow) {
+      const colors = themeColors[colorTheme] || themeColors['cyan'];
+      iframeRef.current.contentWindow.postMessage({
+        type: 'setTheme',
+        mode: newTheme,
+        colors
+      }, '*');
     }
   };
 

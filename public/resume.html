@@ -628,14 +628,6 @@
                     </div>
                     <span class="terminal-title">david@fullstackvibes:~/resume</span>
                 </div>
-                <button class="download-btn" onclick="window.print()">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    PDF
-                </button>
             </div>
             <div class="terminal-content">
                 <div class="terminal-section">
@@ -769,18 +761,59 @@
             localStorage.setItem('resume-theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
         }
 
+        // Update CSS variables with theme colors
+        function setThemeColors(colors) {
+            const root = document.documentElement;
+            if (colors.primary) root.style.setProperty('--accent-primary', colors.primary);
+            if (colors.secondary) root.style.setProperty('--accent-secondary', colors.secondary);
+            if (colors.tertiary) root.style.setProperty('--accent-tertiary', colors.tertiary);
+            if (colors.light) root.style.setProperty('--accent-light', colors.light);
+            if (colors.dark) root.style.setProperty('--accent-dark', colors.dark);
+        }
+
+        // Listen for theme updates from parent window
+        window.addEventListener('message', function(event) {
+            if (event.data && event.data.type === 'setTheme') {
+                if (event.data.mode === 'light') {
+                    document.body.classList.add('light-mode');
+                } else {
+                    document.body.classList.remove('light-mode');
+                }
+                if (event.data.colors) {
+                    setThemeColors(event.data.colors);
+                }
+            }
+        });
+
         // Check for saved theme or sync with portfolio
         (function() {
             // Detect if in iframe and hide theme toggle
             if (window.self !== window.top) {
                 document.body.classList.add('in-iframe');
+                // Notify parent that iframe is ready
+                window.parent.postMessage({ type: 'iframeReady' }, '*');
             }
 
             const savedTheme = localStorage.getItem('resume-theme');
             const portfolioMode = localStorage.getItem('mode');
+            const portfolioColorTheme = localStorage.getItem('colorTheme');
 
             if (savedTheme === 'light' || (!savedTheme && portfolioMode === 'light')) {
                 document.body.classList.add('light-mode');
+            }
+
+            // Try to get theme colors from localStorage
+            if (portfolioColorTheme) {
+                const themeColors = {
+                    'cyan': { primary: '#06b6d4', secondary: '#14b8a6', tertiary: '#0891b2', light: '#67e8f9', dark: '#0e7490' },
+                    'purple': { primary: '#a855f7', secondary: '#8b5cf6', tertiary: '#7c3aed', light: '#c084fc', dark: '#7c3aed' },
+                    'emerald': { primary: '#10b981', secondary: '#059669', tertiary: '#34d399', light: '#6ee7b7', dark: '#047857' },
+                    'orange': { primary: '#f97316', secondary: '#fb923c', tertiary: '#ea580c', light: '#fdba74', dark: '#c2410c' },
+                    'blue': { primary: '#3b82f6', secondary: '#60a5fa', tertiary: '#2563eb', light: '#93c5fd', dark: '#1d4ed8' }
+                };
+                if (themeColors[portfolioColorTheme]) {
+                    setThemeColors(themeColors[portfolioColorTheme]);
+                }
             }
         })();
     </script>
