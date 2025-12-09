@@ -510,14 +510,13 @@
                 font-size: 14px;
                 margin-bottom: 10px;
                 padding-bottom: 4px;
-                color: #06b6d4 !important;
-                -webkit-text-fill-color: #06b6d4 !important;
-                text-fill-color: #06b6d4 !important;
-                background: transparent !important;
+                /* Reset gradient text for print - must override all properties */
+                background: none !important;
                 background-image: none !important;
-                background-color: transparent !important;
                 -webkit-background-clip: border-box !important;
                 background-clip: border-box !important;
+                -webkit-text-fill-color: #06b6d4 !important;
+                color: #06b6d4 !important;
                 border-bottom: 2px solid #06b6d4;
             }
             .profile {
