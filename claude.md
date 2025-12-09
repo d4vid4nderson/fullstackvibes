@@ -145,11 +145,18 @@ Three private enterprise applications with custom project cards:
 - Copyright notice
 - Built with Next.js & Tailwind CSS
 
-### 7. Resume
-- Standalone HTML page at `/public/resume.html`
+### 7. Resume Modal
+- Standalone HTML page at `/public/resume.html` displayed in modal iframe
+- Syncs with portfolio theme colors via postMessage
+- Light/dark mode toggle within modal
+- PDF download button in modal header
 - Matches portfolio visual style (JetBrains Mono, gradients, terminal aesthetics)
-- Accessible via navigation menu
-- Opens in new tab
+
+### 8. Favicons
+- **Browser favicon**: Cyan-to-fuchsia gradient, PNG format (16x16, 32x32)
+- **Mobile app icons**: Separate design for home screen (180x180, 192x192, 512x512)
+- PNG used instead of SVG for better gradient rendering and compatibility
+- Files: `favicon.png`, `favicon_mobile.png`, `apple-touch-icon.png`, `icon-*.png`
 
 ## File Structure
 
@@ -285,6 +292,13 @@ npm run lint         # Run ESLint
 8. **Headshot Size**: Increased from 320px to 400px
 9. **Modal Z-Index**: Increased to z-[9999] to prevent overlay issues
 10. **Dark Mode Default**: Prevents white flash on page load
+11. **Resume Theme Sync**: Resume modal now syncs colors with portfolio theme via postMessage
+12. **Favicon Update**: New gradient favicon (cyan-to-fuchsia), PNG format for better compatibility
+13. **Mobile App Icons**: Separate mobile-specific favicon for home screen icons
+14. **Floating Buttons**: Clean scale animation, scroll-to-top emerges from chat button, bounce easing
+15. **Mobile Hero Layout**: Left-justified terminal text, responsive photo sizes (150/175/200px)
+16. **Project Modal Headers**: Title bar shows path to README.md with `$ cat ./README.md` command
+17. **Consistent Stoplight Buttons**: All terminal stoplight buttons are w-3 h-3 (12px) across all screens
 
 ## Known Issues/Notes
 
@@ -325,6 +339,6 @@ Repository initialized with initial commit
 
 ---
 
-**Last Updated**: 2025-11-23
-**Next.js Version**: 16.0.3
+**Last Updated**: 2025-12-09
+**Next.js Version**: 16.0.7
 **Node Version**: Check with `node -v`

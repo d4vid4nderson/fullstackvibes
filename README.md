@@ -4,21 +4,29 @@ A modern, dynamic portfolio website built with Next.js, TypeScript, and Tailwind
 
 ## Features
 
+- **Multi-Theme System** - 5 color themes (Cyan, Purple, Emerald, Orange, Blue) with light/dark mode
+- **AI Chat Assistant** - Claude-powered chat to answer questions about experience and skills
+- **Interactive Terminal UI** - Terminal-style sections with collapsible windows
+- **Resume Modal** - Theme-synchronized resume viewer with PDF download
 - **Dynamic GitHub Integration** - Automatically fetches and displays your GitHub repositories
-- **Dark Mode** - Toggle between light and dark themes
-- **Responsive Design** - Mobile-first, fully responsive layout
+- **Responsive Design** - Mobile-first, fully responsive layout with optimized mobile icons
+- **Floating Action Buttons** - Scroll-to-top and chat buttons with smooth animations
 - **Contact Form** - Built-in contact form with API route
-- **SEO Optimized** - Meta tags and semantic HTML
+- **SEO Optimized** - Structured data, meta tags, Open Graph, and Twitter cards
+- **PWA Ready** - Installable on mobile with custom app icons
 - **Type Safe** - Built with TypeScript
 
 ## Tech Stack
 
-- **Framework:** Next.js 15 (App Router)
+- **Framework:** Next.js 16.0 (App Router, Turbopack)
 - **Language:** TypeScript
-- **Styling:** Tailwind CSS
+- **Styling:** Tailwind CSS 4.0
 - **Content:** MDX
-- **Icons:** React Icons
-- **Fonts:** Geist Sans & Geist Mono
+- **Icons:** React Icons (Feather, Simple Icons)
+- **Fonts:** JetBrains Mono
+- **AI Chat:** Claude API integration
+- **Analytics:** Vercel Analytics & Speed Insights
+- **Deployment:** Vercel
 
 ## Getting Started
 
