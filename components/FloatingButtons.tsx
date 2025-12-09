@@ -50,15 +50,15 @@ export function FloatingButtons() {
 
   return (
     <>
-      {/* SVG Filter for Gooey Effect */}
+      {/* SVG Filter for Gooey Effect - only used during animation */}
       <svg className="absolute" style={{ width: 0, height: 0 }}>
         <defs>
           <filter id="gooey">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+            <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
             <feColorMatrix
               in="blur"
               mode="matrix"
-              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10"
+              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 25 -12"
               result="gooey"
             />
             <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
@@ -66,10 +66,13 @@ export function FloatingButtons() {
         </defs>
       </svg>
 
-      {/* Gooey Container */}
+      {/* Container - gooey filter only during animation */}
       <div
         className="fixed bottom-0 right-0 z-[9998] pointer-events-none"
-        style={{ filter: 'url(#gooey)' }}
+        style={{
+          filter: isAnimating ? 'url(#gooey)' : 'none',
+          transition: 'filter 0.2s ease-out'
+        }}
       >
         {/* Scroll to Top Button */}
         <button
