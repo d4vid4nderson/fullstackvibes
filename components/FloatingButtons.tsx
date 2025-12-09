@@ -38,10 +38,11 @@ export function FloatingButtons() {
   // Calculate footer offset
   const footerOffset = isFooterVisible ? footerHeight : 0;
 
-  // Base positions - add overshoot during animation
-  const overshoot = isAnimating ? 12 : 0;
-  const chatButtonBottom = 24 + footerOffset + overshoot;
-  const scrollButtonBottom = 88 + footerOffset + overshoot;
+  // Base positions - add overshoot during animation (more for scroll button)
+  const scrollOvershoot = isAnimating ? 28 : 0;
+  const chatOvershoot = isAnimating ? 8 : 0;
+  const chatButtonBottom = 24 + footerOffset + chatOvershoot;
+  const scrollButtonBottom = 88 + footerOffset + scrollOvershoot;
 
   // Bounce easing for gooey effect - overshoots then settles
   const transition = isAnimating
