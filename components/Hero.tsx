@@ -1175,7 +1175,7 @@ export function Hero() {
                       David Anderson
                     </h2>
                     <p className="text-base sm:text-lg font-medium gradient-text">
-                      Digital Experience Architect / Product Owner
+                      Full Stack Developer | AI Solutions
                     </p>
                   </div>
 
