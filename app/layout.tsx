@@ -11,6 +11,7 @@ import { BackgroundOrbs } from "@/components/BackgroundOrbs";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { StructuredData } from "@/components/StructuredData";
+import { ViewModeProvider } from "@/components/ViewModeProvider";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
@@ -141,10 +142,12 @@ export default function RootLayout({
                 try {
                   const mode = localStorage.getItem('mode') || 'dark';
                   const theme = localStorage.getItem('colorTheme') || 'cyan';
+                  const viewMode = localStorage.getItem('viewMode') || 'frontend';
                   if (mode === 'dark') {
                     document.documentElement.classList.add('dark');
                   }
                   document.documentElement.setAttribute('data-theme', theme);
+                  document.documentElement.setAttribute('data-view-mode', viewMode);
                 } catch (e) {}
               })();
             `,
@@ -155,17 +158,19 @@ export default function RootLayout({
         className={`${jetbrainsMono.variable} antialiased min-h-screen flex flex-col`}
       >
         <ThemeProvider>
-          <ChatProvider>
-            <TerminalProvider>
-              <BackgroundOrbs />
-              <div className="flex-1 relative z-10">
-                {children}
-              </div>
-              <Footer />
-              <FloatingButtons />
-              <AIChat />
-            </TerminalProvider>
-          </ChatProvider>
+          <ViewModeProvider>
+            <ChatProvider>
+              <TerminalProvider>
+                <BackgroundOrbs />
+                <div className="flex-1 relative z-10">
+                  {children}
+                </div>
+                <Footer />
+                <FloatingButtons />
+                <AIChat />
+              </TerminalProvider>
+            </ChatProvider>
+          </ViewModeProvider>
         </ThemeProvider>
         <SpeedInsights />
         <Analytics />

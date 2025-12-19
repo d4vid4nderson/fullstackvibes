@@ -3,8 +3,9 @@
 import { useState, useRef, useEffect } from 'react';
 import type { CSSProperties } from 'react';
 import Image from 'next/image';
-import { FiMapPin, FiSun, FiMoon } from 'react-icons/fi';
+import { FiMapPin, FiSun, FiMoon, FiTerminal, FiLayout } from 'react-icons/fi';
 import { useTheme } from './ThemeProvider';
+import { useViewMode } from './ViewModeProvider';
 import { ResumeModal } from './ResumeModal';
 import { useChatContext } from './ChatContext';
 import { useTerminal } from './TerminalContext';
@@ -45,6 +46,7 @@ const THEME_OPTIONS = [
 
 export function Hero() {
   const { mode, setMode, setColorTheme } = useTheme();
+  const { viewMode, toggleViewMode } = useViewMode();
   const { setIsChatOpen } = useChatContext();
   const { careerState, projectsState, contactState, restoreTerminal } = useTerminal();
   const [command, setCommand] = useState('');
@@ -982,6 +984,23 @@ export function Hero() {
                 <a href="#contact" onClick={() => { if (contactState === 'closed') restoreTerminal('contact'); }} className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all focus:outline-none focus:text-accent">
                   Contact
                 </a>
+                <button
+                  onClick={toggleViewMode}
+                  className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all focus:outline-none focus:text-accent flex items-center gap-1.5"
+                  title={viewMode === 'backend' ? 'Switch to Frontend View' : 'Switch to Backend View'}
+                >
+                  {viewMode === 'backend' ? (
+                    <>
+                      <FiLayout className="w-3.5 h-3.5" />
+                      <span>Frontend</span>
+                    </>
+                  ) : (
+                    <>
+                      <FiTerminal className="w-3.5 h-3.5" />
+                      <span>Backend</span>
+                    </>
+                  )}
+                </button>
                 <div className="relative group/themes px-3">
                   <button className="hover-accent hover-glow-accent transition-all whitespace-nowrap">
                     Themes
@@ -1103,7 +1122,7 @@ export function Hero() {
             <div
               id="mobile-nav-links"
               className={`flex items-center gap-1.5 overflow-hidden transition-all duration-500 ease-out ${
-                isNavExpanded ? 'w-[280px] opacity-100 px-2' : 'w-0 opacity-0 px-0'
+                isNavExpanded ? 'w-[320px] opacity-100 px-2' : 'w-0 opacity-0 px-0'
               }`}
             >
               <a href="#career" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); if (careerState === 'closed') restoreTerminal('career'); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap focus:outline-none focus:text-accent">
@@ -1121,6 +1140,17 @@ export function Hero() {
               <a href="#contact" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); if (contactState === 'closed') restoreTerminal('contact'); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap focus:outline-none focus:text-accent">
                 Contact
               </a>
+              <span className="text-gray-500 text-xs">|</span>
+              <button
+                onClick={(e) => { e.stopPropagation(); toggleViewMode(); }}
+                className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap focus:outline-none focus:text-accent flex items-center gap-1"
+              >
+                {viewMode === 'backend' ? (
+                  <><FiLayout className="w-3 h-3" /><span>FE</span></>
+                ) : (
+                  <><FiTerminal className="w-3 h-3" /><span>BE</span></>
+                )}
+              </button>
             </div>
             <span>&gt;</span>
             {/* Title - contracts to FSV when nav open */}
