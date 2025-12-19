@@ -49,7 +49,7 @@ export function FrontendHero() {
       </div>
 
       {/* Fixed top-right controls - same position as Terminal view */}
-      <div className="absolute top-6 right-4 sm:right-6 lg:right-8 flex items-center gap-3 z-20">
+      <div className="fixed top-6 right-4 sm:right-6 lg:right-8 flex items-center gap-3 z-50">
         {/* View mode toggle - pill style like Claude */}
         <div className="flex items-center bg-gray-100 dark:bg-white/5 rounded-full p-0.5">
           <button
@@ -78,7 +78,7 @@ export function FrontendHero() {
       </div>
 
       {/* FSV Title - same position as Terminal view */}
-      <div className="absolute top-6 left-4 sm:left-6 lg:left-8 z-10">
+      <div className="fixed top-6 left-4 sm:left-6 lg:left-8 z-50">
         <div className="text-accent font-bold text-xl tracking-tight font-mono">
           &lt;&gt; FSV
         </div>

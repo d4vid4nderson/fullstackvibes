@@ -954,7 +954,7 @@ export function Hero() {
   return (
     <section className="relative px-4 sm:px-6 lg:px-8 pt-24 pb-8 transition-colors duration-300">
       {/* Fixed top-right controls - consistent with Frontend view */}
-      <div className="absolute top-6 right-4 sm:right-6 lg:right-8 flex items-center gap-3 z-20">
+      <div className="fixed top-6 right-4 sm:right-6 lg:right-8 flex items-center gap-3 z-50">
         {/* View mode toggle - pill style like Claude */}
         <div className="flex items-center bg-gray-100 dark:bg-white/5 rounded-full p-0.5">
           <button
