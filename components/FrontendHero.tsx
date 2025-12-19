@@ -49,11 +49,12 @@ export function FrontendHero() {
       </div>
 
       {/* Navigation */}
-      <nav className="relative z-10 flex items-center justify-between px-6 sm:px-8 lg:px-12 py-6">
-        <div className="text-accent font-bold text-xl tracking-tight">
-          FSV
-        </div>
-        <div className="flex items-center gap-3">
+      <nav className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="flex items-center justify-between">
+          <div className="text-accent font-bold text-xl tracking-tight font-mono">
+            &lt;&gt; FSV
+          </div>
+          <div className="flex items-center gap-3">
           {/* View mode toggle - pill style like Claude */}
           <div className="flex items-center bg-gray-100 dark:bg-white/5 rounded-full p-0.5">
             <button
@@ -79,6 +80,7 @@ export function FrontendHero() {
           >
             {mode === 'dark' ? <FiSun className="w-4 h-4" /> : <FiMoon className="w-4 h-4" />}
           </button>
+          </div>
         </div>
       </nav>
 
