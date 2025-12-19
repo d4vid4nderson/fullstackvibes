@@ -959,17 +959,17 @@ export function Hero() {
         <div className="flex items-center bg-gray-100 dark:bg-white/5 rounded-full p-0.5">
           <button
             onClick={() => {}} // Already on Terminal
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all bg-white dark:bg-white/10 text-gray-900 dark:text-white shadow-sm"
+            className="p-2 rounded-full transition-all bg-white dark:bg-white/10 text-gray-900 dark:text-white shadow-sm"
+            aria-label="Terminal view (active)"
           >
-            <FiTerminal className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Terminal</span>
+            <FiTerminal className="w-4 h-4" />
           </button>
           <button
             onClick={toggleViewMode}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+            className="p-2 rounded-full transition-all text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+            aria-label="Switch to Frontend view"
           >
-            <FiLayout className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Frontend</span>
+            <FiLayout className="w-4 h-4" />
           </button>
         </div>
         {/* Theme toggle */}
