@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
-export const alt = 'David Anderson - Solutions Architect & AI-Augmented Builder'
+export const alt = 'David Anderson - Solutions Architect & AI Developer'
 export const size = {
   width: 1200,
   height: 630,
@@ -81,7 +81,7 @@ export default async function Image() {
             {/* Title */}
             <div style={{ display: 'flex' }}>
               <span style={{ fontSize: '24px', color: '#06b6d4', fontFamily: 'monospace' }}>
-                Solutions Architect | AI-Augmented Builder
+                Solutions Architect | AI Developer
               </span>
             </div>
 

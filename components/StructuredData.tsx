@@ -5,7 +5,7 @@ export function StructuredData() {
     "name": "David Anderson",
     "url": "https://fullstackvibes.io",
     "image": "https://fullstackvibes.io/david-headshot-square.png",
-    "jobTitle": "Solutions Architect & AI-Augmented Builder",
+    "jobTitle": "Solutions Architect & AI Developer",
     "description": "Solutions architect building enterprise tools with AI-augmented development. Over a decade connecting systems, automating workflows, and shipping software people actually use.",
     "sameAs": [
       "https://github.com/d4vid4nderson",
@@ -37,7 +37,7 @@ export function StructuredData() {
     "@type": "WebSite",
     "name": "FullStackVibes",
     "url": "https://fullstackvibes.io",
-    "description": "Portfolio website of David Anderson - Solutions Architect & AI-Augmented Builder",
+    "description": "Portfolio website of David Anderson - Solutions Architect & AI Developer",
     "author": {
       "@type": "Person",
       "name": "David Anderson"

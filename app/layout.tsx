@@ -20,7 +20,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://fullstackvibes.io'),
   title: {
-    default: "David Anderson | Solutions Architect & AI-Augmented Builder",
+    default: "David Anderson | Solutions Architect & AI Developer",
     template: "%s | David Anderson"
   },
   description: "Solutions architect building enterprise tools with AI-augmented development. Over a decade connecting systems, automating workflows, and shipping software people actually use.",
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
         url: 'https://fullstackvibes.io/opengraph-image?v=20251219',
         width: 1200,
         height: 630,
-        alt: 'David Anderson - Solutions Architect & AI-Augmented Builder',
+        alt: 'David Anderson - Solutions Architect & AI Developer',
       },
     ],
   },
