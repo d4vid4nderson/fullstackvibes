@@ -42,9 +42,20 @@ export function FrontendHero() {
           priority
         />
 
-        {/* Dark gradient overlay from left */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)] via-[var(--background)]/90 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[var(--background)] via-[var(--background)]/70 to-[var(--background)]/20 lg:via-transparent lg:to-transparent" />
+        {/* Dark gradient overlay from left - smoother transition */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `linear-gradient(to right,
+              var(--background) 0%,
+              var(--background) 20%,
+              color-mix(in srgb, var(--background) 85%, transparent) 35%,
+              color-mix(in srgb, var(--background) 50%, transparent) 50%,
+              color-mix(in srgb, var(--background) 20%, transparent) 70%,
+              transparent 100%
+            )`
+          }}
+        />
 
         {/* Animated lens flare effect */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
