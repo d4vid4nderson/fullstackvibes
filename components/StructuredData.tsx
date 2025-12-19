@@ -5,8 +5,8 @@ export function StructuredData() {
     "name": "David Anderson",
     "url": "https://fullstackvibes.io",
     "image": "https://fullstackvibes.io/david-headshot-square.png",
-    "jobTitle": "Full Stack Developer & AI Engineer",
-    "description": "Full stack developer specializing in AI-powered enterprise applications. Expert in Go, Python, TypeScript, React, and Next.js.",
+    "jobTitle": "Solutions Architect & AI-Augmented Builder",
+    "description": "Solutions architect building enterprise tools with AI-augmented development. Over a decade connecting systems, automating workflows, and shipping software people actually use.",
     "sameAs": [
       "https://github.com/d4vid4nderson",
       "https://linkedin.com/in/d4v1d4nd3rs0n"
@@ -37,7 +37,7 @@ export function StructuredData() {
     "@type": "WebSite",
     "name": "FullStackVibes",
     "url": "https://fullstackvibes.io",
-    "description": "Portfolio website of David Anderson - Full Stack Developer & AI Engineer",
+    "description": "Portfolio website of David Anderson - Solutions Architect & AI-Augmented Builder",
     "author": {
       "@type": "Person",
       "name": "David Anderson"
@@ -52,18 +52,18 @@ export function StructuredData() {
   const professionalServiceSchema = {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "David Anderson - Software Development Services",
+    "name": "David Anderson - Solutions Architecture Services",
     "url": "https://fullstackvibes.io",
-    "description": "Full stack development and AI engineering services specializing in enterprise applications",
+    "description": "Solutions architecture and AI-augmented development services specializing in enterprise applications",
     "provider": {
       "@type": "Person",
       "name": "David Anderson"
     },
     "serviceType": [
-      "Full Stack Development",
-      "AI/ML Integration",
+      "Solutions Architecture",
+      "AI-Augmented Development",
       "Enterprise Software",
-      "Web Application Development"
+      "Systems Integration"
     ],
     "areaServed": {
       "@type": "Country",

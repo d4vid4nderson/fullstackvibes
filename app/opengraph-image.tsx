@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
-export const alt = 'David Anderson - Full Stack Developer & AI Engineer'
+export const alt = 'David Anderson - Solutions Architect & AI-Augmented Builder'
 export const size = {
   width: 1200,
   height: 630,
@@ -81,7 +81,7 @@ export default async function Image() {
             {/* Title */}
             <div style={{ display: 'flex' }}>
               <span style={{ fontSize: '24px', color: '#06b6d4', fontFamily: 'monospace' }}>
-                Full Stack Developer & AI Engineer
+                Solutions Architect | AI-Augmented Builder
               </span>
             </div>
 
@@ -94,7 +94,7 @@ export default async function Image() {
               <span style={{ color: '#6b7280', fontSize: '18px', fontFamily: 'monospace' }}>--bio</span>
               <span style={{ color: '#9ca3af', fontSize: '18px', fontFamily: 'monospace' }}>→</span>
               <span style={{ color: '#d1d5db', fontSize: '18px', fontFamily: 'monospace' }}>
-                I build AI-powered tools that solve real workflow problems
+                I build enterprise tools that don&apos;t suck. AI helps me ship faster.
               </span>
             </div>
 
