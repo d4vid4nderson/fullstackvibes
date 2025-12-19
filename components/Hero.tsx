@@ -1019,33 +1019,7 @@ export function Hero() {
                   {/* Theme Selection Dropdown - Desktop */}
                   <div className="absolute left-1/2 transform -translate-x-1/2 top-full pt-2 opacity-0 pointer-events-none group-hover/themes:opacity-100 group-hover/themes:pointer-events-auto transition-all duration-200 z-50">
                     <div className="bg-white dark:bg-[#1a1a1a] rounded-lg shadow-xl border border-gray-300 dark:border-white/10 p-4 min-w-[300px]">
-                      <div className="flex items-center justify-between mb-3">
-                        <h3 className="text-sm font-bold text-gray-900 dark:text-white">Select Theme</h3>
-                        <div className="flex gap-2">
-                          <button
-                            onClick={() => setMode('light')}
-                            className={`p-2 rounded-lg transition-colors ${
-                              mode === 'light'
-                                ? 'bg-accent text-white'
-                                : 'bg-gray-100 dark:bg-[#2a2a2a] text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-[#333]'
-                            }`}
-                            aria-label="Light mode"
-                          >
-                            <FiSun className="w-4 h-4" />
-                          </button>
-                          <button
-                            onClick={() => setMode('dark')}
-                            className={`p-2 rounded-lg transition-colors ${
-                              mode === 'dark'
-                                ? 'bg-accent text-white'
-                                : 'bg-gray-100 dark:bg-[#2a2a2a] text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-[#333]'
-                            }`}
-                            aria-label="Dark mode"
-                          >
-                            <FiMoon className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </div>
+                      <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-3">Select Theme</h3>
                       <div className="flex flex-col gap-2">
                         {THEME_OPTIONS.map((theme) => (
                           <button
