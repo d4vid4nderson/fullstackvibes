@@ -48,41 +48,41 @@ export function FrontendHero() {
         />
       </div>
 
-      {/* Navigation */}
-      <nav className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="flex items-center justify-between">
-          <div className="text-accent font-bold text-xl tracking-tight font-mono">
-            &lt;&gt; FSV
-          </div>
-          <div className="flex items-center gap-3">
-          {/* View mode toggle - pill style like Claude */}
-          <div className="flex items-center bg-gray-100 dark:bg-white/5 rounded-full p-0.5">
-            <button
-              onClick={toggleViewMode}
-              className="p-2 rounded-full transition-all text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
-              aria-label="Switch to Terminal view"
-            >
-              <FiTerminal className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => {}} // Already on Frontend
-              className="p-2 rounded-full transition-all bg-white dark:bg-white/10 text-gray-900 dark:text-white shadow-sm"
-              aria-label="Frontend view (active)"
-            >
-              <FiLayout className="w-4 h-4" />
-            </button>
-          </div>
-          {/* Theme toggle */}
+      {/* Fixed top-right controls - same position as Terminal view */}
+      <div className="absolute top-6 right-4 sm:right-6 lg:right-8 flex items-center gap-3 z-20">
+        {/* View mode toggle - pill style like Claude */}
+        <div className="flex items-center bg-gray-100 dark:bg-white/5 rounded-full p-0.5">
           <button
-            onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}
-            className="p-2 rounded-full bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors text-gray-600 dark:text-gray-400"
-            aria-label={mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            onClick={toggleViewMode}
+            className="p-2 rounded-full transition-all text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+            aria-label="Switch to Terminal view"
           >
-            {mode === 'dark' ? <FiSun className="w-4 h-4" /> : <FiMoon className="w-4 h-4" />}
+            <FiTerminal className="w-4 h-4" />
           </button>
-          </div>
+          <button
+            onClick={() => {}} // Already on Frontend
+            className="p-2 rounded-full transition-all bg-white dark:bg-white/10 text-gray-900 dark:text-white shadow-sm"
+            aria-label="Frontend view (active)"
+          >
+            <FiLayout className="w-4 h-4" />
+          </button>
         </div>
-      </nav>
+        {/* Theme toggle */}
+        <button
+          onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}
+          className="p-2 rounded-full bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors text-gray-600 dark:text-gray-400"
+          aria-label={mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          {mode === 'dark' ? <FiSun className="w-4 h-4" /> : <FiMoon className="w-4 h-4" />}
+        </button>
+      </div>
+
+      {/* FSV Title - same position as Terminal view */}
+      <div className="absolute top-6 left-4 sm:left-6 lg:left-8 z-10">
+        <div className="text-accent font-bold text-xl tracking-tight font-mono">
+          &lt;&gt; FSV
+        </div>
+      </div>
 
       {/* Main content */}
       <div className="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 pt-12 lg:pt-20 pb-20">
