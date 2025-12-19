@@ -953,6 +953,34 @@ export function Hero() {
 
   return (
     <section className="relative px-4 sm:px-6 lg:px-8 pt-24 pb-8 transition-colors duration-300">
+      {/* Fixed top-right controls - consistent with Frontend view */}
+      <div className="absolute top-6 right-4 sm:right-6 lg:right-8 flex items-center gap-3 z-20">
+        {/* View mode toggle - pill style like Claude */}
+        <div className="flex items-center bg-gray-100 dark:bg-white/5 rounded-full p-0.5">
+          <button
+            onClick={() => {}} // Already on Terminal
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all bg-white dark:bg-white/10 text-gray-900 dark:text-white shadow-sm"
+          >
+            <FiTerminal className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Terminal</span>
+          </button>
+          <button
+            onClick={toggleViewMode}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+          >
+            <FiLayout className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Frontend</span>
+          </button>
+        </div>
+        {/* Theme toggle */}
+        <button
+          onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}
+          className="p-2 rounded-full bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors text-gray-600 dark:text-gray-400"
+          aria-label={mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          {mode === 'dark' ? <FiSun className="w-4 h-4" /> : <FiMoon className="w-4 h-4" />}
+        </button>
+      </div>
 
       <div className="relative max-w-7xl mx-auto w-full z-10">
         {/* Full Stack Vibes with hidden navigation easter egg - desktop only */}
@@ -984,23 +1012,6 @@ export function Hero() {
                 <a href="#contact" onClick={() => { if (contactState === 'closed') restoreTerminal('contact'); }} className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all focus:outline-none focus:text-accent">
                   Contact
                 </a>
-                <button
-                  onClick={toggleViewMode}
-                  className="px-3 whitespace-nowrap hover-accent hover-glow-accent transition-all focus:outline-none focus:text-accent flex items-center gap-1.5"
-                  title={viewMode === 'backend' ? 'Switch to Frontend View' : 'Switch to Backend View'}
-                >
-                  {viewMode === 'backend' ? (
-                    <>
-                      <FiLayout className="w-3.5 h-3.5" />
-                      <span>Frontend</span>
-                    </>
-                  ) : (
-                    <>
-                      <FiTerminal className="w-3.5 h-3.5" />
-                      <span>Backend</span>
-                    </>
-                  )}
-                </button>
                 <div className="relative group/themes px-3">
                   <button className="hover-accent hover-glow-accent transition-all whitespace-nowrap">
                     Themes
@@ -1140,17 +1151,6 @@ export function Hero() {
               <a href="#contact" onClick={(e) => { e.stopPropagation(); setIsNavExpanded(false); if (contactState === 'closed') restoreTerminal('contact'); }} className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap focus:outline-none focus:text-accent">
                 Contact
               </a>
-              <span className="text-gray-500 text-xs">|</span>
-              <button
-                onClick={(e) => { e.stopPropagation(); toggleViewMode(); }}
-                className="text-gray-700 dark:text-gray-300 hover-accent transition-colors text-xs whitespace-nowrap focus:outline-none focus:text-accent flex items-center gap-1"
-              >
-                {viewMode === 'backend' ? (
-                  <><FiLayout className="w-3 h-3" /><span>FE</span></>
-                ) : (
-                  <><FiTerminal className="w-3 h-3" /><span>BE</span></>
-                )}
-              </button>
             </div>
             <span>&gt;</span>
             {/* Title - contracts to FSV when nav open */}

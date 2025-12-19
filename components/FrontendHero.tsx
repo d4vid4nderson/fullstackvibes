@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { FiGithub, FiLinkedin, FiMail, FiDownload, FiArrowRight, FiTerminal, FiSun, FiMoon } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiMail, FiDownload, FiArrowRight, FiTerminal, FiLayout, FiSun, FiMoon } from 'react-icons/fi';
 import { SiGo, SiPython, SiTypescript, SiReact, SiNextdotjs, SiFastapi, SiPostgresql, SiDocker } from 'react-icons/si';
 import { useTheme } from './ThemeProvider';
 import { useViewMode } from './ViewModeProvider';
@@ -54,17 +54,27 @@ export function FrontendHero() {
           FSV
         </div>
         <div className="flex items-center gap-3">
-          <button
-            onClick={toggleViewMode}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors text-sm text-gray-600 dark:text-gray-400"
-            title="Switch to Backend View"
-          >
-            <FiTerminal className="w-4 h-4" />
-            <span className="hidden sm:inline">Terminal</span>
-          </button>
+          {/* View mode toggle - pill style like Claude */}
+          <div className="flex items-center bg-gray-100 dark:bg-white/5 rounded-full p-0.5">
+            <button
+              onClick={toggleViewMode}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
+            >
+              <FiTerminal className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Terminal</span>
+            </button>
+            <button
+              onClick={() => {}} // Already on Frontend
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all bg-white dark:bg-white/10 text-gray-900 dark:text-white shadow-sm"
+            >
+              <FiLayout className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Frontend</span>
+            </button>
+          </div>
+          {/* Theme toggle */}
           <button
             onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}
-            className="p-2 rounded-lg bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors text-gray-600 dark:text-gray-400"
+            className="p-2 rounded-full bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors text-gray-600 dark:text-gray-400"
             aria-label={mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
           >
             {mode === 'dark' ? <FiSun className="w-4 h-4" /> : <FiMoon className="w-4 h-4" />}
