@@ -760,138 +760,83 @@ html {
    Lens Flare Animations
    ================================ */
 
-/* JJ Abrams-style Anamorphic Lens Flare Animations */
-
-/* Main horizontal streak - subtle drift */
-@keyframes flare-streak-1 {
-  0%, 100% {
-    transform: translateX(0) scaleX(1);
-    opacity: 0.6;
+@keyframes lens-flare-1 {
+  0% {
+    top: -20%;
+    left: 30%;
+    transform: scale(1);
   }
   25% {
-    transform: translateX(5%) scaleX(1.1);
-    opacity: 0.8;
+    top: 10%;
+    left: 50%;
+    transform: scale(1.2);
   }
   50% {
-    transform: translateX(-3%) scaleX(0.95);
-    opacity: 0.5;
+    top: 30%;
+    left: 70%;
+    transform: scale(0.8);
   }
   75% {
-    transform: translateX(2%) scaleX(1.05);
-    opacity: 0.7;
+    top: 50%;
+    left: 40%;
+    transform: scale(1.1);
+  }
+  100% {
+    top: -20%;
+    left: 30%;
+    transform: scale(1);
   }
 }
 
-/* Secondary streak - offset timing */
-@keyframes flare-streak-2 {
-  0%, 100% {
-    transform: translateX(0);
+@keyframes lens-flare-2 {
+  0% {
+    top: 60%;
+    right: 10%;
+    transform: scale(1);
+  }
+  33% {
+    top: 20%;
+    right: 30%;
+    transform: scale(1.3);
+  }
+  66% {
+    top: 40%;
+    right: 50%;
+    transform: scale(0.9);
+  }
+  100% {
+    top: 60%;
+    right: 10%;
+    transform: scale(1);
+  }
+}
+
+@keyframes lens-flare-3 {
+  0% {
+    top: 30%;
+    left: 60%;
     opacity: 0.4;
   }
-  33% {
-    transform: translateX(-8%);
+  50% {
+    top: 50%;
+    left: 80%;
     opacity: 0.6;
   }
-  66% {
-    transform: translateX(4%);
-    opacity: 0.3;
+  100% {
+    top: 30%;
+    left: 60%;
+    opacity: 0.4;
   }
 }
 
-/* Vertical spike - subtle pulse */
-@keyframes flare-spike {
-  0%, 100% {
-    transform: scaleY(1);
-    opacity: 0.3;
-  }
-  50% {
-    transform: scaleY(1.2);
-    opacity: 0.5;
-  }
+.animate-lens-flare-1 {
+  animation: lens-flare-1 20s ease-in-out infinite;
 }
 
-/* Hexagonal bokeh - float and pulse */
-@keyframes flare-bokeh-1 {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.25;
-  }
-  25% {
-    transform: translate(10px, -5px) scale(1.1);
-    opacity: 0.35;
-  }
-  50% {
-    transform: translate(-5px, 10px) scale(0.9);
-    opacity: 0.2;
-  }
-  75% {
-    transform: translate(5px, 5px) scale(1.05);
-    opacity: 0.3;
-  }
+.animate-lens-flare-2 {
+  animation: lens-flare-2 15s ease-in-out infinite;
 }
 
-@keyframes flare-bokeh-2 {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.2;
-  }
-  33% {
-    transform: translate(-8px, 8px) scale(1.15);
-    opacity: 0.3;
-  }
-  66% {
-    transform: translate(12px, -3px) scale(0.85);
-    opacity: 0.15;
-  }
-}
-
-@keyframes flare-bokeh-3 {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.35;
-  }
-  50% {
-    transform: translate(6px, -8px) scale(1.2);
-    opacity: 0.5;
-  }
-}
-
-/* Chromatic glow - slow pulse */
-@keyframes flare-glow {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.3;
-  }
-  50% {
-    transform: scale(1.15);
-    opacity: 0.45;
-  }
-}
-
-.animate-flare-streak-1 {
-  animation: flare-streak-1 8s ease-in-out infinite;
-}
-
-.animate-flare-streak-2 {
-  animation: flare-streak-2 6s ease-in-out infinite;
-}
-
-.animate-flare-spike {
-  animation: flare-spike 4s ease-in-out infinite;
-}
-
-.animate-flare-bokeh-1 {
-  animation: flare-bokeh-1 12s ease-in-out infinite;
-}
-
-.animate-flare-bokeh-2 {
-  animation: flare-bokeh-2 10s ease-in-out infinite;
-}
-
-.animate-flare-bokeh-3 {
-  animation: flare-bokeh-3 8s ease-in-out infinite;
-}
-
-.animate-flare-glow {
-  animation: flare-glow 6s ease-in-out infinite;
+.animate-lens-flare-3 {
+  animation: lens-flare-3 10s ease-in-out infinite;
 }

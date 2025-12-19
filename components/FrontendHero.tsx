@@ -32,121 +32,58 @@ export function FrontendHero() {
 
   return (
     <section className="relative min-h-screen overflow-hidden">
-      {/* Full-screen headshot - covers entire background */}
-      <div className="absolute inset-0">
+      {/* Full-screen headshot on the right */}
+      <div className="absolute inset-0 lg:left-1/3">
         <Image
           src="/david-headshot-square.jpg"
           alt="David Anderson"
           fill
-          className="object-cover object-[75%_top] lg:object-[70%_top]"
+          className="object-cover object-top"
           priority
         />
 
-        {/* Dark gradient overlay - only on far left for content readability */}
+        {/* Dark gradient overlay from left - smoother transition */}
         <div
           className="absolute inset-0"
           style={{
             background: `linear-gradient(to right,
               var(--background) 0%,
-              color-mix(in srgb, var(--background) 95%, transparent) 25%,
-              color-mix(in srgb, var(--background) 70%, transparent) 40%,
-              color-mix(in srgb, var(--background) 30%, transparent) 55%,
-              transparent 75%
+              var(--background) 20%,
+              color-mix(in srgb, var(--background) 85%, transparent) 35%,
+              color-mix(in srgb, var(--background) 50%, transparent) 50%,
+              color-mix(in srgb, var(--background) 20%, transparent) 70%,
+              transparent 100%
             )`
           }}
         />
 
-        {/* JJ Abrams-style anamorphic lens flares */}
+        {/* Animated lens flare effect */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Main horizontal streak - bright center */}
+          {/* Primary lens flare - moves diagonally */}
           <div
-            className="absolute h-[2px] w-[120%] left-[-10%] top-[35%] animate-flare-streak-1"
+            className="absolute w-[600px] h-[600px] rounded-full opacity-30 blur-3xl animate-lens-flare-1"
             style={{
-              background: `linear-gradient(to right,
-                transparent 0%,
-                var(--accent-primary) 20%,
-                white 45%,
-                white 55%,
-                var(--accent-secondary) 80%,
-                transparent 100%
-              )`,
-              boxShadow: `0 0 60px 30px var(--accent-primary), 0 0 100px 60px color-mix(in srgb, var(--accent-primary) 50%, transparent)`,
-              opacity: 0.7,
+              background: `radial-gradient(circle, var(--accent-primary) 0%, var(--accent-secondary) 30%, transparent 70%)`,
             }}
           />
-          {/* Secondary horizontal streak - offset */}
+          {/* Secondary lens flare - moves opposite */}
           <div
-            className="absolute h-[1px] w-[100%] left-0 top-[38%] animate-flare-streak-2"
+            className="absolute w-[400px] h-[400px] rounded-full opacity-20 blur-2xl animate-lens-flare-2"
             style={{
-              background: `linear-gradient(to right,
-                transparent 0%,
-                var(--accent-tertiary) 30%,
-                var(--accent-light) 50%,
-                var(--accent-tertiary) 70%,
-                transparent 100%
-              )`,
-              boxShadow: `0 0 40px 20px var(--accent-secondary)`,
-              opacity: 0.5,
+              background: `radial-gradient(circle, var(--accent-light) 0%, var(--accent-tertiary) 40%, transparent 70%)`,
             }}
           />
-          {/* Vertical flare spike */}
+          {/* Small accent flare */}
           <div
-            className="absolute w-[2px] h-[300px] top-[20%] right-[35%] animate-flare-spike"
+            className="absolute w-[200px] h-[200px] rounded-full opacity-40 blur-xl animate-lens-flare-3"
             style={{
-              background: `linear-gradient(to bottom,
-                transparent 0%,
-                var(--accent-primary) 30%,
-                white 50%,
-                var(--accent-primary) 70%,
-                transparent 100%
-              )`,
-              boxShadow: `0 0 30px 15px var(--accent-primary)`,
-              opacity: 0.4,
-            }}
-          />
-          {/* Hexagonal bokeh flares */}
-          <div
-            className="absolute w-16 h-16 top-[30%] right-[25%] animate-flare-bokeh-1"
-            style={{
-              background: `radial-gradient(circle, white 0%, var(--accent-primary) 30%, transparent 70%)`,
-              clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-              opacity: 0.3,
-              filter: 'blur(2px)',
-            }}
-          />
-          <div
-            className="absolute w-10 h-10 top-[45%] right-[40%] animate-flare-bokeh-2"
-            style={{
-              background: `radial-gradient(circle, white 0%, var(--accent-secondary) 40%, transparent 70%)`,
-              clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-              opacity: 0.25,
-              filter: 'blur(1px)',
-            }}
-          />
-          <div
-            className="absolute w-6 h-6 top-[32%] right-[30%] animate-flare-bokeh-3"
-            style={{
-              background: `radial-gradient(circle, white 0%, var(--accent-light) 50%, transparent 70%)`,
-              clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-              opacity: 0.4,
-              filter: 'blur(0.5px)',
-            }}
-          />
-          {/* Chromatic aberration glow */}
-          <div
-            className="absolute w-[400px] h-[400px] top-[20%] right-[20%] animate-flare-glow"
-            style={{
-              background: `radial-gradient(ellipse 100% 50%,
-                color-mix(in srgb, var(--accent-primary) 30%, transparent) 0%,
-                transparent 70%
-              )`,
-              filter: 'blur(40px)',
+              background: `radial-gradient(circle, white 0%, var(--accent-primary) 30%, transparent 60%)`,
             }}
           />
         </div>
 
-        {/* Subtle vignette on bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)]/60 via-transparent to-transparent" />
+        {/* Subtle vignette on edges */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)]/50 via-transparent to-transparent" />
       </div>
 
       {/* Content container */}
