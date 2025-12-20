@@ -155,7 +155,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${jetbrainsMono.variable} antialiased min-h-screen flex flex-col`}
+        className={`${jetbrainsMono.variable} antialiased min-h-screen flex flex-col bg-white dark:bg-[#0f0f0f]`}
       >
         <ThemeProvider>
           <ViewModeProvider>

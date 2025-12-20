@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import type { CSSProperties } from 'react';
 import Image from 'next/image';
-import { FiMapPin, FiSun, FiMoon, FiTerminal, FiLayout } from 'react-icons/fi';
+import { FiMapPin } from 'react-icons/fi';
 import { useTheme } from './ThemeProvider';
 import { useViewMode } from './ViewModeProvider';
 import { ResumeModal } from './ResumeModal';
@@ -46,7 +46,7 @@ const THEME_OPTIONS = [
 
 export function Hero() {
   const { mode, setMode, setColorTheme } = useTheme();
-  const { viewMode, toggleViewMode } = useViewMode();
+  useViewMode(); // Keep hook for context
   const { setIsChatOpen } = useChatContext();
   const { careerState, projectsState, contactState, restoreTerminal } = useTerminal();
   const [command, setCommand] = useState('');
@@ -953,35 +953,6 @@ export function Hero() {
 
   return (
     <section className="relative px-4 sm:px-6 lg:px-8 pt-24 pb-8 transition-colors duration-300">
-      {/* Fixed top-right controls - consistent with Frontend view */}
-      <div className="fixed top-6 right-4 sm:right-6 lg:right-8 flex items-center gap-3 z-50">
-        {/* View mode toggle - pill style like Claude */}
-        <div className="flex items-center bg-gray-100 dark:bg-white/5 rounded-full p-0.5">
-          <button
-            onClick={() => {}} // Already on Terminal
-            className="p-2 rounded-full transition-all bg-white dark:bg-white/10 text-gray-900 dark:text-white shadow-sm"
-            aria-label="Terminal view (active)"
-          >
-            <FiTerminal className="w-4 h-4" />
-          </button>
-          <button
-            onClick={toggleViewMode}
-            className="p-2 rounded-full transition-all text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
-            aria-label="Switch to Frontend view"
-          >
-            <FiLayout className="w-4 h-4" />
-          </button>
-        </div>
-        {/* Theme toggle */}
-        <button
-          onClick={() => setMode(mode === 'dark' ? 'light' : 'dark')}
-          className="p-2 rounded-full bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 transition-colors text-gray-600 dark:text-gray-400"
-          aria-label={mode === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-        >
-          {mode === 'dark' ? <FiSun className="w-4 h-4" /> : <FiMoon className="w-4 h-4" />}
-        </button>
-      </div>
-
       <div className="relative max-w-7xl mx-auto w-full z-10">
         {/* Full Stack Vibes with hidden navigation easter egg - desktop only */}
         <nav className="absolute -top-12 left-0 group/nav cursor-pointer hidden md:block" aria-label="Main navigation">
