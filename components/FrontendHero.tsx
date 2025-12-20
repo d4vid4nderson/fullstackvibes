@@ -7,7 +7,7 @@ import { useTheme } from './ThemeProvider';
 import { ResumeModal } from './ResumeModal';
 
 // Theme options for dropdown
-const THEME_OPTIONS = [
+const THEME_OPTIONS: { key: 'cyan' | 'purple' | 'emerald' | 'orange' | 'blue'; name: string }[] = [
   {
     key: 'cyan',
     name: 'Water of Life',
