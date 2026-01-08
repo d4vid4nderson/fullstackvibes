@@ -1,8 +1,6 @@
 import { FiGithub, FiMail, FiHeart, FiLinkedin } from 'react-icons/fi';
 
 export function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="relative py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-[#0a0a0a] border-t border-white/10">
       <div className="max-w-7xl mx-auto">
@@ -71,7 +69,7 @@ export function Footer() {
           {/* Right: Copyright and Version */}
           <div className="text-center sm:text-right">
             <p className="text-gray-500 text-xs sm:text-sm">
-              © {currentYear} David Anderson
+              © 2026 David Anderson
             </p>
             <p className="text-gray-600 text-xs font-mono mt-1">
               v{process.env.NEXT_PUBLIC_VERSION || 'dev'}
