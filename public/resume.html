@@ -8,17 +8,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Color Palette - Stripe Brand Colors */
         :root {
-            --accent-primary: #635bff;
-            --accent-secondary: #0a2540;
-            --accent-tertiary: #7a73ff;
-            --accent-light: #8b84ff;
-            --accent-dark: #0a2540;
-            /* Dark mode (default) */
+            --accent-primary: #3b82f6;
+            --accent-secondary: #60a5fa;
+            --accent-tertiary: #2563eb;
+            --accent-light: #93c5fd;
+            --accent-dark: #1d4ed8;
             --bg-page: #0f0f0f;
-            --bg-terminal: #1a1a1a;
-            --bg-terminal-header: #2a2a2a;
+            --bg-terminal: #1c1c1e;
+            --bg-terminal-header: #2d2d2d;
             --bg-card: rgba(255, 255, 255, 0.03);
             --text-body: #e5e5e5;
             --text-strong: #ffffff;
@@ -51,7 +49,6 @@
             transition: background 0.3s ease, color 0.3s ease;
         }
 
-        /* Theme Toggle - hidden when in iframe */
         .theme-toggle {
             position: fixed;
             top: 16px;
@@ -70,7 +67,6 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Hide theme toggle when in iframe */
         .in-iframe .theme-toggle {
             display: none;
         }
@@ -90,20 +86,17 @@
             color: var(--accent-primary);
         }
 
-        /* Sun icon for dark mode, moon for light */
         .theme-toggle .sun { display: block; }
         .theme-toggle .moon { display: none; }
         .light-mode .theme-toggle .sun { display: none; }
         .light-mode .theme-toggle .moon { display: block; }
 
-        /* Terminal Wrapper */
         .terminal-wrapper {
             max-width: 1000px;
             margin: 0 auto;
             padding: 40px 40px 0;
         }
 
-        /* Terminal Window */
         .terminal {
             background: var(--bg-terminal);
             border-radius: 12px;
@@ -227,28 +220,6 @@
             margin: 0 8px;
         }
 
-        .download-btn {
-            padding: 6px 12px;
-            background: transparent;
-            border: 1px solid #525252;
-            color: #a1a1aa;
-            font-size: 11px;
-            font-weight: 500;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .download-btn:hover {
-            border-color: var(--accent-primary);
-            color: var(--accent-primary);
-        }
-
-        /* Main content area */
         .content {
             max-width: 1000px;
             margin: 0 auto;
@@ -273,14 +244,12 @@
             letter-spacing: 2px;
         }
 
-        /* Profile section */
         .profile {
             font-size: 15px;
             line-height: 1.8;
             color: var(--text-body);
         }
 
-        /* Job entries */
         .job {
             margin-bottom: 32px;
             padding: 20px;
@@ -293,7 +262,7 @@
         .job:hover {
             transform: translateY(-2px);
             border-color: var(--accent-primary);
-            box-shadow: 0 8px 24px rgba(6, 182, 212, 0.15);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
         }
 
         .light-mode .job {
@@ -338,7 +307,7 @@
         }
 
         .job-description li::before {
-            content: '▸';
+            content: '\25B8';
             position: absolute;
             left: 0;
             color: var(--accent-secondary);
@@ -348,18 +317,16 @@
             margin-bottom: 0;
         }
 
-        /* Tech note */
         .tech-note {
             font-size: 12px;
             color: var(--text-muted);
             margin-top: 16px;
             padding: 12px 16px;
-            background: rgba(6, 182, 212, 0.1);
+            background: rgba(59, 130, 246, 0.1);
             border-radius: 8px;
-            border: 1px solid rgba(6, 182, 212, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
-        /* Tech sections */
         .tech-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -396,12 +363,6 @@
             line-height: 1.5;
         }
 
-        /* Gradient text */
-        .highlight {
-            color: var(--accent-light);
-            font-weight: 600;
-        }
-
         strong {
             color: var(--accent-light);
             font-weight: 600;
@@ -411,7 +372,6 @@
             color: var(--accent-dark);
         }
 
-        /* Footer */
         .footer {
             padding: 32px 40px;
             background: #0a0a0a;
@@ -447,7 +407,6 @@
             text-decoration: underline;
         }
 
-        /* Print Styles */
         @media print {
             * {
                 -webkit-print-color-adjust: exact !important;
@@ -457,13 +416,14 @@
                 background: white !important;
                 color: #000 !important;
                 padding: 0;
+                font-size: 9px;
             }
-            .theme-toggle, .download-btn, .footer {
+            .theme-toggle, .footer {
                 display: none !important;
             }
             .terminal-wrapper {
                 max-width: none !important;
-                padding: 16px 24px 0 !important;
+                padding: 10px 20px 0 !important;
             }
             .terminal {
                 background: #f5f5f5 !important;
@@ -472,117 +432,138 @@
             }
             .terminal-header {
                 background: #e5e5e5 !important;
-                padding: 8px 12px;
+                padding: 6px 10px;
             }
             .terminal-content {
-                padding: 12px 16px;
-                font-size: 10px;
+                padding: 10px 14px;
+                font-size: 8px;
+                line-height: 1.4;
+            }
+            .terminal-section {
+                margin-bottom: 6px !important;
             }
             .terminal-output-name {
-                font-size: 18px !important;
+                font-size: 16px !important;
                 color: #000 !important;
+                margin-bottom: 2px !important;
+                padding-left: 14px !important;
             }
             .terminal-output-title {
-                font-size: 11px !important;
-                color: #635bff !important;
+                font-size: 10px !important;
+                color: #3b82f6 !important;
+                padding-left: 14px !important;
             }
             .terminal-output {
-                font-size: 9px;
+                font-size: 8px;
                 color: #525252 !important;
+                padding-left: 14px !important;
+                margin-bottom: 1px !important;
             }
             .terminal-output a {
-                color: #635bff !important;
+                color: #3b82f6 !important;
             }
             .terminal-prompt {
-                color: #635bff !important;
+                color: #3b82f6 !important;
             }
             .terminal-command {
                 color: #000 !important;
             }
+            .terminal-line {
+                margin-bottom: 1px !important;
+            }
             .content {
                 max-width: none !important;
-                padding: 16px 24px !important;
+                padding: 10px 20px !important;
             }
             .section {
-                margin-bottom: 16px;
+                margin-bottom: 10px !important;
             }
             .section-title {
-                font-size: 14px;
-                margin-bottom: 10px;
-                padding-bottom: 4px;
-                /* Reset gradient text for print - must override all properties */
+                font-size: 12px;
+                margin-bottom: 6px;
+                padding-bottom: 3px;
                 background: none !important;
                 background-image: none !important;
                 -webkit-background-clip: border-box !important;
                 background-clip: border-box !important;
-                -webkit-text-fill-color: #635bff !important;
-                color: #635bff !important;
-                border-bottom: 2px solid #635bff;
+                -webkit-text-fill-color: #3b82f6 !important;
+                color: #3b82f6 !important;
+                border-bottom: 2px solid #3b82f6;
+                page-break-after: avoid;
             }
             .profile {
-                font-size: 11px;
-                line-height: 1.5;
+                font-size: 9px;
+                line-height: 1.4;
                 color: #000 !important;
             }
             .job {
-                margin-bottom: 12px;
-                padding: 12px;
+                margin-bottom: 8px;
+                padding: 8px 10px;
                 background: #f9f9f9 !important;
                 border: 1px solid #e5e5e5 !important;
-                page-break-inside: avoid;
             }
             .job:hover {
                 transform: none;
                 box-shadow: none;
             }
             .job-title {
-                font-size: 13px;
+                font-size: 11px;
+                margin-bottom: 2px !important;
                 color: #000 !important;
             }
             .job-company {
-                font-size: 11px;
-                color: #635bff !important;
+                font-size: 9px;
+                margin-bottom: 2px !important;
+                color: #3b82f6 !important;
             }
             .job-date {
-                font-size: 10px;
+                font-size: 8px;
                 color: #666 !important;
-                margin-bottom: 8px;
+                margin-bottom: 6px !important;
             }
             .job-description li {
-                font-size: 10px;
-                margin-bottom: 6px;
+                font-size: 9px;
+                margin-bottom: 4px;
                 color: #000 !important;
-                line-height: 1.4;
+                line-height: 1.35;
+                padding-left: 14px !important;
             }
             .job-description li::before {
-                color: #635bff !important;
+                color: #3b82f6 !important;
+                font-size: 10px;
             }
             .tech-note {
-                font-size: 9px;
-                padding: 8px 10px;
-                margin-top: 10px;
-                background: #ecfeff !important;
-                border: 1px solid #06b6d4 !important;
+                font-size: 8px;
+                padding: 6px 8px;
+                margin-top: 6px;
+                background: #dbeafe !important;
+                border: 1px solid #3b82f6 !important;
                 color: #525252 !important;
+                line-height: 1.3;
             }
             .tech-grid {
-                gap: 10px;
+                gap: 6px;
             }
             .tech-category {
-                padding: 10px;
+                padding: 6px 8px;
                 background: #f9f9f9 !important;
                 border: 1px solid #e5e5e5 !important;
             }
             .tech-category-title {
-                font-size: 11px;
-                color: #635bff !important;
+                font-size: 9px;
+                margin-bottom: 4px !important;
+                color: #3b82f6 !important;
             }
             .tech-category-content {
-                font-size: 10px;
+                font-size: 8px;
+                line-height: 1.35;
                 color: #000 !important;
             }
             strong {
                 color: #000 !important;
+            }
+            #technical-skills {
+                page-break-before: always;
             }
         }
 
@@ -598,7 +579,6 @@
     </style>
 </head>
 <body>
-    <!-- Theme Toggle -->
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode">
         <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="5"></circle>
@@ -616,7 +596,6 @@
         </svg>
     </button>
 
-    <!-- Terminal Header -->
     <div class="terminal-wrapper">
         <div class="terminal">
             <div class="terminal-header">
@@ -644,8 +623,8 @@
                         <span class="terminal-prompt">$</span>
                         <span class="terminal-command">david --contact</span>
                     </div>
-                    <div class="terminal-output">→ <a href="mailto:david4nderson@pm.me">david4nderson@pm.me</a><span class="terminal-separator">|</span><a href="https://www.linkedin.com/in/d4v1d4nd3rs0n/" target="_blank">linkedin.com/in/d4v1d4nd3rs0n</a></div>
-                    <div class="terminal-output">→ <a href="https://fullstackvibes.io" target="_blank" class="terminal-highlight">fullstackvibes.io</a><span class="terminal-separator">|</span><a href="https://github.com/d4vid4nderson" target="_blank">github.com/d4vid4nderson</a></div>
+                    <div class="terminal-output">&rarr; <a href="mailto:david4nderson@pm.me">david4nderson@pm.me</a><span class="terminal-separator">|</span><a href="https://www.linkedin.com/in/d4v1d4nd3rs0n/" target="_blank">linkedin.com/in/d4v1d4nd3rs0n</a></div>
+                    <div class="terminal-output">&rarr; <a href="https://fullstackvibes.io" target="_blank" class="terminal-highlight">fullstackvibes.io</a><span class="terminal-separator">|</span><a href="https://github.com/d4vid4nderson" target="_blank">github.com/d4vid4nderson</a></div>
                 </div>
 
                 <div class="terminal-section">
@@ -653,7 +632,7 @@
                         <span class="terminal-prompt">$</span>
                         <span class="terminal-command">david --stack</span>
                     </div>
-                    <div class="terminal-output">→ go, python, typescript, react, next.js, fastapi, postgresql</div>
+                    <div class="terminal-output">&rarr; go, python, typescript, react, next.js, fastapi, postgresql</div>
                 </div>
 
                 <div class="terminal-section">
@@ -661,7 +640,7 @@
                         <span class="terminal-prompt">$</span>
                         <span class="terminal-command">david --ai</span>
                     </div>
-                    <div class="terminal-output">→ Claude Code, OpenAI GPT Codex, Azure Foundry, Prompt Engineering, RAG Pipelines</div>
+                    <div class="terminal-output">&rarr; Claude Code, OpenAI GPT Codex, Azure Foundry, Prompt Engineering, RAG Pipelines</div>
                 </div>
             </div>
         </div>
@@ -671,7 +650,7 @@
         <div class="section">
             <div class="section-title">Profile</div>
             <div class="profile">
-                I've spent over a decade finding the gaps between enterprise systems and the people stuck using them — then building what's missing. At MOREgroup, I created the VUES suite: 6 production applications that cut planning time by 80% and saved over $400K annually. I didn't do it by writing every line of code myself. I did it by understanding the problem deeply, architecting the solution, and using AI to accelerate development. My background spans architectural drafting, resource management, media lab development, and product ownership — which means I understand both the people side and the systems side.
+                I've spent over a decade finding the gaps between enterprise systems and the people stuck using them, then building what's missing. At MOREgroup, I created the VUES suite: 6 production applications that cut planning time by 80% and saved over $400K annually. I didn't do it by writing every line of code myself. I did it by understanding the problem deeply, architecting the solution, and using AI to accelerate development. My background spans architectural drafting, resource management, media lab development, and product ownership, which means I understand both the people side and the systems side.
             </div>
         </div>
 
@@ -681,27 +660,27 @@
             <div class="job">
                 <div class="job-title">Digital Experience Architect & Product Owner</div>
                 <div class="job-company">MOREgroup (formerly Huckabee)</div>
-                <div class="job-date">July 2022 – Present</div>
+                <div class="job-date">July 2022 - Present</div>
                 <ul class="job-description">
-                    <li>Designed and built <strong>VUES</strong>, a suite of <strong>6 production AI applications</strong> used daily by cross-functional teams. End-to-end ownership: user research → interface design → full-stack development → deployment. <strong>130+ API endpoints</strong>, <strong>55+ database tables</strong>, serving 800+ person organization.</li>
+                    <li>Designed and built <strong>VUES</strong>, a suite of <strong>6 production AI applications</strong> used daily by cross-functional teams. End-to-end ownership: user research, interface design, full-stack development, deployment. <strong>130+ API endpoints</strong>, <strong>55+ database tables</strong>, serving 800+ person organization.</li>
 
-                    <li><strong>LegislationVUE</strong> — Python/FastAPI backend processing <strong>20,000+ legislative documents</strong> via Azure OpenAI GPT-4. React frontend with real-time search across <strong>6 state databases</strong>. Eliminated <strong>$40K+/year</strong> in legal consulting costs.</li>
+                    <li><strong>LegislationVUE</strong> - Python/FastAPI backend processing <strong>20,000+ legislative documents</strong> via Azure OpenAI GPT-4. React frontend with real-time search across <strong>6 state databases</strong>. Eliminated <strong>$40K+/year</strong> in legal consulting costs.</li>
 
-                    <li><strong>PlanVUE</strong> — Go/HTMX application managing <strong>200+ active projects</strong> with <strong>25+ PostgreSQL tables</strong>. Claude AI for scope analysis, role-based access control, automated PDF generation. Achieved <strong>80% efficiency gain</strong> (5 days → 1 day).</li>
+                    <li><strong>PlanVUE</strong> - Go/HTMX application managing <strong>200+ active projects</strong> with <strong>25+ PostgreSQL tables</strong>. Claude AI for scope analysis, role-based access control, automated PDF generation. Achieved <strong>80% efficiency gain</strong> (5 days to 1 day).</li>
 
-                    <li><strong>InitiativeVUE</strong> — Full-stack Go application serving <strong>50+ concurrent users</strong>. Real-time WebSocket updates, multi-level approval workflows, <strong>30+ RESTful endpoints</strong>, <strong>15+ DB tables</strong>. Claude AI for automated status reporting.</li>
+                    <li><strong>InitiativeVUE</strong> - Full-stack Go application serving <strong>50+ concurrent users</strong>. Real-time WebSocket updates, multi-level approval workflows, <strong>30+ RESTful endpoints</strong>, <strong>15+ DB tables</strong>. Claude AI for automated status reporting.</li>
 
-                    <li><strong>FacilityVUE</strong> — Multi-tenant Go platform supporting <strong>100+ school districts</strong> with isolated PostgreSQL schemas. <strong>40+ API endpoints</strong>, real-time notifications, comprehensive audit logging. Preparing for commercial release.</li>
+                    <li><strong>FacilityVUE</strong> - Multi-tenant Go platform supporting <strong>100+ school districts</strong> with isolated PostgreSQL schemas. <strong>40+ API endpoints</strong>, real-time notifications, comprehensive audit logging. Preparing for commercial release.</li>
 
-                    <li><strong>SharePointVUE</strong> — Automated testing framework scanning <strong>500+ pages/run</strong>. Playwright-based validation, WCAG 2.1 AA compliance checking, broken link detection. Claude AI analyzes accessibility issues.</li>
+                    <li><strong>SharePointVUE</strong> - Automated testing framework scanning <strong>500+ pages/run</strong>. Playwright-based validation, WCAG 2.1 AA compliance checking, broken link detection. Claude AI analyzes accessibility issues.</li>
                 </ul>
                 <div class="tech-note">Stack: Go, Python, TypeScript, React, Next.js, FastAPI, HTMX, PostgreSQL, Azure SQL, Docker, Playwright | AI: Claude, Azure OpenAI GPT-4, RAG pipelines</div>
             </div>
 
             <div class="job">
-                <div class="job-title">Resource Manager → Media Lab Manager → Digital Experience Designer</div>
+                <div class="job-title">Resource Manager &rarr; Media Lab Manager &rarr; Digital Experience Designer</div>
                 <div class="job-company">Huckabee | A MOREgroup Brand</div>
-                <div class="job-date">July 2013 – July 2022</div>
+                <div class="job-date">July 2013 - July 2022</div>
                 <ul class="job-description">
                     <li>9 years of progressive growth building internal tools, knowledge management platforms (<strong>$30K+ annual savings</strong>), and media production systems. Foundation for understanding workflow pain points and translating user needs into technical solutions.</li>
                 </ul>
@@ -721,7 +700,7 @@
             </div>
         </div>
 
-        <div class="section">
+        <div class="section" id="technical-skills">
             <div class="section-title">Technical Skills</div>
             <div class="tech-grid">
                 <div class="tech-category">
@@ -751,7 +730,7 @@
                 <a href="https://www.linkedin.com/in/d4v1d4nd3rs0n/" target="_blank" class="footer-link">LinkedIn</a>
                 <a href="mailto:david4nderson@pm.me" class="footer-link">Email</a>
             </div>
-            <p>Built with Next.js & Tailwind CSS · Deployed on Vercel</p>
+            <p>Built with Next.js & Tailwind CSS</p>
         </div>
     </div>
 
@@ -761,7 +740,6 @@
             localStorage.setItem('resume-theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
         }
 
-        // Update CSS variables with theme colors
         function setThemeColors(colors) {
             const root = document.documentElement;
             if (colors.primary) root.style.setProperty('--accent-primary', colors.primary);
@@ -771,7 +749,6 @@
             if (colors.dark) root.style.setProperty('--accent-dark', colors.dark);
         }
 
-        // Listen for theme updates from parent window
         window.addEventListener('message', function(event) {
             if (event.data && event.data.type === 'setTheme') {
                 if (event.data.mode === 'light') {
@@ -785,12 +762,9 @@
             }
         });
 
-        // Check for saved theme or sync with portfolio
         (function() {
-            // Detect if in iframe and hide theme toggle
             if (window.self !== window.top) {
                 document.body.classList.add('in-iframe');
-                // Notify parent that iframe is ready
                 window.parent.postMessage({ type: 'iframeReady' }, '*');
             }
 
@@ -802,10 +776,8 @@
                 document.body.classList.add('light-mode');
             }
 
-            // Try to get theme colors from localStorage
             if (portfolioColorTheme) {
                 const themeColors = {
-                    'stripe': { primary: '#635bff', secondary: '#0a2540', tertiary: '#7a73ff', light: '#8b84ff', dark: '#0a2540' },
                     'cyan': { primary: '#06b6d4', secondary: '#14b8a6', tertiary: '#0891b2', light: '#67e8f9', dark: '#0e7490' },
                     'purple': { primary: '#a855f7', secondary: '#8b5cf6', tertiary: '#7c3aed', light: '#c084fc', dark: '#7c3aed' },
                     'emerald': { primary: '#10b981', secondary: '#059669', tertiary: '#34d399', light: '#6ee7b7', dark: '#047857' },
