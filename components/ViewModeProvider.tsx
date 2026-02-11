@@ -23,13 +23,10 @@ export function ViewModeProvider({ children }: { children: ReactNode }) {
   const [viewMode, setViewModeState] = useState<ViewMode>('backend');
   const [mounted, setMounted] = useState(false);
 
-  // Load from localStorage on mount
+  // Always start with backend (terminal mode) on mount
   useEffect(() => {
     setMounted(true);
-    const stored = localStorage.getItem('viewMode') as ViewMode;
-    if (stored && (stored === 'backend' || stored === 'frontend')) {
-      setViewModeState(stored);
-    }
+    // Removed localStorage loading to always default to 'backend' (terminal mode)
   }, []);
 
   // Apply to DOM and persist when viewMode changes
