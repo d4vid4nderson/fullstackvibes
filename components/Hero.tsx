@@ -796,7 +796,7 @@ export function Hero() {
           '',
           '   Currently exploring:',
           '   • Product Owner / Technical PM roles',
-          '   • Full-Stack Developer positions',
+          '   • Solutions Architect positions',
           '   • AI/ML Engineering opportunities',
           '',
           '   Location: Texas (Remote-friendly)',
@@ -1150,7 +1150,7 @@ export function Hero() {
                       David Anderson
                     </h2>
                     <p className="text-base sm:text-lg font-medium gradient-text">
-                      Solutions Architect | AI Developer
+                      AI Solutions Architect/Product Owner
                     </p>
                     <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mt-2 max-w-lg">
                       I build enterprise tools that don&apos;t suck. Over a decade connecting systems, automating workflows, and making software people actually use. AI helps me ship faster.
