@@ -33,6 +33,8 @@ const careerData: CareerEntry[] = [
       'Delivered $400,000+ in annual cost savings through workflow automation',
       'Achieved 80% efficiency gains for architectural planning teams',
       'Integrated Claude AI, GPT-4, and Azure OpenAI into production systems',
+      'Built CI/CD pipelines with Azure DevOps for automated testing and deployment',
+      'Developed Microsoft Teams bots with Adaptive Cards for conversational AI workflows',
       'Led agile sprints from ideation through deployment and adoption',
     ],
     techStack: ['go', 'python', 'typescript', 'react', 'claude', 'postgresql', 'docker'],
