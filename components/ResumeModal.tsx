@@ -9,7 +9,8 @@ const themeColors: Record<string, { primary: string; secondary: string; tertiary
   'purple': { primary: '#a855f7', secondary: '#8b5cf6', tertiary: '#7c3aed', light: '#c084fc', dark: '#7c3aed' },
   'emerald': { primary: '#10b981', secondary: '#059669', tertiary: '#34d399', light: '#6ee7b7', dark: '#047857' },
   'orange': { primary: '#f97316', secondary: '#fb923c', tertiary: '#ea580c', light: '#fdba74', dark: '#c2410c' },
-  'blue': { primary: '#3b82f6', secondary: '#60a5fa', tertiary: '#2563eb', light: '#93c5fd', dark: '#1d4ed8' }
+  'blue': { primary: '#3b82f6', secondary: '#60a5fa', tertiary: '#2563eb', light: '#93c5fd', dark: '#1d4ed8' },
+  'lockheed': { primary: '#003478', secondary: '#004b9c', tertiary: '#0066cc', light: '#3399ff', dark: '#002855' }
 };
 
 interface ResumeModalProps {
@@ -85,6 +86,15 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
     }
   };
 
+  const handleDownloadPDF = () => {
+    // Trigger print dialog in iframe which will use current theme colors
+    if (iframeRef.current?.contentWindow) {
+      iframeRef.current.contentWindow.postMessage({
+        type: 'print'
+      }, '*');
+    }
+  };
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -129,15 +139,14 @@ export function ResumeModal({ isOpen, onClose }: ResumeModalProps) {
               >
                 {resumeTheme === 'dark' ? <FiSun className="w-5 h-5" /> : <FiMoon className="w-5 h-5" />}
               </button>
-              <a
-                href="/david-anderson-resume.pdf"
-                download="David-Anderson-Resume.pdf"
+              <button
+                onClick={handleDownloadPDF}
                 className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-accent hover:bg-accent/90 text-white text-sm font-medium rounded-lg transition-colors"
               >
                 <FiDownload className="w-4 h-4" />
                 <span className="hidden sm:inline">Download PDF</span>
                 <span className="sm:hidden">PDF</span>
-              </a>
+              </button>
               <button
                 onClick={onClose}
                 className="p-2 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-[#2a2a2a] transition-colors"

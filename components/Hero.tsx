@@ -940,7 +940,7 @@ export function Hero() {
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleCommand(command, false);
     }
@@ -1270,7 +1270,7 @@ export function Hero() {
                       type="text"
                       value={command}
                       onChange={(e) => setCommand(e.target.value)}
-                      onKeyPress={handleKeyPress}
+                      onKeyDown={handleKeyDown}
                       className="flex-1 bg-transparent outline-none text-gray-700 dark:text-gray-300 caret-accent dark:caret-accent placeholder:text-gray-500 dark:placeholder:text-gray-500"
                       placeholder="type your command to begin."
                       autoFocus
