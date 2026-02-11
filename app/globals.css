@@ -31,7 +31,8 @@ body {
 .dark[data-theme="purple"],
 .dark[data-theme="emerald"],
 .dark[data-theme="orange"],
-.dark[data-theme="blue"] {
+.dark[data-theme="blue"],
+.dark[data-theme="lockheed"] {
   --background: #0f0f0f;
 }
 
@@ -98,6 +99,19 @@ body {
 
 :root:not(.dark)[data-theme="blue"] {
   --background: #ede9fe;
+}
+
+/* Lockheed Martin Theme - Professional Navy Blues */
+[data-theme="lockheed"] {
+  --accent-primary: #003478;
+  --accent-secondary: #004b9c;
+  --accent-tertiary: #0066cc;
+  --accent-light: #3399ff;
+  --accent-dark: #002855;
+}
+
+:root:not(.dark)[data-theme="lockheed"] {
+  --background: #e6f0ff;
 }
 
 @theme inline {

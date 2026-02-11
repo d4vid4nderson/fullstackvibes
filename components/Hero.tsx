@@ -42,6 +42,12 @@ const THEME_OPTIONS = [
     description: 'Blue vs Red - the eternal clash',
     tagline: 'Choose your side!'
   },
+  {
+    key: 'lockheed',
+    name: 'Skunk Works',
+    description: 'Professional navy blues - engineered for excellence',
+    tagline: 'Innovation at the speed of need!'
+  },
 ];
 
 export function Hero() {
@@ -1037,6 +1043,14 @@ export function Hero() {
                                   <div className="w-5 h-5 rounded-full bg-[#3b82f6] border border-gray-300 dark:border-white/20"></div>
                                   <div className="w-5 h-5 rounded-full bg-[#c026d3] border border-gray-300 dark:border-white/20"></div>
                                   <div className="w-5 h-5 rounded-full bg-[#ef4444] border border-gray-300 dark:border-white/20"></div>
+                                </>
+                              )}
+                              {/* Skunk Works: Navy → Blue → Light Blue */}
+                              {theme.key === 'lockheed' && (
+                                <>
+                                  <div className="w-5 h-5 rounded-full bg-[#003478] border border-gray-300 dark:border-white/20"></div>
+                                  <div className="w-5 h-5 rounded-full bg-[#004b9c] border border-gray-300 dark:border-white/20"></div>
+                                  <div className="w-5 h-5 rounded-full bg-[#0066cc] border border-gray-300 dark:border-white/20"></div>
                                 </>
                               )}
                             </div>
