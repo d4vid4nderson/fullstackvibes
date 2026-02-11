@@ -129,8 +129,8 @@ export function Hero() {
   const handleCommand = (cmd: string, delayAction: boolean = false) => {
     const trimmedCmd = cmd.trim().toLowerCase();
 
-    // Handle theme menu selection (numbers 1-5)
-    if (showThemeMenu && ['1', '2', '3', '4', '5'].includes(trimmedCmd)) {
+    // Handle theme menu selection (numbers 1-6)
+    if (showThemeMenu && ['1', '2', '3', '4', '5', '6'].includes(trimmedCmd)) {
       const selectedTheme = THEME_OPTIONS[parseInt(trimmedCmd) - 1];
       setCommandHistory(prev => [...prev, `> ${cmd}`]);
       handleThemeSelection(selectedTheme.key);
@@ -433,7 +433,7 @@ export function Hero() {
             `  ${idx + 1}. ${theme.name} - ${theme.description}`
           ),
           '',
-          'Type a number (1-5) to select your theme'
+          'Type a number (1-6) to select your theme'
         ]);
         break;
       case 'help':
@@ -464,7 +464,9 @@ export function Hero() {
           '  theme      - Choose your color theme',
           '  light/dark - Switch display mode',
           '  clear      - Clear terminal',
-          '  help       - Show this message'
+          '  help       - Show this message',
+          '',
+          '  🥚 Easter Eggs: Try skunkworks, sr71, or blackbird!'
         ]);
         break;
       case 'clear':
@@ -894,6 +896,39 @@ export function Hero() {
           '    ██                ██        Languages: Go, Python, TS',
           '      ██              ██        Coffee: ████████████ 100%',
           '        ████████████████        Status: Open to Work 🟢',
+          ''
+        ]);
+        break;
+
+      case 'skunkworks':
+      case 'sr71':
+      case 'blackbird':
+        setCommandHistory(prev => [...prev,
+          '',
+          '✈️  SKUNK WORKS - ADVANCED DEVELOPMENT PROGRAMS',
+          '',
+          '   "The Skunk Works is a concentration of a few good people',
+          '    solving problems far in advance of existing technology."',
+          '    — Kelly Johnson',
+          '',
+          '   🦨 LEGENDARY PROJECTS:',
+          '   ├─ SR-71 Blackbird - Mach 3+ reconnaissance aircraft',
+          '   ├─ U-2 Dragon Lady - High-altitude surveillance',
+          '   ├─ F-117 Nighthawk - First stealth fighter',
+          '   ├─ F-22 Raptor - Air superiority stealth fighter',
+          '   └─ F-35 Lightning II - Multi-role stealth fighter',
+          '',
+          '   📐 KELLY JOHNSON\'S 14 RULES (Selected):',
+          '   1. The Skunk Works manager must be delegated',
+          '      authority to make quick decisions.',
+          '   2. Strong but small project teams.',
+          '   3. The number of people with any connection',
+          '      to the project must be minimal.',
+          '   10. Access by outsiders must be strictly controlled.',
+          '',
+          '   💡 "Be quick, be quiet, be on time."',
+          '',
+          '   Innovation at the speed of need! 🚀',
           ''
         ]);
         break;
