@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 
 type Mode = 'light' | 'dark';
-type ColorTheme = 'cyan' | 'purple' | 'emerald' | 'orange' | 'blue';
+type ColorTheme = 'cyan' | 'purple' | 'emerald' | 'orange' | 'blue' | 'lockheed';
 
 interface ThemeContextType {
   mode: Mode;

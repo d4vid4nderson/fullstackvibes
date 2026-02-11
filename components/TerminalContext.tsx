@@ -12,6 +12,9 @@ interface TerminalContextType {
   setProjectsState: (state: TerminalState) => void;
   setContactState: (state: TerminalState) => void;
   restoreTerminal: (terminal: 'career' | 'projects' | 'contact') => void;
+  heroMessages: string[];
+  addHeroMessage: (message: string) => void;
+  clearHeroMessages: () => void;
 }
 
 const TerminalContext = createContext<TerminalContextType | undefined>(undefined);
@@ -20,6 +23,7 @@ export function TerminalProvider({ children }: { children: ReactNode }) {
   const [careerState, setCareerState] = useState<TerminalState>('open');
   const [projectsState, setProjectsState] = useState<TerminalState>('open');
   const [contactState, setContactState] = useState<TerminalState>('open');
+  const [heroMessages, setHeroMessages] = useState<string[]>([]);
 
   const restoreTerminal = (terminal: 'career' | 'projects' | 'contact') => {
     switch (terminal) {
@@ -35,6 +39,14 @@ export function TerminalProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const addHeroMessage = (message: string) => {
+    setHeroMessages(prev => [...prev, message]);
+  };
+
+  const clearHeroMessages = () => {
+    setHeroMessages([]);
+  };
+
   return (
     <TerminalContext.Provider
       value={{
@@ -45,6 +57,9 @@ export function TerminalProvider({ children }: { children: ReactNode }) {
         setProjectsState,
         setContactState,
         restoreTerminal,
+        heroMessages,
+        addHeroMessage,
+        clearHeroMessages,
       }}
     >
       {children}

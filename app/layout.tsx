@@ -12,6 +12,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { StructuredData } from "@/components/StructuredData";
 import { ViewModeProvider } from "@/components/ViewModeProvider";
+import { ScrollToTopOnLoad } from "@/components/ScrollToTopOnLoad";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
@@ -161,6 +162,7 @@ export default function RootLayout({
           <ViewModeProvider>
             <ChatProvider>
               <TerminalProvider>
+                <ScrollToTopOnLoad />
                 <BackgroundOrbs />
                 <div className="flex-1 relative z-10">
                   {children}

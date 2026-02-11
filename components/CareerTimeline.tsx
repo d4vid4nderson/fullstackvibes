@@ -25,7 +25,7 @@ const careerData: CareerEntry[] = [
     endYear: 'HEAD',
     title: 'Digital Experience Architect & Product Owner',
     company: 'MOREgroup',
-    location: 'Paradise, TX',
+    location: 'Fort Worth, Texas',
     type: 'current',
     summary: 'Leading product development of the VUES suite—6 production AI applications that transformed organizational workflows.',
     achievements: [
@@ -45,7 +45,7 @@ const careerData: CareerEntry[] = [
     endYear: '2022',
     title: 'Digital Experience Designer',
     company: 'Huckabee (now MOREgroup)',
-    location: 'Paradise, TX',
+    location: 'Fort Worth, Texas',
     type: 'past',
     summary: 'Evolved from design operations to technical product development, bridging creative workflows with software solutions.',
     achievements: [
@@ -62,7 +62,7 @@ const careerData: CareerEntry[] = [
     endYear: '2018',
     title: 'Media Lab Manager',
     company: 'Huckabee',
-    location: 'Paradise, TX',
+    location: 'Fort Worth, Texas',
     type: 'past',
     summary: 'Established the media lab from concept through C-suite pitch, building the foundation for digital innovation.',
     achievements: [
@@ -78,7 +78,7 @@ const careerData: CareerEntry[] = [
     endYear: '2015',
     title: 'Resource Manager',
     company: 'Huckabee',
-    location: 'Paradise, TX',
+    location: 'Fort Worth, Texas',
     type: 'past',
     summary: 'Managed design team operations and resource allocation, developing deep understanding of creative workflow pain points.',
     achievements: [
@@ -122,7 +122,7 @@ function TimelineCard({ entry, isExpanded, onToggle }: TimelineCardProps) {
       <div className="absolute left-0 sm:left-2 top-0 flex items-center justify-center">
         <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
           isExpanded
-            ? 'bg-accent text-white shadow-lg shadow-accent-primary/50'
+            ? 'bg-accent-dark text-white shadow-lg shadow-accent-primary/50'
             : 'bg-white dark:bg-[#1a1a1a] border-2 border-accent-primary/50'
         }`}>
           <FiGitCommit className={`w-3 h-3 ${isExpanded ? 'text-white' : 'text-accent'}`} />

@@ -425,7 +425,7 @@ function ProjectTimelineCard({ repo, isExpanded, onToggle, isLast }: ProjectTime
       <div className="absolute left-0 sm:left-2 top-0 flex items-center justify-center">
         <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ${
           isExpanded
-            ? 'bg-accent text-white shadow-lg shadow-accent-primary/50'
+            ? 'bg-accent-dark text-white shadow-lg shadow-accent-primary/50'
             : 'bg-white dark:bg-[#1a1a1a] border-2 border-accent-primary/50'
         }`}>
           <FiGitCommit className={`w-3 h-3 ${isExpanded ? 'text-white' : 'text-accent'}`} />

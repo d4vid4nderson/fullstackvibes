@@ -101,26 +101,26 @@ body {
   --background: #ede9fe;
 }
 
-/* Lockheed Martin Theme - Professional Navy Blues */
+/* Skunk Works Theme - Stealth Grays (Black Ops) */
 [data-theme="lockheed"] {
-  --accent-primary: #003478;
-  --accent-secondary: #004b9c;
-  --accent-tertiary: #0066cc;
-  --accent-light: #3399ff;
-  --accent-dark: #002855;
+  --accent-primary: #2a2a2a;
+  --accent-secondary: #3f3f3f;
+  --accent-tertiary: #595959;
+  --accent-light: #737373;
+  --accent-dark: #0a0a0a;
 }
 
-/* Dark mode: Use brighter blues for better contrast */
+/* Dark mode: Use lighter grays for contrast with smooth gradient */
 .dark[data-theme="lockheed"] {
-  --accent-primary: #3399ff;
-  --accent-secondary: #66b3ff;
-  --accent-tertiary: #0066cc;
-  --accent-light: #99ccff;
-  --accent-dark: #0066cc;
+  --accent-primary: #a8a8a8;
+  --accent-secondary: #8c8c8c;
+  --accent-tertiary: #707070;
+  --accent-light: #c4c4c4;
+  --accent-dark: #545454;
 }
 
 :root:not(.dark)[data-theme="lockheed"] {
-  --background: #e6f0ff;
+  --background: #e5e5e5;
 }
 
 @theme inline {

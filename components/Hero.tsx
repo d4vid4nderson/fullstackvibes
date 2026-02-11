@@ -7,6 +7,7 @@ import { FiMapPin } from 'react-icons/fi';
 import { useTheme } from './ThemeProvider';
 import { useViewMode } from './ViewModeProvider';
 import { ResumeModal } from './ResumeModal';
+import { EasterEggsModal } from './EasterEggsModal';
 import { useChatContext } from './ChatContext';
 import { useTerminal } from './TerminalContext';
 
@@ -45,27 +46,36 @@ const THEME_OPTIONS = [
   {
     key: 'lockheed',
     name: 'Skunk Works',
-    description: 'Professional navy blues - engineered for excellence',
+    description: 'Stealth grays - blacked out for classified ops',
     tagline: 'Innovation at the speed of need!'
   },
 ];
 
 export function Hero() {
-  const { mode, setMode, setColorTheme } = useTheme();
+  const { mode, setMode, colorTheme, setColorTheme } = useTheme();
   useViewMode(); // Keep hook for context
   const { setIsChatOpen } = useChatContext();
-  const { careerState, projectsState, contactState, restoreTerminal } = useTerminal();
+  const { careerState, projectsState, contactState, restoreTerminal, heroMessages, clearHeroMessages } = useTerminal();
   const [command, setCommand] = useState('');
-  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [commandHistory, setCommandHistory] = useState<(string | React.ReactNode)[]>([]);
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const [showThemeMenu, setShowThemeMenu] = useState(false);
   const [showResumeModal, setShowResumeModal] = useState(false);
+  const [showEasterEggsModal, setShowEasterEggsModal] = useState(false);
   const [navWidth, setNavWidth] = useState(0);
   const [isHistoryFading, setIsHistoryFading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
   const navMenuRef = useRef<HTMLDivElement>(null);
   const resetTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Listen for messages from TerminalContext (e.g., from button clicks)
+  useEffect(() => {
+    if (heroMessages.length > 0) {
+      setCommandHistory(prev => [...prev, ...heroMessages]);
+      clearHeroMessages();
+    }
+  }, [heroMessages, clearHeroMessages]);
 
   // Auto-reset terminal output after 20 seconds of inactivity with fade effect
   useEffect(() => {
@@ -102,13 +112,24 @@ export function Hero() {
 
     setShowThemeMenu(false);
 
-    // Add loading animation message
-    setCommandHistory(prev => [...prev,
-      `Activating ${theme.name}...`,
-      `${theme.tagline}`,
-      '▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ 100%',
-      `Theme "${theme.name}" activated! ✨`
-    ]);
+    // Special message for Skunk Works theme
+    if (themeKey === 'lockheed') {
+      setCommandHistory(prev => [...prev,
+        '✈️  Activating stealth mode...',
+        '🔒 Engaging classified protocols',
+        '▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ 100%',
+        '🛩️  Stealth mode activated! All systems black.',
+        '   Innovation at the speed of need!'
+      ]);
+    } else {
+      // Standard theme activation message
+      setCommandHistory(prev => [...prev,
+        `Activating ${theme.name}...`,
+        `${theme.tagline}`,
+        '▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ 100%',
+        `Theme "${theme.name}" activated! ✨`
+      ]);
+    }
 
     // Trigger theme change with animation
     document.documentElement.style.transition = 'filter 0.5s ease-in-out';
@@ -241,6 +262,13 @@ export function Hero() {
         return { message: githubMessages[Math.floor(Math.random() * githubMessages.length)], action: 'openGithub' };
 
       case 'light':
+        // Special warning for Skunk Works theme
+        if (colorTheme === 'lockheed') {
+          return {
+            message: '⚠️  STEALTH SYSTEMS DEACTIVATING\n   RADAR SIGNATURE: EXPOSED | EMISSIONS: ACTIVE | THREAT LEVEL: HIGH',
+            action: 'setLight'
+          };
+        }
         const lightMessages = [
           'The Force is strong with this one... Welcome to the Light Side!',
           'Switching to Light Mode... May the Force be with you!',
@@ -251,6 +279,13 @@ export function Hero() {
         return { message: lightMessages[Math.floor(Math.random() * lightMessages.length)], action: 'setLight' };
 
       case 'dark':
+        // Special message for Skunk Works theme
+        if (colorTheme === 'lockheed') {
+          return {
+            message: '✅ STEALTH SYSTEMS ONLINE\n   RADAR SIGNATURE: MINIMAL | EMISSIONS: SUPPRESSED | STATUS: DARK',
+            action: 'setDark'
+          };
+        }
         const darkMessages = [
           'I\'m Batman. Dark Mode activated.',
           'Why do we fall? So we can learn to pick ourselves up... in Dark Mode.',
@@ -465,8 +500,7 @@ export function Hero() {
           '  light/dark - Switch display mode',
           '  clear      - Clear terminal',
           '  help       - Show this message',
-          '',
-          '  🥚 Easter Eggs: Try skunkworks, sr71, or blackbird!'
+          '  eastereggs - Discover hidden commands'
         ]);
         break;
       case 'clear':
@@ -493,6 +527,37 @@ export function Hero() {
           setCommandHistory([]);
           setCommand('');
         }, 500);
+        break;
+
+      case 'eastereggs':
+        setShowEasterEggsModal(true);
+        setCommandHistory(prev => [...prev, '🥚 Opening Easter Eggs modal...']);
+        break;
+
+      case 'easter eggs':
+      case 'easteregg':
+      case 'easter egg':
+        setCommandHistory(prev => [...prev,
+          '',
+          <div key={`eastereggs-suggestion-${Date.now()}`} className="text-sm">
+            <span className="text-gray-600 dark:text-gray-400">
+              Did you mean{' '}
+            </span>
+            <button
+              onClick={() => {
+                setShowEasterEggsModal(true);
+                setCommandHistory(prev => [...prev, '🥚 Opening Easter Eggs modal...']);
+              }}
+              className="text-accent hover:underline cursor-pointer font-bold"
+            >
+              eastereggs
+            </button>
+            <span className="text-gray-600 dark:text-gray-400">
+              ? (click to open)
+            </span>
+          </div>,
+          ''
+        ]);
         break;
 
       // 🥚 EASTER EGGS 🥚
@@ -900,35 +965,97 @@ export function Hero() {
         ]);
         break;
 
-      case 'skunkworks':
-      case 'sr71':
       case 'blackbird':
         setCommandHistory(prev => [...prev,
           '',
-          '✈️  SKUNK WORKS - ADVANCED DEVELOPMENT PROGRAMS',
+          '✈️  SKUNK WORKS - LEGENDARY PROJECTS',
           '',
           '   "The Skunk Works is a concentration of a few good people',
           '    solving problems far in advance of existing technology."',
           '    — Kelly Johnson',
           '',
-          '   🦨 LEGENDARY PROJECTS:',
-          '   ├─ SR-71 Blackbird - Mach 3+ reconnaissance aircraft',
-          '   ├─ U-2 Dragon Lady - High-altitude surveillance',
-          '   ├─ F-117 Nighthawk - First stealth fighter',
-          '   ├─ F-22 Raptor - Air superiority stealth fighter',
-          '   └─ F-35 Lightning II - Multi-role stealth fighter',
+          '   🦨 ADVANCED DEVELOPMENT PROGRAMS:',
+          '   ',
+          '   A-12 OXCART - CIA\'s Mach 3+ spy plane',
+          '     • First flight: 1962 | Classified until 1990s',
+          '     • Top speed: Mach 3.35+ (2,212 mph)',
+          '     • Predecessor to the SR-71 Blackbird',
+          '   ',
+          '   SR-71 BLACKBIRD - Mach 3+ reconnaissance aircraft',
+          '     • First flight: 1964 | Still holds speed records',
+          '     • Top speed: Mach 3.3+ (2,200+ mph)',
+          '     • Altitude: 85,000+ feet',
+          '   ',
+          '   U-2 DRAGON LADY - High-altitude surveillance',
+          '     • First flight: 1955 | Still in active service',
+          '     • Altitude: 70,000+ feet',
+          '   ',
+          '   F-117 NIGHTHAWK - First stealth fighter',
+          '     • First combat: Operation Desert Storm',
+          '     • First flight: 1981 | Retired 2008',
+          '   ',
+          '   F-22 RAPTOR - Air superiority stealth fighter',
+          '     • First flight: 1997 | Active service',
+          '     • Supercruise capable',
+          '   ',
+          '   F-35 LIGHTNING II - Multi-role stealth fighter',
+          '     • First flight: 2006 | Active service',
+          '     • Three variants: A, B, C',
+          ''
+        ]);
+        break;
+
+      case 'skunkworks':
+        setCommandHistory(prev => [...prev,
           '',
-          '   📐 KELLY JOHNSON\'S 14 RULES (Selected):',
+          '📐 KELLY JOHNSON\'S 14 RULES OF MANAGEMENT',
+          '',
+          '   The legendary principles that guided Lockheed\'s',
+          '   most advanced development programs:',
+          '',
           '   1. The Skunk Works manager must be delegated',
-          '      authority to make quick decisions.',
-          '   2. Strong but small project teams.',
-          '   3. The number of people with any connection',
-          '      to the project must be minimal.',
-          '   10. Access by outsiders must be strictly controlled.',
+          '      practically complete control of their program',
+          '      in all aspects.',
           '',
-          '   💡 "Be quick, be quiet, be on time."',
+          '   2. Strong but small project offices must be provided',
+          '      by both the military and industry.',
           '',
-          '   Innovation at the speed of need! 🚀',
+          '   3. The number of people having any connection with',
+          '      the project must be restricted in an almost',
+          '      vicious manner.',
+          '',
+          '   4. A very simple drawing and drawing release system',
+          '      with great flexibility for making changes must',
+          '      be provided.',
+          '',
+          '   5. There must be a minimum number of reports required,',
+          '      but important work must be recorded thoroughly.',
+          '',
+          '   10. Access by outsiders to the project and its personnel',
+          '       must be strictly controlled by appropriate security.',
+          '',
+          '   14. The Skunk Works is governed by a small number of',
+          '       good people who have complete trust of each other.',
+          '',
+          '   💡 "Be quick, be quiet, be on time." — Kelly Johnson',
+          ''
+        ]);
+        break;
+
+      case 'sr71':
+        setCommandHistory(prev => [...prev,
+          '',
+          '🚀 LOCKHEED MARTIN SKUNK WORKS',
+          '',
+          '   Innovation at the speed of need!',
+          '',
+          '   "Everything I did in my career I waited for someone to',
+          '    tell me I couldn\'t do it. And when no one did, I did it."',
+          '    — Kelly Johnson, Skunk Works Founder',
+          '',
+          '   💡 Try these commands:',
+          '   • blackbird  - View legendary aircraft projects',
+          '   • skunkworks - Read Kelly Johnson\'s 14 rules',
           ''
         ]);
         break;
@@ -1080,12 +1207,12 @@ export function Hero() {
                                   <div className="w-5 h-5 rounded-full bg-[#ef4444] border border-gray-300 dark:border-white/20"></div>
                                 </>
                               )}
-                              {/* Skunk Works: Navy → Blue → Light Blue */}
+                              {/* Skunk Works: Dark Gray → Mid Gray (Gradient) */}
                               {theme.key === 'lockheed' && (
                                 <>
-                                  <div className="w-5 h-5 rounded-full bg-[#003478] border border-gray-300 dark:border-white/20"></div>
-                                  <div className="w-5 h-5 rounded-full bg-[#004b9c] border border-gray-300 dark:border-white/20"></div>
-                                  <div className="w-5 h-5 rounded-full bg-[#0066cc] border border-gray-300 dark:border-white/20"></div>
+                                  <div className="w-5 h-5 rounded-full bg-[#2a2a2a] border border-gray-300 dark:border-white/20"></div>
+                                  <div className="w-5 h-5 rounded-full bg-[#3f3f3f] border border-gray-300 dark:border-white/20"></div>
+                                  <div className="w-5 h-5 rounded-full bg-[#595959] border border-gray-300 dark:border-white/20"></div>
                                 </>
                               )}
                             </div>
@@ -1178,7 +1305,7 @@ export function Hero() {
                     <div className="relative rounded-full p-[3px] bg-gradient-accent-to-r w-[150px] h-[150px] sm:w-[175px] sm:h-[175px] lg:w-[200px] lg:h-[200px]">
                       <div className="relative rounded-full overflow-hidden w-full h-full bg-white dark:bg-[#1a1a1a]">
                         <Image
-                          src="/david-headshot-square.jpg"
+                          src="/Headshot_updated.jpg"
                           alt="David Anderson"
                           width={200}
                           height={200}
@@ -1250,16 +1377,35 @@ export function Hero() {
                       isHistoryFading
                         ? 'opacity-0 max-h-0 mb-0'
                         : commandHistory.length > 0
-                          ? 'opacity-100 max-h-32 sm:max-h-48 mb-3'
+                          ? 'opacity-100 max-h-64 sm:max-h-96 mb-3'
                           : 'max-h-0 mb-0'
                     }`}
                     onClick={focusInput}
                   >
-                    {commandHistory.map((line, index) => (
-                      <div key={index} className="text-gray-600 dark:text-gray-400 text-sm mb-1">
-                        {line}
-                      </div>
-                    ))}
+                    {commandHistory.map((line, index) => {
+                      // Handle React elements directly
+                      if (typeof line !== 'string') {
+                        return <div key={index} className="mb-1">{line}</div>;
+                      }
+
+                      // Handle string lines with special styling
+                      const isWarning = line.startsWith('⚠️');
+                      const isSuccess = line.startsWith('✅');
+                      return (
+                        <div
+                          key={index}
+                          className={`text-sm mb-1 ${
+                            isWarning
+                              ? 'bg-red-900/80 text-red-100 dark:bg-red-950/80 dark:text-red-200 px-2 py-1 rounded font-bold border border-red-700 dark:border-red-800'
+                              : isSuccess
+                              ? 'bg-green-900/80 text-green-100 dark:bg-green-950/80 dark:text-green-200 px-2 py-1 rounded font-bold border border-green-700 dark:border-green-800'
+                              : 'text-gray-600 dark:text-gray-400'
+                          }`}
+                        >
+                          {line}
+                        </div>
+                      );
+                    })}
                   </div>
 
                   {/* Command Input */}
@@ -1285,7 +1431,7 @@ export function Hero() {
                   {/* Commands */}
                   <div className="text-gray-500 dark:text-gray-400 text-xs">
                     <div className="hidden sm:block">
-                      Commands: <button onClick={() => handleCommand('help', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">help</button> | <button onClick={() => handleCommand('projects', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">projects</button> | <button onClick={() => handleCommand('career', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">career</button> | <button onClick={() => handleCommand('contact', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">contact</button> | <button onClick={() => handleCommand('resume', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">resume</button> | <button onClick={() => handleCommand('github', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">github</button> | <button onClick={() => handleCommand('linkedin', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">linkedin</button> | <button onClick={() => handleCommand('ai', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">ai</button> | <button onClick={() => handleCommand('theme', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">theme</button>
+                      Commands: <button onClick={() => handleCommand('help', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">help</button> | <button onClick={() => handleCommand('projects', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">projects</button> | <button onClick={() => handleCommand('career', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">career</button> | <button onClick={() => handleCommand('contact', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">contact</button> | <button onClick={() => handleCommand('resume', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">resume</button> | <button onClick={() => handleCommand('github', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">github</button> | <button onClick={() => handleCommand('linkedin', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">linkedin</button> | <button onClick={() => handleCommand('ai', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">ai</button> | <button onClick={() => handleCommand('theme', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">theme</button> | <button onClick={() => handleCommand('eastereggs', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">eastereggs</button> | <button onClick={() => handleCommand('clear', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">clear</button>
                     </div>
                     <div className="sm:hidden flex flex-wrap gap-x-2 gap-y-1">
                       <span>Commands:</span>
@@ -1306,6 +1452,10 @@ export function Hero() {
                       <button onClick={() => handleCommand('ai', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">ai</button>
                       <span>|</span>
                       <button onClick={() => handleCommand('theme', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">theme</button>
+                      <span>|</span>
+                      <button onClick={() => handleCommand('eastereggs', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">eastereggs</button>
+                      <span>|</span>
+                      <button onClick={() => handleCommand('clear', true)} className="text-accent dark:text-accent hover:underline cursor-pointer">clear</button>
                     </div>
                   </div>
                 </div>
@@ -1317,6 +1467,13 @@ export function Hero() {
 
       {/* Resume Modal */}
       <ResumeModal isOpen={showResumeModal} onClose={() => setShowResumeModal(false)} />
+
+      {/* Easter Eggs Modal */}
+      <EasterEggsModal
+        isOpen={showEasterEggsModal}
+        onClose={() => setShowEasterEggsModal(false)}
+        onCommandClick={(cmd) => handleCommand(cmd, true)}
+      />
     </section>
   );
 }
