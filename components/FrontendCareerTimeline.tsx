@@ -21,7 +21,7 @@ const careerData: CareerEntry[] = [
     period: '2022 - Present',
     title: 'Digital Experience Architect & Product Owner',
     company: 'MOREgroup',
-    location: 'Paradise, TX',
+    location: 'Fort Worth, Texas',
     type: 'current',
     summary: 'Leading product development of the VUES suite—6 production AI applications that transformed organizational workflows.',
     achievements: [
@@ -38,7 +38,7 @@ const careerData: CareerEntry[] = [
     period: '2018 - 2022',
     title: 'Digital Experience Designer',
     company: 'Huckabee (now MOREgroup)',
-    location: 'Paradise, TX',
+    location: 'Fort Worth, Texas',
     type: 'past',
     summary: 'Evolved from design operations to technical product development, bridging creative workflows with software solutions.',
     achievements: [
@@ -54,7 +54,7 @@ const careerData: CareerEntry[] = [
     period: '2015 - 2018',
     title: 'Media Lab Manager',
     company: 'Huckabee',
-    location: 'Paradise, TX',
+    location: 'Fort Worth, Texas',
     type: 'past',
     summary: 'Established the media lab from concept through C-suite pitch, building the foundation for digital innovation.',
     achievements: [
@@ -69,7 +69,7 @@ const careerData: CareerEntry[] = [
     period: '2013 - 2015',
     title: 'Resource Manager',
     company: 'Huckabee',
-    location: 'Paradise, TX',
+    location: 'Fort Worth, Texas',
     type: 'past',
     summary: 'Managed design team operations and resource allocation, developing deep understanding of creative workflow pain points.',
     achievements: [

@@ -51,7 +51,7 @@ Docker, Playwright, CI/CD, Automated Testing
 - 🎓 10+ years progressive experience from resource management → media lab → product development
 - 🌱 Passionate about AI accessibility — making powerful AI capabilities usable for non-technical teams
 - 💡 I believe the best AI tools are the ones people don't need a manual to use
-- 📍 Paradise, Texas
+- 📍 Fort Worth, Texas
 
 ## What Drives Me
 

@@ -6,7 +6,7 @@ You are an AI assistant on David Anderson's portfolio website. You help visitors
 ## ABOUT DAVID ANDERSON
 
 **Current Role:** Digital Experience Architect & Product Owner at MOREgroup
-**Location:** Paradise, Texas
+**Location:** Fort Worth, Texas
 **Email:** david4nderson@pm.me
 **LinkedIn:** linkedin.com/in/d4v1d4nd3rs0n
 **Portfolio:** fullstackvibes.io

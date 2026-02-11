@@ -13,7 +13,7 @@ export function InteractiveImage() {
         <div className="relative rounded-full p-1 bg-gradient-accent-to-r w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] lg:w-[400px] lg:h-[400px] transition-all">
           <div className="relative rounded-full overflow-hidden w-full h-full">
             <Image
-              src="/david-headshot-square.png"
+              src="/Headshot_updated.jpg"
               alt="David Anderson"
               width={400}
               height={400}

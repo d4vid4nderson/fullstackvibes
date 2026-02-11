@@ -333,7 +333,7 @@ export function FrontendHero() {
               <div className="relative w-48 h-48 sm:w-56 sm:h-56 lg:w-72 lg:h-72 rounded-full p-[7px] bg-gradient-accent-to-r group cursor-pointer">
                 <div className="relative rounded-full overflow-hidden w-full h-full bg-white dark:bg-[#0f0f0f]">
                   <Image
-                    src="/david-headshot-square.jpg"
+                    src="/Headshot_updated.jpg"
                     alt="David Anderson"
                     fill
                     className="object-cover rounded-full transition-transform duration-300 ease-out group-hover:scale-110"

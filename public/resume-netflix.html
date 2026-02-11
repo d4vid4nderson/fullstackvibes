@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Anderson - Senior Product Designer | ECXD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --netflix-red: #E50914;
+            --netflix-dark: #141414;
+            --netflix-gray: #808080;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --bg-page: #0a0a0a;
+            --bg-card: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-page);
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .name {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+
+        .title {
+            font-size: 20px;
+            color: var(--netflix-red);
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .contact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .contact a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact a:hover {
+            color: var(--netflix-red);
+        }
+
+        /* Summary */
+        .summary {
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            padding: 24px;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border-left: 3px solid var(--netflix-red);
+        }
+
+        .summary strong {
+            color: var(--text-primary);
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--netflix-red);
+            margin-bottom: 24px;
+        }
+
+        /* Jobs */
+        .job {
+            margin-bottom: 36px;
+            padding-bottom: 36px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .job:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .job-header {
+            margin-bottom: 16px;
+        }
+
+        .job-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .job-company {
+            font-size: 16px;
+            color: var(--netflix-red);
+            font-weight: 500;
+        }
+
+        .job-meta {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .job-description {
+            list-style: none;
+        }
+
+        .job-description li {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.7;
+        }
+
+        .job-description li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            background: var(--netflix-red);
+            border-radius: 50%;
+        }
+
+        .job-description strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .skill-category-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .skill-category-content {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            background: rgba(229, 9, 20, 0.1);
+            border: 1px solid rgba(229, 9, 20, 0.3);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .highlight-box strong {
+            color: var(--netflix-red);
+        }
+
+        /* Print */
+        @media print {
+            body {
+                background: white;
+                color: #000;
+            }
+            .container {
+                padding: 20px;
+            }
+            .name {
+                font-size: 28px;
+                color: #000;
+            }
+            .title {
+                color: #E50914;
+                font-size: 16px;
+            }
+            .contact {
+                color: #666;
+            }
+            .contact a {
+                color: #666;
+            }
+            .summary {
+                background: #f5f5f5;
+                color: #333;
+                font-size: 14px;
+                padding: 16px;
+            }
+            .summary strong {
+                color: #000;
+            }
+            .section-title {
+                color: #E50914;
+                font-size: 11px;
+            }
+            .job-title {
+                font-size: 16px;
+                color: #000;
+            }
+            .job-company {
+                color: #E50914;
+                font-size: 14px;
+            }
+            .job-meta {
+                color: #666;
+                font-size: 12px;
+            }
+            .job-description li {
+                font-size: 12px;
+                color: #333;
+                margin-bottom: 8px;
+            }
+            .job-description strong {
+                color: #000;
+            }
+            .skills-grid {
+                gap: 12px;
+            }
+            .skill-category {
+                background: #f5f5f5;
+                padding: 12px;
+            }
+            .skill-category-title {
+                font-size: 12px;
+                color: #000;
+            }
+            .skill-category-content {
+                font-size: 11px;
+                color: #333;
+            }
+            .highlight-box {
+                background: #fff5f5;
+                border: 1px solid #E50914;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="name">David Anderson</h1>
+            <p class="title">Senior Product Designer | Multimedia & Interactive Experience</p>
+            <div class="contact">
+                <a href="mailto:david4nderson@pm.me">david4nderson@pm.me</a>
+                <a href="https://fullstackvibes.io" target="_blank">fullstackvibes.io</a>
+                <a href="https://linkedin.com/in/d4v1d4nd3rs0n" target="_blank">linkedin.com/in/d4v1d4nd3rs0n</a>
+                <a href="https://github.com/d4vid4nderson" target="_blank">github.com/d4vid4nderson</a>
+            </div>
+        </header>
+
+        <div class="summary">
+            I built a media lab from scratch and spent three years producing <strong>video, motion graphics, 3D visualizations, and brand content</strong> before evolving into product leadership. That foundation in visual storytelling shapes how I approach product design today: <strong>six production applications</strong> shipped, <strong>$400K+ in annual savings</strong> delivered, and interfaces used daily by cross-functional teams. I bring a rare combination of <strong>hands-on creative production experience</strong> and <strong>technical product leadership</strong> - equally comfortable in After Effects as I am defining design systems and partnering with engineering.
+        </div>
+
+        <section class="section">
+            <h2 class="section-title">Experience</h2>
+
+            <div class="job">
+                <div class="job-header">
+                    <h3 class="job-title">Digital Experience Architect & Product Owner</h3>
+                    <p class="job-company">MOREgroup</p>
+                    <p class="job-meta">July 2022 - Present | Paradise, TX</p>
+                </div>
+                <ul class="job-description">
+                    <li>Lead <strong>end-to-end product design</strong> for VUES suite: 6 production applications serving 800+ person organization. Ownership spans user research, interaction design, visual design, prototyping, and cross-functional collaboration with engineering.</li>
+                    <li>Designed and built <strong>intuitive interfaces for complex workflows</strong> - transforming multi-day planning exercises into single-day sessions (80% efficiency gain). Focus on information architecture, progressive disclosure, and reducing cognitive load.</li>
+                    <li>Integrated <strong>AI-powered features</strong> (Claude, GPT-4, Azure OpenAI) into production UX - developed conversational interface patterns, AI-assisted content generation flows, and intelligent automation that users actually trust and adopt.</li>
+                    <li>Created <strong>scalable design frameworks</strong> across web, mobile-responsive, and data-heavy interfaces. Established component libraries, interaction patterns, and visual systems ensuring consistency across product suite.</li>
+                    <li>Partner with engineering to <strong>prototype and validate concepts</strong> - comfortable building high-fidelity interactive prototypes in code when needed to prove out interactions and animations.</li>
+                </ul>
+                <div class="highlight-box">
+                    <strong>Key Products:</strong> PlanVUE (project management + AI analysis), InitiativeVUE (real-time collaboration + approval workflows), LegislationVUE (document search + AI summarization), FacilityVUE (multi-tenant SaaS platform)
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <h3 class="job-title">Digital Experience Designer</h3>
+                    <p class="job-company">Huckabee (now MOREgroup)</p>
+                    <p class="job-meta">2018 - 2022 | Paradise, TX</p>
+                </div>
+                <ul class="job-description">
+                    <li>Bridged <strong>creative production and technical implementation</strong> - transitioned from hands-on media work to designing internal tools and knowledge platforms that saved $30K+ annually.</li>
+                    <li>Designed <strong>UI/UX systems and iconography standards</strong> adopted across the organization. Created design documentation and style guides ensuring visual consistency.</li>
+                    <li>Led <strong>3D reality capture initiatives</strong> for architectural documentation - evaluated emerging visualization technologies and integrated them into client deliverables.</li>
+                    <li>Developed <strong>interactive presentations and pitch materials</strong> that contributed to winning major architectural contracts.</li>
+                </ul>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <h3 class="job-title">Media Lab Manager → Creative Services Lead</h3>
+                    <p class="job-company">Huckabee</p>
+                    <p class="job-meta">2015 - 2018 | Paradise, TX</p>
+                </div>
+                <ul class="job-description">
+                    <li><strong>Built media lab from concept to full Creative Services team</strong> — pitched initiative to C-suite, secured approval, then <strong>hired and developed a team of 4 creatives</strong> before transitioning to tackle new challenges within the company.</li>
+                    <li>Led creative production for <strong>50 Year Anniversary Campaign</strong> — major brand storytelling initiative spanning video, motion graphics, print, and digital content celebrating company history and vision.</li>
+                    <li><strong>Produced and directed multi-day offsite conference for 250+ employees across 5 offices</strong> — coordinated transportation logistics, guest speakers and trainers, catering, entertainment, and all multimedia content including presentations, videos, and live production elements.</li>
+                    <li>Hands-on <strong>video production and editing</strong> — produced promotional videos, project documentaries, event coverage, and interview content using Premiere Pro and DaVinci Resolve.</li>
+                    <li>Created <strong>motion graphics and animations</strong> — title sequences, animated infographics, explainer videos, and brand animations in After Effects.</li>
+                    <li>Produced <strong>3D architectural visualizations</strong> — photorealistic renders and walkthrough animations using SketchUp, Lumion, and Enscape that enhanced client presentations.</li>
+                    <li><strong>Established brand's social media presence</strong> — developed content strategy, produced multimedia content, and grew audience engagement across platforms.</li>
+                    <li>Led <strong>audio production</strong> including podcast hosting/editing, voiceover recording, and sound design for video content.</li>
+                </ul>
+                <div class="highlight-box">
+                    <strong>Tools:</strong> After Effects, Premiere Pro, Photoshop, Illustrator, Audition, SketchUp, Lumion, Enscape, DaVinci Resolve
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <h3 class="job-title">Resource Manager</h3>
+                    <p class="job-company">Huckabee</p>
+                    <p class="job-meta">2013 - 2015 | Paradise, TX</p>
+                </div>
+                <ul class="job-description">
+                    <li>Coordinated resources across <strong>50+ concurrent architectural projects</strong> - developed deep understanding of creative workflow pain points that later informed product design decisions.</li>
+                    <li>Identified operational inefficiencies that became the foundation for VUES product suite.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-category-title">Visual Design & Motion</div>
+                    <div class="skill-category-content">After Effects, Premiere Pro, Photoshop, Illustrator, motion graphics, video editing, 3D visualization (Lumion, SketchUp), audio production</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">UX & Product Design</div>
+                    <div class="skill-category-content">User research, interaction design, prototyping, design systems, information architecture, accessibility (WCAG 2.1), Figma</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">Technical Prototyping</div>
+                    <div class="skill-category-content">React, Next.js, TypeScript, HTML/CSS, interactive prototypes, design-to-code handoff, animation implementation</div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-category-title">AI & Emerging Tech</div>
+                    <div class="skill-category-content">AI UX patterns, conversational interfaces, Claude/GPT integration, prompt engineering, RAG pipelines</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Side Projects</h2>
+            <div class="job">
+                <div class="job-header">
+                    <h3 class="job-title">Tenant Wise</h3>
+                    <p class="job-company">Personal Project</p>
+                </div>
+                <ul class="job-description">
+                    <li>Designed and built a <strong>SaaS product from concept to launch</strong> - Next.js application with AI-powered document generation, e-signature integration, and subscription billing. End-to-end ownership of product design and development.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

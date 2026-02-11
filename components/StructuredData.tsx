@@ -4,7 +4,7 @@ export function StructuredData() {
     "@type": "Person",
     "name": "David Anderson",
     "url": "https://fullstackvibes.io",
-    "image": "https://fullstackvibes.io/david-headshot-square.png",
+    "image": "https://fullstackvibes.io/Headshot_updated.jpg",
     "jobTitle": "Solutions Architect & AI Developer",
     "description": "Solutions architect building enterprise tools with AI-augmented development. Over a decade connecting systems, automating workflows, and shipping software people actually use.",
     "sameAs": [
