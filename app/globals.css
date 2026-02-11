@@ -110,6 +110,15 @@ body {
   --accent-dark: #002855;
 }
 
+/* Dark mode: Use brighter blues for better contrast */
+.dark[data-theme="lockheed"] {
+  --accent-primary: #3399ff;
+  --accent-secondary: #66b3ff;
+  --accent-tertiary: #0066cc;
+  --accent-light: #99ccff;
+  --accent-dark: #0066cc;
+}
+
 :root:not(.dark)[data-theme="lockheed"] {
   --background: #e6f0ff;
 }
