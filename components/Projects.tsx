@@ -78,7 +78,7 @@ export async function Projects() {
         {/* Footer note */}
         <div className="mt-8 pt-6 border-t border-gray-200 dark:border-white/10">
           <p className="text-xs text-gray-500 dark:text-gray-500 text-center">
-            <span className="text-accent">tip:</span> expand a project and click <code className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-white/5 text-accent">view ./README.md</code> for full details
+            <span className="text-accent">tip:</span> click on any project to expand and view full details, features, and tech stack
           </p>
         </div>
       </div>

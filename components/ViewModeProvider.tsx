@@ -12,7 +12,7 @@ interface ViewModeContextType {
 
 // Default context value for SSR/static generation
 const defaultContext: ViewModeContextType = {
-  viewMode: 'frontend',
+  viewMode: 'backend',
   toggleViewMode: () => {},
   setViewMode: () => {},
 };
@@ -20,7 +20,7 @@ const defaultContext: ViewModeContextType = {
 const ViewModeContext = createContext<ViewModeContextType>(defaultContext);
 
 export function ViewModeProvider({ children }: { children: ReactNode }) {
-  const [viewMode, setViewModeState] = useState<ViewMode>('frontend');
+  const [viewMode, setViewModeState] = useState<ViewMode>('backend');
   const [mounted, setMounted] = useState(false);
 
   // Load from localStorage on mount

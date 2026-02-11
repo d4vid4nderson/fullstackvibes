@@ -453,6 +453,36 @@ const getProjectDetails = (repoName: string) => {
           caption: 'Landlord settings page with profile information for document population, email/password management, Pro Plan subscription with Stripe billing integration, notification preferences for document reminders and Texas law updates, and account deletion option.'
         }
       ],
+    },
+    'Habit-a-Day': {
+      fullDescription: 'Habit-a-Day is a comprehensive health tracking and physical therapy practice management platform with AI-powered nutrition analysis. The patient application features barcode scanning, Claude AI-powered calorie estimation, detailed bathroom tracking, water intake monitoring, and food journaling with macro tracking. The backend practice management suite provides physical therapists with comprehensive patient dashboards, treatment plan assignment, clinical notes, goal management, and real-time patient data access for holistic care coordination.',
+      keyFeatures: [
+        'AI-powered calorie estimation using Claude API with natural language food descriptions ("chicken sandwich with fries")',
+        'Barcode scanning with html5-qrcode for instant food product lookup and nutritional data import',
+        'Comprehensive food journaling with automatic macro calculations (protein, carbs, fats, calories)',
+        'Medical-grade bathroom tracking with urine color charts (URINE_COLORS), stream strength, consistency metrics',
+        'Water intake tracking with customizable units (oz, ml, liters) and daily goal monitoring',
+        'Physical therapy workout logging with exercise libraries, rep/set tracking, and progress visualization',
+        'Healthcare report generation with PDF export (jspdf, html2canvas) and shareable patient summaries',
+        'Recharts-powered analytics with line charts, progress trends, and visual data insights',
+      ],
+      capabilities: [
+        { title: 'AI Nutrition Analysis', description: 'Claude AI-powered calorie estimation accepting natural language food descriptions, barcode scanning for instant product lookup, and fuzzy search with Fuse.js for 20,000+ USDA food database entries' },
+        { title: 'Medical Habit Tracking', description: 'Comprehensive tracking interface for bathroom usage with medical metrics (urine color, consistency, urgency), water intake with unit conversion, and food journaling with macro breakdowns for clinical monitoring' },
+        { title: 'PT Practice Management', description: 'Multi-role backend (patient, therapist, practice_owner) with patient dashboards showing all tracking data, treatment plan assignment, clinical notes (assessment, progress, alert, general), and goal management for nutrition/exercise' },
+        { title: 'Analytics & Reporting', description: 'Recharts-powered data visualization with line charts, progress trends, healthcare report generation with PDF export capabilities, and shareable patient summaries for provider communication' },
+        { title: 'Secure Multi-Tenancy', description: 'Practice-based multi-tenancy with Row Level Security (RLS) policies, therapist-patient assignments, middleware-based route protection, and read-only patient data access preserving autonomy' },
+      ],
+      techIcons: [
+        { Icon: SiTypescript, name: 'TypeScript', color: 'text-blue-400' },
+        { Icon: SiNextdotjs, name: 'Next.js', color: 'text-white' },
+        { Icon: SiReact, name: 'React', color: 'text-cyan-400' },
+        { Icon: SiTailwindcss, name: 'Tailwind CSS', color: 'text-cyan-400' },
+        { Icon: SiSupabase, name: 'Supabase', color: 'text-green-400' },
+        { Icon: SiAnthropic, name: 'Claude AI', color: 'text-orange-400' },
+        { Icon: SiPostgresql, name: 'PostgreSQL', color: 'text-blue-400' },
+      ],
+      alsoIncludes: 'Anthropic AI SDK, Recharts, html5-qrcode, html2canvas, jspdf, Fuse.js, Row Level Security, Supabase Auth, Real-time Subscriptions, Vercel',
     }
   };
 
