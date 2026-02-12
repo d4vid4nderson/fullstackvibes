@@ -45,16 +45,18 @@ export function ScreenshotShowcase({ screenshots }: ScreenshotShowcaseProps) {
         {screenshots.map((screenshot, index) => (
           <div
             key={index}
-            className="group relative bg-gray-100 dark:bg-white/5 rounded-lg border border-gray-300 dark:border-white/10 overflow-hidden hover:border-cyan-400/50 transition-all"
+            className="group relative bg-gray-100 dark:bg-white/5 rounded-lg border border-gray-300 dark:border-white/10 overflow-hidden hover:border-cyan-400/50 transition-all max-w-4xl mx-auto"
           >
             {/* Screenshot Image */}
-            <div className="relative aspect-video w-full overflow-hidden bg-gray-200 dark:bg-[#0a0a0a]">
+            <div className="relative w-full overflow-hidden bg-gray-200 dark:bg-[#0a0a0a] rounded-lg">
               <Image
                 src={screenshot.src}
                 alt={screenshot.alt}
-                fill
-                className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                width={1920}
+                height={1080}
+                className="w-full h-auto transition-transform duration-300 group-hover:scale-105"
+                quality={100}
+                unoptimized={true}
               />
 
               {/* Hover Overlay */}
@@ -114,6 +116,8 @@ export function ScreenshotShowcase({ screenshots }: ScreenshotShowcaseProps) {
                   height={1080}
                   className="w-full h-auto rounded-lg shadow-2xl border border-white/10"
                   style={{ maxWidth: '100%', height: 'auto' }}
+                  quality={100}
+                  unoptimized={true}
                 />
               </div>
 

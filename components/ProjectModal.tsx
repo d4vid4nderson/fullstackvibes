@@ -483,6 +483,45 @@ const getProjectDetails = (repoName: string) => {
         { Icon: SiPostgresql, name: 'PostgreSQL', color: 'text-blue-400' },
       ],
       alsoIncludes: 'Anthropic AI SDK, Recharts, html5-qrcode, html2canvas, jspdf, Fuse.js, Row Level Security, Supabase Auth, Real-time Subscriptions, Vercel',
+    },
+    'AI Status Widget': {
+      fullDescription: 'AI Status Widget is a lightweight macOS desktop widget built for Übersicht that provides real-time monitoring of AI service health for OpenAI and Anthropic. The widget displays live operational status with color-coded indicators (green = operational, yellow = minor issues, red = major outage) and auto-refreshes every 2 minutes. Features expandable views showing detailed status for individual models and components, drag-to-move positioning, light/dark theme support, and seamless integration with macOS desktop via Statuspage API.',
+      keyFeatures: [
+        'Real-time service health monitoring for OpenAI and Anthropic using Statuspage API integration',
+        'Color-coded status indicators: green (operational), yellow (minor issues), red (major outage)',
+        'Expandable model/component details showing status for GPT-5.2, GPT-5 variants, Codex, and realtime models',
+        'Auto-refresh every 2 minutes to ensure up-to-date status information',
+        'Drag-to-move widget positioning anywhere on macOS desktop',
+        'Light/dark theme toggle with system-aware default mode',
+        'Lightweight React-based widget running in Übersicht framework',
+        'Minimal memory footprint and CPU usage optimized for always-on desktop monitoring',
+      ],
+      capabilities: [
+        { title: 'Service Health Monitoring', description: 'Real-time status tracking for OpenAI (GPT models, Codex, Realtime) and Anthropic (Claude) services with automatic status updates via Statuspage API polling' },
+        { title: 'Expandable Details View', description: 'Click to expand service cards and view granular status information for individual models, APIs, and components with specific issue descriptions' },
+        { title: 'Desktop Integration', description: 'Seamless macOS integration via Übersicht widget system with drag-to-position functionality, system tray behavior, and always-on-top visibility' },
+        { title: 'Visual Status Indicators', description: 'Color-coded status badges with operational (green), degraded (yellow), and outage (red) states for at-a-glance monitoring' },
+        { title: 'Theme Customization', description: 'Light and dark theme support with manual toggle and automatic detection of system preferences for comfortable viewing in any lighting' },
+      ],
+      techIcons: [
+        { Icon: SiJavascript, name: 'JavaScript', color: 'text-yellow-400' },
+        { Icon: SiReact, name: 'React', color: 'text-cyan-400' },
+        { Icon: OpenAIIcon, name: 'OpenAI', color: '' },
+        { Icon: SiAnthropic, name: 'Anthropic', color: 'text-orange-400' },
+      ],
+      alsoIncludes: 'Übersicht, Statuspage API, macOS, ES6 Modules, CSS Animations',
+      screenshots: [
+        {
+          src: '/screenshots/ai_status_01.png',
+          alt: 'AI Status Widget - Collapsed View',
+          caption: 'AI Service Health widget showing collapsed view with OpenAI (yellow indicator = minor issues) and Anthropic (green indicator = operational). Auto-refreshes every 2 minutes with last update timestamps and light/dark theme toggle.'
+        },
+        {
+          src: '/screenshots/ai_status_02.png',
+          alt: 'AI Status Widget - Expanded OpenAI Details',
+          caption: 'Expanded OpenAI service view displaying granular status for all models: GPT-5.2, GPT-5.2 pro, GPT-5.1, GPT-5, GPT-5 mini, GPT-5 nano, GPT-5.2-Codex, and gpt-realtime. All showing minor issues status with detailed model-level monitoring.'
+        }
+      ],
     }
   };
 

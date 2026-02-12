@@ -1,10 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { GitHubRepo } from '@/types/github';
-import { FiChevronDown, FiChevronUp, FiGitCommit, FiExternalLink, FiGithub, FiCheckCircle } from 'react-icons/fi';
+import { FiChevronDown, FiChevronUp, FiGitCommit, FiExternalLink, FiGithub, FiCheckCircle, FiImage, FiX } from 'react-icons/fi';
 import { SiAnthropic, SiGo, SiJavascript, SiTailwindcss, SiDocker, SiReact, SiPython, SiFastapi, SiPostgresql, SiTypescript, SiNextdotjs, SiVuedotjs, SiNodedotjs, SiSupabase, SiStripe } from 'react-icons/si';
 import Image from 'next/image';
+import { ScreenshotShowcase } from './ScreenshotShowcase';
+import { useScreenshot } from './ScreenshotContext';
 
 interface ProjectTimelineProps {
   projects: GitHubRepo[];
@@ -212,6 +214,43 @@ const getProjectDetails = (repoName: string) => {
         { Icon: PlaywrightIconLarge, name: 'Playwright', color: '' },
       ],
       alsoIncludes: 'Microsoft Bot Framework, Teams SDK, Adaptive Cards, HTMX, Alpine.js, Azure Container Apps, SQL Server, Chi Router, Webhooks',
+      screenshots: [
+        {
+          src: '/screenshots/Initvue_01.png',
+          alt: 'InitiativeVUE - All Active Initiatives',
+          caption: 'All Active Initiatives dashboard providing users with a comprehensive view of enterprise-wide initiatives, displaying status, health indicators, and completion percentages with expandable rows showing last updates and inline status editing without navigating to detail pages'
+        },
+        {
+          src: '/screenshots/Initvue_07.png',
+          alt: 'InitiativeVUE - Initiative Detail Page',
+          caption: 'Comprehensive initiative detail page displaying complete information including description, status tracking, health indicators, percentage progress bar, sponsors, department assignments, supporting documentation, sub-task management, and an activity feed providing historical updates and audit trail'
+        },
+        {
+          src: '/screenshots/Initvue_02.png',
+          alt: 'InitiativeVUE - Backlog of Initiatives',
+          caption: 'Backlog management interface where initiatives await leadership activation, featuring expandable rows for detailed review and quick "Add to Active" buttons enabling streamlined workflow transition from planning to execution'
+        },
+        {
+          src: '/screenshots/Initvue_03.png',
+          alt: 'InitiativeVUE - Schedule View',
+          caption: 'Interactive schedule view featuring Gantt chart and calendar visualization modes with drag-and-drop date adjustment capabilities for aligning initiatives within quarters, displaying initiative counts per quarter to provide executives with at-a-glance capacity planning insights'
+        },
+        {
+          src: '/screenshots/Initvue_04.png',
+          alt: 'InitiativeVUE - Executive Dashboard',
+          caption: 'Executive Leadership Team dashboard displaying executive-only initiatives with GPT-4o Mini-generated summaries providing C-suite leaders with consolidated insights into initiative status, enabling proactive intervention and issue resolution before problems escalate'
+        },
+        {
+          src: '/screenshots/Initvue_05.png',
+          alt: 'InitiativeVUE - Microsoft Teams Bot Conversation',
+          caption: 'Conversational interface with the Microsoft Teams bot, demonstrating natural language queries to retrieve initiatives assigned to specific users with interactive Adaptive Cards enabling users to select initiatives and request additional details directly within Teams chat'
+        },
+        {
+          src: '/screenshots/Initvue_06.png',
+          alt: 'InitiativeVUE - Teams Channel Notification',
+          caption: 'Microsoft Teams channel notification post enabling designated executives to review submitted initiatives and take immediate action—either activating initiatives directly from Teams or navigating to the full initiative detail page within the application for comprehensive review'
+        }
+      ],
     },
     'LegislationVUE': {
       fullDescription: 'AI-driven legislative intelligence platform powered by Azure AI Foundry and GPT-4o for automated policy analysis. LegislationVUE monitors federal executive orders and state legislation across 6 US states (CA, TX, NV, KY, SC, CO), using LLM batch processing to generate executive summaries, talking points, and business impact assessments. Provides automated policy intelligence with real-time AI-generated insights empowering C-suite decision-making on regulatory compliance, risk mitigation, and strategic planning.',
@@ -246,6 +285,33 @@ const getProjectDetails = (repoName: string) => {
         { Icon: AzureAIIconLarge, name: 'Azure AI Foundry', color: '' },
       ],
       alsoIncludes: 'Azure Container Apps, Azure SQL Server, Azure OpenAI, Azure AD, Vite, Recharts, D3.js, BeautifulSoup, Pandas, SQLAlchemy',
+      screenshots: [
+        {
+          src: '/screenshots/legislation-homepage.png',
+          alt: 'LegislationVUE - Homepage Welcome',
+          caption: 'Application homepage providing users with an overview of LegislationVUE functionality, platform capabilities, and step-by-step guidance on navigating legislative tracking features and AI-powered analysis tools'
+        },
+        {
+          src: '/screenshots/legislation-hr1-bill.png',
+          alt: 'LegislationVUE - Bill Detail Page',
+          caption: 'Bill-specific detail page providing comprehensive executive-level insights into individual legislation, featuring AI-generated summaries, status tracking, key provisions, and direct links to source documentation to keep stakeholders informed and up-to-date on legislative developments'
+        },
+        {
+          src: '/screenshots/legislation-state-texas.png',
+          alt: 'LegislationVUE - State Legislation View',
+          caption: 'State-specific legislation dashboard featuring GPT-4o Mini-generated bill summaries with advanced filtering, sorting, tagging capabilities, and direct links to source documentation enabling executives to quickly identify and monitor state legislation that may impact business operations and strategic planning'
+        },
+        {
+          src: '/screenshots/legislation-executive-orders.png',
+          alt: 'LegislationVUE - Federal Executive Orders',
+          caption: 'Federal executive orders dashboard featuring AI-generated summaries with advanced filtering capabilities, executive briefing materials, strategic talking points, potential business impact assessments, and direct links to source documentation for comprehensive policy analysis'
+        },
+        {
+          src: '/screenshots/legislation-settings.png',
+          alt: 'LegislationVUE - Settings & Configuration',
+          caption: 'Administrative settings page providing centralized management of API connections, platform analytics, technical configuration options, and database administration tools for system optimization and maintenance'
+        }
+      ],
     },
     'SharePointVUE': {
       fullDescription: 'AI-enhanced automated SharePoint testing platform with Claude AI-powered accessibility analysis. SharePointVUE uses Playwright for headless browser testing and integrates Claude AI to analyze WCAG compliance issues, provide remediation recommendations, and generate executive test reports. Features real-time monitoring, multi-format reporting, and Azure DevOps CI/CD automation.',
@@ -276,6 +342,33 @@ const getProjectDetails = (repoName: string) => {
         { Icon: PlaywrightIconLarge, name: 'Playwright', color: '' },
       ],
       alsoIncludes: 'HTMX, Chi Router, axe-core, Azure Container Apps, Azure SQL Database, Azure AD, Heroicons, Chromium',
+      screenshots: [
+        {
+          src: '/screenshots/spvue_01.png',
+          alt: 'SharePointVUE - Main Dashboard',
+          caption: 'Main dashboard displaying site traffic analytics over the last 7 days with interactive KPI cards above and below the chart for drilling into detailed metrics and performance insights'
+        },
+        {
+          src: '/screenshots/spvue_02.png',
+          alt: 'SharePointVUE - Automated Testing History',
+          caption: 'Automated site testing history powered by Playwright, validating links and images across SharePoint sites to identify broken or missing content with comprehensive test result archives'
+        },
+        {
+          src: '/screenshots/spvue_03.png',
+          alt: 'SharePointVUE - Site Management Modal',
+          caption: 'Site management interface displaying all SharePoint sites within the tenant enrolled in dashboard monitoring and automated testing, with configuration options for test scheduling and coverage'
+        },
+        {
+          src: '/screenshots/spvue_04.png',
+          alt: 'SharePointVUE - Storage Analytics Modal',
+          caption: 'Storage management dashboard tracking tenant-wide storage availability with granular site-by-site breakdowns, enabling proactive identification of capacity issues and resource optimization opportunities'
+        },
+        {
+          src: '/screenshots/spvue_05.png',
+          alt: 'SharePointVUE - User Activity Heat Map',
+          caption: 'User activity analytics featuring an engagement heat map that visualizes employee content consumption patterns, empowering content teams to identify high-performing areas and target gaps for strategic content development'
+        }
+      ],
     },
     'PlanVUE': {
       fullDescription: 'AI-powered strategic planning platform with OpenAI GPT-4o Mini integration for automated survey analysis and insights generation. PlanVUE combines traditional surveys with Red Dot/Green Dot (RDGD) ranking exercises, using LLM technology to analyze stakeholder responses, detect sentiment patterns, and generate executive summaries. Achieved 80% efficiency gain for architectural planners saving $400,000+ in manual data processing. AI-enhanced workflows automatically generate PowerPoint presentations with insights, transforming weeks of manual analysis into minutes.',
@@ -307,6 +400,38 @@ const getProjectDetails = (repoName: string) => {
         { Icon: PlaywrightIconLarge, name: 'Playwright', color: '' },
       ],
       alsoIncludes: 'SignalR, Chart.js, D3.js, React Query, Azure Blob Storage, Next-Auth, FontAwesome, Heroicons, Excel.js, jsPDF, PPTXGenJS',
+      screenshots: [
+        {
+          src: '/screenshots/planvue-clients.png',
+          alt: 'PlanVUE - Client Portal Dashboard',
+          caption: 'Client management dashboard with project overview, active surveys, team collaboration tools, and customizable branding for architectural planning firms'
+        },
+        {
+          src: '/screenshots/planvue-survey.png',
+          alt: 'PlanVUE - Survey Creation Interface',
+          caption: 'Interactive survey builder with multi-modal question types, OpenAI GPT-4o Mini integration for automated response analysis, and real-time preview'
+        },
+        {
+          src: '/screenshots/planvue-rdgd.png',
+          alt: 'PlanVUE - RDGD Visual Ranking Exercise',
+          caption: 'Red Dot/Green Dot ranking interface allowing stakeholders to visually prioritize architectural elements with real-time aggregation and AI sentiment analysis'
+        },
+        {
+          src: '/screenshots/planvue-ranking.png',
+          alt: 'PlanVUE - Priority Ranking Results',
+          caption: 'AI-enhanced ranking results visualization with GPT-4o Mini-generated insights, preference patterns, and stakeholder sentiment breakdown'
+        },
+        {
+          src: '/screenshots/planvue-exercises.png',
+          alt: 'PlanVUE - Planning Exercises Management',
+          caption: 'Exercise management dashboard for coordinating multiple survey rounds, RDGD sessions, and collaborative planning activities with live participation tracking'
+        },
+        {
+          src: '/screenshots/planvue-report.png',
+          alt: 'PlanVUE - AI-Generated Report Preview',
+          caption: 'Automated PowerPoint report with LLM-written executive summaries, sentiment analysis charts, word clouds, and stakeholder recommendations ready for board presentations'
+        }
+      ],
     },
     'FacilityVUE': {
       fullDescription: 'FacilityVUE is a comprehensive facilities management and geospatial assessment platform designed for multi-district school systems. The application provides interactive mapping, facility tracking, and assessment management across multiple school districts. Built with Vue.js and Mapbox integration, FacilityVUE enables administrators to visualize facility locations, manage maintenance schedules, track assessments, and coordinate resources across geographically distributed campuses.',
@@ -336,6 +461,33 @@ const getProjectDetails = (repoName: string) => {
         { Icon: SiDocker, name: 'Docker', color: 'text-blue-400' },
       ],
       alsoIncludes: 'Mapbox GL, Next.js, Tailwind CSS, TypeScript, Axios, Heroicons, Express, CSV Parser, Geocoding API',
+      screenshots: [
+        {
+          src: '/screenshots/facilityvue-home.png',
+          alt: 'FacilityVUE - Interactive Map Homepage',
+          caption: 'Main dashboard featuring Mapbox-powered interactive map displaying facility locations across Willis ISD, Conroe ISD, and Magnolia ISD with district boundaries and campus clustering'
+        },
+        {
+          src: '/screenshots/facilityvue-facility1.png',
+          alt: 'FacilityVUE - Facility Detail View',
+          caption: 'Comprehensive facility profile with location data, maintenance schedules, assessment history, compliance status, and resource allocation tracking'
+        },
+        {
+          src: '/screenshots/facilityvue-facility2.png',
+          alt: 'FacilityVUE - Facility Assessment Management',
+          caption: 'Facility condition assessment interface with maintenance tracking, compliance monitoring, and automated reporting for proactive facility management'
+        },
+        {
+          src: '/screenshots/facilityvue-org.png',
+          alt: 'FacilityVUE - Multi-District Organization View',
+          caption: 'District-level organization dashboard showing facility hierarchies, custom branding configurations, and administrative controls for managing multiple school districts'
+        },
+        {
+          src: '/screenshots/facilityvue-share.png',
+          alt: 'FacilityVUE - Resource Sharing & Export',
+          caption: 'Data export and resource sharing interface with CSV import/export, automated geocoding, and customizable report generation for stakeholder communication'
+        }
+      ],
     },
     'Tenant Wise': {
       fullDescription: 'AI-powered legal document generation SaaS using Claude API for Texas-compliant landlord notices. TenantWise leverages large language models with custom prompt engineering to automatically generate state-compliant legal documents, notices, and communications. Advanced prompt templates ensure Texas Property Code compliance (§ 24.005, § 92.103) while maintaining professional legal language. Reduces expensive property management software costs ($50-200/month) to an affordable AI-driven solution ($19-39/month).',
@@ -368,6 +520,58 @@ const getProjectDetails = (repoName: string) => {
         { Icon: SignWellIconLarge, name: 'SignWell', color: '' },
       ],
       alsoIncludes: 'Supabase Auth, Row Level Security, Vercel, React 19, App Router, E-Signatures',
+      screenshots: [
+        {
+          src: '/screenshots/Tenant_Wise-Landing.png',
+          alt: 'TenantWise - Landing Page',
+          caption: 'Modern landing page showcasing AI-powered legal document generation for Texas landlords with feature highlights and pricing tiers'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-Dashboard.png',
+          alt: 'TenantWise - Main Dashboard',
+          caption: 'Landlord dashboard with property overview, recent documents, tenant management, and quick actions for common AI document generation tasks'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-dashboard-New Document.png',
+          alt: 'TenantWise - AI Document Generation',
+          caption: 'Claude AI-powered document creation interface with prompt engineering templates for Texas-compliant legal notices (Late Rent, Security Deposit, Lease Renewal)'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-Documents.png',
+          alt: 'TenantWise - Document Library',
+          caption: 'Comprehensive document management with AI-generated notices, e-signature tracking, audit trail, and compliance records for Texas Property Code requirements'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-Document Preview.png',
+          alt: 'TenantWise - Legal Document Preview',
+          caption: 'Document preview showing Claude AI-generated Texas-compliant legal notice with embedded Property Code citations (§ 24.005, § 92.103) and personalized tenant details'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-Prop Detail.png',
+          alt: 'TenantWise - Property Details',
+          caption: 'Property profile management with addresses, unit details, lease terms, and tenant roster for personalized AI document generation context injection'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-Tenant Detail.png',
+          alt: 'TenantWise - Tenant Management',
+          caption: 'Tenant detail view with contact information, lease dates, rent amounts, security deposits, and document history for comprehensive relationship tracking'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-Property Dashboard.png',
+          alt: 'TenantWise - Property-Specific Dashboard',
+          caption: 'Individual property dashboard showing tenant list, lease status, payment history, and recent AI-generated documents for multi-property landlords'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-Legal.png',
+          alt: 'TenantWise - Legal AI Assistant Chatbot',
+          caption: 'Conversational Claude AI chatbot trained on Texas landlord-tenant law using retrieval-augmented generation (RAG) to provide instant legal guidance and Property Code citations'
+        },
+        {
+          src: '/screenshots/Tenant_Wise-Settings.png',
+          alt: 'TenantWise - Settings & Subscription',
+          caption: 'User settings dashboard with Stripe subscription management, usage-based billing tracking, notification preferences, and API token consumption monitoring'
+        }
+      ],
     },
     'Habit-a-Day': {
       fullDescription: 'AI-powered health assistant with Claude API chatbot for conversational nutrition and physical therapy guidance. Habit-a-Day features a conversational AI agent that answers food-related questions, provides PT exercise guidance, and offers health recommendations through natural language chat. Uses LLM technology to parse free-text food descriptions, estimate calories/macros, and provide domain-specific health advice. Features physical therapy practice management backend with multi-role access, treatment plans, and clinical notes.',
@@ -398,6 +602,45 @@ const getProjectDetails = (repoName: string) => {
         { Icon: SiPostgresql, name: 'PostgreSQL', color: 'text-blue-400' },
       ],
       alsoIncludes: 'Anthropic AI SDK, Recharts, html5-qrcode, html2canvas, jspdf, Fuse.js, Row Level Security, Supabase Auth, Real-time Subscriptions, Vercel',
+    },
+    'AI Status Widget': {
+      fullDescription: 'Lightweight macOS Übersicht desktop widget providing real-time service health monitoring for OpenAI and Anthropic AI platforms. Built with React and the Übersicht framework, this widget displays live API status directly on your desktop with expandable model/component details, customizable positioning via drag-and-drop, and seamless light/dark theme integration. Features automatic refresh every 2 minutes using Statuspage API integration for instant awareness of AI service disruptions and maintenance windows.',
+      keyFeatures: [
+        'Real-time service health monitoring for OpenAI (status.openai.com) and Anthropic (status.anthropic.com) via Statuspage API integration',
+        'Expandable component view showing detailed status for individual models (GPT-4, Claude Opus, etc.) and API endpoints',
+        'Drag-to-reposition desktop widget with persistent location memory across system restarts',
+        'Automatic theme detection syncing with macOS light/dark mode preferences for seamless desktop integration',
+        'Auto-refresh every 2 minutes with visual loading states and error handling for API failures',
+        'Compact collapsed view showing aggregate service health with one-click expansion for detailed breakdowns',
+        'Color-coded status indicators (green/yellow/red) with hover tooltips explaining current service states',
+        'Übersicht framework integration for native macOS desktop widget rendering with minimal resource usage'
+      ],
+      capabilities: [
+        { title: 'Statuspage API Integration', description: 'Connects to OpenAI and Anthropic Statuspage APIs to fetch real-time service health data. Parses component status, incident reports, and scheduled maintenance. Displays aggregate system health (operational, degraded, major outage) with expandable per-component details showing individual model/endpoint status' },
+        { title: 'Desktop Widget Framework', description: 'Built with Übersicht, a macOS framework for creating desktop widgets using web technologies. Widget renders as native desktop overlay with transparent background, always-on-top positioning, and system-level event handling. Drag functionality implemented for custom positioning with coordinates saved to localStorage' },
+        { title: 'Responsive UI Design', description: 'Collapsible interface toggling between compact summary view (OpenAI/Anthropic aggregate status) and expanded detailed view (all components, models, API endpoints). Smooth animations for expand/collapse transitions. Adaptive sizing based on content with minimum/maximum dimensions for optimal desktop space usage' },
+        { title: 'Theme & Styling', description: 'Automatic light/dark mode detection via macOS system preferences. Custom CSS with themed color variables for text, backgrounds, status indicators. Gradient accent colors, frosted glass effects (backdrop-blur), and smooth hover transitions matching modern macOS design language' },
+        { title: 'Performance Optimization', description: 'Minimal resource footprint with 2-minute polling intervals. React hooks (useState, useEffect) for efficient state management. CSS animations use GPU-accelerated transforms for smooth 60fps interactions. Error boundaries prevent widget crashes from API failures with graceful fallback displays' }
+      ],
+      techIcons: [
+        { Icon: SiJavascript, name: 'JavaScript', color: 'text-yellow-400' },
+        { Icon: SiReact, name: 'React', color: 'text-cyan-400' },
+        { Icon: OpenAIIconLarge, name: 'OpenAI', color: '' },
+        { Icon: SiAnthropic, name: 'Anthropic', color: 'text-orange-400' },
+      ],
+      alsoIncludes: 'Übersicht Framework, Statuspage API, CSS Animations, localStorage, macOS Integration, React Hooks',
+      screenshots: [
+        {
+          src: '/screenshots/ai_status_01.png',
+          alt: 'AI Status Widget - Collapsed View',
+          caption: 'Compact collapsed view showing aggregate service health for OpenAI and Anthropic with color-coded status indicators (green/yellow/red) and macOS desktop integration'
+        },
+        {
+          src: '/screenshots/ai_status_02.png',
+          alt: 'AI Status Widget - Expanded Details',
+          caption: 'Expanded view displaying detailed component status for individual AI models (GPT-4, Claude Opus, Claude Sonnet) and API endpoints with real-time Statuspage data and incident reports'
+        }
+      ],
     }
   };
 
@@ -413,9 +656,31 @@ interface ProjectTimelineCardProps {
 
 function ProjectTimelineCard({ repo, isExpanded, onToggle, isLast }: ProjectTimelineCardProps) {
   const projectDetails = getProjectDetails(repo.name);
+  const [showScreenshots, setShowScreenshots] = useState(false);
+  const { setScreenshotModalOpen } = useScreenshot();
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  // Update global screenshot modal state when local state changes
+  useEffect(() => {
+    setScreenshotModalOpen(showScreenshots);
+  }, [showScreenshots, setScreenshotModalOpen]);
+
+  // Scroll to card when expanded
+  useEffect(() => {
+    if (isExpanded && cardRef.current) {
+      setTimeout(() => {
+        const yOffset = -100; // Scroll 100px above the card
+        const element = cardRef.current;
+        if (element) {
+          const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }, 150);
+    }
+  }, [isExpanded]);
 
   return (
-    <div className={`relative pl-8 sm:pl-12 ${isLast ? '' : 'pb-6'}`}>
+    <div ref={cardRef} className={`relative pl-8 sm:pl-12 ${isLast ? '' : 'pb-6'}`}>
       {/* Vertical line */}
       {!isLast && (
         <div className="absolute left-[11px] sm:left-[19px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-accent-primary via-accent-secondary to-transparent opacity-30" />
@@ -512,6 +777,18 @@ function ProjectTimelineCard({ repo, isExpanded, onToggle, isLast }: ProjectTime
                       <FiGithub className="w-4 h-4" />
                       <span>View on GitHub</span>
                     </a>
+                  )}
+                  {projectDetails?.screenshots && projectDetails.screenshots.length > 0 && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowScreenshots(true);
+                      }}
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-white/5 text-gray-900 dark:text-white font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-white/10 transition-colors border border-gray-300 dark:border-white/10"
+                    >
+                      <FiImage className="w-4 h-4" />
+                      <span>See Screenshots</span>
+                    </button>
                   )}
                 </div>
 
@@ -627,12 +904,39 @@ function ProjectTimelineCard({ repo, isExpanded, onToggle, isLast }: ProjectTime
           </div>
         </div>
       </div>
+
+      {/* Screenshots Modal */}
+      {showScreenshots && projectDetails?.screenshots && (
+        <div className="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-sm overflow-y-auto" onClick={() => setShowScreenshots(false)}>
+          <div className="min-h-screen px-4 py-8">
+            {/* Modal Content */}
+            <div className="max-w-4xl mx-auto" onClick={(e) => e.stopPropagation()}>
+              <div className="bg-white dark:bg-[#1a1a1a] rounded-xl p-6 border border-white/10 relative">
+                {/* Close button - X icon in top right corner of modal */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowScreenshots(false);
+                  }}
+                  className="absolute top-4 right-4 p-2 bg-white/10 hover:bg-white/20 border border-white/30 rounded-lg transition-colors shadow-lg backdrop-blur-sm text-gray-700 dark:text-white"
+                  aria-label="Close screenshots"
+                >
+                  <FiX className="w-5 h-5" />
+                </button>
+
+                <h2 className="text-2xl font-bold mb-6 gradient-text pr-12">{repo.name} - Screenshots</h2>
+                <ScreenshotShowcase screenshots={projectDetails.screenshots} />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
 export function ProjectTimeline({ projects }: ProjectTimelineProps) {
-  const [expandedId, setExpandedId] = useState<number | null>(projects[0]?.id || null);
+  const [expandedId, setExpandedId] = useState<number | null>(null);
 
   const handleToggle = (id: number) => {
     setExpandedId(expandedId === id ? null : id);

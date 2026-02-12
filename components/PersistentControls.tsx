@@ -4,11 +4,13 @@ import { FiTerminal, FiLayout, FiSun, FiMoon } from 'react-icons/fi';
 import { useTheme } from './ThemeProvider';
 import { useViewMode } from './ViewModeProvider';
 import { useTerminal } from './TerminalContext';
+import { useScreenshot } from './ScreenshotContext';
 
 export function PersistentControls() {
   const { mode, setMode, colorTheme } = useTheme();
   const { viewMode, toggleViewMode } = useViewMode();
   const { addHeroMessage } = useTerminal();
+  const { isScreenshotModalOpen } = useScreenshot();
 
   const handleThemeToggle = () => {
     // Show warning if switching to light mode with Skunk Works theme
@@ -23,6 +25,11 @@ export function PersistentControls() {
     }
     setMode(mode === 'dark' ? 'light' : 'dark');
   };
+
+  // Hide controls when screenshot modal is open
+  if (isScreenshotModalOpen) {
+    return null;
+  }
 
   return (
     <div className="fixed top-6 right-4 sm:right-6 lg:right-8 flex items-center gap-3 z-50">
