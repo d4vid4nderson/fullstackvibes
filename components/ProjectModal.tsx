@@ -532,6 +532,7 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [diagramContent, setDiagramContent] = useState<string>('');
   const [mounted, setMounted] = useState(false);
+  const [hideBackdrop, setHideBackdrop] = useState(false);
 
   // Ensure we're mounted before using portal
   useEffect(() => {
@@ -608,7 +609,7 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
     >
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
+        className={`fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity ${hideBackdrop ? 'opacity-0 pointer-events-none' : ''}`}
         style={{ zIndex: 99999 }}
         onClick={onClose}
       />
@@ -768,7 +769,7 @@ export function ProjectModal({ repo, isOpen, onClose }: ProjectModalProps) {
                 {projectDetails.screenshots && projectDetails.screenshots.length > 0 && (
                   <div>
                     <h3 className="text-sm font-bold text-accent uppercase tracking-wide mb-4 transition-colors duration-300"># Screenshots</h3>
-                    <ScreenshotShowcase screenshots={projectDetails.screenshots} />
+                    <ScreenshotShowcase screenshots={projectDetails.screenshots} onLightboxChange={setHideBackdrop} />
                   </div>
                 )}
               </>

@@ -907,7 +907,7 @@ function ProjectTimelineCard({ repo, isExpanded, onToggle, isLast }: ProjectTime
 
       {/* Screenshots Modal */}
       {showScreenshots && projectDetails?.screenshots && (
-        <div className="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-sm overflow-y-auto" onClick={() => setShowScreenshots(false)}>
+        <div className="fixed inset-0 z-[99999] bg-slate-900/30 backdrop-blur-md backdrop-saturate-150 overflow-y-auto" onClick={() => setShowScreenshots(false)}>
           <div className="min-h-screen px-4 py-8">
             {/* Modal Content */}
             <div className="max-w-4xl mx-auto" onClick={(e) => e.stopPropagation()}>

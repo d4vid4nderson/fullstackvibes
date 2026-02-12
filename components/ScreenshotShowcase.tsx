@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { FiMaximize, FiX } from 'react-icons/fi';
 
@@ -12,16 +13,24 @@ interface Screenshot {
 
 interface ScreenshotShowcaseProps {
   screenshots: Screenshot[];
+  onLightboxChange?: (isOpen: boolean) => void;
 }
 
-export function ScreenshotShowcase({ screenshots }: ScreenshotShowcaseProps) {
+export function ScreenshotShowcase({ screenshots, onLightboxChange }: ScreenshotShowcaseProps) {
   const [lightboxImage, setLightboxImage] = useState<Screenshot | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  // Handle client-side mounting
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Handle ESC key to close lightbox
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && lightboxImage) {
         setLightboxImage(null);
+        onLightboxChange?.(false);
       }
     };
 
@@ -29,13 +38,16 @@ export function ScreenshotShowcase({ screenshots }: ScreenshotShowcaseProps) {
       document.addEventListener('keydown', handleEscape);
       // Prevent body scroll when lightbox is open
       document.body.style.overflow = 'hidden';
+      onLightboxChange?.(true);
+    } else {
+      onLightboxChange?.(false);
     }
 
     return () => {
       document.removeEventListener('keydown', handleEscape);
       document.body.style.overflow = 'unset';
     };
-  }, [lightboxImage]);
+  }, [lightboxImage, onLightboxChange]);
 
   if (!screenshots || screenshots.length === 0) return null;
 
@@ -49,26 +61,23 @@ export function ScreenshotShowcase({ screenshots }: ScreenshotShowcaseProps) {
           >
             {/* Screenshot Image */}
             <div className="relative w-full overflow-hidden bg-gray-200 dark:bg-[#0a0a0a] rounded-lg">
+              <button
+                onClick={() => setLightboxImage(screenshot)}
+                className="absolute top-3 right-3 z-10 inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold tracking-wide uppercase bg-white/80 dark:bg-black/60 text-gray-900 dark:text-white border border-white/40 dark:border-white/20 rounded-full shadow-lg backdrop-blur-sm hover:bg-white/95 dark:hover:bg-black/80 transition-colors"
+                title="View full screenshot"
+              >
+                <FiMaximize className="w-4 h-4" />
+                View Full
+              </button>
               <Image
                 src={screenshot.src}
                 alt={screenshot.alt}
                 width={1920}
                 height={1080}
-                className="w-full h-auto transition-transform duration-300 group-hover:scale-105"
+                className="w-full h-auto"
                 quality={100}
                 unoptimized={true}
               />
-
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                <button
-                  onClick={() => setLightboxImage(screenshot)}
-                  className="opacity-0 group-hover:opacity-100 transition-opacity p-3 bg-cyan-500/20 backdrop-blur-sm border border-cyan-400/50 rounded-lg hover:bg-cyan-500/30"
-                  title="View fullscreen"
-                >
-                  <FiMaximize className="w-6 h-6 text-cyan-400" />
-                </button>
-              </div>
             </div>
 
             {/* Caption */}
@@ -82,17 +91,21 @@ export function ScreenshotShowcase({ screenshots }: ScreenshotShowcaseProps) {
       </div>
 
       {/* Lightbox Modal */}
-      {lightboxImage && (
+      {mounted && lightboxImage && createPortal(
         <div
-          className="fixed inset-0 z-[200] bg-black/95 backdrop-blur-sm overflow-y-auto"
-          onClick={() => setLightboxImage(null)}
+          className="fixed inset-0 z-[100000] bg-slate-900/15 backdrop-blur-lg backdrop-saturate-150 overflow-y-auto"
+          onClick={() => {
+            setLightboxImage(null);
+            onLightboxChange?.(false);
+          }}
         >
           {/* Fixed Close Button - Always Visible at Top */}
-          <div className="sticky top-0 z-20 flex justify-end p-4 bg-gradient-to-b from-black/80 to-transparent">
+          <div className="sticky top-0 z-20 flex justify-end p-4 bg-gradient-to-b from-black/40 to-transparent">
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setLightboxImage(null);
+                onLightboxChange?.(false);
               }}
               className="p-3 bg-white/10 hover:bg-white/20 border border-white/30 rounded-lg transition-colors shadow-lg backdrop-blur-sm"
               title="Close (ESC)"
@@ -122,8 +135,8 @@ export function ScreenshotShowcase({ screenshots }: ScreenshotShowcaseProps) {
               </div>
 
               {/* Caption */}
-              <div className="mt-6 p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10">
-                <p className="text-gray-300 text-sm leading-relaxed text-center">
+              <div className="mt-6 p-4 bg-black/50 backdrop-blur-sm rounded-lg border border-white/20">
+                <p className="text-gray-100 text-sm leading-relaxed text-center">
                   {lightboxImage.caption}
                 </p>
               </div>
@@ -136,7 +149,8 @@ export function ScreenshotShowcase({ screenshots }: ScreenshotShowcaseProps) {
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
