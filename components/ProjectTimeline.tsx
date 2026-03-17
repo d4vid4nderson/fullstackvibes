@@ -138,6 +138,8 @@ const getIconForTopic = (topic: string) => {
     'playwright': PlaywrightIcon,
     'openai': OpenAIIcon,
     'azure': AzureIcon,
+    'spfx': AzureIcon,
+    'microsoft-graph': AzureIcon,
     'supabase': SupabaseIcon,
     'stripe': StripeIcon,
   };
@@ -606,6 +608,33 @@ const getProjectDetails = (repoName: string) => {
         { Icon: SiPostgresql, name: 'PostgreSQL', color: 'text-blue-400' },
       ],
       alsoIncludes: 'Anthropic AI SDK, Recharts, html5-qrcode, html2canvas, jspdf, Fuse.js, Row Level Security, Supabase Auth, Real-time Subscriptions, Vercel',
+    },
+    'Teams Calendar Webpart': {
+      fullDescription: "The modern SharePoint calendar webpart has no connection to Teams or Outlook — it's a standalone calendar requiring constant manual updates. Even though Microsoft Teams is built on a SharePoint backend, there was no native bridge between the two. This SPFx 1.18 webpart was built to close that gap. Using Microsoft Graph API with delegated permissions, it connects directly to Teams group calendars and Outlook, surfacing live event data on any SharePoint page. Month, week, and list calendar views are powered by FullCalendar 6, with a collapsible mini-calendar sidebar for quick navigation. A dedicated events view presents upcoming meetings as cards or lists with attendee RSVP status per person. The event detail modal deep-links into Teams meetings, converts Zoom URLs to native zoom protocol, and surfaces attachments with inline image rendering from event HTML bodies.",
+      keyFeatures: [
+        'Solves the native SharePoint calendar\'s complete disconnection from Teams — connects directly to Teams group and personal Outlook calendars via Microsoft Graph API',
+        'Month, week, and list calendar views powered by FullCalendar 6 with a collapsible mini-calendar sidebar and ResizeObserver-driven responsive layout',
+        'Dedicated events card view with configurable time ranges (week, month, quarter) and card, list, or compact display styles',
+        'One-click meeting join with deep-link protocol detection: Teams meetings launch msteams://, Zoom URLs convert to zoommtg://, Google Meet passes through as HTTPS',
+        'Multi-calendar display with per-calendar color coding and icon assignment — personal calendar and multiple M365/Teams group calendars shown simultaneously',
+        'Event detail modal with full attendee list and per-person RSVP status (accepted/declined/tentative), organizer info, location, and HTML body rendering',
+        'Attachment support with inline image rendering: cid: references in event HTML bodies are fetched individually and replaced with base64 data URLs',
+        'Admin property pane with calendar picker, subject filter, category filter (predefined Technology/HR/Practice groups), and SharePoint theme color integration',
+      ],
+      capabilities: [
+        { title: 'Graph API Calendar Service', description: 'GraphCalendarService abstracts all Microsoft Graph calls with parallel fetch across personal and group calendars, user category enrichment from personal copies of group events, attendee fallback logic when group calendars return incomplete data, and per-event attachment fetching. Endpoints: /me/calendar/events, /groups/{id}/calendar/events, /me/calendarView, /me/memberOf, /me/outlook/masterCategories.' },
+        { title: 'Multi-View Calendar', description: 'FullCalendar 6 renders month (dayGridMonth), week (timeGridWeek), and list (listWeek) views. A collapsible sidebar mini-calendar provides quick date navigation with 240ms CSS transition. ResizeObserver tracks container dimensions and notifies FullCalendar after sidebar transitions for accurate column recalculation.' },
+        { title: 'Events Card View', description: 'EventsView component renders upcoming events as cards or list items with configurable time ranges. Each entry shows event metadata, calendar color badges, organizer, location, and per-attendee RSVP status. Meeting join buttons appear when online meeting URLs are detected in the event body or joinWebUrl field.' },
+        { title: 'Meeting Deep-Linking', description: 'EventModal parses event HTML body and joinWebUrl to detect platform: Teams joins use msteams:// deep-links for native app launch, Zoom HTTPS URLs are converted to zoommtg:// with meeting number and password extracted from query params, Google Meet URLs pass through as direct HTTPS links.' },
+        { title: 'Property Pane & Theming', description: 'Admin-configurable property pane with multi-calendar picker (color + icon per calendar), subject keyword filter, category filter with predefined groups, and display type toggle (calendar vs events). Theme system reads SharePoint site brand colors or accepts custom hex values with YIQ contrast algorithm ensuring readable text on any background.' },
+      ],
+      techIcons: [
+        { Icon: SiTypescript, name: 'TypeScript', color: 'text-blue-400' },
+        { Icon: SiReact, name: 'React', color: 'text-cyan-400' },
+        { Icon: AzureIcon, name: 'SPFx 1.18', color: '' },
+        { Icon: AzureIcon, name: 'Microsoft Graph', color: '' },
+      ],
+      alsoIncludes: 'FullCalendar 6, Fluent UI 8, date-fns, SCSS Modules, MSGraphClientV3, Azure Pipelines CI/CD',
     },
     'AI Status Widget': {
       fullDescription: 'Lightweight macOS Übersicht desktop widget providing real-time service health monitoring for OpenAI and Anthropic AI platforms. Built with React and the Übersicht framework, this widget displays live API status directly on your desktop with expandable model/component details, customizable positioning via drag-and-drop, and seamless light/dark theme integration. Features automatic refresh every 2 minutes using Statuspage API integration for instant awareness of AI service disruptions and maintenance windows.',
