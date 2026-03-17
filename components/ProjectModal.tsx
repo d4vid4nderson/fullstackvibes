@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { GitHubRepo } from '@/types/github';
 import { FiX, FiCheckCircle, FiExternalLink } from 'react-icons/fi';
-import { SiGo, SiJavascript, SiTailwindcss, SiDocker, SiAnthropic, SiReact, SiPython, SiFastapi, SiPostgresql, SiTypescript, SiNextdotjs, SiVuedotjs, SiNodedotjs, SiSupabase, SiStripe } from 'react-icons/si';
+import { SiGo, SiJavascript, SiTailwindcss, SiDocker, SiAnthropic, SiOpenai, SiReact, SiPython, SiFastapi, SiPostgresql, SiTypescript, SiNextdotjs, SiVuedotjs, SiNodedotjs, SiSupabase, SiStripe } from 'react-icons/si';
 import Image from 'next/image';
 import { MermaidDiagram } from './MermaidDiagram';
 import { ScreenshotShowcase } from './ScreenshotShowcase';
@@ -71,23 +71,23 @@ const getProjectDetails = (repoName: string) => {
   const details: { [key: string]: any } = {
     'InitiativeVUE': {
       diagramPath: '/diagrams/init_vue.mmd',
-      fullDescription: 'InitiativeVUE is a comprehensive enterprise platform that provides strategic oversight and executive tracking of organizational initiatives. The system enables leadership to approve projects, track progress, manage budgets, and maintain stakeholder alignment from sponsors through to end users.',
+      fullDescription: 'InitiativeVUE replaced org-wide Excel workbooks and PowerPoint decks with a single unified platform for tracking strategic initiatives across every department and region. Built entirely solo, the system manages the full initiative lifecycle — from submission through multi-stage approval to completion — with AI-powered executive summaries for C-suite near real-time visibility, Gantt scheduling, budget tracking, and Microsoft Teams integration. v1.11.1 with 67 database migrations reflects active production development with zero SaaS licensing cost.',
       keyFeatures: [
-        'Multi-level approval workflow with department, management, and executive approval stages',
-        'Real-time health status monitoring with green/yellow/red indicators and mitigation planning',
-        'Comprehensive budget tracking across capital costs, operational costs, personnel, and technology',
-        'Executive Leadership Dashboard with strategic insights and analytics',
-        'Interactive Gantt charts and calendar views for initiative scheduling',
-        'Department-based organization with 12 color-coded departments for visual clarity',
-        'Rich commenting system with activity tracking and collaborative features',
-        'Mobile-optimized responsive design with dark mode support',
+        'Built solo — replaced scattered Excel workbooks and PowerPoints across the entire organization with one unified system',
+        'Multi-stage approval workflow (submitted → pending → approved → in progress → completed) with full status audit trail',
+        'OpenAI-powered executive summaries giving C-suite near real-time portfolio visibility without manual reporting',
+        'AI subtask generation and status update drafting with @mention support for initiative tasks',
+        'Interactive Gantt charts with milestone markers, today indicator, and shared date range across initiative cards',
+        'Comprehensive budget tracking across capital, operational, personnel, and technology costs with Excel export',
+        'Microsoft Teams integration with notification webhook for initiative events',
+        'Role-based access control across 4 roles and 5 permission levels with per-user dashboard preferences',
       ],
       capabilities: [
-        { title: 'Dashboard & Welcome', description: 'Centralized hub with quick actions: Create Initiative, View All Initiatives, My Initiatives, and View Schedule' },
-        { title: 'Initiative Management', description: 'Browse and manage all initiatives with advanced filtering by department, status, and health indicators' },
-        { title: 'Detailed Tracking', description: 'Comprehensive initiative details including status, departments, stakeholders, budgets, timelines, and progress tracking' },
-        { title: 'Visual Scheduling', description: 'Gantt chart and calendar views showing initiative timelines across quarters with drag-and-drop capabilities' },
-        { title: 'Executive Insights', description: 'Leadership dashboard with high-level overview, initiative pipeline, and strategic analytics' },
+        { title: 'Initiative Lifecycle', description: 'Full workflow from submission through multi-stage approval to completion — with health tracking (on-track / at-risk / off-track), status history, and milestone completion toggle' },
+        { title: 'AI Features', description: 'OpenAI-powered executive summary generation for C-suite dashboards, AI subtask suggestions, and status update drafting with @mention support' },
+        { title: 'Executive & Regional Dashboards', description: 'C-suite dashboard with AI-generated portfolio summary and KPI breakdown; interactive US regional map showing initiative counts by geography' },
+        { title: 'Scheduling & Budget', description: 'Gantt chart with milestones and today marker; mini-Gantt in dashboard cards; budget tracking with actual vs. planned spend and Excel export' },
+        { title: 'Teams & Permissions', description: 'Microsoft Teams webhook integration for initiative notifications; 4 roles × 5 access levels for fine-grained permission control across the organization' },
       ],
       techIcons: [
         { Icon: SiGo, name: 'Go', color: 'text-cyan-400' },
@@ -95,7 +95,7 @@ const getProjectDetails = (repoName: string) => {
         { Icon: SiTailwindcss, name: 'Tailwind CSS', color: 'text-cyan-400' },
         { Icon: SiJavascript, name: 'JavaScript', color: 'text-yellow-400' },
         { Icon: SiDocker, name: 'Docker', color: 'text-blue-400' },
-        { Icon: SiAnthropic, name: 'Claude AI', color: 'text-orange-400' },
+        { Icon: SiOpenai, name: 'OpenAI', color: 'text-green-400' },
         { Icon: PlaywrightIcon, name: 'Playwright', color: '' },
       ],
       alsoIncludes: 'HTMX, Alpine.js, Azure Container Apps, SQL Server, Chi Router',

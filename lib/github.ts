@@ -41,7 +41,7 @@ const developerProjects: GitHubRepo[] = [
     id: 1,
     name: 'InitiativeVUE',
     full_name: 'd4vid4nderson/InitiativeVUE',
-    description: 'AI-powered enterprise tracking with Microsoft Teams bot integration. Custom Teams bots for MS Office 365: notification bot flags channels on initiative creation, conversational bot with Adaptive Cards for status updates via Teams chat. Full-stack Go application serving 50+ users with Claude AI automated reporting, multi-level approvals, and Azure DevOps CI/CD.',
+    description: 'Built solo — replaced org-wide Excel workbooks and PowerPoints with a unified initiative tracking platform. Multi-stage approval workflows, OpenAI-powered executive summaries for C-suite, AI subtask generation, Gantt charts, budget tracking, Teams integration, and role-based access across 5 permission levels. v1.11 with 67 database migrations in production.',
     html_url: '#',
     homepage: null,
     stargazers_count: 0,

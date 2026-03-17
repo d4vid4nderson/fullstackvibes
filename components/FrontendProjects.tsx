@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { GitHubRepo } from '@/types/github';
-import { FiCode, FiUsers, FiExternalLink, FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { FiCode, FiUsers, FiExternalLink, FiChevronDown, FiChevronUp, FiLink, FiCheckCircle } from 'react-icons/fi';
 import { SiAnthropic } from 'react-icons/si';
 import { ProjectModal } from './ProjectModal';
 
@@ -106,6 +106,8 @@ const getIconForTopic = (topic: string) => {
   return iconMap[topic.toLowerCase()];
 };
 
+const getProjectSlug = (name: string) => name.toLowerCase().replace(/\s+/g, '-');
+
 interface ProjectCardProps {
   repo: GitHubRepo;
   isExpanded: boolean;
@@ -114,10 +116,12 @@ interface ProjectCardProps {
 
 function FrontendProjectCard({ repo, isExpanded, onToggle }: ProjectCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
 
   return (
     <>
       <div
+        id={getProjectSlug(repo.name)}
         className={`relative bg-white dark:bg-white/5 rounded-xl transition-all duration-300 ${
           isExpanded
             ? 'border-2 border-accent/50 shadow-xl shadow-accent/30'
@@ -200,7 +204,7 @@ function FrontendProjectCard({ repo, isExpanded, onToggle }: ProjectCardProps) {
             )}
 
             {/* View Details Button */}
-            <div className="pt-4 border-t border-gray-100 dark:border-white/5">
+            <div className="pt-4 border-t border-gray-100 dark:border-white/5 flex items-center gap-4">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -209,6 +213,20 @@ function FrontendProjectCard({ repo, isExpanded, onToggle }: ProjectCardProps) {
                 className="text-sm text-accent hover:underline font-medium"
               >
                 View full details →
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const url = `${window.location.origin}${window.location.pathname}#${getProjectSlug(repo.name)}`;
+                  navigator.clipboard.writeText(url).then(() => {
+                    setLinkCopied(true);
+                    setTimeout(() => setLinkCopied(false), 2000);
+                  });
+                }}
+                className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-accent transition-colors"
+              >
+                {linkCopied ? <FiCheckCircle className="w-3.5 h-3.5 text-green-500" /> : <FiLink className="w-3.5 h-3.5" />}
+                <span>{linkCopied ? 'Copied!' : 'Copy link'}</span>
               </button>
             </div>
           </div>
@@ -247,12 +265,35 @@ interface FrontendProjectsProps {
 }
 
 export function FrontendProjects({ developerProjects, productOwnerProjects }: FrontendProjectsProps) {
-  const [expandedId, setExpandedId] = useState<number | null>(
-    developerProjects.length > 0 ? developerProjects[0].id : null
-  );
+  const allProjects = [...developerProjects, ...productOwnerProjects];
+  const [expandedId, setExpandedId] = useState<number | null>(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        const matched = allProjects.find(p => getProjectSlug(p.name) === hash);
+        if (matched) return matched.id;
+      }
+    }
+    return developerProjects.length > 0 ? developerProjects[0].id : null;
+  });
 
-  const handleToggle = (id: number) => {
-    setExpandedId(expandedId === id ? null : id);
+  // Handle hash on mount (for SSR safety)
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      const matched = allProjects.find(p => getProjectSlug(p.name) === hash);
+      if (matched) setExpandedId(matched.id);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleToggle = (id: number, name: string) => {
+    if (expandedId === id) {
+      setExpandedId(null);
+      history.pushState(null, '', window.location.pathname + window.location.search);
+    } else {
+      setExpandedId(id);
+      history.pushState(null, '', '#' + getProjectSlug(name));
+    }
   };
 
   return (
@@ -291,7 +332,7 @@ export function FrontendProjects({ developerProjects, productOwnerProjects }: Fr
                   key={repo.id}
                   repo={repo}
                   isExpanded={expandedId === repo.id}
-                  onToggle={() => handleToggle(repo.id)}
+                  onToggle={() => handleToggle(repo.id, repo.name)}
                 />
               ))}
             </div>
@@ -321,7 +362,7 @@ export function FrontendProjects({ developerProjects, productOwnerProjects }: Fr
                   key={repo.id}
                   repo={repo}
                   isExpanded={expandedId === repo.id}
-                  onToggle={() => handleToggle(repo.id)}
+                  onToggle={() => handleToggle(repo.id, repo.name)}
                 />
               ))}
             </div>

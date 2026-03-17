@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { GitHubRepo } from '@/types/github';
-import { FiChevronDown, FiChevronUp, FiGitCommit, FiExternalLink, FiGithub, FiCheckCircle, FiImage, FiX } from 'react-icons/fi';
+import { FiChevronDown, FiChevronUp, FiGitCommit, FiExternalLink, FiGithub, FiCheckCircle, FiImage, FiX, FiLink } from 'react-icons/fi';
 import { SiAnthropic, SiGo, SiJavascript, SiTailwindcss, SiDocker, SiReact, SiPython, SiFastapi, SiPostgresql, SiTypescript, SiNextdotjs, SiVuedotjs, SiNodedotjs, SiSupabase, SiStripe } from 'react-icons/si';
 import Image from 'next/image';
 import { ScreenshotShowcase } from './ScreenshotShowcase';
@@ -10,6 +10,10 @@ import { useScreenshot } from './ScreenshotContext';
 
 interface ProjectTimelineProps {
   projects: GitHubRepo[];
+}
+
+function getProjectSlug(name: string): string {
+  return name.toLowerCase().replace(/\s+/g, '-');
 }
 
 // Icon components
@@ -657,6 +661,7 @@ interface ProjectTimelineCardProps {
 function ProjectTimelineCard({ repo, isExpanded, onToggle, isLast }: ProjectTimelineCardProps) {
   const projectDetails = getProjectDetails(repo.name);
   const [showScreenshots, setShowScreenshots] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
   const { setScreenshotModalOpen } = useScreenshot();
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -680,7 +685,7 @@ function ProjectTimelineCard({ repo, isExpanded, onToggle, isLast }: ProjectTime
   }, [isExpanded]);
 
   return (
-    <div ref={cardRef} className={`relative pl-8 sm:pl-12 ${isLast ? '' : 'pb-6'}`}>
+    <div ref={cardRef} id={getProjectSlug(repo.name)} className={`relative pl-8 sm:pl-12 ${isLast ? '' : 'pb-6'}`}>
       {/* Vertical line */}
       {!isLast && (
         <div className="absolute left-[11px] sm:left-[19px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-accent-primary via-accent-secondary to-transparent opacity-30" />
@@ -790,6 +795,20 @@ function ProjectTimelineCard({ repo, isExpanded, onToggle, isLast }: ProjectTime
                       <span>See Screenshots</span>
                     </button>
                   )}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const url = `${window.location.origin}${window.location.pathname}#${getProjectSlug(repo.name)}`;
+                      navigator.clipboard.writeText(url).then(() => {
+                        setLinkCopied(true);
+                        setTimeout(() => setLinkCopied(false), 2000);
+                      });
+                    }}
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-white/5 text-gray-900 dark:text-white font-semibold rounded-lg hover:bg-gray-200 dark:hover:bg-white/10 transition-colors border border-gray-300 dark:border-white/10"
+                  >
+                    {linkCopied ? <FiCheckCircle className="w-4 h-4 text-green-500" /> : <FiLink className="w-4 h-4" />}
+                    <span>{linkCopied ? 'Copied!' : 'Copy Link'}</span>
+                  </button>
                 </div>
 
                 {projectDetails ? (
@@ -938,8 +957,25 @@ function ProjectTimelineCard({ repo, isExpanded, onToggle, isLast }: ProjectTime
 export function ProjectTimeline({ projects }: ProjectTimelineProps) {
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
-  const handleToggle = (id: number) => {
-    setExpandedId(expandedId === id ? null : id);
+  // Auto-expand project from URL hash on mount
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      const matched = projects.find(p => getProjectSlug(p.name) === hash);
+      if (matched) {
+        setExpandedId(matched.id);
+      }
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleToggle = (id: number, name: string) => {
+    if (expandedId === id) {
+      setExpandedId(null);
+      history.pushState(null, '', window.location.pathname + window.location.search);
+    } else {
+      setExpandedId(id);
+      history.pushState(null, '', '#' + getProjectSlug(name));
+    }
   };
 
   return (
@@ -949,7 +985,7 @@ export function ProjectTimeline({ projects }: ProjectTimelineProps) {
           key={repo.id}
           repo={repo}
           isExpanded={expandedId === repo.id}
-          onToggle={() => handleToggle(repo.id)}
+          onToggle={() => handleToggle(repo.id, repo.name)}
           isLast={index === projects.length - 1}
         />
       ))}
